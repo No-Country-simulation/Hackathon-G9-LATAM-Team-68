@@ -38,9 +38,9 @@ Aquí aparecen aspectos como:
 - concentración del gasto.
 
 # Estados posibles de cada dimensión:
-- Saludable
-- En observación
-- En riesgo
+🟢 Saludable
+🟡 En observación
+🔴 En riesgo
 
 Ejemplo:
 
@@ -206,10 +206,148 @@ Justificación:
 
 ## Dimensión 4 — COMPORTAMIENTO DE CONSUMO
 
+Es el análisis de la forma en que el usuario distribuye sus gastos entre las diferentes categorías de consumo, permitiendo identificar patrones, hábitos y áreas donde existen oportunidades de mejorar la administración de sus recursos.
+
 ### ¿Qué preguntas debe responder?
+
+- ¿En qué categorías concentra la mayor parte de sus gastos?
+- ¿Cómo distribuye su presupuesto entre las distintas categorías?
+- ¿Existen patrones de consumo relevantes?
+- ¿Hay categorías que representan una proporción excesiva del gasto?
+- ¿Qué hábitos de consumo pueden identificarse?
+
 ### Variables necesarias
+- Consumo total mensual:	Suma de todas las transacciones clasificadas como consumo.
+- Gasto por categoría:	Suma de las transacciones pertenecientes a cada categoría de consumo.
+- Distribución porcentual del gasto:	Porcentaje que representa cada categoría respecto al consumo total.
+
+
 ### Indicadores generados
+
+- Distribución del gasto por categorías: Determinar cómo se distribuye el consumo del usuario entre las distintas categorías de gasto. Permite conocer el peso relativo de cada categoría. Facilita comparar hábitos de consumo entre distintos usuarios. Constituye la base para identificar patrones de consumo.
+- Índice de concentración del gasto: Evaluar qué tan equilibrada o concentrada se encuentra la distribución del consumo. Identifica si el presupuesto está distribuido entre diversas categorías. Detecta cuando una o pocas categorías concentran la mayor parte del consumo. Complementa la distribución porcentual del gasto. (Nota: La fórmula específica del índice se definirá posteriormente)
+- Perfil de consumo: A partir de los indicadores financieros anteriores, el sistema generará un conjunto de indicadores interpretativos que describen el comportamiento de consumo del usuario. Estos indicadores serán utilizados tanto para la evaluación de la dimensión como para la generación de recomendaciones personalizadas.
+
+Indicador de consumo 1: _Predominio del gasto_
+
+Describe el tipo de necesidades hacia las que el usuario orienta la mayor parte de su presupuesto.
+
+Posibles resultados:
+- Predominio en gastos esenciales.
+- Balance entre gastos esenciales y discrecionales.
+- Predominio en gastos discrecionales.
+
+Indicador de consumo 2: _Tipo de consumo_
+
+Describe la forma en que se distribuye el gasto.
+
+Posibles resultados:
+
+- Consumo equilibrado.
+- Consumo moderadamente concentrado.
+- Consumo altamente concentrado.
+
+Indicador de consumo 3: _Diversificación del consumo_
+
+Describe si el usuario distribuye su presupuesto entre distintas categorías o concentra sus recursos en pocas de ellas.
+
+Posibles resultados:
+
+- Consumo diversificado.
+- Consumo poco diversificado.
+
+Indicador de consumo 4: _Categoría predominante_
+
+Identifica la categoría que representa el mayor porcentaje del consumo.
+
+Ejemplos:
+
+- Alimentación.
+- Vivienda.
+- Transporte.
+- Salud.
+- Educación.
+- Entretenimiento.
+- Restaurantes.
+- Compras.
+- Etc.
+
+Este indicador tiene un propósito descriptivo y servirá para personalizar las recomendaciones, sin afectar directamente la evaluación de la dimensión.
+
+### Evaluación de la dimensión
+
+La evaluación del Comportamiento de Consumo se realizará mediante un proceso de interpretación compuesto por dos etapas:
+
+#### Etapa 1
+
+Cálculo de los indicadores financieros:
+
+- Distribución del gasto por categorías.
+- Índice de concentración del gasto.
+
+#### Etapa 2
+
+Generación de los indicadores de consumo:
+
+- Predominio del gasto.
+- Tipo de consumo.
+- Diversificación del consumo.
+- Categoría predominante.
+
+Con base en estos indicadores, la dimensión podrá clasificarse en uno de los siguientes estados:
+
+🟢 Saludable
+🟡 En observación
+🔴 En riesgo
+
+Los criterios de clasificación y el sistema de puntuación se definirán posteriormente.
+
 ### Resultados posibles de acuerdo a los indicadores
+
+#### Saludable
+
+Indicadores de consumo
+
+- Predominio en gastos esenciales.
+- Consumo equilibrado.
+- Consumo diversificado.
+- Categoría predominante: Vivienda.
+
+Justificación
+
+- El presupuesto se distribuye de forma equilibrada.
+- No existe una concentración excesiva del gasto.
+- La mayor parte del consumo se destina a necesidades esenciales.
+
+#### En observación
+
+Indicadores de consumo
+
+- Balance entre gastos esenciales y discrecionales.
+- Consumo moderadamente concentrado.
+- Consumo poco diversificado.
+- Categoría predominante: Entretenimiento.
+
+Justificación
+
+- Existe una concentración moderada del gasto.
+- El consumo discrecional comienza a representar una parte importante del presupuesto.
+- La distribución del gasto puede optimizarse.
+
+#### En riesgo
+
+Indicadores de consumo
+
+- Predominio en gastos discrecionales.
+- Consumo altamente concentrado.
+- Consumo poco diversificado.
+- Categoría predominante: Entretenimiento.
+
+Justificación
+
+- Una parte importante del presupuesto se concentra en gastos discrecionales.
+- El consumo presenta poca diversificación.
+- El comportamiento de consumo puede comprometer la estabilidad financiera.
 
 # Ejemplo de ficha de datos de entrada
 
