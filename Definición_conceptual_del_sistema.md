@@ -349,11 +349,112 @@ Justificación
 - El consumo presenta poca diversificación.
 - El comportamiento de consumo puede comprometer la estabilidad financiera.
 
+# Resumen de variables necesarias y indicadores generados para el sistema funcione
+
+## Variables de entrada (usuario)
+
+- Ingreso mensual
+- Transacciones financieras: Registro de todas las transacciones del periodo.
+
+## Variables derivadas globales
+
+|Variable|	Cómo se obtiene|
+| --- | --- |
+|Consumo total mensual|	Suma de transacciones de consumo.|
+|Pago mensual de deudas|	Suma de transacciones clasificadas como deuda.|
+|Ahorro e inversión total|	Suma de transacciones clasificadas como ahorro e inversión.|
+|Gasto por categoría|	Suma por categoría de consumo.|
+|Distribución porcentual del gasto|	Porcentaje de cada categoría respecto al consumo total.|
+|Egreso total|	Consumo total + Pago de deudas.|
+
+## Indicadores generados
+
+|Dimensión	|Indicadores|
+| --- | --- |
+|Balance Financiero|	Balance mensual, Tasa de gasto, Margen financiero|
+|Capacidad de Ahorro|	Tasa de ahorro, Ahorro e inversión del periodo, Aprovechamiento del margen financiero|
+|Endeudamiento|	Ratio de endeudamiento, Monto destinado al pago de deudas, Presión de la deuda|
+|Comportamiento de Consumo|	Distribución del gasto por categorías, Índice de concentración del gasto, Perfil de consumo|
+
+## Perfil de consumo
+
+Se generan únicamente para la cuarta dimensión.
+
+|Elemento|	Posibles valores|
+| --- | --- |
+|Predominio del gasto|	Esenciales, Balanceado, Discrecionales|
+|Tipo de consumo|	Equilibrado, Moderadamente concentrado, Altamente concentrado|
+|Diversificación|	Diversificado, Poco diversificado|
+|Categoría predominante|	Vivienda, Alimentación, Salud, etc.|
+
+
+# Forma de clasificar las transacciones
+
+Las transacciones se clasificaran en tres tipos financieros:
+- Consumo
+- Pago de deuda
+- Ahorro e inversión
+
+A su vez, las transacciones clasificadas como consumo se clasificaran en las siguientes categorias:
+
+| Categoría	|Tipo|
+| --- |--- |
+|🏠 Vivienda|	Esencial|
+|🍽️ Alimentación|	Esencial|
+|🚗 Transporte|	Esencial|
+|🏥 Salud	|Esencial|
+|🎓 Educación|	Esencial|
+|🎉 Entretenimiento y ocio|	Discrecional|
+|🍔 Restaurantes y comida fuera|	Discrecional|
+|🛍️ Compras personales|	Discrecional|
+|✈️ Viajes y vacaciones	|Discrecional|
+|📦 Otros|	Depende del análisis o revisión|
+
 # Ejemplo de ficha de datos de entrada
+
+{
+  "usuario": {
+    "id": 1,
+    "nombre": "Brayan Lira"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingreso_mensual": 25000,
+  "transacciones": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Walmart",
+      "monto": 850
+    },
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Pago tarjeta BBVA",
+      "monto": 2500
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "CETES",
+      "monto": 1000
+    },
+    {
+      "fecha": "2026-07-04",
+      "descripcion": "Netflix",
+      "monto": 239
+    }
+  ]
+}
+
+
 
 # Ejemplo de ficha de datos de salida
 
-# Categirias a implementar para clasificar las transacciones
+
+
+
+
+
 
                    
 
