@@ -410,8 +410,42 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
 |✈️ Viajes y vacaciones	|Discrecional|
 |📦 Otros|	Depende del análisis o revisión|
 
+# Perfil Financiero 
+
+El perfil financiero representa el resultado integral del análisis realizado por el sistema sobre la información financiera del usuario durante un periodo determinado. Este perfil se construye a partir de la evaluación de cuatro dimensiones fundamentales: balance financiero, capacidad de ahorro, endeudamiento y comportamiento de consumo. Cada dimensión es analizada mediante indicadores específicos que permiten determinar su estado, identificar fortalezas y áreas de oportunidad, y generar recomendaciones personalizadas. Como resultado, el perfil financiero ofrece una visión clara y estructurada de la salud financiera del usuario, facilitando la comprensión de sus hábitos financieros y apoyando la toma de decisiones orientadas a mejorar su estabilidad económica.
+
+## Posibles estados
+
+🟢 Saludable
+🟡 En observación
+🔴 En riesgo
+
+# Resultados finales entregables del analisis
+
+**Datos del usuario:** Identificador y nombre del usuario analizado.
+
+**Perfil financiero:** Estado general de la salud financiera obtenido a partir de la evaluación conjunta de las cuatro dimensiones.
+
+**Resultados por dimensión:**
+
+- Estado de la dimensión.
+- Indicadores financieros utilizados para su evaluación.
+- Recomendaciones específicas de la dimensión.
+
+**Perfil de consumo (únicamente para la dimensión Comportamiento de Consumo):**
+
+- Distribución del gasto por categoría.
+- Índice de concentración del gasto.
+- Predominio del gasto.
+- Tipo de consumo.
+- Diversificación del consumo.
+- Categoría predominante.
+  
+**Recomendaciones generales:** Conjunto de recomendaciones integrales generadas a partir del análisis de todas las dimensiones, orientadas a fortalecer la salud financiera del usuario.
+
 # Ejemplo de ficha de datos de entrada
 
+```
 {
   "usuario": {
     "id": 1,
@@ -445,10 +479,93 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
     }
   ]
 }
+```
 
 
 
 # Ejemplo de ficha de datos de salida
+
+```
+{
+  "usuario": {
+    "id": 1,
+    "nombre": "Brayan Lira"
+  },
+  "perfil_financiero": {
+    "estado": "En observación"
+  },
+  "dimensiones": {
+    "balance_financiero": {
+      "estado": "Saludable",
+      "indicadores": {
+        "balance_mensual": 5500,
+        "tasa_gasto": 0.78,
+        "margen_financiero": 0.22
+      },
+      "recomendaciones": [
+        "Mantener el equilibrio actual entre ingresos y gastos.",
+        "Continuar monitoreando el margen financiero mensualmente."
+      ]
+    },
+    "capacidad_ahorro": {
+      "estado": "En observación",
+      "indicadores": {
+        "tasa_ahorro": 0.08,
+        "ahorro_inversion_periodo": 2000,
+        "aprovechamiento_margen": 0.36
+      },
+      "recomendaciones": [
+        "Incrementar gradualmente el porcentaje destinado al ahorro.",
+        "Aprovechar una mayor parte del margen financiero para ahorro e inversión."
+      ]
+    },
+    "endeudamiento": {
+      "estado": "Saludable",
+      "indicadores": {
+        "ratio_endeudamiento": 0.12,
+        "pago_deudas": 3000,
+        "presion_deuda": "Baja"
+      },
+      "recomendaciones": [
+        "Mantener el nivel actual de endeudamiento.",
+        "Evitar adquirir nuevas deudas innecesarias."
+      ]
+    },
+    "comportamiento_consumo": {
+      "estado": "En observación",
+      "indicadores": {
+        "distribucion_gasto_categoria": {
+          "Vivienda": 30.2,
+          "Alimentación": 21.8,
+          "Transporte": 12.5,
+          "Salud": 4.8,
+          "Educación": 6.5,
+          "Entretenimiento": 15.4,
+          "Restaurantes": 6.1,
+          "Compras personales": 2.7
+        },
+        "indice_concentracion": 0.58
+      },
+      "perfil_consumo": {
+        "predominio_gasto": "Balance entre gastos esenciales y discrecionales",
+        "tipo_consumo": "Moderadamente concentrado",
+        "diversificacion_consumo": "Diversificado",
+        "categoria_predominante": "Vivienda"
+      },
+      "recomendaciones": [
+        "Reducir gradualmente el gasto en entretenimiento.",
+        "Mantener una distribución equilibrada entre gastos esenciales y discrecionales.",
+        "Continuar monitoreando la distribución del presupuesto."
+      ]
+    }
+  },
+  "recomendaciones_generales": [
+    "Incrementar la capacidad de ahorro para fortalecer la estabilidad financiera.",
+    "Mantener el bajo nivel de endeudamiento actual.",
+    "Revisar periódicamente los gastos discrecionales para mejorar el margen financiero."
+  ]
+}
+```
 
 
 
