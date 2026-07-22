@@ -1,0 +1,307 @@
+@font-face {
+  font-family: "Orbitron Local";
+  src: url("../fonts/orbitron-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Orbitron Local";
+  src: url("../fonts/orbitron-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk Local";
+  src: url("../fonts/space-grotesk-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk Local";
+  src: url("../fonts/space-grotesk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk Local";
+  src: url("../fonts/space-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --y2k-bg-1: #d9f7ff;
+  --y2k-bg-2: #ffd6f6;
+  --y2k-bg-3: #f9fbff;
+  --y2k-surface: rgba(255, 255, 255, 0.86);
+  --y2k-surface-strong: rgba(255, 255, 255, 0.96);
+  --y2k-primary: #00a6ff;
+  --y2k-secondary: #ff4fd8;
+  --y2k-accent: #7b61ff;
+  --y2k-acid: #6affc8;
+  --y2k-text: #11233f;
+  --y2k-muted: #52627f;
+  --y2k-outline: rgba(123, 97, 255, 0.24);
+  --y2k-shadow: 0 20px 42px rgba(71, 106, 255, 0.2);
+  --y2k-inner-highlight: inset 0 2px 0 rgba(255, 255, 255, 0.95), inset 0 -10px 18px rgba(123, 97, 255, 0.08);
+  --y2k-radius: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--y2k-text);
+  font-family: "Space Grotesk Local", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 20%),
+    radial-gradient(circle at 85% 12%, rgba(255, 125, 212, 0.28) 0%, rgba(255, 125, 212, 0) 24%),
+    radial-gradient(circle at 75% 78%, rgba(0, 181, 255, 0.2) 0%, rgba(0, 181, 255, 0) 22%),
+    linear-gradient(135deg, var(--y2k-bg-1) 0%, var(--y2k-bg-3) 46%, var(--y2k-bg-2) 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.16) 1px, transparent 1px, transparent 72px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.16) 1px, transparent 1px, transparent 72px);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent 88%);
+}
+
+.navbar {
+  margin: 10px 14px 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 250, 255, 0.82) 36%, rgba(215, 233, 255, 0.9) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.98) !important;
+  border-radius: 28px !important;
+  box-shadow: var(--y2k-shadow), var(--y2k-inner-highlight);
+  backdrop-filter: blur(16px) saturate(135%);
+}
+
+.navbar-brand,
+.nav-link,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.form-label {
+  color: var(--y2k-text) !important;
+}
+
+.navbar-brand,
+h1,
+h2,
+h3,
+.btn {
+  font-family: "Orbitron Local", "Space Grotesk Local", sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 700;
+}
+
+.nav-link.active,
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--y2k-secondary) !important;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--y2k-primary) 0%, var(--y2k-secondary) 100%);
+}
+
+.card,
+.rounded-3,
+.border {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 248, 255, 0.94) 24%, rgba(225, 240, 255, 0.82) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.96) !important;
+  border-radius: var(--y2k-radius) !important;
+  box-shadow: var(--y2k-shadow), var(--y2k-inner-highlight) !important;
+  backdrop-filter: blur(16px);
+}
+
+.text-body-secondary,
+small,
+.lead,
+.card-text,
+.table {
+  color: var(--y2k-muted) !important;
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.5);
+}
+
+.btn {
+  border-radius: 999px !important;
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(123, 97, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+}
+
+.btn-primary,
+.btn-dark {
+  border: 1px solid rgba(255, 255, 255, 0.96) !important;
+  color: #ffffff !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 28%),
+    linear-gradient(135deg, var(--y2k-primary) 0%, var(--y2k-secondary) 100%) !important;
+}
+
+.btn-primary:hover,
+.btn-dark:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 28%),
+    linear-gradient(135deg, var(--y2k-accent) 0%, var(--y2k-secondary) 100%) !important;
+}
+
+.btn-outline-secondary,
+.btn-outline-primary {
+  border: 1px solid rgba(255, 255, 255, 0.94) !important;
+  color: var(--y2k-text) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(230, 242, 255, 0.82) 100%) !important;
+}
+
+.navbar .nav-help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.96) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.62) 24%, rgba(255, 255, 255, 0) 28%),
+    linear-gradient(135deg, rgba(221, 239, 255, 0.98) 0%, rgba(255, 214, 246, 0.95) 100%) !important;
+  color: var(--y2k-accent) !important;
+}
+
+.navbar .nav-help-btn:hover,
+.navbar .nav-help-btn:focus-visible {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--y2k-primary) 0%, var(--y2k-secondary) 100%) !important;
+  transform: translateY(-1px) scale(1.01);
+}
+
+.navbar .nav-help-btn ion-icon {
+  font-size: 1rem;
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+  border: 1px solid rgba(255, 255, 255, 0.96) !important;
+  border-radius: 16px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(232, 244, 255, 0.86) 100%) !important;
+  color: var(--y2k-text) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), inset 0 -8px 14px rgba(123, 97, 255, 0.06);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: rgba(0, 166, 255, 0.65) !important;
+  box-shadow: 0 0 0 0.2rem rgba(123, 97, 255, 0.14) !important;
+}
+
+.introjs-tooltip {
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.72) 18%, rgba(233, 244, 255, 0.94) 100%);
+  box-shadow: 0 18px 40px rgba(71, 106, 255, 0.22), var(--y2k-inner-highlight);
+}
+
+.introjs-button {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.94);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(232, 244, 255, 0.86) 100%);
+  color: var(--y2k-text);
+  text-shadow: none;
+}
+
+.introjs-button:hover,
+.introjs-button:focus {
+  background: linear-gradient(135deg, var(--y2k-primary) 0%, var(--y2k-secondary) 100%);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.introjs-skipbutton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border-radius: 999px;
+  color: var(--y2k-accent);
+  line-height: 1;
+}
+
+.introjs-skipbutton ion-icon {
+  font-size: 1.25rem;
+}
+
+.introjs-skipbutton:hover,
+.introjs-skipbutton:focus {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--y2k-primary) 0%, var(--y2k-secondary) 100%);
+}
+
+.container section::after,
+.card-body::after {
+  display: none;
+}
+
+.chart-shell {
+  min-height: 320px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0) 42%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(220, 241, 255, 0.82) 58%, rgba(255, 216, 246, 0.74) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: var(--y2k-inner-highlight);
+}
+
+.chart-shell canvas {
+  border-radius: 12px;
+}
+
+@media (max-width: 991px) {
+  .navbar {
+    margin: 0;
+    border-radius: 0 0 26px 26px !important;
+  }
+}
