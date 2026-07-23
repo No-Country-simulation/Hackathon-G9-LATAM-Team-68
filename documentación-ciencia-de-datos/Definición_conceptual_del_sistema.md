@@ -51,6 +51,66 @@ Ejemplo:
 |Endeudamiento|Saludable|
 |Comportamiento de consumo|En riesgo|
 
+# Escala de puntuación
+
+Además de clasificar el resultado de cada dimensión y del perfil financiero general mediante los estados Saludable, En observación y En riesgo, el sistema incorporará una escala de puntuación de 0 a 100. Esta puntuación tiene como objetivo ofrecer una evaluación más precisa del desempeño financiero del usuario y facilitar la interpretación de los resultados.
+
+La puntuación será calculada a partir de un sistema de scoring basado en los indicadores financieros definidos para cada dimensión. Cada indicador contribuirá al resultado mediante un peso previamente establecido, permitiendo obtener una calificación numérica que represente el nivel de desempeño del usuario en esa dimensión.
+
+Una vez calculada la puntuación, el sistema asignará el estado correspondiente de acuerdo con rangos previamente definidos. De esta manera, el estado cualitativo será una interpretación de la puntuación obtenida y no un resultado independiente.
+
+Este enfoque ofrece varias ventajas:
+
+- Proporciona una evaluación más detallada que una clasificación únicamente cualitativa.
+- Permite identificar pequeñas mejoras o deterioros en la salud financiera del usuario.
+- Facilita la comparación entre distintas evaluaciones realizadas en diferentes periodos.
+- Mantiene un criterio de evaluación transparente y explicable, ya que la puntuación se obtiene directamente a partir de los indicadores financieros y de las reglas de scoring definidas por el sistema.
+
+Cada una de las cuatro dimensiones generará tanto una puntuación como un estado, mientras que el perfil financiero general se obtendrá integrando los resultados de todas las dimensiones mediante un sistema de ponderación.
+
+**Ejemplo de resultados:**
+| Elemento |	Puntuación |	Estado |
+| -- | -- | -- |
+| Balance Financiero	| 87	| Saludable |
+| Capacidad de Ahorro |	64	| En observación |
+| Endeudamiento |	91	| Saludable |
+| Comportamiento de Consumo	| 58	| En observación |
+| **Perfil Financiero**	| **75** |	**En observación** |
+
+# Perfil Financiero General
+
+El perfil financiero general representa la evaluación integral de la salud financiera del usuario. Su objetivo es sintetizar el desempeño obtenido en cada una de las cuatro dimensiones analizadas por el sistema en una única puntuación y un estado general.
+
+A diferencia del scoring de cada dimensión, el cual se calcula a partir de indicadores financieros específicos, el scoring del perfil financiero general se obtiene utilizando como entrada las puntuaciones finales de las cuatro dimensiones:
+
+- Balance Financiero.
+- Capacidad de Ahorro.
+- Endeudamiento.
+- Comportamiento de Consumo.
+
+Cada una de estas dimensiones genera previamente una puntuación en una escala de 0 a 100, la cual resume el desempeño del usuario dentro de esa área específica. Posteriormente, dichas puntuaciones son combinadas mediante un sistema de ponderación para calcular la puntuación final del perfil financiero.
+
+## Sistema de ponderación
+
+Para calcular la puntuación final, cada dimensión tendrá un peso que representará su importancia relativa dentro de la evaluación global de la salud financiera. Estos pesos serán definidos durante el diseño del sistema y deberán sumar el 100 %.
+
+La ponderación permite reflejar que algunas dimensiones pueden tener una mayor influencia sobre la salud financiera general que otras, manteniendo un criterio de evaluación consistente y transparente.
+
+## Resultado del scoring
+
+Como resultado de este proceso, el sistema generará:
+
+- Una puntuación final en una escala de 0 a 100.
+- Un estado general del perfil financiero, obtenido a partir de los rangos de puntuación definidos por el sistema.
+
+## Estados generales posibles
+
+🟢 Saludable
+🟡 En observación
+🔴 En riesgo
+
+De esta manera, el perfil financiero ofrecerá tanto una evaluación cuantitativa como una interpretación cualitativa de la situación financiera del usuario.
+
 # Analisis profundo de cada dimension:
 
 ## Dimensión 1 — BALANCE FINANCIERO
@@ -410,15 +470,6 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
 |✈️ Viajes y vacaciones	|Discrecional|
 |📦 Otros|	Depende del análisis o revisión|
 
-# Perfil Financiero 
-
-El perfil financiero representa el resultado integral del análisis realizado por el sistema sobre la información financiera del usuario durante un periodo determinado. Este perfil se construye a partir de la evaluación de cuatro dimensiones fundamentales: balance financiero, capacidad de ahorro, endeudamiento y comportamiento de consumo. Cada dimensión es analizada mediante indicadores específicos que permiten determinar su estado, identificar fortalezas y áreas de oportunidad, y generar recomendaciones personalizadas. Como resultado, el perfil financiero ofrece una visión clara y estructurada de la salud financiera del usuario, facilitando la comprensión de sus hábitos financieros y apoyando la toma de decisiones orientadas a mejorar su estabilidad económica.
-
-## Posibles estados
-
-🟢 Saludable
-🟡 En observación
-🔴 En riesgo
 
 # Resultados finales entregables del analisis
 
@@ -567,9 +618,68 @@ El perfil financiero representa el resultado integral del análisis realizado po
 }
 ```
 
+# Uso de Inteligencia Artificial dentro de la arquitectura del sistema
 
+Con el objetivo de desarrollar un sistema confiable, transparente y fácilmente explicable, se adoptará una arquitectura híbrida en la que la Inteligencia Artificial será utilizada únicamente en aquellas tareas donde aporta un valor significativo, mientras que la metodología de evaluación financiera permanecerá completamente definida mediante reglas de negocio implementadas por el equipo de desarrollo.
 
+Este enfoque permite aprovechar las fortalezas de la IA sin perder el control sobre la lógica financiera del sistema.
 
+## Clasificación automática de transacciones
+
+La primera etapa en la que se incorporará Inteligencia Artificial corresponde a la clasificación automática de las transacciones financieras.
+
+A partir de la descripción de cada transacción, un modelo de lenguaje (LLM) identificará:
+
+- El tipo principal de la transacción:
+  - Consumo.
+  - Pago de deuda.
+  - Ahorro e inversión.
+- En caso de tratarse de una transacción de consumo, determinará además su categoría correspondiente:
+  - Vivienda.
+  - Alimentación.
+  - Transporte.
+  - Salud.
+  - Educación.
+  - Entretenimiento y ocio.
+  - Restaurantes y comida fuera.
+  - Compras personales.
+  - Viajes y vacaciones.
+  - Otros.
+
+Posteriormente, el sistema asignará automáticamente el grupo funcional correspondiente (Esencial o Discrecional) de acuerdo con la categoría identificada.
+
+La utilización de un LLM en esta etapa permite interpretar descripciones de transacciones escritas en lenguaje natural, incluso cuando presentan abreviaturas, nombres comerciales o formatos diferentes según la institución financiera.
+
+## Motor de análisis financiero
+
+Una vez clasificadas las transacciones, todo el proceso de evaluación financiera será realizado exclusivamente por el motor desarrollado por el equipo.
+
+Esta parte del sistema no dependerá de modelos de Inteligencia Artificial ni de aprendizaje automático, sino de una metodología basada en reglas de negocio previamente definidas.
+
+El motor será responsable de:
+
+- Calcular las variables derivadas.
+- Calcular los indicadores financieros de cada dimensión.
+- Aplicar el sistema de scoring de cada dimensión.
+- Determinar la puntuación de cada dimensión.
+- Asignar el estado correspondiente.
+- Calcular el scoring del perfil financiero general.
+- Determinar el estado general del perfil financiero.
+- Seleccionar las recomendaciones aplicables de acuerdo con los resultados obtenidos.
+
+Este enfoque garantiza que todos los resultados sean consistentes, reproducibles y completamente explicables.
+
+## Generación de recomendaciones en lenguaje natural
+
+Las recomendaciones serán determinadas inicialmente mediante reglas de negocio implementadas dentro del motor de análisis financiero.
+
+Es decir, el sistema decidirá qué acciones deben recomendarse al usuario con base en los indicadores, puntuaciones y estados obtenidos durante la evaluación.
+
+Posteriormente, un modelo de lenguaje (LLM) tendrá como única responsabilidad transformar ese conjunto de recomendaciones en un texto más natural, claro y personalizado para el usuario.
+
+De esta manera, el modelo de lenguaje no tomará decisiones financieras ni modificará la lógica del sistema; únicamente actuará como un componente encargado de mejorar la comunicación de los resultados.
+
+En conjunto, esta estrategia convierte a la Inteligencia Artificial en una herramienta de apoyo para tareas de interpretación y comunicación, mientras que la evaluación financiera permanece sustentada en una metodología transparente, consistente y completamente controlada por el sistema desarrollado por el equipo.
 
 
 
