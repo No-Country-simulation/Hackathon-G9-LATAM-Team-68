@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+	<title>Team68 Salud Financiera | Gastos</title>
+	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
+	<link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+	<link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg border-bottom">
+		<div class="container">
+			<a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
+				<img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link" href="summary.html">Resumen</a></li>
+					<li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
+					<li class="nav-item"><a class="nav-link active" href="expense.html">Gastos</a></li>
+					<li class="nav-item"><a class="nav-link" href="history.html">Historial</a></li>
+					<li class="nav-item"><a class="nav-link" href="salud-financiera.html">Salud financiera</a></li>
+					<li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+				</ul>
+				<div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+					<button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la pagina">
+						<ion-icon name="help-circle-outline"></ion-icon>
+						<span></span>
+					</button>
+					<label for="themeSelector" class="small mb-0">Estilo</label>
+					<select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
+						<option value="default">Default (Bootstrap)</option>
+						<option value="wireframe">Wireframe</option>
+						<option value="modern">Modern</option>
+						<option value="y2k">Y2K</option>
+						<option value="hollow">Hollow</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<main class="container py-4 py-md-5">
+		<section class="rounded-3 border p-4 mb-4" id="expenseForm">
+			<h1 class="h3 mb-3">Registrar gasto</h1>
+			<form class="row g-3" id="expenseEntryForm">
+				<div class="col-md-4">
+					<label for="fechaGasto" class="form-label">Fecha</label>
+					<input id="fechaGasto" type="date" class="form-control fecha-hoy" required>
+				</div>
+				<div class="col-md-4">
+					<label for="montoGasto" class="form-label">Monto</label>
+					<input id="montoGasto" type="number" class="form-control" placeholder="0.00" required>
+				</div>
+				<div class="col-md-4">
+					<label for="metodoPago" class="form-label">Metodo de pago</label>
+					<select id="metodoPago" class="form-control" required>
+						<option>Tarjeta</option>
+						<option>Transferencia</option>
+						<option>Efectivo</option>
+					</select>
+				</div>
+				<div class="col-md-12">
+					<label for="conceptoGasto" class="form-label">Concepto</label>
+					<input id="conceptoGasto" type="text" class="form-control" placeholder="Ej. Supermercado" required>
+				</div>
+				<div class="col-md-4 d-none">
+					<label for="categoriaGasto" class="form-label">Categoria</label>
+					<select id="categoriaGasto" class="form-control">
+						<option>Alimentacion</option>
+						<option>Transporte</option>
+						<option>Servicios</option>
+						<option>Salud</option>
+						<option>Otros</option>
+					</select>
+				</div>
+				<div class="col-12 d-flex gap-2">
+					<button type="button" class="btn btn-primary" id="saveExpenseBtn"><ion-icon name="save-outline"></ion-icon> Guardar gasto</button>
+					<a class="btn btn-outline-secondary" href="summary.html"><ion-icon name="close-circle-outline"></ion-icon> Cancelar</a>
+				</div>
+			</form>
+		</section>
+
+		<section class="card" id="expenseRecent">
+			<div class="card-body">
+				<h2 class="h5 mb-3">Gastos recientes</h2>
+				<ul class="mb-0" id="expenseRecentList"></ul>
+			</div>
+		</section>
+	</main>
+
+	<script src="../vendor/introjs/intro.min.js"></script>
+	<script type="module" src="../vendor/ionicons/ionicons.esm.js"></script>
+	<script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
+	<script src="../assets/js/theme-switcher.js"></script>
+	<script src="../assets/js/page-help.js"></script>
+	<script src="../assets/js/movements-local.js"></script>
+	<script src="../assets/js/forms-local.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
