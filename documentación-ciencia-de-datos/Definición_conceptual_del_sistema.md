@@ -465,7 +465,7 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
 |🏥 Salud	|Esencial|
 |🎓 Educación|	Esencial|
 |🎉 Entretenimiento y ocio|	Discrecional|
-|🍔 Restaurantes y comida fuera|	Discrecional|
+| :tv: Suscripciones digitales|	Discrecional|
 |🛍️ Compras personales|	Discrecional|
 |✈️ Viajes y vacaciones	|Discrecional|
 |📦 Otros|	Depende del análisis o revisión|
@@ -543,10 +543,18 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
     "nombre": "Brayan Lira"
   },
   "perfil_financiero": {
-    "estado": "En observación"
+    "puntuacion": 76,
+    "estado": "En observación",
+    "dimensiones": {
+      "balance_financiero": 87,
+      "capacidad_ahorro": 64,
+      "endeudamiento": 91,
+      "comportamiento_consumo": 58
+    }
   },
   "dimensiones": {
     "balance_financiero": {
+      "puntuacion": 87,
       "estado": "Saludable",
       "indicadores": {
         "balance_mensual": 5500,
@@ -559,6 +567,7 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
       ]
     },
     "capacidad_ahorro": {
+      "puntuacion": 64,
       "estado": "En observación",
       "indicadores": {
         "tasa_ahorro": 0.08,
@@ -571,6 +580,7 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
       ]
     },
     "endeudamiento": {
+      "puntuacion": 91,
       "estado": "Saludable",
       "indicadores": {
         "ratio_endeudamiento": 0.12,
@@ -583,6 +593,7 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
       ]
     },
     "comportamiento_consumo": {
+      "puntuacion": 58,
       "estado": "En observación",
       "indicadores": {
         "distribucion_gasto_categoria": {
@@ -591,9 +602,11 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
           "Transporte": 12.5,
           "Salud": 4.8,
           "Educación": 6.5,
-          "Entretenimiento": 15.4,
-          "Restaurantes": 6.1,
-          "Compras personales": 2.7
+          "Entretenimiento y ocio": 15.4,
+          "Suscripciones digitales": 6.1,
+          "Compras personales": 2.7,
+          "Viajes y vacaciones": 0.0,
+          "Otros": 0.0
         },
         "indice_concentracion": 0.58
       },
@@ -604,7 +617,8 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
         "categoria_predominante": "Vivienda"
       },
       "recomendaciones": [
-        "Reducir gradualmente el gasto en entretenimiento.",
+        "Reducir gradualmente el gasto en entretenimiento y ocio.",
+        "Revisar las suscripciones digitales activas y cancelar aquellas con poco uso.",
         "Mantener una distribución equilibrada entre gastos esenciales y discrecionales.",
         "Continuar monitoreando la distribución del presupuesto."
       ]
