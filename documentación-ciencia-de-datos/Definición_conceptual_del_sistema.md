@@ -124,7 +124,7 @@ permitiendo identificar si existe un equilibrio, un superávit o un déficit fin
 - ¿Qué porcentaje del ingreso está comprometido por los gastos?
 
 ### Variables necesarias
-- Ingreso mensual
+- Ingreso mensual: Suma de todos los ingresos
 - Consumo total mensual: Suma de las transacciones clasificadas como consumo.
 - Pago mensual de deudas: Suma de las transacciones clasificadas como pago de deuda.
 - Egreso total: consumo total mensual + pago mensual de deudas
@@ -499,34 +499,46 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
 ```
 {
   "usuario": {
-    "id": 1,
     "nombre": "Brayan Lira"
   },
   "periodo": {
     "inicio": "2026-07-01",
     "fin": "2026-07-31"
   },
-  "ingreso_mensual": 25000,
-  "transacciones": [
+  "ingresos": [
     {
-      "fecha": "2026-07-01",
-      "descripcion": "Walmart",
-      "monto": 850
+      "descripcion": "Salario",
+      "monto": 25000
     },
     {
+      "descripcion": "Trabajo freelance",
+      "monto": 4500
+    },
+    {
+      "descripcion": "Rendimientos de inversión",
+      "monto": 800
+    }
+  ],
+  "transacciones": [
+    {
       "fecha": "2026-07-02",
-      "descripcion": "Pago tarjeta BBVA",
-      "monto": 2500
+      "descripcion": "Walmart León",
+      "monto": 1350
     },
     {
       "fecha": "2026-07-03",
-      "descripcion": "CETES",
-      "monto": 1000
+      "descripcion": "Netflix",
+      "monto": 219
     },
     {
-      "fecha": "2026-07-04",
-      "descripcion": "Netflix",
-      "monto": 239
+      "fecha": "2026-07-05",
+      "descripcion": "Pago tarjeta Santander",
+      "monto": 3200
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "CETES Directo",
+      "monto": 1500
     }
   ]
 }
