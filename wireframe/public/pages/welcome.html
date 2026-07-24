@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Team68 Wireframe | Bienvenida</title>
+	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
+	<link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg border-bottom">
+		<div class="container">
+			<a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
+				<img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link" href="summary.html">Resumen</a></li>
+					<li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
+					<li class="nav-item"><a class="nav-link" href="expense.html">Gastos</a></li>
+					<li class="nav-item"><a class="nav-link" href="history.html">Historial</a></li>
+					<li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+				</ul>
+				<div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+					<button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la pagina">
+						<ion-icon name="help-circle-outline"></ion-icon>
+						<span></span>
+					</button>
+					<label for="themeSelector" class="small mb-0">Estilo</label>
+					<select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
+						<option value="default">Default (Bootstrap)</option>
+						<option value="wireframe">Wireframe</option>
+						<option value="modern">Modern</option>
+						<option value="y2k">Y2K</option>
+						<option value="hollow">Hollow</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<main class="container py-5">
+		<section class="rounded-3 border p-4 p-md-5 mb-4" id="welcomeHero">
+			<div class="row g-4 align-items-center">
+				<div class="col-lg-7">
+					<h1 class="display-6 fw-bold">Wireframe de App de Ingresos y Gastos</h1>
+					<p class="lead">Explora una maqueta visual para registrar movimientos, categorizar gastos y revisar tu balance mensual.</p>
+					<div class="d-flex gap-2 flex-wrap" id="welcomeActions">
+						<a class="btn btn-primary" href="summary.html"><ion-icon name="speedometer-outline"></ion-icon> Ir al resumen</a>
+						<a class="btn btn-outline-secondary" href="income.html"><ion-icon name="trending-up-outline"></ion-icon> Registrar ingreso</a>
+						<a class="btn btn-outline-secondary" href="expense.html"><ion-icon name="trending-down-outline"></ion-icon> Registrar gasto</a>
+					</div>
+				</div>
+				<div class="col-lg-5">
+					<div class="card h-100" id="welcomeModules">
+						<div class="card-body">
+							<h2 class="h5 card-title">Modulos previstos</h2>
+							<ul class="mb-0">
+								<li>Dashboard mensual</li>
+								<li>Carga de ingresos</li>
+								<li>Carga de gastos</li>
+								<li>Historial y filtros</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script src="../vendor/introjs/intro.min.js"></script>
+	<script type="module" src="../vendor/ionicons/ionicons.esm.js"></script>
+	<script src="../assets/js/theme-switcher.js"></script>
+	<script src="../assets/js/page-help.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

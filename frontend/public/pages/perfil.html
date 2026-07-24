@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <title>Team68 Salud Financiera | Salud financiera</title>
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
+  <link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css">
+  <style>
+    .health-chart-shell {
+      max-width: 220px;
+      margin: 0 auto;
+    }
+
+    .health-suggestions {
+      text-align: left;
+    }
+
+    .medal-card img {
+      max-height: 150px;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
+        <img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="summary.html">Resumen</a></li>
+          <li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
+          <li class="nav-item"><a class="nav-link" href="expense.html">Gastos</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">Historial</a></li>
+          <li class="nav-item"><a class="nav-link active" href="perfil.html">Perfil</a></li>
+          <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+          <button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la pagina">
+            <ion-icon name="help-circle-outline"></ion-icon>
+            <span></span>
+          </button>
+          <label for="themeSelector" class="small mb-0">Estilo</label>
+          <select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
+            <option value="default">Default (Bootstrap)</option>
+            <option value="wireframe">Wireframe</option>
+            <option value="modern">Modern</option>
+            <option value="y2k">Y2K</option>
+            <option value="hollow">Hollow</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4 py-md-5">
+    
+    <section class="rounded-3 border p-4 mb-4" id="financialHealthHeader">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div>
+          <h1 class="h3 mb-1">Perfil financiero</h1>
+          <small>Indicadores clave de tu situacion actual</small>
+        </div>
+        <a href="history.html" class="btn btn-outline-secondary"><ion-icon name="stats-chart-outline"></ion-icon> Ver historial</a>
+      </div>
+    </section>
+
+    <section class="row g-3 mb-4" id="financialHealthMetrics">
+      <div class="col-md-4">
+        <article class="card h-100">
+          <div class="card-body text-center">
+            <h2 class="h5 mb-1">Salud financiera</h2>
+            <p class="small mb-3" id="saludEstado">Estado actual de la salud financiera: en observacion.</p>
+            <div class="health-chart-shell mb-3">
+              <canvas id="saludChart" aria-label="Grafica de salud financiera" role="img"></canvas>
+            </div>
+            <h3 class="h6 mb-2">Sugerencias</h3>
+            <ul class="small mb-0 health-suggestions" id="saludSuggestions"></ul>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="card h-100">
+          <div class="card-body text-center">
+            <h2 class="h5 mb-1">Endeudamiento</h2>
+            <p class="small mb-3">Porcentaje de tus ingresos comprometidos en gastos.</p>
+            <div class="health-chart-shell mb-3">
+              <canvas id="deudaChart" aria-label="Grafica de endeudamiento" role="img"></canvas>
+            </div>
+            <h3 class="h6 mb-2">Sugerencias</h3>
+            <ul class="small mb-0 health-suggestions" id="deudaSuggestions"></ul>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="card h-100">
+          <div class="card-body text-center">
+            <h2 class="h5 mb-1">Ahorro</h2>
+            <p class="small mb-3">Proporcion de ingresos que logras conservar.</p>
+            <div class="health-chart-shell mb-3">
+              <canvas id="ahorroChart" aria-label="Grafica de ahorro" role="img"></canvas>
+            </div>
+            <h3 class="h6 mb-2">Sugerencias</h3>
+            <ul class="small mb-0 health-suggestions" id="ahorroSuggestions"></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="rounded-3 border p-4 mb-4" id="medallasObtenidas">
+      <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+        <div>
+          <h2 class="h4 mb-1">Medallas obtenidas el mes pasado</h2>
+          <p class="small mb-0">Reconocimientos de ejemplo ganados por buenos hábitos financieros.</p>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <article class="h-100 text-center">
+            <div class="card-body">
+              <img src="../assets/images/medalla-finanzas-saludables.webp" class="img-fluid mb-3" alt="Medalla finanzas saludables">
+              <h3 class="h6 mb-2">Finanzas saludables</h3>
+              <p class="small mb-0">Reconoce constancia en ahorro y balance financiero estable.</p>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="h-100 text-center">
+            <div class="card-body">
+              <img src="../assets/images/medalla-deuda-bajo control.webp" class="img-fluid mb-3" alt="Medalla deuda bajo control">
+              <h3 class="h6 mb-2">Deuda bajo control</h3>
+              <p class="small mb-0">Premio por mantener el endeudamiento dentro de un nivel sano.</p>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="h-100 text-center">
+            <div class="card-body">
+              <img src="../assets/images/medalla-gasto-hormiga-reina.webp" class="img-fluid mb-3" alt="Medalla gasto hormiga reina">
+              <h3 class="h6 mb-2">Gasto hormiga reina</h3>
+              <p class="small mb-0">La hormiga reina exige un gasto a la altura de sus caprichos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../vendor/introjs/intro.min.js"></script>
+  <script type="module" src="../vendor/ionicons/ionicons.esm.js"></script>
+  <script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script src="../assets/js/page-help.js"></script>
+  <script src="../assets/js/movements-local.js"></script>
+  <script src="../vendor/chartjs/chart.umd.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function roundPercent(value) {
+      return Math.round(clamp(value, 0, 100));
+    }
+
+    function getTotalsFromMovements() {
+      var totals = {
+        income: 0,
+        expense: 0
+      };
+
+      if (!window.team68Movements || typeof window.team68Movements.getAll !== "function") {
+        return totals;
+      }
+
+      var rows = window.team68Movements.getAll();
+      rows.forEach(function (item) {
+        var amount = Math.abs(Number(item.monto || 0));
+        if (item.tipo === "Ingreso") {
+          totals.income += amount;
+        }
+        if (item.tipo === "Gasto") {
+          totals.expense += amount;
+        }
+      });
+
+      return totals;
+    }
+
+    function getFinancialMetrics() {
+      var totals = getTotalsFromMovements();
+      var income = totals.income;
+      var expense = totals.expense;
+
+      if (income <= 0) {
+        return {
+          health: 0,
+          debt: 0,
+          savings: 0
+        };
+      }
+
+      var savingsAmount = Math.max(income - expense, 0);
+      var debtPct = roundPercent((expense / income) * 100);
+      var savingsPct = roundPercent((savingsAmount / income) * 100);
+
+      var healthFormula = 100 - debtPct * 0.6 + savingsPct * 0.4;
+      var healthPct = roundPercent(healthFormula);
+
+      return {
+        health: healthPct,
+        debt: debtPct,
+        savings: savingsPct
+      };
+    }
+
+    function drawDonut(canvasId, value, color) {
+      var canvas = document.getElementById(canvasId);
+      var safeValue = roundPercent(value);
+
+      if (!canvas) {
+        return;
+      }
+
+      var centerLabelPlugin = {
+        id: "team68-center-label-" + canvasId,
+        afterDraw: function (chart) {
+          var meta = chart.getDatasetMeta(0);
+          if (!meta || !meta.data || !meta.data.length) {
+            return;
+          }
+
+          var point = meta.data[0];
+          var x = point.x;
+          var y = point.y;
+          var ctx = chart.ctx;
+          var centerColor = getComputedStyle(document.documentElement)
+            .getPropertyValue("--team68-donut-center-color")
+            .trim() || "#212529";
+
+          ctx.save();
+          ctx.fillStyle = centerColor;
+          ctx.font = "700 28px system-ui";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(safeValue + "%", x, y);
+          ctx.restore();
+        }
+      };
+
+      new Chart(canvas, {
+        type: "doughnut",
+        plugins: [centerLabelPlugin],
+        data: {
+          labels: ["Valor", "Resto"],
+          datasets: [{
+            data: [safeValue, 100 - safeValue],
+            backgroundColor: [color, "#e9ecef"],
+            borderWidth: 0,
+            hoverOffset: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          cutout: "72%",
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function (ctx) {
+                  return ctx.raw + "%";
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderSuggestions(listId, suggestions) {
+      var listNode = document.getElementById(listId);
+      if (!listNode) {
+        return;
+      }
+
+      listNode.innerHTML = suggestions.map(function (text) {
+        return "<li>" + text + "</li>";
+      }).join("");
+    }
+
+    function getHealthSuggestions(value) {
+      if (value >= 75) {
+        return [
+          "Mantener tu presupuesto actual y revisar resultados cada semana.",
+          "Automatizar transferencias a ahorro para conservar el buen ritmo.",
+          "Definir una meta de inversion de mediano plazo."
+        ];
+      }
+
+      if (value >= 50) {
+        return [
+          "Reducir uno o dos gastos variables este mes.",
+          "Separar primero un monto fijo para ahorro.",
+          "Revisar suscripciones y pagos recurrentes."
+        ];
+      }
+
+      return [
+        "Crear un presupuesto base con topes por categoria.",
+        "Evitar compras no esenciales durante las proximas semanas.",
+        "Buscar una fuente adicional de ingreso temporal."
+      ];
+    }
+
+    function getDebtSuggestions(value) {
+      if (value <= 35) {
+        return [
+          "Mantener el endeudamiento en niveles controlados.",
+          "Pagar siempre el total de tarjetas para evitar intereses.",
+          "Construir fondo de emergencia para no recurrir a deuda."
+        ];
+      }
+
+      if (value <= 60) {
+        return [
+          "Priorizar el pago de deudas con mayor interes.",
+          "Evitar nuevas compras financiadas en el corto plazo.",
+          "Negociar mejores tasas o consolidar saldos si aplica."
+        ];
+      }
+
+      return [
+        "Detener deuda nueva y enfocarte en reducir saldo actual.",
+        "Aplicar metodo bola de nieve o avalancha de pagos.",
+        "Revisar plan de pagos mensual con objetivos realistas."
+      ];
+    }
+
+    function getSavingsSuggestions(value) {
+      if (value >= 25) {
+        return [
+          "Mantener la disciplina de ahorro mensual.",
+          "Evaluar dividir ahorro entre emergencia e inversion.",
+          "Subir gradualmente tu meta de ahorro."
+        ];
+      }
+
+      if (value >= 10) {
+        return [
+          "Incrementar ahorro con recortes pequenos y constantes.",
+          "Programar una transferencia automatica al inicio del mes.",
+          "Definir un objetivo puntual para motivar el ahorro."
+        ];
+      }
+
+      return [
+        "Comenzar con una meta minima del 5% del ingreso.",
+        "Eliminar gastos hormiga y redirigir ese monto a ahorro.",
+        "Separar el ahorro apenas recibas ingresos."
+      ];
+    }
+
+    function getHealthStatusLabel(value) {
+      if (value >= 75) {
+        return "saludable";
+      }
+
+      if (value >= 50) {
+        return "en observacion";
+      }
+
+      return "en riego";
+    }
+
+    function renderFinancialHealthPage() {
+      var metrics = getFinancialMetrics();
+      var statusNode = document.getElementById("saludEstado");
+
+      drawDonut("saludChart", metrics.health, "#198754");
+      drawDonut("deudaChart", metrics.debt, "#dc3545");
+      drawDonut("ahorroChart", metrics.savings, "#0d6efd");
+
+      if (statusNode) {
+        statusNode.textContent = "Estado actual de la salud financiera: " + getHealthStatusLabel(metrics.health) + ".";
+      }
+
+      renderSuggestions("saludSuggestions", getHealthSuggestions(metrics.health));
+      renderSuggestions("deudaSuggestions", getDebtSuggestions(metrics.debt));
+      renderSuggestions("ahorroSuggestions", getSavingsSuggestions(metrics.savings));
+    }
+
+    renderFinancialHealthPage();
+  </script>
+</body>
+</html>
