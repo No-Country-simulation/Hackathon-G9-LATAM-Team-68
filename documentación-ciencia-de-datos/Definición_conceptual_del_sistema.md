@@ -413,13 +413,16 @@ Justificación
 
 ## Variables de entrada (usuario)
 
-- Ingreso mensual
+- Usuario
+- Período de análisis
+- Ingresos
 - Transacciones financieras: Registro de todas las transacciones del periodo.
 
 ## Variables derivadas globales
 
 |Variable|	Cómo se obtiene|
 | --- | --- |
+| Ingreso mensual | Suma de todos los ingresos |
 |Consumo total mensual|	Suma de transacciones de consumo.|
 |Pago mensual de deudas|	Suma de transacciones clasificadas como deuda.|
 |Ahorro e inversión total|	Suma de transacciones clasificadas como ahorro e inversión.|
