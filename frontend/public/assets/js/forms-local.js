@@ -1,4 +1,33 @@
 (function () {
+  function getBogotaISODate() {
+    var formatter = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Bogota",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    });
+    var parts = formatter.formatToParts(new Date());
+    var year = "";
+    var month = "";
+    var day = "";
+
+    parts.forEach(function (part) {
+      if (part.type === "year") {
+        year = part.value;
+      }
+
+      if (part.type === "month") {
+        month = part.value;
+      }
+
+      if (part.type === "day") {
+        day = part.value;
+      }
+    });
+
+    return year + "-" + month + "-" + day;
+  }
+
   function showMessage(icon, title, text) {
     if (window.Swal) {
       window.Swal.fire({
@@ -19,11 +48,26 @@
       return input;
     }
 
-    return new Date().toISOString().slice(0, 10);
+    return getBogotaISODate();
+  }
+
+  function setTodayOnInput(inputId) {
+    var input = document.getElementById(inputId);
+    if (!input) {
+      return;
+    }
+
+    input.value = getBogotaISODate();
+  }
+
+  function setTodayOnDateFields() {
+    document.querySelectorAll(".fecha-hoy").forEach(function (input) {
+      input.value = getBogotaISODate();
+    });
   }
 
   function renderRecentList(type, listId, emptyText) {
-    if (!window.fintrackMovements) {
+    if (!window.team68Movements) {
       return;
     }
 
@@ -32,7 +76,7 @@
       return;
     }
 
-    var rows = window.fintrackMovements.getAll()
+    var rows = window.team68Movements.getAll()
       .filter(function (item) {
         return item.tipo === type;
       })
@@ -45,9 +89,9 @@
 
     list.innerHTML = rows.map(function (row) {
       return "<li>" +
-        window.fintrackMovements.formatDate(row.fecha) +
+        window.team68Movements.formatDate(row.fecha) +
         " - " + row.concepto +
-        " - " + window.fintrackMovements.formatAmount(row.monto) +
+        " - " + window.team68Movements.formatAmount(row.monto) +
         "</li>";
     }).join("");
   }
@@ -60,7 +104,7 @@
   function setupIncomeForm() {
     var form = document.getElementById("incomeEntryForm");
     var saveBtn = document.getElementById("saveIncomeBtn");
-    if (!form || !saveBtn || !window.fintrackMovements) {
+    if (!form || !saveBtn || !window.team68Movements) {
       return;
     }
 
@@ -69,20 +113,20 @@
       var monto = document.getElementById("montoIngreso").value;
       var fecha = document.getElementById("fechaIngreso").value;
       var categoria = document.getElementById("categoriaIngreso").value;
-      var cuenta = document.getElementById("cuentaIngreso").value;
+
 
       try {
-        var row = window.fintrackMovements.add({
+        var row = window.team68Movements.add({
           concepto: concepto,
           monto: Number(monto),
           fecha: normalizeDate(fecha),
           categoria: categoria,
-          cuenta: cuenta,
           tipo: "Ingreso"
         });
 
         form.reset();
-        showMessage("success", "Ingreso guardado", row.concepto + " por " + window.fintrackMovements.formatAmount(row.monto));
+        setTodayOnInput("fechaIngreso");
+        showMessage("success", "Ingreso guardado", row.concepto + " por " + window.team68Movements.formatAmount(row.monto));
         renderRecentLists();
       } catch (error) {
         showMessage("error", "No se pudo guardar", error.message);
@@ -93,29 +137,30 @@
   function setupExpenseForm() {
     var form = document.getElementById("expenseEntryForm");
     var saveBtn = document.getElementById("saveExpenseBtn");
-    if (!form || !saveBtn || !window.fintrackMovements) {
+    if (!form || !saveBtn || !window.team68Movements) {
       return;
     }
 
     saveBtn.addEventListener("click", function () {
-      var concepto = document.getElementById("conceptoGasto").value;
+      var concepto = document.getElementById("conceptoGasto").value.trim().slice(0, 60);
       var monto = document.getElementById("montoGasto").value;
       var fecha = document.getElementById("fechaGasto").value;
       var categoria = document.getElementById("categoriaGasto").value;
-      var cuenta = document.getElementById("metodoPago").value;
+      var metodoPago = document.getElementById("metodoPagoGasto").value;
 
       try {
-        var row = window.fintrackMovements.add({
+        var row = window.team68Movements.add({
           concepto: concepto,
           monto: Number(monto),
           fecha: normalizeDate(fecha),
           categoria: categoria,
-          cuenta: cuenta,
+          metodoPago: metodoPago,
           tipo: "Gasto"
         });
 
         form.reset();
-        showMessage("success", "Gasto guardado", row.concepto + " por " + window.fintrackMovements.formatAmount(row.monto));
+        setTodayOnInput("fechaGasto");
+        showMessage("success", "Gasto guardado", row.concepto + " por " + window.team68Movements.formatAmount(row.monto));
         renderRecentLists();
       } catch (error) {
         showMessage("error", "No se pudo guardar", error.message);
@@ -125,11 +170,6 @@
 
   setupIncomeForm();
   setupExpenseForm();
+  setTodayOnDateFields();
   renderRecentLists();
 })();
-
-const hoy = new Date().toISOString().split('T')[0];
-
-document.querySelectorAll('.fecha-hoy').forEach(input => {
-    input.value = hoy;
-});

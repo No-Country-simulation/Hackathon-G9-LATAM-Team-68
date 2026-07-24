@@ -27,14 +27,14 @@
     }
 
     document.documentElement.setAttribute("data-theme", themeName);
-    document.dispatchEvent(new CustomEvent("fintrack:theme-change", { detail: { theme: themeName } }));
+    document.dispatchEvent(new CustomEvent("team68:theme-change", { detail: { theme: themeName } }));
 
     if (persist) {
-      localStorage.setItem("fintrack-theme", themeName);
+      localStorage.setItem("team68-theme", themeName);
     }
   }
 
-  var storedTheme = localStorage.getItem("fintrack-theme");
+  var storedTheme = localStorage.getItem("team68-theme");
   var initialTheme = Object.prototype.hasOwnProperty.call(themes, storedTheme) ? storedTheme : "default";
 
   applyTheme(initialTheme, false);

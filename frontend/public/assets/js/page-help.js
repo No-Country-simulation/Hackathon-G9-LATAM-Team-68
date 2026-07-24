@@ -19,11 +19,11 @@
       {
         element: "#loginCard",
         title: "Acceso",
-        intro: "Completa tu correo y contrasena para entrar al panel principal."
+        intro: "Completa tu usuario y contrasena para entrar al panel principal."
       },
       {
-        element: "#email",
-        title: "Correo",
+        element: "#user",
+        title: "Usuario",
         intro: "Usa este campo para escribir la cuenta con la que deseas ingresar."
       },
       {
@@ -88,11 +88,6 @@
         intro: "Registra concepto, monto, fecha y cuenta del ingreso que deseas guardar."
       },
       {
-        element: "#cuentaIngreso",
-        title: "Cuenta de destino",
-        intro: "Selecciona donde impacta el dinero para mantener el control de tus fondos."
-      },
-      {
         element: "#incomeRecent",
         title: "Ingresos recientes",
         intro: "Este bloque muestra ejemplos de los ultimos ingresos cargados."
@@ -108,11 +103,6 @@
         element: "#expenseForm",
         title: "Formulario de gasto",
         intro: "Aqui capturas el concepto, categoria, monto y metodo de pago del gasto."
-      },
-      {
-        element: "#metodoPago",
-        title: "Metodo de pago",
-        intro: "Indica si el gasto se hizo con tarjeta, transferencia o efectivo."
       },
       {
         element: "#expenseRecent",
@@ -142,7 +132,7 @@
         intro: "La grafica agrupa gastos por categoria para detectar tendencias rapidamente."
       }
     ],
-    "salud-financiera.html": [
+    "perfil.html": [
       {
         element: "#pageHelpTrigger",
         title: "Ayuda de la pagina",

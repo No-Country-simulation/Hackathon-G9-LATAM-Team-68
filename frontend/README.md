@@ -6,17 +6,19 @@ La propuesta funcional combina visualizacion clara, clasificacion de movimientos
 
 ## Versiones
 
-Version actual: 0.3
+Version actual: 0.5
 
 Version 0.1: Prototipo inicial
-Version 0.2: Grafica de ingresos y gastos
-Version 0.3: Grafica de salud financiera
+Version 0.2: Grafica de gastos
+Version 0.3: Grafica de perfil financiero
+Version 0.4: Ajustes de la simulacion
+Version 0.5: Metodo de pago en gastos
 
 ## Descripcion del proyecto
 
 Team 68 busca ofrecer una experiencia simple, intuitiva y confiable para organizar finanzas personales, detectar patrones de consumo y recibir orientacion accionable basada en datos reales.
 
-En este workspace se representa esa propuesta mediante un wireframe frontend con pantallas de bienvenida, resumen, ingresos, gastos, historial, salud financiera y login, listo para validar contenido, navegacion y enfoque visual del producto.
+En este workspace se representa esa propuesta mediante un prototipo frontend con pantallas de bienvenida, resumen, ingresos, gastos, historial, perfil y login, listo para validar contenido, navegacion y enfoque visual del producto.
 
 ## Objetivo
 
@@ -29,7 +31,7 @@ En este workspace se representa esa propuesta mediante un wireframe frontend con
 - Registro de ingresos y gastos con categorizacion flexible.
 - Visualizacion dinamica de movimientos y distribucion de gastos.
 - Analisis del comportamiento financiero y clasificacion del perfil del usuario.
-- Recomendaciones de presupuesto mensual, alertas de riesgo y sugerencias de ahorro.
+- Recomendaciones personalizadas basadas en datos reales.
 - Navegacion entre pantallas clave del flujo del producto.
 - Cambio de tema visual con persistencia mediante localStorage.
 
@@ -61,7 +63,7 @@ Este repositorio implementa la capa frontend del MVP como maqueta funcional en H
 - HTML5, CSS3 y JavaScript moderno.
 - Bootstrap 5 para estructura responsive.
 - Chart.js para visualizacion de tendencias y categorias.
-- DataTables, SweetAlert2, Intro.js e Ionicons para soporte de interaccion y experiencia.
+- SweetAlert2, Intro.js e Ionicons para soporte de interaccion y experiencia.
 
 ### Backend
 
@@ -100,7 +102,7 @@ Este repositorio implementa la capa frontend del MVP como maqueta funcional en H
     - income.html: formulario de carga de ingresos.
     - expense.html: formulario de carga de gastos.
     - history.html: filtros, tabla historica y grafica de categorias.
-    - salud-financiera.html: indicadores de salud financiera, sugerencias y medallas obtenidas.
+    - perfil.html: indicadores de salud financiera, sugerencias y medallas obtenidas.
     - logout.html: salida y redireccion.
   - assets/css/
     - wireframe.css: estilo tipo boceto.
@@ -114,20 +116,7 @@ Este repositorio implementa la capa frontend del MVP como maqueta funcional en H
     - page-help.js: ayuda contextual.
   - vendor/
     - bootstrap: estilos y componentes.
-    - datatables: tabla interactiva.
     - sweetalert2: modales y alertas.
     - ionicons: iconografia.
     - chartjs: renderizado de graficas.
     - introjs: guias paso a paso.
-
-## Tecnologias usadas en este workspace
-
-- HTML5
-- CSS3
-- JavaScript vanilla
-- Bootstrap 5
-- DataTables
-- SweetAlert2
-- Chart.js
-- Intro.js
-- Ionicons

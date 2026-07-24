@@ -33,7 +33,7 @@
           <li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
           <li class="nav-item"><a class="nav-link" href="expense.html">Gastos</a></li>
           <li class="nav-item"><a class="nav-link active" href="history.html">Historial</a></li>
-          <li class="nav-item"><a class="nav-link" href="salud-financiera.html">Salud financiera</a></li>
+          <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
           <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
         </ul>
         <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
@@ -78,19 +78,22 @@
           <label for="categoria" class="form-label">Categoria</label>
           <select id="categoria" class="form-control">
             <option value="Todas">Todas</option>
-            <option value="Trabajo">Trabajo</option>
-            <option value="Freelance">Freelance</option>
-            <option value="Inversiones">Inversiones</option>
+            <option value="Vivienda">Vivienda</option>
             <option value="Alimentacion">Alimentacion</option>
             <option value="Transporte">Transporte</option>
-            <option value="Servicios">Servicios</option>
             <option value="Salud">Salud</option>
+            <option value="Educacion">Educacion</option>
+            <option value="Entretenimiento">Entretenimiento</option>
+            <option value="Subscripciones">Subscripciones</option>
+            <option value="Personal">Personal</option>
+            <option value="Viajes">Viajes</option>
             <option value="Otros">Otros</option>
           </select>
         </div>
         <div class="col-12 d-flex gap-2">
           <button type="button" class="btn btn-primary" id="applyFiltersBtn"><ion-icon name="funnel-outline"></ion-icon> Aplicar filtros</button>
           <button type="button" class="btn btn-outline-secondary" id="clearFiltersBtn"><ion-icon name="refresh-outline"></ion-icon> Limpiar</button>
+           <button type="button" class="btn btn-outline-secondary" id="resetFiltersBtn"><ion-icon name="refresh-outline"></ion-icon> Restablecer</button>
         </div>
       </form>
     </section>
@@ -122,6 +125,15 @@
       </div>
     </section>
 
+    <section class="card mb-4" id="historyChartCard">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Gastos por categoria</h2>
+        <div class="chart-shell">
+          <canvas id="expenseCategoryChart" aria-label="Grafica de gastos por categoria" role="img"></canvas>
+        </div>
+      </div>
+    </section>
+
     <section class="card mb-4" id="historyResults">
       <div class="card-body">
         <h2 class="h5 mb-3">Resultados</h2>
@@ -132,31 +144,13 @@
                 <th>Fecha</th>
                 <th>Concepto</th>
                 <th>Categoria</th>
+                <th>Metodo de pago</th>
                 <th>Tipo</th>
-                <th>Cuenta</th>
                 <th class="text-end">Monto</th>
               </tr>
             </thead>
             <tbody id="historyMovementsBody"></tbody>
           </table>
-        </div>
-      </div>
-    </section>
-
-    <section class="card mb-4" id="historyChartCard">
-      <div class="card-body">
-        <h2 class="h5 mb-3">Gastos por categoria</h2>
-        <div class="chart-shell">
-          <canvas id="expenseCategoryChart" aria-label="Grafica de gastos por categoria" role="img"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <section class="card" id="historyIncomeChartCard">
-      <div class="card-body">
-        <h2 class="h5 mb-3">Ingresos por categoria</h2>
-        <div class="chart-shell">
-          <canvas id="incomeCategoryChart" aria-label="Grafica de ingresos por categoria" role="img"></canvas>
         </div>
       </div>
     </section>
@@ -173,7 +167,6 @@
   <script>
     let currentHistoryRows = [];
     let expenseChart = null;
-    let incomeChart = null;
 
     function getChartSeries(rows) {
       const categoryTotals = {};
@@ -204,52 +197,6 @@
         labels: labels,
         values: values
       };
-    }
-
-    function getIncomeChartSeries(rows) {
-      const categoryTotals = {};
-
-      rows.forEach(function (item) {
-        if (item.tipo !== "Ingreso") {
-          return;
-        }
-
-        const category = item.categoria || "Otros";
-        const amount = Math.abs(Number(item.monto || 0));
-        categoryTotals[category] = (categoryTotals[category] || 0) + amount;
-      });
-
-      const labels = Object.keys(categoryTotals);
-      const values = labels.map(function (label) {
-        return categoryTotals[label];
-      });
-
-      if (!labels.length) {
-        return {
-          labels: ["Sin datos"],
-          values: [0]
-        };
-      }
-
-      return {
-        labels: labels,
-        values: values
-      };
-    }
-
-    function getCurrentFilteredRows() {
-      if (!window.fintrackMovements) {
-        return [];
-      }
-
-      const filters = {
-        desde: document.getElementById("desde") ? document.getElementById("desde").value : "",
-        hasta: document.getElementById("hasta") ? document.getElementById("hasta").value : "",
-        tipo: document.getElementById("tipo") ? document.getElementById("tipo").value : "Todos",
-        categoria: document.getElementById("categoria") ? document.getElementById("categoria").value : "Todas"
-      };
-
-      return window.fintrackMovements.filter(window.fintrackMovements.getAll(), filters);
     }
 
     function renderExpenseChart() {
@@ -311,78 +258,16 @@
       });
     }
 
-    function renderIncomeChart() {
-      const chartCanvas = document.getElementById("incomeCategoryChart");
-      if (!chartCanvas) {
-        return;
-      }
-
-      const chartSeries = getIncomeChartSeries(currentHistoryRows);
-
-      if (incomeChart) {
-        incomeChart.destroy();
-      }
-
-      const dataset = {
-        label: "Ingreso (USD)",
-        data: chartSeries.values
-      };
-
-      const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return "$" + context.raw;
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function(value) {
-                return "$" + value;
-              }
-            }
-          },
-          x: {
-            grid: {
-              display: false
-            }
-          }
-        }
-      };
-
-      incomeChart = new Chart(chartCanvas, {
-        type: "bar",
-        data: {
-          labels: chartSeries.labels,
-          datasets: [dataset]
-        },
-        options: chartOptions
-      });
-    }
-
-    currentHistoryRows = getCurrentFilteredRows();
+    currentHistoryRows = window.team68Movements ? window.team68Movements.getAll() : [];
     renderExpenseChart();
-    renderIncomeChart();
 
-    document.addEventListener("fintrack:history-data-change", function (event) {
+    document.addEventListener("team68:history-data-change", function (event) {
       currentHistoryRows = event.detail && Array.isArray(event.detail.rows) ? event.detail.rows : [];
       renderExpenseChart();
-      renderIncomeChart();
     });
 
-    document.addEventListener("fintrack:theme-change", function () {
+    document.addEventListener("team68:theme-change", function () {
       renderExpenseChart();
-      renderIncomeChart();
     });
   </script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

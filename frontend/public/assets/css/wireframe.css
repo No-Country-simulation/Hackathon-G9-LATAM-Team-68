@@ -47,6 +47,7 @@ textarea {
 .navbar,
 .card,
 .form-control,
+.form-select,
 .btn,
 .rounded-3,
 .border,
@@ -116,7 +117,8 @@ small,
 	filter: brightness(0.94);
 }
 
-.form-control {
+.form-control,
+.form-select {
 	color: var(--wf-line);
 }
 

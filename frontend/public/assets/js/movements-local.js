@@ -1,27 +1,27 @@
 (function () {
-  var STORAGE_KEY = "fintrack-movimientos";
+  var STORAGE_KEY = "team68-movimientos";
 
   var seedMovements = [
-    { id: 1, fecha: "2026-07-01", concepto: "Salario mensual", categoria: "Trabajo", tipo: "Ingreso", cuenta: "Banco principal", monto: 2400 },
-    { id: 2, fecha: "2026-07-02", concepto: "Supermercado", categoria: "Alimentacion", tipo: "Gasto", cuenta: "Tarjeta", monto: -135 },
-    { id: 3, fecha: "2026-07-03", concepto: "Freelance landing page", categoria: "Servicios", tipo: "Ingreso", cuenta: "Banco principal", monto: 620 },
-    { id: 4, fecha: "2026-07-04", concepto: "Gasolina", categoria: "Transporte", tipo: "Gasto", cuenta: "Efectivo", monto: -58 },
-    { id: 5, fecha: "2026-07-05", concepto: "Internet hogar", categoria: "Servicios", tipo: "Gasto", cuenta: "Tarjeta", monto: -45 },
-    { id: 6, fecha: "2026-07-06", concepto: "Venta de accesorios", categoria: "Otros", tipo: "Ingreso", cuenta: "Billetera", monto: 120 },
-    { id: 7, fecha: "2026-07-07", concepto: "Farmacia", categoria: "Salud", tipo: "Gasto", cuenta: "Tarjeta", monto: -32 },
-    { id: 8, fecha: "2026-07-08", concepto: "Consultoria UX", categoria: "Trabajo", tipo: "Ingreso", cuenta: "Banco principal", monto: 450 },
-    { id: 9, fecha: "2026-07-09", concepto: "Cafeteria", categoria: "Alimentacion", tipo: "Gasto", cuenta: "Efectivo", monto: -18 },
-    { id: 10, fecha: "2026-07-10", concepto: "Interes bancario", categoria: "Inversiones", tipo: "Ingreso", cuenta: "Banco principal", monto: 36 },
-    { id: 11, fecha: "2026-07-11", concepto: "Taxi", categoria: "Transporte", tipo: "Gasto", cuenta: "Tarjeta", monto: -21 },
-    { id: 12, fecha: "2026-07-12", concepto: "Suscripcion musica", categoria: "Servicios", tipo: "Gasto", cuenta: "Tarjeta", monto: -11 },
-    { id: 13, fecha: "2026-07-13", concepto: "Clases particulares", categoria: "Freelance", tipo: "Ingreso", cuenta: "Efectivo", monto: 90 },
-    { id: 14, fecha: "2026-07-14", concepto: "Mercado semanal", categoria: "Alimentacion", tipo: "Gasto", cuenta: "Tarjeta", monto: -164 },
-    { id: 15, fecha: "2026-07-15", concepto: "Reembolso empresa", categoria: "Trabajo", tipo: "Ingreso", cuenta: "Banco principal", monto: 210 },
-    { id: 16, fecha: "2026-07-16", concepto: "Seguro vehicular", categoria: "Servicios", tipo: "Gasto", cuenta: "Banco principal", monto: -87 },
-    { id: 17, fecha: "2026-07-17", concepto: "Diseno de logo", categoria: "Freelance", tipo: "Ingreso", cuenta: "Banco principal", monto: 300 },
-    { id: 18, fecha: "2026-07-18", concepto: "Cena familiar", categoria: "Alimentacion", tipo: "Gasto", cuenta: "Tarjeta", monto: -72 },
-    { id: 19, fecha: "2026-07-19", concepto: "Bono productividad", categoria: "Trabajo", tipo: "Ingreso", cuenta: "Banco principal", monto: 180 },
-    { id: 20, fecha: "2026-07-20", concepto: "Mantenimiento bici", categoria: "Transporte", tipo: "Gasto", cuenta: "Efectivo", monto: -26 }
+    { id: 1, fecha: "2026-07-01", concepto: "Salario mensual", categoria: "Sueldo", tipo: "Ingreso", monto: 2400 },
+    { id: 2, fecha: "2026-07-02", concepto: "Arriendo", categoria: "Vivienda", metodoPago: "Transferencia", tipo: "Gasto", monto: -650 },
+    { id: 3, fecha: "2026-07-03", concepto: "Pago cliente landing page", categoria: "Freelance", tipo: "Ingreso", monto: 620 },
+    { id: 4, fecha: "2026-07-04", concepto: "Gasolina", categoria: "Transporte", metodoPago: "Debito", tipo: "Gasto", monto: -58 },
+    { id: 5, fecha: "2026-07-05", concepto: "Mercado quincenal", categoria: "Alimentacion", metodoPago: "Debito", tipo: "Gasto", monto: -145 },
+    { id: 6, fecha: "2026-07-06", concepto: "Venta de accesorios", categoria: "Otros", tipo: "Ingreso", monto: 120 },
+    { id: 7, fecha: "2026-07-07", concepto: "Consulta medica", categoria: "Salud", metodoPago: "Efectivo", tipo: "Gasto", monto: -95 },
+    { id: 8, fecha: "2026-07-08", concepto: "Consultoria UX", categoria: "Freelance", tipo: "Ingreso", monto: 450 },
+    { id: 9, fecha: "2026-07-09", concepto: "Curso online", categoria: "Educacion", metodoPago: "Credito", tipo: "Gasto", monto: -42 },
+    { id: 10, fecha: "2026-07-10", concepto: "Interes bancario", categoria: "Otros", tipo: "Ingreso", monto: 36 },
+    { id: 11, fecha: "2026-07-11", concepto: "Bus intermunicipal", categoria: "Transporte", metodoPago: "Efectivo", tipo: "Gasto", monto: -21 },
+    { id: 12, fecha: "2026-07-12", concepto: "Plataforma de musica", categoria: "Subscripciones", metodoPago: "Credito", tipo: "Gasto", monto: -11 },
+    { id: 13, fecha: "2026-07-13", concepto: "Clases particulares", categoria: "Otros", tipo: "Ingreso", monto: 90 },
+    { id: 14, fecha: "2026-07-14", concepto: "Cena con amigos", categoria: "Entretenimiento", metodoPago: "Debito", tipo: "Gasto", monto: -72 },
+    { id: 15, fecha: "2026-07-15", concepto: "Reembolso empresa", categoria: "Sueldo", tipo: "Ingreso", monto: 210 },
+    { id: 16, fecha: "2026-07-16", concepto: "Corte de cabello", categoria: "Personal", metodoPago: "Efectivo", tipo: "Gasto", monto: -38 },
+    { id: 17, fecha: "2026-07-17", concepto: "Diseno de logo", categoria: "Freelance", tipo: "Ingreso", monto: 300 },
+    { id: 18, fecha: "2026-07-18", concepto: "Reserva de hotel", categoria: "Viajes", metodoPago: "Transferencia", tipo: "Gasto", monto: -180 },
+    { id: 19, fecha: "2026-07-19", concepto: "Bono productividad", categoria: "Bono", tipo: "Ingreso", monto: 180 },
+    { id: 20, fecha: "2026-07-20", concepto: "Compra de escritorio", categoria: "Otros", metodoPago: "Debito", tipo: "Gasto", monto: -85 }
   ];
 
   function parseStorage() {
@@ -66,6 +66,12 @@
     saveStorage(movements);
   }
 
+  function resetToSeedData() {
+    var freshSeed = seedMovements.slice();
+    saveMovements(freshSeed);
+    return freshSeed;
+  }
+
   function getNextId(movements) {
     if (!movements.length) {
       return 1;
@@ -86,6 +92,10 @@
       throw new Error("El concepto es obligatorio.");
     }
 
+    if (concept.length > 60) {
+      throw new Error("El concepto no puede superar los 60 caracteres.");
+    }
+
     if (!dateValue) {
       throw new Error("La fecha es obligatoria.");
     }
@@ -103,8 +113,10 @@
       fecha: dateValue,
       concepto: concept,
       categoria: String(payload.categoria || "Otros").trim() || "Otros",
+      metodoPago: typeValue === "Gasto"
+        ? (String(payload.metodoPago || "Efectivo").trim() || "Efectivo")
+        : "",
       tipo: typeValue,
-      cuenta: String(payload.cuenta || "Efectivo").trim() || "Efectivo",
       monto: normalizedAmount
     };
 
@@ -215,12 +227,14 @@
   }
 
   function rowForHistory(item) {
+    var metodoPago = item.tipo === "Gasto" ? (item.metodoPago || "") : "";
+
     return "<tr>" +
       "<td>" + formatDate(item.fecha) + "</td>" +
       "<td>" + item.concepto + "</td>" +
       "<td>" + item.categoria + "</td>" +
+      "<td>" + metodoPago + "</td>" +
       "<td>" + item.tipo + "</td>" +
-      "<td>" + item.cuenta + "</td>" +
       '<td class="text-end">' + formatAmount(item.monto) + "</td>" +
       "</tr>";
   }
@@ -295,7 +309,7 @@
 
     renderHistoryTotals(rows);
 
-    document.dispatchEvent(new CustomEvent("fintrack:history-data-change", {
+    document.dispatchEvent(new CustomEvent("team68:history-data-change", {
       detail: {
         rows: rows
       }
@@ -311,6 +325,7 @@
   function attachEvents() {
     var applyFiltersBtn = document.getElementById("applyFiltersBtn");
     var clearFiltersBtn = document.getElementById("clearFiltersBtn");
+    var resetFiltersBtn = document.getElementById("resetFiltersBtn");
 
     if (applyFiltersBtn) {
       applyFiltersBtn.addEventListener("click", loadHistoryTable);
@@ -343,10 +358,46 @@
       });
     }
 
+    if (resetFiltersBtn) {
+      resetFiltersBtn.addEventListener("click", function () {
+        var confirmed = window.confirm("Esto restablecera los datos de ejemplo. Deseas continuar?");
+        if (!confirmed) {
+          return;
+        }
+
+        resetToSeedData();
+
+        var desde = document.getElementById("desde");
+        var hasta = document.getElementById("hasta");
+        var tipo = document.getElementById("tipo");
+        var categoria = document.getElementById("categoria");
+
+        if (desde) {
+          desde.value = "";
+        }
+
+        if (hasta) {
+          hasta.value = "";
+        }
+
+        if (tipo) {
+          tipo.value = "Todos";
+        }
+
+        if (categoria) {
+          categoria.value = "Todas";
+        }
+
+        loadSummaryTable();
+        loadHistoryTable();
+      });
+    }
+
   }
 
-  window.fintrackMovements = {
+  window.team68Movements = {
     ensureSeedData: ensureSeedData,
+    resetToSeedData: resetToSeedData,
     getAll: getMovements,
     add: addMovement,
     filter: filterMovements,

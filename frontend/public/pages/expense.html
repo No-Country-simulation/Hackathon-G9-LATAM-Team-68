@@ -25,7 +25,7 @@
 					<li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
 					<li class="nav-item"><a class="nav-link active" href="expense.html">Gastos</a></li>
 					<li class="nav-item"><a class="nav-link" href="history.html">Historial</a></li>
-					<li class="nav-item"><a class="nav-link" href="salud-financiera.html">Salud financiera</a></li>
+					<li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
 					<li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
 				</ul>
 				<div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
@@ -59,24 +59,30 @@
 					<input id="montoGasto" type="number" class="form-control" placeholder="0.00" required>
 				</div>
 				<div class="col-md-4">
-					<label for="metodoPago" class="form-label">Metodo de pago</label>
-					<select id="metodoPago" class="form-control" required>
-						<option>Tarjeta</option>
-						<option>Transferencia</option>
-						<option>Efectivo</option>
+					<label for="metodoPagoGasto" class="form-label">Metodo de pago</label>
+					<select id="metodoPagoGasto" class="form-select" required>
+						<option value="Efectivo">Efectivo</option>
+						<option value="Transferencia">Transferencia</option>
+						<option value="Debito">Debito</option>
+						<option value="Credito">Credito</option>
 					</select>
 				</div>
 				<div class="col-md-12">
 					<label for="conceptoGasto" class="form-label">Concepto</label>
-					<input id="conceptoGasto" type="text" class="form-control" placeholder="Ej. Supermercado" required>
+					<input id="conceptoGasto" type="text" class="form-control" placeholder="Ej. Supermercado" maxlength="60" required>
 				</div>
 				<div class="col-md-4 d-none">
 					<label for="categoriaGasto" class="form-label">Categoria</label>
 					<select id="categoriaGasto" class="form-control">
+						<option>Vivienda</option>
 						<option>Alimentacion</option>
 						<option>Transporte</option>
-						<option>Servicios</option>
 						<option>Salud</option>
+						<option>Educacion</option>
+						<option>Entretenimiento</option>
+						<option>Subscripciones</option>
+						<option>Personal</option>
+						<option>Viajes</option>
 						<option>Otros</option>
 					</select>
 				</div>
