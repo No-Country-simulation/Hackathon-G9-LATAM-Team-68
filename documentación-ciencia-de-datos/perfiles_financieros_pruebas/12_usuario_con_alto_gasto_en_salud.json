@@ -1,0 +1,86 @@
+{
+  "usuario": {
+    "nombre": "Gerardo Molina"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "descripcion": "Salario",
+      "monto": 30000
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Renta departamento",
+      "monto": 6500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "Consulta con cardiólogo",
+      "monto": 1800,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "Estudios de laboratorio Chopo",
+      "monto": 2600,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 51
+    },
+    {
+      "fecha": "2026-07-07",
+      "descripcion": "Medicamentos Farmacias San Pablo",
+      "monto": 3200,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 51
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "Seguro de gastos médicos",
+      "monto": 2800,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Terapia física",
+      "monto": 2000,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Despensa Walmart",
+      "monto": 2100,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-20",
+      "descripcion": "CFE servicio de luz",
+      "monto": 650,
+      "tipo de pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-22",
+      "descripcion": "Gasolina Pemex",
+      "monto": 1200,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-25",
+      "descripcion": "Internet Totalplay",
+      "monto": 699,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 51
+    },
+    {
+      "fecha": "2026-07-28",
+      "descripcion": "Consulta de seguimiento",
+      "monto": 1200,
+      "tipo de pago": "tarjeta de débito"
+    }
+  ]
+}

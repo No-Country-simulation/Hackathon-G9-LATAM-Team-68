@@ -1,0 +1,105 @@
+{
+  "usuario": {
+    "nombre": "Mariana López"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "descripcion": "Salario",
+      "monto": 26000
+    },
+    {
+      "descripcion": "Clases particulares",
+      "monto": 6500
+    },
+    {
+      "descripcion": "Renta de habitación",
+      "monto": 5000
+    },
+    {
+      "descripcion": "Rendimientos de inversión",
+      "monto": 1200
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Renta departamento",
+      "monto": 8500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "Agua SACMEX",
+      "monto": 420,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-04",
+      "descripcion": "Despensa Soriana",
+      "monto": 2100,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 55
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "Metro y Metrobús",
+      "monto": 650,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "Internet Telmex",
+      "monto": 599,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 55
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "Colegiatura diplomado",
+      "monto": 3200,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Fondo de inversión BBVA",
+      "monto": 4500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-16",
+      "descripcion": "CETES Directo",
+      "monto": 3000,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-19",
+      "descripcion": "Spotify Individual",
+      "monto": 129,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 55
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "Cena en Sonora Grill",
+      "monto": 1400,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 55
+    },
+    {
+      "fecha": "2026-07-25",
+      "descripcion": "Seguro de vida",
+      "monto": 980,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-29",
+      "descripcion": "Ropa Zara",
+      "monto": 1750,
+      "tipo de pago": "tarjeta de débito"
+    }
+  ]
+}

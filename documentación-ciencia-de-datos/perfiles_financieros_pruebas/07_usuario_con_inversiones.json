@@ -1,0 +1,100 @@
+{
+  "usuario": {
+    "nombre": "Sofía Aguilar"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "descripcion": "Salario",
+      "monto": 48000
+    },
+    {
+      "descripcion": "Dividendos",
+      "monto": 2100
+    },
+    {
+      "descripcion": "Intereses de pagaré bancario",
+      "monto": 900
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Crédito hipotecario",
+      "monto": 12000,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-04",
+      "descripcion": "Despensa City Market",
+      "monto": 3200,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 42
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "Gasolina BP",
+      "monto": 1700,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "Seguro de vida",
+      "monto": 1250,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "ETF S&P 500",
+      "monto": 5000,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Fondo indexado GBM",
+      "monto": 4500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "Pagaré bancario Banorte",
+      "monto": 4000,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Aportación voluntaria AFORE",
+      "monto": 3000,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "Acciones BMV",
+      "monto": 3500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-23",
+      "descripcion": "CFE servicio de luz",
+      "monto": 890,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-25",
+      "descripcion": "Internet Telmex",
+      "monto": 599,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 42
+    },
+    {
+      "fecha": "2026-07-28",
+      "descripcion": "Restaurante Suntory",
+      "monto": 1600,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 42
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "usuario": {
+    "nombre": "Nicolás Bravo"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "descripcion": "Diseño de sitio web",
+      "monto": 14000
+    },
+    {
+      "descripcion": "Proyecto de identidad visual",
+      "monto": 9500
+    },
+    {
+      "descripcion": "Consultoría de marketing",
+      "monto": 7000
+    },
+    {
+      "descripcion": "Venta de plantillas digitales",
+      "monto": 3200
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Renta departamento",
+      "monto": 7500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-04",
+      "descripcion": "Internet Totalplay",
+      "monto": 699,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 58
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "Adobe Creative Cloud",
+      "monto": 899,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 58
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "Google Workspace",
+      "monto": 136,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 58
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "Despensa Walmart",
+      "monto": 2400,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "Gasolina Mobil",
+      "monto": 1300,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Pago provisional de impuestos SAT",
+      "monto": 3200,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "Seguro de vida",
+      "monto": 850,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Fondo de inversión de deuda",
+      "monto": 3500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "Cuenta de ahorro para impuestos",
+      "monto": 2500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-24",
+      "descripcion": "Restaurante",
+      "monto": 780,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 58
+    },
+    {
+      "fecha": "2026-07-27",
+      "descripcion": "Monitor para diseño",
+      "monto": 4200,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 58
+    },
+    {
+      "fecha": "2026-07-30",
+      "descripcion": "Consulta médica",
+      "monto": 750,
+      "tipo de pago": "tarjeta de débito"
+    }
+  ]
+}

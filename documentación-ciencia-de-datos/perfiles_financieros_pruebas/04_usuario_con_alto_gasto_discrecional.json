@@ -1,0 +1,105 @@
+{
+  "usuario": {
+    "nombre": "Diego Serrano"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "descripcion": "Salario",
+      "monto": 32000
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Renta departamento",
+      "monto": 7000,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "Despensa Walmart",
+      "monto": 1600,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "Netflix Premium",
+      "monto": 329,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "HBO Max Estándar",
+      "monto": 199,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-07",
+      "descripcion": "Spotify Premium",
+      "monto": 129,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-09",
+      "descripcion": "Bar República",
+      "monto": 2200,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-11",
+      "descripcion": "Restaurante Mochomos",
+      "monto": 2800,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-14",
+      "descripcion": "Tenis Nike",
+      "monto": 3400,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-17",
+      "descripcion": "Audífonos Sony",
+      "monto": 4200,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-20",
+      "descripcion": "Boletos concierto",
+      "monto": 3600,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-23",
+      "descripcion": "Fin de semana en Valle de Bravo",
+      "monto": 5500,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-27",
+      "descripcion": "Cine Cinépolis",
+      "monto": 780,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 72
+    },
+    {
+      "fecha": "2026-07-30",
+      "descripcion": "Gasolina Shell",
+      "monto": 1300,
+      "tipo de pago": "tarjeta de débito"
+    }
+  ]
+}

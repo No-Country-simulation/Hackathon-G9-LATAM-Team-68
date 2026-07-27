@@ -1,0 +1,218 @@
+{
+  "usuario": {
+    "nombre": "Alejandra Soto"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "descripcion": "Salario",
+      "monto": 38000
+    },
+    {
+      "descripcion": "Comisiones de ventas",
+      "monto": 8500
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Renta departamento",
+      "monto": 9000,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Café Starbucks",
+      "monto": 95,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "Metro y Metrobús",
+      "monto": 45,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-04",
+      "descripcion": "Despensa Walmart",
+      "monto": 1450,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "Netflix Estándar",
+      "monto": 249,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "Gasolina Pemex",
+      "monto": 900,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-07",
+      "descripcion": "Comida en fonda",
+      "monto": 180,
+      "tipo de pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "CFE servicio de luz",
+      "monto": 680,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-09",
+      "descripcion": "Farmacia del Ahorro",
+      "monto": 340,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "Uber",
+      "monto": 160,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-11",
+      "descripcion": "Spotify Premium",
+      "monto": 129,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Cine Cinépolis",
+      "monto": 420,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-13",
+      "descripcion": "Despensa Soriana",
+      "monto": 980,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-14",
+      "descripcion": "Internet Telmex",
+      "monto": 599,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "Pago tarjeta de crédito",
+      "monto": 2500,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-16",
+      "descripcion": "Restaurante Vips",
+      "monto": 390,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-17",
+      "descripcion": "Uber",
+      "monto": 135,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Ropa H&M",
+      "monto": 1250,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-19",
+      "descripcion": "Consulta médica",
+      "monto": 700,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-20",
+      "descripcion": "Agua potable",
+      "monto": 320,
+      "tipo de pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "CETES Directo",
+      "monto": 2000,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-22",
+      "descripcion": "Cuenta de ahorro Nu",
+      "monto": 1800,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-23",
+      "descripcion": "Gasolina Pemex",
+      "monto": 850,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-24",
+      "descripcion": "Amazon accesorios",
+      "monto": 680,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-25",
+      "descripcion": "Comida rápida",
+      "monto": 210,
+      "tipo de pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-26",
+      "descripcion": "Seguro automotriz",
+      "monto": 1450,
+      "tipo de pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-27",
+      "descripcion": "Uber",
+      "monto": 145,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-28",
+      "descripcion": "Despensa Chedraui",
+      "monto": 1150,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-29",
+      "descripcion": "Bar con amigos",
+      "monto": 950,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 47
+    },
+    {
+      "fecha": "2026-07-30",
+      "descripcion": "Curso en línea",
+      "monto": 900,
+      "tipo de pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-31",
+      "descripcion": "Aportación voluntaria AFORE",
+      "monto": 1500,
+      "tipo de pago": "transferencia bancaria"
+    }
+  ]
+}
