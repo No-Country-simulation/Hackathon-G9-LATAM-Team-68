@@ -533,7 +533,7 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
       "descripcion": "Netflix",
       "monto": 219,
       "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 90%
+      "tasa de interés de la tarjeta": 90
     },
     {
       "fecha": "2026-07-05",
