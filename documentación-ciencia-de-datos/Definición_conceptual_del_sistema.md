@@ -1,20 +1,18 @@
 # Objetivo del sistema:
 
-Desarrollar un sistema inteligente capaz de analizar el comportamiento financiero de un usuario a partir de información relacionada con sus ingresos, gastos, ahorro y endeudamiento,
-con el fin de identificar patrones financieros, evaluar su salud financiera, clasificar su perfil y generar recomendaciones personalizadas que apoyen la toma de decisiones.
+Desarrollar un sistema inteligente capaz de analizar el comportamiento financiero de un usuario a partir de información relacionada con sus ingresos, gastos, ahorro y endeudamiento, con el fin de identificar patrones financieros, evaluar su salud financiera, clasificar su perfil y generar recomendaciones personalizadas que apoyen la toma de decisiones.
 
 # Definición de salud financiera:
 
-La salud financiera es la capacidad de una persona para administrar sus recursos económicos de manera equilibrada y sostenible, 
-manteniendo un balance adecuado entre ingresos, gastos, ahorro y endeudamiento, de forma que pueda satisfacer sus necesidades actuales sin comprometer su estabilidad financiera futura.
+La salud financiera es la capacidad de una persona para administrar sus recursos económicos de manera equilibrada y sostenible, manteniendo un balance adecuado entre ingresos, gastos, ahorro y endeudamiento, de forma que pueda satisfacer sus necesidades actuales sin comprometer su estabilidad financiera futura.
 
 # Dimensiones principales de la salud financiera:
 
 ## 1. Balance financiero
 ¿La persona vive dentro de sus posibilidades?
-Aquí analizamos si los ingresos son suficientes para cubrir gastos y obligaciones.
+Aquí analizamos si los ingresos son suficientes para solventar gastos y obligaciones.
 Esta dimensión debería ser la más importante.
-Sin equilibrio financiero es difícil que exista una buena salud financiera.
+Sin equilibrio financiero, es difícil que exista una buena salud financiera.
 
 ## 2. Capacidad de ahorro
 ¿La persona genera recursos para el futuro?
@@ -111,11 +109,10 @@ Como resultado de este proceso, el sistema generará:
 
 De esta manera, el perfil financiero ofrecerá tanto una evaluación cuantitativa como una interpretación cualitativa de la situación financiera del usuario.
 
-# Analisis profundo de cada dimension:
+# Análisis profundo de cada dimensión:
 
 ## Dimensión 1 — BALANCE FINANCIERO
-El balance financiero evalúa la capacidad de una persona para cubrir sus obligaciones económicas con los ingresos que percibe durante un periodo determinado, 
-permitiendo identificar si existe un equilibrio, un superávit o un déficit financiero.
+El balance financiero evalúa la capacidad de una persona para cubrir sus obligaciones económicas con los ingresos que percibe durante un periodo determinado, permitiendo identificar si existe un equilibrio, un superávit o un déficit financiero.
 
 ### ¿Qué preguntas debe responder?
 - ¿Los ingresos son suficientes para cubrir los gastos del periodo?
@@ -135,7 +132,7 @@ permitiendo identificar si existe un equilibrio, un superávit o un déficit fin
 - Tasa de gasto: Determinar qué proporción del ingreso se utiliza para cubrir los egresos. Mide la presión financiera ejercida por los egresos.
   (Tasa de gasto = Egreso total / Ingreso mensual)
 - Margen financiero: Medir qué porcentaje del ingreso permanece disponible una vez cubiertos todos los egresos. Evalúa la capacidad de maniobra económica del usuario.
-  (Margen financiero = Balance mensual / Ingreso mensua)
+  (Margen financiero = Balance mensual / Ingreso mensual)
 
 ### Resultados posibles de acuerdo a los indicadores
 
@@ -227,9 +224,11 @@ Evaluar si las obligaciones financieras del usuario son sostenibles de acuerdo c
 
 ### Variables necesarias
 
+- Tasa de interés: Valor de entrada del usuario.
 - Pago mensual de deudas:	Suma de las transacciones clasificadas como pago de deuda.
 - Balance mensual:	Proveniente de la dimensión Balance Financiero.
 - Egreso total:	Proveniente de la dimensión Balance Financiero.
+- Incremento de la deuda: Proveniente de Pago mensual de deudas más Tasa de Interés.
 
 ### Indicadores generados
 
@@ -453,12 +452,12 @@ Se generan únicamente para la cuarta dimensión.
 
 # Forma de clasificar las transacciones
 
-Las transacciones se clasificaran en tres tipos financieros:
+Las transacciones se clasificarán en tres tipos financieros:
 - Consumo
 - Pago de deuda
 - Ahorro e inversión
 
-A su vez, las transacciones clasificadas como consumo se clasificaran en las siguientes categorias:
+A su vez, las transacciones clasificadas como consumo se clasificarán en las siguientes categorías:
 
 | Categoría	|Tipo|
 | --- |--- |
@@ -474,7 +473,7 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
 |📦 Otros|	Depende del análisis o revisión|
 
 
-# Resultados finales entregables del analisis
+# Resultados finales entregables del análisis
 
 **Datos del usuario:** Identificador y nombre del usuario analizado.
 
@@ -526,22 +525,27 @@ A su vez, las transacciones clasificadas como consumo se clasificaran en las sig
     {
       "fecha": "2026-07-02",
       "descripcion": "Walmart León",
-      "monto": 1350
+      "monto": 1350,
+      "tipo de pago": "efectivo"
     },
     {
       "fecha": "2026-07-03",
       "descripcion": "Netflix",
-      "monto": 219
+      "monto": 219,
+      "tipo de pago": "tarjeta de crédito",
+      "tasa de interés de la tarjeta": 90%
     },
     {
       "fecha": "2026-07-05",
       "descripcion": "Pago tarjeta Santander",
-      "monto": 3200
+      "monto": 3200,
+      "tipo de pago": "efectivo"
     },
     {
       "fecha": "2026-07-08",
       "descripcion": "CETES Directo",
-      "monto": 1500
+      "monto": 1500,
+      "tipo de pago": "tarjeta de débito"
     }
   ]
 }
