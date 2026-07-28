@@ -21,77 +21,77 @@
       "fecha": "2026-07-02",
       "descripcion": "Renta departamento",
       "monto": 8500,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-04",
       "descripcion": "Despensa La Comer",
       "monto": 2400,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 39
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 39
     },
     {
       "fecha": "2026-07-06",
       "descripcion": "CFE servicio de luz",
       "monto": 620,
-      "tipo de pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito"
     },
     {
       "fecha": "2026-07-08",
       "descripcion": "Internet Telmex",
       "monto": 599,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 39
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 39
     },
     {
       "fecha": "2026-07-10",
       "descripcion": "Gasolina Pemex",
       "monto": 1400,
-      "tipo de pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito"
     },
     {
       "fecha": "2026-07-12",
       "descripcion": "Seguro médico",
       "monto": 1500,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-15",
       "descripcion": "Pago tarjeta de crédito",
       "monto": 2000,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-18",
       "descripcion": "Fondo de inversión",
       "monto": 5000,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-21",
       "descripcion": "Cuenta de ahorro",
       "monto": 3500,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-24",
       "descripcion": "Restaurante Toks",
       "monto": 650,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 39
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 39
     },
     {
       "fecha": "2026-07-27",
       "descripcion": "Netflix Estándar",
       "monto": 249,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 39
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 39
     },
     {
       "fecha": "2026-07-29",
       "descripcion": "Curso en línea",
       "monto": 1200,
-      "tipo de pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito"
     }
   ]
 }

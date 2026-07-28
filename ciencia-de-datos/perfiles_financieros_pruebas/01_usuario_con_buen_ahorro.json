@@ -21,77 +21,77 @@
       "fecha": "2026-07-02",
       "descripcion": "Renta departamento",
       "monto": 9500,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-03",
       "descripcion": "CFE servicio de luz",
       "monto": 780,
-      "tipo de pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito"
     },
     {
       "fecha": "2026-07-04",
       "descripcion": "Despensa Costco",
       "monto": 2800,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 48
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48
     },
     {
       "fecha": "2026-07-06",
       "descripcion": "Gasolina BP",
       "monto": 1600,
-      "tipo de pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito"
     },
     {
       "fecha": "2026-07-08",
       "descripcion": "Seguro de gastos médicos",
       "monto": 1850,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-10",
       "descripcion": "Internet Totalplay",
       "monto": 699,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 48
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48
     },
     {
       "fecha": "2026-07-12",
       "descripcion": "Fondo indexado GBM",
       "monto": 8500,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-15",
       "descripcion": "Cuenta de ahorro Nu",
       "monto": 5000,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-18",
       "descripcion": "Restaurante La Vaka",
       "monto": 950,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 48
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48
     },
     {
       "fecha": "2026-07-22",
       "descripcion": "Aportación voluntaria AFORE",
       "monto": 3500,
-      "tipo de pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-26",
       "descripcion": "Netflix Estándar",
       "monto": 249,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 48
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48
     },
     {
       "fecha": "2026-07-29",
       "descripcion": "Consulta médica general",
       "monto": 800,
-      "tipo de pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito"
     }
   ]
 }
