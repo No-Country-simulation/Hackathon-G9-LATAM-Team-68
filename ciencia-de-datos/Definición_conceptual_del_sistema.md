@@ -230,7 +230,7 @@ Evaluar si las obligaciones financieras del usuario son sostenibles de acuerdo c
 ### Variables necesarias
 
 - Tasa de interés: Valor de entrada del usuario.
-- Pago mensual de deudas:	Suma de las transacciones clasificadas como pago de deuda.
+- Pago mensual de deudas:	Suma de todas las transacciones cuya clasificación incluya la etiqueta "Pago de deuda".
 - Balance mensual:	Proveniente de la dimensión Balance Financiero.
 - Egreso total:	Proveniente de la dimensión Balance Financiero.
 - Incremento de la deuda: Proveniente de Pago mensual de deudas más Tasa de Interés.
@@ -240,7 +240,7 @@ Evaluar si las obligaciones financieras del usuario son sostenibles de acuerdo c
 - Ratio de endeudamiento: Determinar qué porcentaje del ingreso mensual se destina al pago de obligaciones financieras. Evalúa la carga financiera respecto al ingreso.
 Permite comparar usuarios con distintos niveles de ingreso. Indica qué tan sostenible es el pago de las obligaciones financieras. (Ratio de endeudamiento = Pago mensual de deudas / Ingreso mensual)
 
-- Monto destinado al pago de deudas: Determinar el monto absoluto destinado al pago de obligaciones financieras durante el periodo. Cuantifica el esfuerzo económico destinado al cumplimiento de obligaciones financieras. Complementa al ratio de endeudamiento mostrando el valor monetario destinado al pago de deudas. (Monto destinado al pago de deudas = Suma de transacciones clasificadas como pago de deuda)
+- Monto destinado al pago de deudas: Determinar el monto absoluto destinado al pago de obligaciones financieras durante el periodo. Cuantifica el esfuerzo económico destinado al cumplimiento de obligaciones financieras. Complementa al ratio de endeudamiento mostrando el valor monetario destinado al pago de deudas. (Monto destinado al pago de deudas = Pago mensual de deudas)
 
 - Presión de la deuda: Evaluar qué proporción del gasto total corresponde al pago de obligaciones financieras.Mide qué tan dominante es la deuda dentro del presupuesto mensual.
 Permite identificar cuando el pago de obligaciones comienza a desplazar otros gastos importantes. Complementa el análisis del ratio de endeudamiento desde la perspectiva del gasto total. (Presión de la deuda = Pago mensual de deudas / Egreso total)
