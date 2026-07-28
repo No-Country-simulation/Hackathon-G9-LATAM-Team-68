@@ -433,7 +433,7 @@ Justificación
 - El consumo presenta poca diversificación.
 - El comportamiento de consumo puede comprometer la estabilidad financiera.
 
-# Resumen de variables necesarias y indicadores generados para el sistema funcione
+# Resumen de variables necesarias e indicadores generados para el sistema funcione
 
 ## Variables de entrada (usuario)
 
