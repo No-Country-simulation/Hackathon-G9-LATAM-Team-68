@@ -281,10 +281,9 @@ Es el análisis de la forma en que el usuario distribuye sus gastos entre las di
 - ¿Qué hábitos de consumo pueden identificarse?
 
 ### Variables necesarias
-- Consumo total mensual:	Suma de todas las transacciones clasificadas como consumo.
-- Gasto por categoría:	Suma de las transacciones pertenecientes a cada categoría de consumo.
-- Distribución porcentual del gasto:	Porcentaje que representa cada categoría respecto al consumo total.
-
+- Consumo total por categoría: Suma de todas las transacciones cuya clasificación incluya la etiqueta "Consumo", independientemente de la forma de pago.
+- Gasto por categoría: Suma de las transacciones cuya clasificación incluya la etiqueta "Consumo", agrupadas según su categoría de consumo.
+- Distribución porcentual del gasto: Porcentaje que representa cada categoría respecto al consumo por categoría.
 
 ### Indicadores generados
 
