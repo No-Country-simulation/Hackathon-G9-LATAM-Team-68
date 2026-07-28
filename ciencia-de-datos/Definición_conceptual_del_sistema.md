@@ -229,11 +229,24 @@ Evaluar si las obligaciones financieras del usuario son sostenibles de acuerdo c
 
 ### Variables necesarias
 
-- Tasa de interés: Valor de entrada del usuario.
 - Pago mensual de deudas:	Suma de todas las transacciones cuya clasificación incluya la etiqueta "Pago de deuda".
 - Balance mensual:	Proveniente de la dimensión Balance Financiero.
 - Egreso total:	Proveniente de la dimensión Balance Financiero.
-- Incremento de la deuda: Proveniente de Pago mensual de deudas más Tasa de Interés.
+- Tasa de interés promedio ponderada: Promedio ponderado de las tasas de interés correspondientes a las transacciones cuya clasificación incluya la etiqueta "Pago de deuda" y cuya forma de pago sea "Tarjeta de crédito", utilizando el monto de cada transacción como factor de ponderación.
+
+Fórmula:
+
+$$
+\text{Tasa de interés promedio ponderada}=
+\frac{\sum_{i=1}^{n}(Monto_i \times Tasa_i)}
+{\sum_{i=1}^{n}Monto_i}
+$$
+
+Donde:
+
+- $Monto_i$: monto de la transacción $i$.
+- $Tasa_i$: tasa de interés asociada a la tarjeta de crédito utilizada en la transacción $i$.
+- $n$: número de transacciones cuya clasificación incluya la etiqueta **"Pago de deuda"** y cuya forma de pago sea **"Tarjeta de crédito"**.
 
 ### Indicadores generados
 
@@ -244,6 +257,8 @@ Permite comparar usuarios con distintos niveles de ingreso. Indica qué tan sost
 
 - Presión de la deuda: Evaluar qué proporción del gasto total corresponde al pago de obligaciones financieras.Mide qué tan dominante es la deuda dentro del presupuesto mensual.
 Permite identificar cuando el pago de obligaciones comienza a desplazar otros gastos importantes. Complementa el análisis del ratio de endeudamiento desde la perspectiva del gasto total. (Presión de la deuda = Pago mensual de deudas / Egreso total)
+
+- Costo promedio del endeudamiento: Evaluar el costo financiero promedio asociado a las obligaciones adquiridas mediante tarjetas de crédito. Este indicador complementa el análisis del endeudamiento al considerar no solo el monto de la deuda, sino también el costo promedio de financiarla. (Costo promedio del endeudamiento=Tasa de interés promedio ponderada)
 
 ### Resultados posibles de acuerdo a los indicadores
 
@@ -267,6 +282,10 @@ Justificación:
 - Una proporción elevada de los ingresos se destina al pago de deudas.
 - El monto destinado al pago de obligaciones limita significativamente la capacidad financiera.
 - La deuda domina el presupuesto mensual y compromete la estabilidad financiera.
+
+### Notas importantes
+
+Regla de cálculo: Si durante el período no existen transacciones cuya forma de pago sea "Tarjeta de crédito", la Tasa de interés promedio ponderada se establece en 0 % (o null, según la implementación) y el Costo promedio del endeudamiento se interpreta como "No aplica".
 
 ## Dimensión 4 — COMPORTAMIENTO DE CONSUMO
 
