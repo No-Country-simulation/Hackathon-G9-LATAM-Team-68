@@ -611,13 +611,7 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
   },
   "perfil_financiero": {
     "puntuacion": 76,
-    "estado": "En observación",
-    "dimensiones": {
-      "balance_financiero": 87,
-      "capacidad_ahorro": 64,
-      "endeudamiento": 91,
-      "comportamiento_consumo": 58
-    }
+    "estado": "En observación"
   },
   "dimensiones": {
     "balance_financiero": {
@@ -625,7 +619,7 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
       "estado": "Saludable",
       "indicadores": {
         "balance_mensual": 5500,
-        "tasa_gasto": 0.78,
+        "tasa_de_gasto": 0.78,
         "margen_financiero": 0.22
       },
       "recomendaciones": [
@@ -633,13 +627,13 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
         "Continuar monitoreando el margen financiero mensualmente."
       ]
     },
-    "capacidad_ahorro": {
+    "capacidad_de_ahorro": {
       "puntuacion": 64,
       "estado": "En observación",
       "indicadores": {
-        "tasa_ahorro": 0.08,
-        "ahorro_inversion_periodo": 2000,
-        "aprovechamiento_margen": 0.36
+        "tasa_de_ahorro": 0.08,
+        "ahorro_e_inversion_del_periodo": 2000,
+        "aprovechamiento_del_margen_financiero": 0.36
       },
       "recomendaciones": [
         "Incrementar gradualmente el porcentaje destinado al ahorro.",
@@ -650,38 +644,39 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
       "puntuacion": 91,
       "estado": "Saludable",
       "indicadores": {
-        "ratio_endeudamiento": 0.12,
-        "pago_deudas": 3000,
-        "presion_deuda": "Baja"
+        "ratio_de_endeudamiento": 0.12,
+        "monto_destinado_al_pago_de_deudas": 3000,
+        "presion_de_la_deuda": 0.19,
+        "costo_promedio_del_endeudamiento": 50.1
       },
       "recomendaciones": [
         "Mantener el nivel actual de endeudamiento.",
         "Evitar adquirir nuevas deudas innecesarias."
       ]
     },
-    "comportamiento_consumo": {
+    "comportamiento_de_consumo": {
       "puntuacion": 58,
       "estado": "En observación",
       "indicadores": {
-        "distribucion_gasto_categoria": {
-          "Vivienda": 30.2,
-          "Alimentación": 21.8,
-          "Transporte": 12.5,
-          "Salud": 4.8,
-          "Educación": 6.5,
-          "Entretenimiento y ocio": 15.4,
-          "Suscripciones digitales": 6.1,
-          "Compras personales": 2.7,
-          "Viajes y vacaciones": 0.0,
-          "Otros": 0.0
+        "distribucion_del_gasto_por_categoria": {
+          "vivienda": 30.2,
+          "alimentacion": 21.8,
+          "transporte": 12.5,
+          "salud": 4.8,
+          "educacion": 6.5,
+          "entretenimiento_y_ocio": 15.4,
+          "suscripciones_digitales": 6.1,
+          "compras_personales": 2.7,
+          "viajes_y_vacaciones": 0.0,
+          "otros": 0.0
         },
-        "indice_concentracion": 0.58
-      },
-      "perfil_consumo": {
-        "predominio_gasto": "Balance entre gastos esenciales y discrecionales",
-        "tipo_consumo": "Moderadamente concentrado",
-        "diversificacion_consumo": "Diversificado",
-        "categoria_predominante": "Vivienda"
+        "indice_de_concentracion_del_gasto": 0.58,
+        "perfil_de_consumo": {
+          "predominio_del_gasto": "Balance entre gastos esenciales y discrecionales",
+          "tipo_de_consumo": "Moderadamente concentrado",
+          "diversificacion_del_consumo": "Diversificado",
+          "categoria_predominante": "Vivienda"
+        }
       },
       "recomendaciones": [
         "Reducir gradualmente el gasto en entretenimiento y ocio.",
@@ -691,11 +686,7 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
       ]
     }
   },
-  "recomendaciones_generales": [
-    "Incrementar la capacidad de ahorro para fortalecer la estabilidad financiera.",
-    "Mantener el bajo nivel de endeudamiento actual.",
-    "Revisar periódicamente los gastos discrecionales para mejorar el margen financiero."
-  ]
+  "recomendacion_general": "Tu situación financiera muestra un buen nivel de estabilidad, aunque existe una oportunidad para incrementar tu capacidad de ahorro. Mantener el bajo nivel de endeudamiento y reducir gradualmente algunos gastos discrecionales permitirá fortalecer tu margen financiero y mejorar tu salud financiera en el largo plazo."
 }
 ```
 
