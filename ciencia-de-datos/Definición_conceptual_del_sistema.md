@@ -502,6 +502,27 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
 |✈️ Viajes y vacaciones	|Discrecional|
 |📦 Otros|	Depende del análisis o revisión|
 
+Clasificación de la forma de pago:
+
+Además de clasificar cada transacción según su clasificación principal y, cuando corresponda, su categoría de consumo, el sistema identificará la forma de pago utilizada para realizar la transacción.
+
+Esta información permitirá complementar el análisis financiero y facilitar el cálculo de algunos indicadores, como el costo promedio del endeudamiento asociado al uso de tarjetas de crédito.
+
+Cada transacción será clasificada en una de las siguientes formas de pago:
+
+- Tarjeta de crédito
+- Tarjeta de débito
+- Transferencia bancaria
+- Efectivo
+
+La forma de pago es independiente de la clasificación principal de la transacción, por lo que cualquier transacción podrá asociarse a cualquiera de estas opciones.
+
+Cuando la forma de pago sea Tarjeta de crédito, la transacción deberá incluir adicionalmente el campo:
+
+- Tasa de interés de la tarjeta
+
+Esta información será utilizada para calcular el Costo promedio del endeudamiento, uno de los indicadores de la dimensión de Endeudamiento.
+
 
 # Resultados finales entregables del análisis
 
