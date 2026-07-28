@@ -121,10 +121,10 @@ El balance financiero evalúa la capacidad de una persona para cubrir sus obliga
 - ¿Qué porcentaje del ingreso está comprometido por los gastos?
 
 ### Variables necesarias
-- Ingreso mensual: Suma de todos los ingresos
-- Consumo total mensual: Suma de las transacciones clasificadas como consumo.
-- Pago mensual de deudas: Suma de las transacciones clasificadas como pago de deuda.
-- Egreso total: consumo total mensual + pago mensual de deudas
+- Ingreso mensual: Suma de todos los ingresos registrados durante el período de análisis.
+- Consumo total mensual: Suma de las transacciones cuya clasificación incluya únicamente la etiqueta "Consumo".
+- Pago mensual de deudas: Suma de todas las transacciones cuya clasificación incluya la etiqueta "Pago de deuda", independientemente de que también estén clasificadas como "Consumo".
+- Egreso total: Suma del consumo total mensual y del pago mensual de deudas.
 
 ### Indicadores generados
 - Balance mensual: Determinar cuánto dinero permanece disponible después de cubrir todos los egresos. Determina si existe superávit, equilibrio o déficit financiero.
@@ -156,14 +156,12 @@ Justificación:
 - Los egresos superan los ingresos.
 - No existe margen financiero.
 
+### Notas importantes: 
+
+Una transacción puede contener más de una clasificación. En caso de que una transacción esté clasificada simultáneamente como "Consumo" y "Pago de deuda" (por ejemplo, una compra realizada con tarjeta de crédito), esta no se contabiliza en el consumo total mensual para evitar duplicidades, pero sí se incluye en el pago mensual de deudas.
 
 ## Dimensión 2 — CAPACIDAD DE AHORRO
 La capacidad de ahorro evalúa la habilidad del usuario para reservar una parte de sus ingresos de forma constante, después de cubrir sus obligaciones económicas, con el fin de fortalecer su estabilidad financiera y prepararse para necesidades futuras.
-
-### Notas importantes
-El ahorro no se calculará como el dinero sobrante al final del periodo.
-Solo se considerará ahorro el dinero que el usuario destine explícitamente a instrumentos o cuentas de ahorro e inversión.
-El ahorro implícito (dinero disponible no gastado) no formará parte de los indicadores de esta dimensión.
 
 ### ¿Qué preguntas debe responder?
 - ¿El usuario logra ahorrar parte de sus ingresos?
@@ -210,6 +208,13 @@ Justificación:
 No existen transacciones de ahorro o inversión.
 La tasa de ahorro es nula o muy baja.
 El margen financiero disponible no se aprovecha para construir estabilidad financiera.
+
+### Notas importantes
+El ahorro no se calculará como el dinero sobrante al final del periodo.
+Solo se considerará ahorro el dinero que el usuario destine explícitamente a instrumentos o cuentas de ahorro e inversión.
+El ahorro implícito (dinero disponible no gastado) no formará parte de los indicadores de esta dimensión.
+
+Regla de cálculo: El indicador Aprovechamiento del margen financiero solo se calcula cuando el Balance mensual es mayor que cero. Si el Balance mensual es cero o negativo, el indicador se establece en 0 y se interpreta que el usuario no dispone de margen financiero para ahorrar.
 
 ## Dimensión 3 — ENDEUDAMIENTO
 
