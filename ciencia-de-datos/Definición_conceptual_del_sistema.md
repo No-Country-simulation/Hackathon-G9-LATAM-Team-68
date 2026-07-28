@@ -287,6 +287,8 @@ Justificación:
 
 Regla de cálculo: Si durante el período no existen transacciones cuya forma de pago sea "Tarjeta de crédito", la Tasa de interés promedio ponderada se establece en 0 % (o null, según la implementación) y el Costo promedio del endeudamiento se interpreta como "No aplica".
 
+La tasa de interés corresponde a la tasa anual asociada al instrumento de crédito utilizado en la transacción. En caso de que varias transacciones se hayan realizado con la misma tarjeta de crédito, es esperado que compartan el mismo valor de tasa de interés. Si se utilizan distintos instrumentos de crédito, las tasas pueden ser diferentes.
+
 ## Dimensión 4 — COMPORTAMIENTO DE CONSUMO
 
 Es el análisis de la forma en que el usuario distribuye sus gastos entre las diferentes categorías de consumo, permitiendo identificar patrones, hábitos y áreas donde existen oportunidades de mejorar la administración de sus recursos.
