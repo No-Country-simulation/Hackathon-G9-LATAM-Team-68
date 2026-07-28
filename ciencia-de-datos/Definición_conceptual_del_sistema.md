@@ -444,24 +444,29 @@ Justificación
 
 ## Variables derivadas globales
 
-|Variable|	Cómo se obtiene|
-| --- | --- |
-| Ingreso mensual | Suma de todos los ingresos |
-|Consumo total mensual|	Suma de transacciones de consumo.|
-|Pago mensual de deudas|	Suma de transacciones clasificadas como deuda.|
-|Ahorro e inversión total|	Suma de transacciones clasificadas como ahorro e inversión.|
-|Gasto por categoría|	Suma por categoría de consumo.|
-|Distribución porcentual del gasto|	Porcentaje de cada categoría respecto al consumo total.|
-|Egreso total|	Consumo total + Pago de deudas.|
+Las siguientes variables son utilizadas por el sistema para calcular los indicadores de las cuatro dimensiones de la salud financiera.
+
+| Variable | Cómo se obtiene |
+|----------|-----------------|
+| **Ingreso mensual** | Suma de todos los ingresos registrados durante el periodo de análisis. |
+| **Consumo total mensual** | Suma de los montos de todas las transacciones cuya clasificación incluya únicamente la etiqueta **Consumo**. No considera transacciones clasificadas simultáneamente como **Consumo** y **Pago de deuda** (compras con tarjeta de crédito). |
+| **Pago mensual de deudas** | Suma de los montos de todas las transacciones cuya clasificación incluya la etiqueta **Pago de deuda**. Incluye pagos de préstamos, pagos de tarjetas de crédito y compras realizadas con tarjeta de crédito. |
+| **Ahorro e inversión total** | Suma de los montos de todas las transacciones cuya clasificación incluya la etiqueta **Ahorro e inversión**. |
+| **Egreso total** | Suma del **Consumo total mensual** y del **Pago mensual de deudas**. No incluye el ahorro e inversión. |
+| **Balance mensual** | Diferencia entre el **Ingreso mensual** y el **Egreso total**. |
+| **Consumo total por categoría** | Suma de los montos de todas las transacciones cuya clasificación incluya la etiqueta **Consumo**, independientemente de la forma de pago. Se utiliza para analizar la distribución del consumo por categorías. |
+| **Gasto por categoría** | Agrupación del consumo total por cada categoría de gasto (alimentación, transporte, vivienda, salud, etc.). |
+| **Distribución porcentual del gasto** | Porcentaje que representa cada categoría respecto al **Consumo total por categoría**. |
+| **Tasa de interés promedio ponderada** | Promedio ponderado de las tasas de interés de las transacciones cuya clasificación incluya **Pago de deuda** y cuya forma de pago sea **Tarjeta de crédito**, utilizando el monto de cada transacción como ponderador. Si no existen transacciones con tarjeta de crédito durante el periodo, su valor será 0 (o `null`, según la implementación). |
 
 ## Indicadores generados
 
-|Dimensión	|Indicadores|
-| --- | --- |
-|Balance Financiero|	Balance mensual, Tasa de gasto, Margen financiero|
-|Capacidad de Ahorro|	Tasa de ahorro, Ahorro e inversión del periodo, Aprovechamiento del margen financiero|
-|Endeudamiento|	Ratio de endeudamiento, Monto destinado al pago de deudas, Presión de la deuda|
-|Comportamiento de Consumo|	Distribución del gasto por categorías, Índice de concentración del gasto, Perfil de consumo|
+| Dimensión | Indicadores |
+|-----------|-------------|
+| **Balance Financiero** | • Balance mensual<br>• Tasa de gasto<br>• Margen financiero |
+| **Capacidad de Ahorro** | • Tasa de ahorro<br>• Ahorro e inversión del periodo<br>• Aprovechamiento del margen financiero |
+| **Endeudamiento** | • Ratio de endeudamiento<br>• Monto destinado al pago de deudas<br>• Presión de la deuda<br>• Costo promedio del endeudamiento |
+| **Comportamiento de Consumo** | • Distribución del gasto por categorías<br>• Índice de concentración del gasto<br>• Perfil de consumo (predominio del gasto, tipo de consumo, diversificación y categoría predominante) |
 
 ## Perfil de consumo
 
@@ -534,16 +539,14 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
   },
   "ingresos": [
     {
+      "fecha": "2026-07-01",
       "descripcion": "Salario",
       "monto": 25000
     },
     {
-      "descripcion": "Trabajo freelance",
+      "fecha": "2026-07-15",
+      "descripcion": "Proyecto freelance",
       "monto": 4500
-    },
-    {
-      "descripcion": "Rendimientos de inversión",
-      "monto": 800
     }
   ],
   "transacciones": [
@@ -551,26 +554,46 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
       "fecha": "2026-07-02",
       "descripcion": "Walmart León",
       "monto": 1350,
-      "tipo de pago": "efectivo"
-    },
-    {
-      "fecha": "2026-07-03",
-      "descripcion": "Netflix",
-      "monto": 219,
-      "tipo de pago": "tarjeta de crédito",
-      "tasa de interés de la tarjeta": 90
+      "forma_pago": "Tarjeta de débito"
     },
     {
       "fecha": "2026-07-05",
-      "descripcion": "Pago tarjeta Santander",
-      "monto": 3200,
-      "tipo de pago": "efectivo"
+      "descripcion": "Hospital Ángeles",
+      "monto": 5800,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interés_de_la_tarjeta": 48.5
     },
     {
       "fecha": "2026-07-08",
-      "descripcion": "CETES Directo",
-      "monto": 1500,
-      "tipo de pago": "tarjeta de débito"
+      "descripcion": "Pago préstamo personal",
+      "monto": 3200,
+      "forma_pago": "Transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Netflix",
+      "monto": 249,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interés_de_la_tarjeta": 48.5
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Gasolina Pemex",
+      "monto": 900,
+      "forma_pago": "Efectivo"
+    },
+    {
+      "fecha": "2026-07-22",
+      "descripcion": "Aportación fondo de inversión",
+      "monto": 2500,
+      "forma_pago": "Transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-26",
+      "descripcion": "Liverpool",
+      "monto": 4200,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 52.3
     }
   ]
 }
