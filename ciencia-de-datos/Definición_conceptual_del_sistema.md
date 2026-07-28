@@ -561,7 +561,7 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
       "descripcion": "Hospital Ángeles",
       "monto": 5800,
       "forma_pago": "Tarjeta de crédito",
-      "tasa_de_interés_de_la_tarjeta": 48.5
+      "tasa_de_interes_de_la_tarjeta": 48.5
     },
     {
       "fecha": "2026-07-08",
@@ -574,7 +574,7 @@ A su vez, las transacciones clasificadas como consumo se clasificarán en las si
       "descripcion": "Netflix",
       "monto": 249,
       "forma_pago": "Tarjeta de crédito",
-      "tasa_de_interés_de_la_tarjeta": 48.5
+      "tasa_de_interes_de_la_tarjeta": 48.5
     },
     {
       "fecha": "2026-07-18",
