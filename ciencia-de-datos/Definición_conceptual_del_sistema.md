@@ -415,7 +415,7 @@ Justificación
 - Usuario
 - Período de análisis
 - Ingresos
-- Transacciones financieras: Registro de todas las transacciones del periodo.
+- Transacciones financieras: Registro de todas las transacciones del periodo (fecha, descripcion, monto, tipo de pago, tasa de interés de la tarjeta)
 
 ## Variables derivadas globales
 
