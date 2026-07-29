@@ -9,7 +9,7 @@ import java.util.UUID;
 
 
 @Entity
-@Table(name = "trasacciones")
+@Table(name = "transacciones")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -45,5 +45,12 @@ public class Transaccion {
     @Enumerated(EnumType.STRING)
     @Column(nullable = true)
     private GrupoCategoria grupo;
+
+    @Enumerated (EnumType.STRING)
+    @Column(nullable = false)
+    private MetodoPago metodoPago;
+
+    @Column (nullable = true)
+    private BigDecimal tasaInteresTarjeta;
 
 }
