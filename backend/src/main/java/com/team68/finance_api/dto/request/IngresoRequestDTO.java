@@ -1,9 +1,5 @@
 package com.team68.finance_api.dto.request;
 
-import com.team68.finance_api.model.CategoriaConsumo;
-import com.team68.finance_api.model.TipoFinanciero;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -16,23 +12,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TransaccionRequestDTO {
+public class IngresoRequestDTO {
     @NotNull(message = "La fecha es obligatoria")
     private LocalDate fecha;
 
-    @NotBlank(message = "La descripción no puede estar vacía")
+    @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
 
     @NotNull(message = "El monto es obligatorio")
     @Positive(message = "El monto debe ser positivo")
     private BigDecimal monto;
-
-    @JsonProperty("forma_pago")
-    private String formaPago;
-
-    @JsonProperty("tasa_de_interes_de_la_tarjeta")
-    private Double tasaDeInteresDeLaTarjeta;
-
-    private TipoFinanciero tipoFinanciero;
-    private CategoriaConsumo categoria;
 }
