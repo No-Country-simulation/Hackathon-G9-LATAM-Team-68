@@ -1,30 +1,25 @@
 package com.team68.finance_api.model;
 
+import lombok.Getter;
+
+@Getter
 public enum CategoriaConsumo {
-    VIVIENDA(GrupoCategoria.ESENCIAL, "Vivienda"),
-    ALIMENTACION(GrupoCategoria.ESENCIAL, "Alimentación"),
-    TRANSPORTE(GrupoCategoria.ESENCIAL, "Transporte"),
-    SALUD(GrupoCategoria.ESENCIAL, "Salud"),
-    EDUCACION(GrupoCategoria.ESENCIAL, "Educación"),
-    ENTRETENIMIENTO_Y_OCIO(GrupoCategoria.DISCRECIONAL, "Entretenimiento y ocio"),
-    SUSCRIPCIONES_DIGITALES(GrupoCategoria.DISCRECIONAL, "Suscripciones digitales"),
-    COMPRAS_PERSONALES(GrupoCategoria.DISCRECIONAL, "Compras personales"),
-    VIAJES_Y_VACACIONES(GrupoCategoria.DISCRECIONAL, "Viajes y vacaciones"),
-    OTROS(GrupoCategoria.DISCRECIONAL, "Otros");
+    VIVIENDA("Vivienda", GrupoCategoria.ESENCIAL),
+    ALIMENTACION("Alimentación", GrupoCategoria.ESENCIAL),
+    TRANSPORTE("Transporte", GrupoCategoria.ESENCIAL),
+    SALUD("Salud", GrupoCategoria.ESENCIAL),
+    EDUCACION("Educación", GrupoCategoria.ESENCIAL),
+    ENTRETENIMIENTO("Entretenimiento y ocio", GrupoCategoria.DISCRECIONAL),
+    SUSCRIPCIONES("Suscripciones digitales", GrupoCategoria.DISCRECIONAL),
+    COMPRAS_PERSONALES("Compras personales", GrupoCategoria.DISCRECIONAL),
+    VIAJES("Viajes y vacaciones", GrupoCategoria.DISCRECIONAL),
+    OTROS("Otros", GrupoCategoria.DISCRECIONAL);
 
-    private final GrupoCategoria grupo;
     private final String nombreFormateado;
+    private final GrupoCategoria grupo;
 
-    CategoriaConsumo(GrupoCategoria grupo, String nombreFormateado) {
-        this.grupo = grupo;
+    CategoriaConsumo(String nombreFormateado, GrupoCategoria grupo) {
         this.nombreFormateado = nombreFormateado;
-    }
-
-    public GrupoCategoria getGrupo() {
-        return grupo;
-    }
-
-    public String getNombreFormateado() {
-    return nombreFormateado;
+        this.grupo = grupo;
     }
 }

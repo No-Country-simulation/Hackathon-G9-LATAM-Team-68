@@ -2,8 +2,9 @@ package com.team68.finance_api.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -19,15 +20,22 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
-    private String nombre;
-
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
 
-    @Column(name = "ingreso_mensual", nullable = false, precision = 12, scale = 2)
+    @Column(nullable = false)
+    private String password; // Encriptada con BCrypt
+
+    private String nombre;
+    private String email;
     private BigDecimal ingresoMensual;
 
-    @Column(name = "frecuencia_ahorro")
-    private String frecuenciaAhorro;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "usuario_medallas",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "medalla_id")
+    )
+    @Builder.Default
+    private Set<Medalla> medallas = new HashSet<>();
 }
