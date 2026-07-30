@@ -131,9 +131,11 @@ small,
   color: var(--md-muted);
   font-size: 1.6rem;
   line-height: 1;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
 }
 
-.introjs-skipbutton ion-icon {
+.introjs-skipbutton .introjs-close-x {
   font-size: 1.25rem;
 }
 
@@ -173,7 +175,7 @@ small,
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.navbar .nav-help-btn ion-icon {
+.navbar .nav-help-btn i {
   font-size: 1rem;
 }
 

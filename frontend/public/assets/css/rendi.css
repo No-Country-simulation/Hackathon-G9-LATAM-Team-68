@@ -1,0 +1,279 @@
+@font-face {
+  font-family: "Roboto Local";
+  src: url("../fonts/roboto-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Local";
+  src: url("../fonts/roboto-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Local";
+  src: url("../fonts/roboto-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk Local";
+  src: url("../fonts/space-grotesk-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk Local";
+  src: url("../fonts/space-grotesk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk Local";
+  src: url("../fonts/space-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --rd-bg: #e9f7ef;
+  --rd-surface: #ffffff;
+  --rd-surface-soft: #f4fbf7;
+  --rd-primary: #4E9B62;
+  --rd-primary-strong: #ECAE40;
+  --rd-secondary: #277041;
+  --rd-brown: #69513E;
+  --rd-brown-soft: #996E4F;
+  --rd-text: #2D2C2B;
+  --rd-muted: #4c665c;
+  --rd-outline: #cfe8da;
+  --rd-shadow: 0 12px 28px rgba(18, 140, 126, 0.14);
+  --rd-radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 20% 15%, #CFEAD8 0%, transparent 35%),
+        radial-gradient(circle at 80% 10%, #B9DFC7 0%, transparent 30%),
+        linear-gradient(
+            to bottom,
+            #DFF3E6 0%,
+            #EAF5E8 20%,
+            #F5EFE5 65%,
+            #F1E3CF 100%
+        );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: var(--rd-text);
+  font-family: "Space Grotesk Local", Calibri, "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.navbar {
+  background: linear-gradient(110deg, #ffffff 0%, #f3fbf6 100%) !important;
+  border: 1px solid var(--rd-outline) !important;
+  border-radius: 0 0 var(--rd-radius) var(--rd-radius);
+  box-shadow: var(--rd-shadow);
+}
+
+.navbar-brand,
+.nav-link,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.form-label {
+  color: var(--rd-text) !important;
+}
+
+.nav-link.active {
+  color: var(--rd-secondary) !important;
+  font-weight: 700;
+}
+
+.card,
+.rounded-3,
+.border {
+  background: linear-gradient(165deg, var(--rd-surface) 0%, var(--rd-surface-soft) 100%) !important;
+  border: 1px solid var(--rd-outline) !important;
+  border-radius: var(--rd-radius) !important;
+  box-shadow: var(--rd-shadow) !important;
+}
+
+.text-body-secondary,
+small,
+.lead,
+.card-text,
+.table {
+  color: var(--rd-muted) !important;
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: #eef9f2;
+}
+
+.btn {
+  border-radius: 999px !important;
+  font-weight: 600;
+  box-shadow: none !important;
+}
+
+.btn-primary,
+.btn-dark {
+  background: linear-gradient(135deg, var(--rd-primary) 0%, var(--rd-secondary) 100%) !important;
+  border: 1px solid var(--rd-secondary) !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover,
+.btn-dark:hover {
+  background: linear-gradient(135deg, var(--rd-primary-strong) 0%, #117366 100%) !important;
+}
+
+.btn-outline-secondary,
+.btn-outline-primary {
+  border: 1px solid #d5c2b1 !important;
+  color: var(--rd-brown) !important;
+  background: #fffdfa !important;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-primary:hover {
+  border-color: var(--rd-brown-soft) !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--rd-brown) 0%, var(--rd-brown-soft) 100%) !important;
+}
+
+.navbar .nav-help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid #d7c3b2 !important;
+  background: linear-gradient(135deg, #fffdfa 0%, #f6ebe2 100%) !important;
+  color: var(--rd-brown) !important;
+  box-shadow: 0 8px 18px rgba(139, 94, 60, 0.14) !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.navbar .nav-help-btn:hover,
+.navbar .nav-help-btn:focus-visible {
+  background: linear-gradient(135deg, var(--rd-brown) 0%, var(--rd-brown-soft) 100%) !important;
+  border-color: var(--rd-brown) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+  border: 1px solid var(--rd-outline) !important;
+  border-radius: 12px !important;
+  background-color: #ffffff !important;
+  color: var(--rd-text) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #6ddf9a !important;
+  box-shadow: 0 0 0 0.2rem rgba(37, 211, 102, 0.17) !important;
+}
+
+.introjs-tooltip {
+  border: 1px solid var(--rd-outline);
+  border-radius: var(--rd-radius);
+  box-shadow: var(--rd-shadow);
+}
+
+.introjs-button {
+  border-radius: 999px;
+  border: 1px solid var(--rd-outline);
+  background: #ffffff;
+  color: var(--rd-text);
+  text-shadow: none;
+}
+
+.introjs-button:hover,
+.introjs-button:focus {
+  background: linear-gradient(135deg, var(--rd-primary) 0%, var(--rd-secondary) 100%);
+  border-color: var(--rd-secondary);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.introjs-skipbutton {
+  color: var(--rd-muted);
+}
+
+.introjs-skipbutton:hover,
+.introjs-skipbutton:focus {
+  color: var(--rd-brown);
+  background: #f9efe8;
+}
+
+.swal2-popup {
+  font-family: "Space Grotesk Local", Calibri, "Trebuchet MS", "Segoe UI", sans-serif;
+  background: linear-gradient(165deg, var(--rd-surface) 0%, var(--rd-surface-soft) 100%);
+  color: var(--rd-text);
+  border: 1px solid var(--rd-outline);
+  border-radius: var(--rd-radius);
+  box-shadow: var(--rd-shadow);
+}
+
+.swal2-title,
+.swal2-html-container {
+  color: var(--rd-text);
+}
+
+.swal2-confirm,
+.swal2-cancel {
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+.swal2-confirm {
+  background: linear-gradient(135deg, var(--rd-primary) 0%, var(--rd-secondary) 100%) !important;
+  border: 1px solid var(--rd-secondary) !important;
+}
+
+.swal2-cancel {
+  background: #fffdfa !important;
+  color: var(--rd-brown) !important;
+  border: 1px solid #d5c2b1 !important;
+}
+
+.total-positive {
+  color: #13703d !important;
+}
+
+.total-negative {
+  color: #b3261e !important;
+}
+
+.total-neutral {
+  color: var(--rd-text) !important;
+}
+
+@media (max-width: 991px) {
+  .navbar {
+    border-radius: 0;
+  }
+}

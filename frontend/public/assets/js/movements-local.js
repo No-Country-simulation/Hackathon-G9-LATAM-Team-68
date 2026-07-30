@@ -10,15 +10,15 @@
     { id: 6, fecha: "2026-07-06", concepto: "Venta de accesorios", categoria: "Otros", tipo: "Ingreso", monto: 120 },
     { id: 7, fecha: "2026-07-07", concepto: "Consulta medica", categoria: "Salud", metodoPago: "Efectivo", tipo: "Gasto", monto: -95 },
     { id: 8, fecha: "2026-07-08", concepto: "Consultoria UX", categoria: "Freelance", tipo: "Ingreso", monto: 450 },
-    { id: 9, fecha: "2026-07-09", concepto: "Curso online", categoria: "Educacion", metodoPago: "Credito", tipo: "Gasto", monto: -42 },
-    { id: 10, fecha: "2026-07-10", concepto: "Interes bancario", categoria: "Otros", tipo: "Ingreso", monto: 36 },
+    { id: 9, fecha: "2026-07-09", concepto: "Curso online", categoria: "Educacion", metodoPago: "Crédito", tipo: "Gasto", monto: -42 },
+    { id: 10, fecha: "2026-07-10", concepto: "Interés bancario", categoria: "Otros", tipo: "Ingreso", monto: 36 },
     { id: 11, fecha: "2026-07-11", concepto: "Bus intermunicipal", categoria: "Transporte", metodoPago: "Efectivo", tipo: "Gasto", monto: -21 },
-    { id: 12, fecha: "2026-07-12", concepto: "Plataforma de musica", categoria: "Subscripciones", metodoPago: "Credito", tipo: "Gasto", monto: -11 },
+    { id: 12, fecha: "2026-07-12", concepto: "Plataforma de musica", categoria: "Subscripciones", metodoPago: "Crédito", tipo: "Gasto", monto: -11 },
     { id: 13, fecha: "2026-07-13", concepto: "Clases particulares", categoria: "Otros", tipo: "Ingreso", monto: 90 },
     { id: 14, fecha: "2026-07-14", concepto: "Cena con amigos", categoria: "Entretenimiento", metodoPago: "Debito", tipo: "Gasto", monto: -72 },
     { id: 15, fecha: "2026-07-15", concepto: "Reembolso empresa", categoria: "Sueldo", tipo: "Ingreso", monto: 210 },
     { id: 16, fecha: "2026-07-16", concepto: "Corte de cabello", categoria: "Personal", metodoPago: "Efectivo", tipo: "Gasto", monto: -38 },
-    { id: 17, fecha: "2026-07-17", concepto: "Diseno de logo", categoria: "Freelance", tipo: "Ingreso", monto: 300 },
+    { id: 17, fecha: "2026-07-17", concepto: "Diseño de logo", categoria: "Freelance", tipo: "Ingreso", monto: 300 },
     { id: 18, fecha: "2026-07-18", concepto: "Reserva de hotel", categoria: "Viajes", metodoPago: "Transferencia", tipo: "Gasto", monto: -180 },
     { id: 19, fecha: "2026-07-19", concepto: "Bono productividad", categoria: "Bono", tipo: "Ingreso", monto: 180 },
     { id: 20, fecha: "2026-07-20", concepto: "Compra de escritorio", categoria: "Otros", metodoPago: "Debito", tipo: "Gasto", monto: -85 }
@@ -77,7 +77,7 @@
       return 1;
     }
 
-    return Math.max.apply(null, movements.map(function (entry) {
+    return Math.max(...movements.map(function (entry) {
       return Number(entry.id || 0);
     })) + 1;
   }
@@ -107,18 +107,30 @@
     var rows = getMovements();
     var nextId = getNextId(rows);
     var normalizedAmount = typeValue === "Gasto" ? -Math.abs(amountValue) : Math.abs(amountValue);
+    var paymentMethod = typeValue === "Gasto"
+      ? (String(payload.metodoPago || "Efectivo").trim() || "Efectivo")
+      : "";
+    var interestRate = payload.tasaInteres;
+
+    if (typeValue === "Gasto" && paymentMethod === "Crédito") {
+      if (!Number.isFinite(Number(interestRate)) || Number(interestRate) <= 0) {
+        throw new Error("La tasa de interés es obligatoria cuando el método de pago es Crédito.");
+      }
+    }
 
     var entry = {
       id: nextId,
       fecha: dateValue,
       concepto: concept,
       categoria: String(payload.categoria || "Otros").trim() || "Otros",
-      metodoPago: typeValue === "Gasto"
-        ? (String(payload.metodoPago || "Efectivo").trim() || "Efectivo")
-        : "",
+      metodoPago: paymentMethod,
       tipo: typeValue,
       monto: normalizedAmount
     };
+
+    if (typeValue === "Gasto" && paymentMethod === "Crédito") {
+      entry.tasaInteres = Number(interestRate);
+    }
 
     rows.push(entry);
     saveMovements(rows);
@@ -333,27 +345,11 @@
 
     if (clearFiltersBtn) {
       clearFiltersBtn.addEventListener("click", function () {
-        var desde = document.getElementById("desde");
-        var hasta = document.getElementById("hasta");
-        var tipo = document.getElementById("tipo");
-        var categoria = document.getElementById("categoria");
-
-        if (desde) {
-          desde.value = "";
-        }
-
-        if (hasta) {
-          hasta.value = "";
-        }
-
-        if (tipo) {
-          tipo.value = "Todos";
-        }
-
-        if (categoria) {
-          categoria.value = "Todas";
-        }
-
+        var resetFields = {"desde": "", "hasta": "", "tipo": "Todos", "categoria": "Todas"};
+        Object.keys(resetFields).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.value = resetFields[id];
+        });
         loadHistoryTable();
       });
     }
@@ -366,28 +362,11 @@
         }
 
         resetToSeedData();
-
-        var desde = document.getElementById("desde");
-        var hasta = document.getElementById("hasta");
-        var tipo = document.getElementById("tipo");
-        var categoria = document.getElementById("categoria");
-
-        if (desde) {
-          desde.value = "";
-        }
-
-        if (hasta) {
-          hasta.value = "";
-        }
-
-        if (tipo) {
-          tipo.value = "Todos";
-        }
-
-        if (categoria) {
-          categoria.value = "Todas";
-        }
-
+        var resetFields = {"desde": "", "hasta": "", "tipo": "Todos", "categoria": "Todas"};
+        Object.keys(resetFields).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.value = resetFields[id];
+        });
         loadSummaryTable();
         loadHistoryTable();
       });

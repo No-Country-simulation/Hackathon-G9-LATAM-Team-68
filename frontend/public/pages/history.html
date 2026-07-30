@@ -6,9 +6,10 @@
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <title>Team68 Salud Financiera | Historial</title>
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
   <link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
   <link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
-  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css">
+  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
   <style>
     .chart-shell {
       min-height: 320px;
@@ -19,12 +20,13 @@
   </style>
 </head>
 <body>
+
   <nav class="navbar navbar-expand-lg border-bottom">
     <div class="container">
       <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
         <img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menu">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="mainNav">
@@ -37,8 +39,8 @@
           <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
         </ul>
         <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
-          <button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la pagina">
-            <ion-icon name="help-circle-outline"></ion-icon>
+          <button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la página">
+            <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
             <span></span>
           </button>
           <label for="themeSelector" class="small mb-0">Estilo</label>
@@ -48,6 +50,7 @@
             <option value="modern">Modern</option>
             <option value="y2k">Y2K</option>
             <option value="hollow">Hollow</option>
+							<option value="rendi">Rendi</option>
           </select>
         </div>
       </div>
@@ -55,6 +58,7 @@
   </nav>
 
   <main class="container py-4 py-md-5">
+
     <section class="rounded-3 border p-4 mb-4" id="historyFilters">
       <h1 class="h3 mb-3">Historial de movimientos</h1>
       <form class="row g-3 align-items-end">
@@ -91,14 +95,14 @@
           </select>
         </div>
         <div class="col-12 d-flex gap-2">
-          <button type="button" class="btn btn-primary" id="applyFiltersBtn"><ion-icon name="funnel-outline"></ion-icon> Aplicar filtros</button>
-          <button type="button" class="btn btn-outline-secondary" id="clearFiltersBtn"><ion-icon name="refresh-outline"></ion-icon> Limpiar</button>
-           <button type="button" class="btn btn-outline-secondary" id="resetFiltersBtn"><ion-icon name="refresh-outline"></ion-icon> Restablecer</button>
+          <button type="button" class="btn btn-primary" id="applyFiltersBtn"><i class="fa-solid fa-filter" aria-hidden="true"></i> Aplicar filtros</button>
+          <button type="button" class="btn btn-outline-secondary" id="clearFiltersBtn"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Limpiar</button>
+           <button type="button" class="btn btn-outline-secondary" id="resetFiltersBtn"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Restablecer</button>
         </div>
       </form>
     </section>
 
-    <section class="row g-3 mb-4">
+    <section class="row g-3 mb-4" id="historyTotals">
       <div class="col-md-4">
         <div class="card h-100">
           <div class="card-body">
@@ -144,7 +148,7 @@
                 <th>Fecha</th>
                 <th>Concepto</th>
                 <th>Categoria</th>
-                <th>Metodo de pago</th>
+                <th>Método de pago</th>
                 <th>Tipo</th>
                 <th class="text-end">Monto</th>
               </tr>
@@ -158,7 +162,6 @@
   </main>
 
   <script src="../vendor/introjs/intro.min.js"></script>
-  <script type="module" src="../vendor/ionicons/ionicons.esm.js"></script>
   <script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
   <script src="../assets/js/theme-switcher.js"></script>
   <script src="../assets/js/page-help.js"></script>
@@ -167,55 +170,44 @@
   <script>
     let currentHistoryRows = [];
     let expenseChart = null;
-
     function getChartSeries(rows) {
       const categoryTotals = {};
-
       rows.forEach(function (item) {
         if (item.tipo !== "Gasto") {
           return;
         }
-
         const category = item.categoria || "Otros";
         const amount = Math.abs(Number(item.monto || 0));
         categoryTotals[category] = (categoryTotals[category] || 0) + amount;
       });
-
       const labels = Object.keys(categoryTotals);
       const values = labels.map(function (label) {
         return categoryTotals[label];
       });
-
       if (!labels.length) {
         return {
           labels: ["Sin datos"],
           values: [0]
         };
       }
-
       return {
         labels: labels,
         values: values
       };
     }
-
     function renderExpenseChart() {
       const chartCanvas = document.getElementById("expenseCategoryChart");
       if (!chartCanvas) {
         return;
       }
-
       const chartSeries = getChartSeries(currentHistoryRows);
-
       if (expenseChart) {
         expenseChart.destroy();
       }
-
       const dataset = {
         label: "Gasto (USD)",
         data: chartSeries.values
       };
-
       const chartOptions = {
         responsive: true,
         maintainAspectRatio: false,
@@ -247,7 +239,6 @@
           }
         }
       };
-
       expenseChart = new Chart(chartCanvas, {
         type: "bar",
         data: {
@@ -257,15 +248,12 @@
         options: chartOptions
       });
     }
-
     currentHistoryRows = window.team68Movements ? window.team68Movements.getAll() : [];
     renderExpenseChart();
-
     document.addEventListener("team68:history-data-change", function (event) {
       currentHistoryRows = event.detail && Array.isArray(event.detail.rows) ? event.detail.rows : [];
       renderExpenseChart();
     });
-
     document.addEventListener("team68:theme-change", function () {
       renderExpenseChart();
     });

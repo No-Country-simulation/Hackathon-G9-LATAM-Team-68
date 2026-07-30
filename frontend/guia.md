@@ -1,18 +1,18 @@
-# Guia de formularios y graficas
+# Guía de formularios y gráficas
 
 ## 1. Objetivo
-Este documento explica como fluye la informacion en el proyecto:
+Este documento explica cómo fluye la información en el proyecto:
 - Desde los formularios de ingreso/gasto.
 - Hasta el almacenamiento local.
-- Y finalmente a las tablas y graficas.
+- Y finalmente a las tablas y gráficas.
 
 ## 2. Archivos clave
 
 ### Formularios y datos
 - `public/assets/js/forms-local.js`
   - Conecta botones de guardado de formularios.
-  - Arma el objeto del movimiento y llama al modulo de datos.
-  - Muestra mensajes de exito/error (SweetAlert o `alert`).
+  - Arma el objeto del movimiento y llama al módulo de datos.
+  - Muestra mensajes de éxito/error (SweetAlert o `alert`).
 - `public/assets/js/movements-local.js`
   - Es la capa de datos local.
   - Lee/escribe en `localStorage` con la clave `team68-movimientos`.
@@ -20,11 +20,11 @@ Este documento explica como fluye la informacion en el proyecto:
 
 ### Graficas
 - `public/pages/history.html`
-  - Construye 2 graficas de barras (gastos por categoria e ingresos por categoria).
+  - Construye 2 gráficas de barras (gastos por categoría e ingresos por categoría).
   - Reacciona a cambios de filtros y tema.
 - `public/pages/perfil.html`
-  - Calcula metricas (salud, deuda, ahorro).
-  - Dibuja 3 graficas tipo doughnut con Chart.js.
+  - Calcula métricas (salud, deuda, ahorro).
+  - Dibuja 3 gráficas tipo doughnut con Chart.js.
 
 ## 3. Flujo de formularios
 
@@ -33,10 +33,10 @@ flowchart TD
   A[Usuario llena formulario] --> B[Click en Guardar]
   B --> C[forms-local.js lee campos]
   C --> D[team68Movements.add(payload)]
-  D --> E[Validacion + normalizacion]
+  D --> E[Validación + normalización]
   E --> F[Guardar en localStorage]
   F --> G[Reset de formulario]
-  G --> H[Mensaje de exito]
+  G --> H[Mensaje de éxito]
   F --> I[Recarga de vistas/listas]
 ```
 
@@ -46,24 +46,24 @@ En `forms-local.js` hay dos funciones principales:
 - `setupExpenseForm()` para gastos.
 
 Ambas:
-1. Buscan el formulario y boton (`saveIncomeBtn` o `saveExpenseBtn`).
-2. En click, leen concepto, monto, fecha, categoria y cuenta/metodo.
+1. Buscan el formulario y botón (`saveIncomeBtn` o `saveExpenseBtn`).
+2. En click, leen concepto, monto, fecha, categoría y cuenta/método.
 3. Llaman a `window.team68Movements.add({...})`.
 
 ### 3.2 Validaciones
-Las validaciones fuertes estan en `movements-local.js`, dentro de `addMovement(payload)`:
+Las validaciones fuertes están en `movements-local.js`, dentro de `addMovement(payload)`:
 - Concepto obligatorio.
 - Fecha obligatoria.
-- Monto numerico y mayor a 0.
+- Monto numérico y mayor a 0.
 
 Si algo falla, lanza `Error` y `forms-local.js` muestra mensaje de error.
 
-### 3.3 Normalizacion del monto
+### 3.3 Normalización del monto
 `addMovement` ajusta signo segun tipo:
 - `Ingreso` => monto positivo.
 - `Gasto` => monto negativo.
 
-Esto facilita calculos de totales y graficas.
+Esto facilita cálculos de totales y gráficas.
 
 ### 3.4 Persistencia
 Se guarda en `localStorage` bajo:
@@ -71,25 +71,25 @@ Se guarda en `localStorage` bajo:
 
 Al iniciar, `ensureSeedData()` carga datos semilla si no hay registros.
 
-## 4. Como se actualiza la vista tras guardar
+## 4. Cómo se actualiza la vista tras guardar
 
-Despues de guardar, hay dos comportamientos:
-- `forms-local.js` actualiza listas recientes (ultimos ingresos/gastos).
+Después de guardar, hay dos comportamientos:
+- `forms-local.js` actualiza listas recientes (últimos ingresos/gastos).
 - `movements-local.js` mantiene las vistas de resumen/historial con:
   - `loadSummaryTable()`
   - `loadHistoryTable()`
 
-`loadHistoryTable()` ademas emite un evento:
+`loadHistoryTable()` además emite un evento:
 - `team68:history-data-change`
 
-Ese evento permite que las graficas de historial se redibujen con los datos filtrados actuales.
+Ese evento permite que las gráficas de historial se redibujen con los datos filtrados actuales.
 
 ## 5. Graficas en historial (`history.html`)
 
 ## 5.1 Origen de datos
 1. Se obtiene `currentHistoryRows` desde filtros activos.
-2. `getChartSeries(rows)` agrupa gastos por categoria.
-3. `getIncomeChartSeries(rows)` agrupa ingresos por categoria.
+2. `getChartSeries(rows)` agrupa gastos por categoría.
+3. `getIncomeChartSeries(rows)` agrupa ingresos por categoría.
 
 Si no hay datos, se usa:
 - Etiqueta: `Sin datos`
@@ -104,19 +104,19 @@ Detalles importantes:
 - `responsive: true` y `maintainAspectRatio: false`.
 - Tooltip y eje Y formateados con prefijo `$`.
 
-## 5.3 Re-render automatico
+## 5.3 Re-render automático
 Se redibujan cuando:
 - Cambian datos del historial (`team68:history-data-change`).
 - Cambia el tema (`team68:theme-change`).
 
 ## 6. Graficas de perfil financiero (`perfil.html`)
 
-## 6.1 Calculo de metricas
+## 6.1 Cálculo de métricas
 Con todos los movimientos:
 - `income`: suma de ingresos.
 - `expense`: suma de gastos absolutos.
 
-Formulas:
+Fórmulas:
 - `debtPct = round((expense / income) * 100)`
 - `savingsAmount = max(income - expense, 0)`
 - `savingsPct = round((savingsAmount / income) * 100)`
@@ -136,20 +136,98 @@ Se usa para:
 - `ahorroChart`
 
 ## 6.3 Estado y sugerencias
-Segun el porcentaje:
-- Salud financiera: `saludable`, `en observacion` o `en riego` (texto actual en codigo).
+Según el porcentaje:
+- Salud financiera: `saludable`, `en observación` o `en riesgo` (texto actual en código).
 - Se llenan listas de sugerencias para salud, deuda y ahorro.
 
-## 7. Resumen tecnico rapido
+## 7. Resumen técnico rapido
 - Los formularios no escriben directo en la UI final: delegan en `team68Movements`.
 - `movements-local.js` centraliza reglas de negocio y persistencia.
-- Las graficas se alimentan de datos ya filtrados/normalizados.
-- El evento `team68:history-data-change` desacopla tabla y graficas en historial.
+- Las gráficas se alimentan de datos ya filtrados/normalizados.
+- El evento `team68:history-data-change` desacopla tabla y gráficas en historial.
 
 ## 8. Recomendaciones de mantenimiento
 - Mantener validaciones en un solo lugar (`addMovement`) para evitar inconsistencias.
 - Si agregas nuevos tipos de movimiento, actualizar:
-  - Normalizacion de monto.
+  - Normalización de monto.
   - Filtros de historial.
   - Serie de datos para charts.
-- Para nuevos dashboards, reutilizar `getAll()` + funciones de agregacion por categoria/periodo.
+- Para nuevos dashboards, reutilizar `getAll()` + funciones de agregación por categoría/periodo.
+
+## 9. Contrato JSON para perfil financiero
+
+La vista de perfil (`public/pages/perfil.html`) ahora acepta dos formatos:
+- Formato nuevo (recomendado): claves simples en `camelCase`.
+- Formato anterior: claves en `snake_case` (compatibilidad activa).
+
+### 9.1 Formato recomendado
+
+```json
+{
+  "user": {
+    "id": 1,
+    "name": "Brayan Lira"
+  },
+  "financialProfile": {
+    "score": 76,
+    "status": "En observacion"
+  },
+  "dimensions": {
+    "financialBalance": {
+      "score": 87,
+      "status": "Saludable",
+      "indicators": {
+        "monthlyBalance": 5500,
+        "expenseRate": 0.78,
+        "financialMargin": 0.22
+      },
+      "recommendations": []
+    },
+    "savingsCapacity": {
+      "score": 64,
+      "status": "En observacion",
+      "indicators": {
+        "savingsRate": 0.08,
+        "periodSavingsAndInvestment": 2000,
+        "marginUsageRate": 0.36
+      },
+      "recommendations": []
+    },
+    "debt": {
+      "score": 91,
+      "status": "Saludable",
+      "indicators": {
+        "debtRatio": 0.12,
+        "debtPaymentAmount": 3000,
+        "debtPressure": 0.19,
+        "averageDebtCost": 50.1
+      },
+      "recommendations": []
+    },
+    "consumptionBehavior": {
+      "score": 58,
+      "status": "En observacion",
+      "indicators": {
+        "expenseDistributionByCategory": {},
+        "expenseConcentrationIndex": 0.58,
+        "consumptionProfile": {
+          "spendingPredominance": "Balance entre gastos esenciales y discrecionales",
+          "consumptionType": "Moderadamente concentrado",
+          "consumptionDiversification": "Diversificado",
+          "mainCategory": "Vivienda"
+        }
+      },
+      "recommendations": []
+    }
+  },
+  "generalRecommendation": "Texto de recomendación general"
+}
+```
+
+### 9.2 Entrada del payload en frontend
+
+Se puede enviar de 2 formas:
+- `window.team68FinancialPayload = {...}` antes de cargar la lógica de la página.
+- `localStorage.setItem("team68-financial-profile", JSON.stringify(payload))`.
+
+Si no existe payload, la página sigue calculando métricas locales con movimientos de `localStorage`.

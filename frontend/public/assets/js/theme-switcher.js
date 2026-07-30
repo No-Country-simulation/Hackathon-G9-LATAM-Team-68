@@ -10,11 +10,12 @@
     wireframe: themeLink.dataset.wireframe || themeLink.getAttribute("href"),
     modern: themeLink.dataset.modern,
     y2k: themeLink.dataset.y2k,
-    hollow: themeLink.dataset.hollow
+    hollow: themeLink.dataset.hollow,
+    rendi: themeLink.dataset.rendi
   };
 
   function applyTheme(themeName, persist) {
-    if (!Object.prototype.hasOwnProperty.call(themes, themeName)) {
+    if (!Object.hasOwn(themes, themeName)) {
       return;
     }
 
@@ -35,7 +36,7 @@
   }
 
   var storedTheme = localStorage.getItem("team68-theme");
-  var initialTheme = Object.prototype.hasOwnProperty.call(themes, storedTheme) ? storedTheme : "default";
+  var initialTheme = Object.hasOwn(themes, storedTheme) ? storedTheme : "default";
 
   applyTheme(initialTheme, false);
 

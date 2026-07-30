@@ -6,16 +6,18 @@
   	<link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
 	<title>Team68 Salud Financiera | Login</title>
 	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
 	<link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
-	<link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css">
+	<link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
 </head>
 <body>
+	
 	<nav class="navbar navbar-expand-lg border-bottom">
 		<div class="container">
 			<a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
 				<img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
 			</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menu">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="mainNav">
@@ -28,8 +30,8 @@
 					<li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
 				</ul>
 				<div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
-					<button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la pagina">
-						<ion-icon name="help-circle-outline"></ion-icon>
+					<button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la página">
+						<i class="fa-regular fa-circle-question" aria-hidden="true"></i>
 						<span></span>
 					</button>
 					<label for="themeSelector" class="small mb-0">Estilo</label>
@@ -39,6 +41,7 @@
 						<option value="modern">Modern</option>
 						<option value="y2k">Y2K</option>
 						<option value="hollow">Hollow</option>
+							<option value="rendi">Rendi</option>
 					</select>
 				</div>
 			</div>
@@ -50,7 +53,7 @@
 			<div class="col-md-8 col-lg-5">
 				<div class="card" id="loginCard">
 					<div class="card-body p-4">
-						<h1 class="h3 mb-3">Iniciar sesion</h1>
+						<h1 class="h3 mb-3">Iniciar sesión</h1>
 						<p class="text-body-secondary mb-4">Accede para gestionar tus ingresos y gastos.</p>
 						<form class="row g-3" action="summary.html">
 							<div class="col-12">
@@ -62,7 +65,7 @@
 								<input id="password" type="password" class="form-control" placeholder="********" required>
 							</div>
 							<div class="col-12 d-grid">
-								<button class="btn btn-primary" type="submit"><ion-icon name="log-in-outline"></ion-icon> Ingresar</button>
+								<button class="btn btn-primary" type="submit"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Ingresar</button>
 							</div>
 						</form>
 					</div>
@@ -72,7 +75,6 @@
 	</main>
 
 	<script src="../vendor/introjs/intro.min.js"></script>
-	<script type="module" src="../vendor/ionicons/ionicons.esm.js"></script>
 	<script src="../assets/js/theme-switcher.js"></script>
 	<script src="../assets/js/page-help.js"></script>
 	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
