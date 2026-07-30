@@ -24,13 +24,29 @@ public class UsuarioService {
     }
 
     public AuthResponseDTO login(AuthRequestDTO request) {
-        // En producción/hackathon validas contraseña encriptada
-        Usuario usuario = usuarioRepository.findByUsername(request.getUsername())
-                .orElseGet(() -> usuarioRepository.save(Usuario.builder()
-                        .username(request.getUsername())
-                        .password(request.getPassword())
-                        .nombre(request.getUsername())
-                        .build()));
+        // Buscar o crear usuario (sin la variable esNuevoUsuario innecesaria)
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(request.getUsername());
+        Usuario usuario;
+
+        if (usuarioOpt.isPresent()) {
+            usuario = usuarioOpt.get();
+        } else {
+            usuario = Usuario.builder()
+                    .username(request.getUsername())
+                    .password(request.getPassword())
+                    .nombre(request.getUsername())
+                    .medallas(new HashSet<>()) // Asegurar inicialización de la colección
+                    .build();
+        }
+
+        // Asignar medalla de bienvenida si no la tiene
+        medallaRepository.findByCodigo("PEQUENO_OSEZNO").ifPresent(medalla -> {
+            if (!usuario.getMedallas().contains(medalla)) {
+                usuario.getMedallas().add(medalla);
+            }
+        });
+
+        usuarioRepository.save(usuario);
 
         return AuthResponseDTO.builder()
                 .id(usuario.getId())
@@ -45,20 +61,26 @@ public class UsuarioService {
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
         List<Medalla> todasLasMedallas = medallaRepository.findAll();
-        Set<UUID> medallasObtenidasIds = usuario.getMedallas().stream()
-                .map(m -> m.getId().toString())
-                .map(UUID::fromString)
+
+        // Cambiado a Set<Long> y lambda explícita m -> m.getId() para evitar warnings de null safety
+        Set<Long> medallasObtenidasIds = usuario.getMedallas().stream()
+                .filter(Objects::nonNull)
+                .map(m -> m.getId())
+                .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
 
-        return todasLasMedallas.stream().map(m -> MedallaResponseDTO.builder()
-                .id(m.getId())
-                .codigo(m.getCodigo())
-                .nombre(m.getNombre())
-                .descripcion(m.getDescripcion())
-                .iconoUrl(m.getIconoUrl())
-                .puntos(m.getPuntos())
-                .obtenida(usuario.getMedallas().contains(m))
-                .build()
-        ).collect(Collectors.toList());
+        return todasLasMedallas.stream()
+                .filter(Objects::nonNull)
+                .map(m -> MedallaResponseDTO.builder()
+                        .id(m.getId())
+                        .codigo(m.getCodigo())
+                        .nombre(m.getNombre())
+                        .descripcion(m.getDescripcion())
+                        .iconoUrl(m.getIconoUrl())
+                        .puntos(m.getPuntos())
+                        .obtenida(medallasObtenidasIds.contains(m.getId()))
+                        .build()
+                )
+                .collect(Collectors.toList());
     }
 }

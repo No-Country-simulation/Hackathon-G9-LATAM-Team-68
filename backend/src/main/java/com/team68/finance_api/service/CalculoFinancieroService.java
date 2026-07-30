@@ -17,8 +17,10 @@ public class CalculoFinancieroService {
     public AnalisisResponseDTO calcularAnalisisFinanciero(AnalisisRequestDTO request) {
         // 1. Calcular Ingresos Totales
         BigDecimal ingresoTotal = request.getIngresos().stream()
-                .map(IngresoRequestDTO::getMonto)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+            .filter(Objects::nonNull)
+            .map(i -> i.getMonto())
+            .filter(Objects::nonNull)
+            .reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 
         // 2. Procesar Transacciones
         BigDecimal consumoTotal = BigDecimal.ZERO;
@@ -184,6 +186,7 @@ public class CalculoFinancieroService {
                 .balanceFinanciero(dimBalance)
                 .capacidadAhorro(dimAhorro)
                 .endeudamiento(dimDeuda)
+                .endeudamiento(dimDeuda)
                 .comportamientoConsumo(dimConsumo)
                 .build();
 
@@ -206,7 +209,7 @@ public class CalculoFinancieroService {
             }
         } else if (tipo == TipoFinanciero.CONSUMO) {
             if (categoria == null) {
-                throw new IllegalArgumentException("Para movimientos de tipo CONSUMO, la categoría es estrictamente obligatoria.");
+                throw new IllegalArgumentException("Para movimientos de tipo CONSUMO, la categoría es strictly obligatoria.");
             }
         }
     }
