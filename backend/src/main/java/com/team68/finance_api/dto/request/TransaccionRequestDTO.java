@@ -2,6 +2,7 @@ package com.team68.finance_api.dto.request;
 
 import com.team68.finance_api.model.CategoriaConsumo;
 import com.team68.finance_api.model.TipoFinanciero;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
@@ -28,9 +29,11 @@ public class TransaccionRequestDTO {
     private BigDecimal monto;
 
     @JsonProperty("forma_pago")
+    @JsonAlias("formaPago") // Acepta tanto forma_pago como formaPago
     private String formaPago;
 
     @JsonProperty("tasa_de_interes_de_la_tarjeta")
+    @JsonAlias("tasaDeInteresDeLaTarjeta")
     private Double tasaDeInteresDeLaTarjeta;
 
     private TipoFinanciero tipoFinanciero;
