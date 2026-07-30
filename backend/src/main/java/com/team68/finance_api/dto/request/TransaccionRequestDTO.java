@@ -34,5 +34,6 @@ public class TransaccionRequestDTO {
     private Double tasaDeInteresDeLaTarjeta;
 
     private TipoFinanciero tipoFinanciero;
+
     private CategoriaConsumo categoria;
 }
