@@ -13,13 +13,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class IngresoRequestDTO {
-    @NotNull(message = "La fecha es obligatoria")
+    @NotNull(message = "La fecha del ingreso es obligatoria")
     private LocalDate fecha;
 
-    @NotBlank(message = "La descripción es obligatoria")
+    @NotBlank(message = "La descripción del ingreso no puede estar vacía")
     private String descripcion;
 
-    @NotNull(message = "El monto es obligatorio")
-    @Positive(message = "El monto debe ser positivo")
+    @NotNull(message = "El monto del ingreso es obligatorio")
+    @Positive(message = "El monto del ingreso debe ser un valor mayor a cero")
     private BigDecimal monto;
 }

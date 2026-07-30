@@ -30,6 +30,11 @@ public class CalculoFinancieroService {
         Map<String, BigDecimal> gastoPorCategoria = new HashMap<>();
 
         for (TransaccionRequestDTO tx : request.getTransacciones()) {
+            // Regla de Negocio Especial: Validación Cruzada
+            if (tx.getTipoFinanciero() != null) {
+                validarReglaTipoYCategoria(tx.getTipoFinanciero(), tx.getCategoria());
+            }
+
             BigDecimal monto = tx.getMonto();
             // Clasificación inferida si no viene explícita
             TipoFinanciero tipo = tx.getTipoFinanciero() != null ? tx.getTipoFinanciero() : inferirTipo(tx);
@@ -192,6 +197,18 @@ public class CalculoFinancieroService {
                         "Revisar periódicamente los gastos discrecionales para mejorar el margen financiero."
                 ))
                 .build();
+    }
+
+    private void validarReglaTipoYCategoria(TipoFinanciero tipo, CategoriaConsumo categoria) {
+        if (tipo == TipoFinanciero.PAGO_DEUDA || tipo == TipoFinanciero.AHORRO_INVERSION) {
+            if (categoria != null) {
+                throw new IllegalArgumentException("Para movimientos de tipo PAGO_DEUDA o AHORRO_INVERSION, el campo categoría debe ser nulo.");
+            }
+        } else if (tipo == TipoFinanciero.CONSUMO) {
+            if (categoria == null) {
+                throw new IllegalArgumentException("Para movimientos de tipo CONSUMO, la categoría es estrictamente obligatoria.");
+            }
+        }
     }
 
     private TipoFinanciero inferirTipo(TransaccionRequestDTO tx) {

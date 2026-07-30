@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class AuthRequestDTO {
-    @NotBlank(message = "El username es obligatorio")
+    @NotBlank(message = "El nombre de usuario es obligatorio")
     private String username;
 
     @NotBlank(message = "La contraseña es obligatoria")
