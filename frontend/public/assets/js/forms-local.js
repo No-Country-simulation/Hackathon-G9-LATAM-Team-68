@@ -7,25 +7,12 @@
       day: "2-digit"
     });
     var parts = formatter.formatToParts(new Date());
-    var year = "";
-    var month = "";
-    var day = "";
+    var dateObj = parts.reduce(function (acc, part) {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
 
-    parts.forEach(function (part) {
-      if (part.type === "year") {
-        year = part.value;
-      }
-
-      if (part.type === "month") {
-        month = part.value;
-      }
-
-      if (part.type === "day") {
-        day = part.value;
-      }
-    });
-
-    return year + "-" + month + "-" + day;
+    return dateObj.year + "-" + dateObj.month + "-" + dateObj.day;
   }
 
   function showMessage(icon, title, text) {
@@ -88,11 +75,7 @@
     }
 
     list.innerHTML = rows.map(function (row) {
-      return "<li>" +
-        window.team68Movements.formatDate(row.fecha) +
-        " - " + row.concepto +
-        " - " + window.team68Movements.formatAmount(row.monto) +
-        "</li>";
+      return "<li>" + window.team68Movements.formatDate(row.fecha) + " - " + row.concepto + " - " + window.team68Movements.formatAmount(row.monto) + "</li>";
     }).join("");
   }
 
@@ -101,32 +84,76 @@
     renderRecentList("Gasto", "expenseRecentList", "Sin gastos registrados");
   }
 
-  function setupIncomeForm() {
-    var form = document.getElementById("incomeEntryForm");
-    var saveBtn = document.getElementById("saveIncomeBtn");
+  function setupCreditInterestField() {
+    var paymentMethod = document.getElementById("metodoPagoGasto");
+    var interestWrapper = document.getElementById("tasaInteresGastoWrapper");
+    var interestInput = document.getElementById("tasaInteresGasto");
+    var conceptWrapper = document.getElementById("conceptoGastoWrapper");
+    if (!paymentMethod || !interestWrapper || !interestInput || !conceptWrapper) {
+      return;
+    }
+
+    function syncCreditInterestVisibility() {
+      var isCredit = paymentMethod.value === "Credito";
+      interestWrapper.classList.toggle("d-none", !isCredit);
+      interestInput.required = isCredit;
+      conceptWrapper.classList.toggle("col-md-12", !isCredit);
+      conceptWrapper.classList.toggle("col-md-8", isCredit);
+
+      if (!isCredit) {
+        interestInput.value = "";
+      }
+    }
+
+    paymentMethod.addEventListener("change", syncCreditInterestVisibility);
+    syncCreditInterestVisibility();
+  }
+
+  function setupMovementForm(formId, saveBtnId, conceptoId, montoId, fechaId, categoriaId, metodoPagoId, tipo) {
+    var form = document.getElementById(formId);
+    var saveBtn = document.getElementById(saveBtnId);
     if (!form || !saveBtn || !window.team68Movements) {
       return;
     }
 
     saveBtn.addEventListener("click", function () {
-      var concepto = document.getElementById("conceptoIngreso").value;
-      var monto = document.getElementById("montoIngreso").value;
-      var fecha = document.getElementById("fechaIngreso").value;
-      var categoria = document.getElementById("categoriaIngreso").value;
+      var concepto = document.getElementById(conceptoId).value.trim().slice(0, 60);
+      var monto = document.getElementById(montoId).value;
+      var fecha = document.getElementById(fechaId).value;
+      var categoria = document.getElementById(categoriaId).value;
+      var payload = {
+        concepto: concepto,
+        monto: Number(monto),
+        fecha: normalizeDate(fecha),
+        categoria: categoria,
+        tipo: tipo
+      };
 
+      if (metodoPagoId) {
+        payload.metodoPago = document.getElementById(metodoPagoId).value;
+      }
+
+      if (tipo === "Gasto") {
+        var interestNode = document.getElementById("tasaInteresGasto");
+        if (interestNode) {
+          var interestRaw = String(interestNode.value || "").trim();
+          if (payload.metodoPago === "Credito") {
+            payload.tasaInteres = Number(interestRaw);
+          }
+        }
+      }
 
       try {
-        var row = window.team68Movements.add({
-          concepto: concepto,
-          monto: Number(monto),
-          fecha: normalizeDate(fecha),
-          categoria: categoria,
-          tipo: "Ingreso"
-        });
-
+        var row = window.team68Movements.add(payload);
         form.reset();
-        setTodayOnInput("fechaIngreso");
-        showMessage("success", "Ingreso guardado", row.concepto + " por " + window.team68Movements.formatAmount(row.monto));
+        setTodayOnInput(fechaId);
+        if (tipo === "Gasto") {
+          var paymentMethod = document.getElementById("metodoPagoGasto");
+          if (paymentMethod) {
+            paymentMethod.dispatchEvent(new Event("change"));
+          }
+        }
+        showMessage("success", tipo + " guardado", row.concepto + " por " + window.team68Movements.formatAmount(row.monto));
         renderRecentLists();
       } catch (error) {
         showMessage("error", "No se pudo guardar", error.message);
@@ -134,42 +161,9 @@
     });
   }
 
-  function setupExpenseForm() {
-    var form = document.getElementById("expenseEntryForm");
-    var saveBtn = document.getElementById("saveExpenseBtn");
-    if (!form || !saveBtn || !window.team68Movements) {
-      return;
-    }
-
-    saveBtn.addEventListener("click", function () {
-      var concepto = document.getElementById("conceptoGasto").value.trim().slice(0, 60);
-      var monto = document.getElementById("montoGasto").value;
-      var fecha = document.getElementById("fechaGasto").value;
-      var categoria = document.getElementById("categoriaGasto").value;
-      var metodoPago = document.getElementById("metodoPagoGasto").value;
-
-      try {
-        var row = window.team68Movements.add({
-          concepto: concepto,
-          monto: Number(monto),
-          fecha: normalizeDate(fecha),
-          categoria: categoria,
-          metodoPago: metodoPago,
-          tipo: "Gasto"
-        });
-
-        form.reset();
-        setTodayOnInput("fechaGasto");
-        showMessage("success", "Gasto guardado", row.concepto + " por " + window.team68Movements.formatAmount(row.monto));
-        renderRecentLists();
-      } catch (error) {
-        showMessage("error", "No se pudo guardar", error.message);
-      }
-    });
-  }
-
-  setupIncomeForm();
-  setupExpenseForm();
+  setupMovementForm("incomeEntryForm", "saveIncomeBtn", "conceptoIngreso", "montoIngreso", "fechaIngreso", "categoriaIngreso", null, "Ingreso");
+  setupMovementForm("expenseEntryForm", "saveExpenseBtn", "conceptoGasto", "montoGasto", "fechaGasto", "categoriaGasto", "metodoPagoGasto", "Gasto");
+  setupCreditInterestField();
   setTodayOnDateFields();
   renderRecentLists();
 })();

@@ -211,7 +211,7 @@ small,
   transform: translateY(-1px) scale(1.01);
 }
 
-.navbar .nav-help-btn ion-icon {
+.navbar .nav-help-btn i {
   font-size: 1rem;
 }
 
@@ -267,9 +267,11 @@ small,
   border-radius: 999px;
   color: var(--y2k-accent);
   line-height: 1;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
 }
 
-.introjs-skipbutton ion-icon {
+.introjs-skipbutton .introjs-close-x {
   font-size: 1.25rem;
 }
 

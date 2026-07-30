@@ -13,13 +13,13 @@
     "login.html": [
       {
         element: "#pageHelpTrigger",
-        title: "Ayuda de la pagina",
+        title: "Ayuda de la página",
         intro: "Abre esta guia en cualquier momento para recordar que hace cada bloque."
       },
       {
         element: "#loginCard",
         title: "Acceso",
-        intro: "Completa tu usuario y contrasena para entrar al panel principal."
+        intro: "Completa tu usuario y contraseña para entrar al panel principal."
       },
       {
         element: "#user",
@@ -29,41 +29,19 @@
       {
         element: "#password",
         title: "Contrasena",
-        intro: "Aqui introduces tu contrasena antes de pulsar Ingresar."
-      }
-    ],
-    "welcome.html": [
-      {
-        element: "#pageHelpTrigger",
-        title: "Ayuda de la pagina",
-        intro: "Esta visita guiada resume los accesos rapidos de la maqueta."
-      },
-      {
-        element: "#welcomeHero",
-        title: "Vista general",
-        intro: "La portada resume el objetivo de la app y te lleva a los flujos principales."
-      },
-      {
-        element: "#welcomeActions",
-        title: "Acciones rapidas",
-        intro: "Desde aqui puedes ir al resumen o abrir directamente los formularios de ingresos y gastos."
-      },
-      {
-        element: "#welcomeModules",
-        title: "Modulos previstos",
-        intro: "Esta tarjeta enumera los modulos contemplados en el wireframe."
+        intro: "Aquí introduces tu contraseña antes de pulsar Ingresar."
       }
     ],
     "summary.html": [
       {
         element: "#pageHelpTrigger",
-        title: "Ayuda de la pagina",
-        intro: "Activa este recorrido para ubicar rapidamente las secciones del resumen."
+        title: "Ayuda de la página",
+        intro: "Activa este recorrido para ubicar rápidamente las secciones del resumen."
       },
       {
         element: "#summaryHeader",
         title: "Resumen mensual",
-        intro: "Aqui ves el periodo actual y los accesos para crear movimientos nuevos."
+        intro: "Aquí ves el período actual y los accesos para crear movimientos nuevos."
       },
       {
         element: "#summaryTotals",
@@ -72,71 +50,76 @@
       },
       {
         element: "#summaryMovements",
-        title: "Ultimos movimientos",
-        intro: "La tabla resume las transacciones recientes para una revision rapida."
+        title: "Últimos movimientos",
+        intro: "La tabla resume las transacciones recientes para una revisión rápida."
       }
     ],
     "income.html": [
       {
         element: "#pageHelpTrigger",
-        title: "Ayuda de la pagina",
+        title: "Ayuda de la página",
         intro: "Usa esta ayuda para identificar el flujo de carga de ingresos."
       },
       {
         element: "#incomeForm",
         title: "Formulario de ingreso",
-        intro: "Registra concepto, monto, fecha y cuenta del ingreso que deseas guardar."
+        intro: "Registra fecha, monto y concepto que deseas guardar."
       },
       {
         element: "#incomeRecent",
         title: "Ingresos recientes",
-        intro: "Este bloque muestra ejemplos de los ultimos ingresos cargados."
+        intro: "Este bloque muestra ejemplos de los últimos ingresos cargados."
       }
     ],
     "expense.html": [
       {
         element: "#pageHelpTrigger",
-        title: "Ayuda de la pagina",
+        title: "Ayuda de la página",
         intro: "Este recorrido explica donde registrar y revisar gastos."
       },
       {
         element: "#expenseForm",
         title: "Formulario de gasto",
-        intro: "Aqui capturas el concepto, categoria, monto y metodo de pago del gasto."
+        intro: "Aquí capturas la fecha, monto, método de pago del gasto y concepto."
       },
       {
         element: "#expenseRecent",
         title: "Gastos recientes",
-        intro: "Este listado sirve como referencia rapida de los ultimos egresos registrados."
+        intro: "Este listado sirve como referencia rápida de los últimos egresos registrados."
       }
     ],
     "history.html": [
       {
         element: "#pageHelpTrigger",
-        title: "Ayuda de la pagina",
-        intro: "Desde aqui puedes revisar como filtrar y analizar el historial."
+        title: "Ayuda de la página",
+        intro: "Desde aquí puedes revisar cómo filtrar y analizar el historial."
       },
       {
         element: "#historyFilters",
         title: "Filtros",
-        intro: "Define rango de fechas, tipo y categoria para acotar el historial."
+        intro: "Define rango de fechas, tipo y categoría para acotar el historial."
+      },
+      {
+        element: "#historyTotals",
+        title: "Indicadores clave",
+        intro: "Estas tarjetas muestran ingresos, gastos y balance filtrados."
+      },
+      {
+        element: "#historyChartCard",
+        title: "Analitica visual",
+        intro: "La gráfica agrupa gastos por categoría para detectar tendencias rápidamente."
       },
       {
         element: "#historyResults",
         title: "Resultados",
         intro: "La tabla central muestra los movimientos que cumplen los filtros seleccionados."
-      },
-      {
-        element: "#historyChartCard",
-        title: "Analitica visual",
-        intro: "La grafica agrupa gastos por categoria para detectar tendencias rapidamente."
       }
     ],
     "perfil.html": [
       {
         element: "#pageHelpTrigger",
-        title: "Ayuda de la pagina",
-        intro: "Este recorrido te explica como leer los indicadores de salud financiera."
+        title: "Ayuda de la página",
+        intro: "Este recorrido te explica cómo leer los indicadores de salud financiera."
       },
       {
         element: "#financialHealthHeader",
@@ -146,25 +129,28 @@
       {
         element: "#financialHealthMetrics",
         title: "Indicadores porcentuales",
-        intro: "Aqui se muestran salud financiera, endeudamiento y ahorro con graficas de pastel."
+        intro: "Aquí se muestran salud financiera, endeudamiento y ahorro con gráficas de pastel."
+      },
+      {
+        element: "#medallasObtenidas",
+        title: "Medallas obtenidas",
+        intro: "Aquí se muestran las medallas que has obtenido por tus logros financieros."
       }
     ]
   };
 
   function buildSteps(definition) {
-    return definition.filter(function (step) {
-      return !step.element || document.querySelector(step.element);
-    }).map(function (step) {
+    return definition.map(function (step) {
       if (!step.element) {
         return step;
       }
-
-      return {
-        element: document.querySelector(step.element),
+      var element = document.querySelector(step.element);
+      return element ? {
+        element: element,
         title: step.title,
         intro: step.intro
-      };
-    });
+      } : null;
+    }).filter(Boolean);
   }
 
   function applyCloseIcon() {
@@ -174,7 +160,7 @@
     }
 
     skipButton.setAttribute("aria-label", "Cerrar ayuda");
-    skipButton.innerHTML = '<ion-icon name="close-outline" aria-hidden="true"></ion-icon><span class="visually-hidden">Cerrar ayuda</span>';
+    skipButton.innerHTML = 'X<span class="visually-hidden">Cerrar ayuda</span>';
   }
 
   function startHelp() {
@@ -182,7 +168,7 @@
     if (!steps.length) {
       steps = [{
         title: "Ayuda",
-        intro: "No hay instrucciones configuradas para esta pagina todavia."
+        intro: "No hay instrucciones configuradas para esta página todavía."
       }];
     }
 

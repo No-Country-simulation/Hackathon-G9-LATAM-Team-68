@@ -6,19 +6,18 @@
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
   <title>Team68 Salud Financiera | Salud financiera</title>
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
   <link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
   <link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
-  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css">
+  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
   <style>
     .health-chart-shell {
       max-width: 220px;
       margin: 0 auto;
     }
-
     .health-suggestions {
       text-align: left;
     }
-
     .medal-card img {
       max-height: 150px;
       object-fit: contain;
@@ -26,12 +25,13 @@
   </style>
 </head>
 <body>
+
   <nav class="navbar navbar-expand-lg border-bottom">
     <div class="container">
       <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
         <img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menu">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="mainNav">
@@ -44,8 +44,8 @@
           <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
         </ul>
         <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
-          <button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la pagina">
-            <ion-icon name="help-circle-outline"></ion-icon>
+          <button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la página">
+            <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
             <span></span>
           </button>
           <label for="themeSelector" class="small mb-0">Estilo</label>
@@ -55,6 +55,7 @@
             <option value="modern">Modern</option>
             <option value="y2k">Y2K</option>
             <option value="hollow">Hollow</option>
+							<option value="rendi">Rendi</option>
           </select>
         </div>
       </div>
@@ -67,9 +68,9 @@
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
         <div>
           <h1 class="h3 mb-1">Perfil financiero</h1>
-          <small>Indicadores clave de tu situacion actual</small>
+          <small>Indicadores clave de tu situación actual</small>
         </div>
-        <a href="history.html" class="btn btn-outline-secondary"><ion-icon name="stats-chart-outline"></ion-icon> Ver historial</a>
+        <a href="history.html" class="btn btn-outline-secondary"><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Ver historial</a>
       </div>
     </section>
 
@@ -78,7 +79,7 @@
         <article class="card h-100">
           <div class="card-body text-center">
             <h2 class="h5 mb-1">Salud financiera</h2>
-            <p class="small mb-3" id="saludEstado">Estado actual de la salud financiera: en observacion.</p>
+            <p class="small mb-3" id="saludEstado">Estado actual de la salud financiera: en observación.</p>
             <div class="health-chart-shell mb-3">
               <canvas id="saludChart" aria-label="Grafica de salud financiera" role="img"></canvas>
             </div>
@@ -156,7 +157,6 @@
   </main>
 
   <script src="../vendor/introjs/intro.min.js"></script>
-  <script type="module" src="../vendor/ionicons/ionicons.esm.js"></script>
   <script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
   <script src="../assets/js/theme-switcher.js"></script>
   <script src="../assets/js/page-help.js"></script>
@@ -164,24 +164,34 @@
   <script src="../vendor/chartjs/chart.umd.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
+    function pickFirstDefined(values) {
+      for (var i = 0; i < values.length; i += 1) {
+        if (values[i] !== undefined && values[i] !== null) {
+          return values[i];
+        }
+      }
+      return undefined;
+    }
+    function asArray(value) {
+      return Array.isArray(value) ? value : [];
+    }
+    function asObject(value) {
+      return value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    }
     function clamp(value, min, max) {
       return Math.min(Math.max(value, min), max);
     }
-
     function roundPercent(value) {
       return Math.round(clamp(value, 0, 100));
     }
-
     function getTotalsFromMovements() {
       var totals = {
         income: 0,
         expense: 0
       };
-
       if (!window.team68Movements || typeof window.team68Movements.getAll !== "function") {
         return totals;
       }
-
       var rows = window.team68Movements.getAll();
       rows.forEach(function (item) {
         var amount = Math.abs(Number(item.monto || 0));
@@ -192,15 +202,12 @@
           totals.expense += amount;
         }
       });
-
       return totals;
     }
-
     function getFinancialMetrics() {
       var totals = getTotalsFromMovements();
       var income = totals.income;
       var expense = totals.expense;
-
       if (income <= 0) {
         return {
           health: 0,
@@ -208,21 +215,84 @@
           savings: 0
         };
       }
-
       var savingsAmount = Math.max(income - expense, 0);
       var debtPct = roundPercent((expense / income) * 100);
       var savingsPct = roundPercent((savingsAmount / income) * 100);
-
       var healthFormula = 100 - debtPct * 0.6 + savingsPct * 0.4;
       var healthPct = roundPercent(healthFormula);
-
       return {
         health: healthPct,
         debt: debtPct,
         savings: savingsPct
       };
     }
+    function normalizeFinancialPayload(payload) {
+      var data = asObject(payload);
+      var userData = asObject(pickFirstDefined([data.user, data.usuario]));
+      var profileData = asObject(pickFirstDefined([data.financialProfile, data.perfil_financiero]));
+      var dimensionsData = asObject(pickFirstDefined([data.dimensions, data.dimensiones]));
 
+      var financialBalance = asObject(pickFirstDefined([dimensionsData.financialBalance, dimensionsData.balance_financiero]));
+      var savingsCapacity = asObject(pickFirstDefined([dimensionsData.savingsCapacity, dimensionsData.capacidad_de_ahorro]));
+      var debt = asObject(pickFirstDefined([dimensionsData.debt, dimensionsData.endeudamiento]));
+      var consumptionBehavior = asObject(pickFirstDefined([dimensionsData.consumptionBehavior, dimensionsData.comportamiento_de_consumo]));
+
+      return {
+        user: {
+          id: pickFirstDefined([userData.id]),
+          name: pickFirstDefined([userData.name, userData.nombre, "Usuario"])
+        },
+        financialProfile: {
+          score: Number(pickFirstDefined([profileData.score, profileData.puntuacion, 0])) || 0,
+          status: pickFirstDefined([profileData.status, profileData.estado, "Sin datos"])
+        },
+        dimensions: {
+          financialBalance: {
+            score: Number(pickFirstDefined([financialBalance.score, financialBalance.puntuacion, 0])) || 0,
+            status: pickFirstDefined([financialBalance.status, financialBalance.estado, "Sin datos"]),
+            indicators: asObject(pickFirstDefined([financialBalance.indicators, financialBalance.indicadores])),
+            recommendations: asArray(pickFirstDefined([financialBalance.recommendations, financialBalance.recomendaciones]))
+          },
+          savingsCapacity: {
+            score: Number(pickFirstDefined([savingsCapacity.score, savingsCapacity.puntuacion, 0])) || 0,
+            status: pickFirstDefined([savingsCapacity.status, savingsCapacity.estado, "Sin datos"]),
+            indicators: asObject(pickFirstDefined([savingsCapacity.indicators, savingsCapacity.indicadores])),
+            recommendations: asArray(pickFirstDefined([savingsCapacity.recommendations, savingsCapacity.recomendaciones]))
+          },
+          debt: {
+            score: Number(pickFirstDefined([debt.score, debt.puntuacion, 0])) || 0,
+            status: pickFirstDefined([debt.status, debt.estado, "Sin datos"]),
+            indicators: asObject(pickFirstDefined([debt.indicators, debt.indicadores])),
+            recommendations: asArray(pickFirstDefined([debt.recommendations, debt.recomendaciones]))
+          },
+          consumptionBehavior: {
+            score: Number(pickFirstDefined([consumptionBehavior.score, consumptionBehavior.puntuacion, 0])) || 0,
+            status: pickFirstDefined([consumptionBehavior.status, consumptionBehavior.estado, "Sin datos"]),
+            indicators: asObject(pickFirstDefined([consumptionBehavior.indicators, consumptionBehavior.indicadores])),
+            recommendations: asArray(pickFirstDefined([consumptionBehavior.recommendations, consumptionBehavior.recomendaciones]))
+          }
+        },
+        generalRecommendation: pickFirstDefined([
+          data.generalRecommendation,
+          data.recomendacion_general,
+          ""
+        ])
+      };
+    }
+    function getFinancialPayloadSource() {
+      if (window.team68FinancialPayload && typeof window.team68FinancialPayload === "object") {
+        return window.team68FinancialPayload;
+      }
+      try {
+        var fromStorage = localStorage.getItem("team68-financial-profile");
+        if (!fromStorage) {
+          return null;
+        }
+        return JSON.parse(fromStorage);
+      } catch (error) {
+        return null;
+      }
+    }
     function drawDonut(canvasId, value, color) {
       var canvas = document.getElementById(canvasId);
       var safeValue = roundPercent(value);
@@ -230,7 +300,6 @@
       if (!canvas) {
         return;
       }
-
       var centerLabelPlugin = {
         id: "team68-center-label-" + canvasId,
         afterDraw: function (chart) {
@@ -256,7 +325,6 @@
           ctx.restore();
         }
       };
-
       new Chart(canvas, {
         type: "doughnut",
         plugins: [centerLabelPlugin],
@@ -288,18 +356,15 @@
         }
       });
     }
-
     function renderSuggestions(listId, suggestions) {
       var listNode = document.getElementById(listId);
       if (!listNode) {
         return;
       }
-
       listNode.innerHTML = suggestions.map(function (text) {
         return "<li>" + text + "</li>";
       }).join("");
     }
-
     function getHealthSuggestions(value) {
       if (value >= 75) {
         return [
@@ -308,7 +373,6 @@
           "Definir una meta de inversion de mediano plazo."
         ];
       }
-
       if (value >= 50) {
         return [
           "Reducir uno o dos gastos variables este mes.",
@@ -316,14 +380,12 @@
           "Revisar suscripciones y pagos recurrentes."
         ];
       }
-
       return [
         "Crear un presupuesto base con topes por categoria.",
         "Evitar compras no esenciales durante las proximas semanas.",
         "Buscar una fuente adicional de ingreso temporal."
       ];
     }
-
     function getDebtSuggestions(value) {
       if (value <= 35) {
         return [
@@ -332,7 +394,6 @@
           "Construir fondo de emergencia para no recurrir a deuda."
         ];
       }
-
       if (value <= 60) {
         return [
           "Priorizar el pago de deudas con mayor interes.",
@@ -340,14 +401,12 @@
           "Negociar mejores tasas o consolidar saldos si aplica."
         ];
       }
-
       return [
         "Detener deuda nueva y enfocarte en reducir saldo actual.",
         "Aplicar metodo bola de nieve o avalancha de pagos.",
         "Revisar plan de pagos mensual con objetivos realistas."
       ];
     }
-
     function getSavingsSuggestions(value) {
       if (value >= 25) {
         return [
@@ -356,7 +415,6 @@
           "Subir gradualmente tu meta de ahorro."
         ];
       }
-
       if (value >= 10) {
         return [
           "Incrementar ahorro con recortes pequenos y constantes.",
@@ -364,43 +422,55 @@
           "Definir un objetivo puntual para motivar el ahorro."
         ];
       }
-
       return [
         "Comenzar con una meta minima del 5% del ingreso.",
         "Eliminar gastos hormiga y redirigir ese monto a ahorro.",
         "Separar el ahorro apenas recibas ingresos."
       ];
     }
-
     function getHealthStatusLabel(value) {
       if (value >= 75) {
         return "saludable";
       }
-
       if (value >= 50) {
-        return "en observacion";
+        return "en observación";
       }
-
       return "en riego";
     }
-
     function renderFinancialHealthPage() {
+      var rawPayload = getFinancialPayloadSource();
+      var profilePayload = rawPayload ? normalizeFinancialPayload(rawPayload) : null;
       var metrics = getFinancialMetrics();
+      var healthValue = profilePayload ? profilePayload.financialProfile.score : metrics.health;
+      var debtValue = profilePayload ? profilePayload.dimensions.debt.score : metrics.debt;
+      var savingsValue = profilePayload ? profilePayload.dimensions.savingsCapacity.score : metrics.savings;
       var statusNode = document.getElementById("saludEstado");
-
-      drawDonut("saludChart", metrics.health, "#198754");
-      drawDonut("deudaChart", metrics.debt, "#dc3545");
-      drawDonut("ahorroChart", metrics.savings, "#0d6efd");
-
+      drawDonut("saludChart", healthValue, "#198754");
+      drawDonut("deudaChart", debtValue, "#dc3545");
+      drawDonut("ahorroChart", savingsValue, "#0d6efd");
       if (statusNode) {
-        statusNode.textContent = "Estado actual de la salud financiera: " + getHealthStatusLabel(metrics.health) + ".";
+        var label = profilePayload ? String(profilePayload.financialProfile.status).toLowerCase() : getHealthStatusLabel(healthValue);
+        statusNode.textContent = "Estado actual de la salud financiera: " + label + ".";
       }
-
-      renderSuggestions("saludSuggestions", getHealthSuggestions(metrics.health));
-      renderSuggestions("deudaSuggestions", getDebtSuggestions(metrics.debt));
-      renderSuggestions("ahorroSuggestions", getSavingsSuggestions(metrics.savings));
+      renderSuggestions(
+        "saludSuggestions",
+        profilePayload
+          ? profilePayload.dimensions.financialBalance.recommendations
+          : getHealthSuggestions(healthValue)
+      );
+      renderSuggestions(
+        "deudaSuggestions",
+        profilePayload
+          ? profilePayload.dimensions.debt.recommendations
+          : getDebtSuggestions(debtValue)
+      );
+      renderSuggestions(
+        "ahorroSuggestions",
+        profilePayload
+          ? profilePayload.dimensions.savingsCapacity.recommendations
+          : getSavingsSuggestions(savingsValue)
+      );
     }
-
     renderFinancialHealthPage();
   </script>
 </body>

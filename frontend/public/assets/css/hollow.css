@@ -223,7 +223,7 @@ small,
   transform: translateY(-1px);
 }
 
-.navbar .nav-help-btn ion-icon {
+.navbar .nav-help-btn i {
   font-size: 1rem;
 }
 
@@ -313,7 +313,21 @@ option {
 }
 
 .introjs-skipbutton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border-radius: 999px;
+  line-height: 1;
   color: var(--hk-muted);
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+}
+
+.introjs-skipbutton .introjs-close-x {
+  font-size: 1.25rem;
 }
 
 .introjs-skipbutton:hover,
