@@ -6,6 +6,7 @@ WORKDIR /app
 COPY . .
 
 # Compilar la aplicación omitiendo las pruebas para agilizar
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # 2. Imagen ligera solo con el Runtime de Java para ejecutar el JAR
