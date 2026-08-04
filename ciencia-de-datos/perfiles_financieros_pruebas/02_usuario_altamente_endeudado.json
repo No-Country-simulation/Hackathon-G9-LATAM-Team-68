@@ -8,6 +8,7 @@
   },
   "ingresos": [
     {
+      "fecha": "2026-07-31",
       "descripcion": "Salario",
       "monto": 23000
     }
