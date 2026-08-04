@@ -8,10 +8,12 @@
   },
   "ingresos": [
     {
+      "fecha": "2026-07-01",
       "descripcion": "Salario",
       "monto": 36000
     },
     {
+      "fecha": "2026-07-02",
       "descripcion": "Rendimientos de inversión",
       "monto": 700
     }
