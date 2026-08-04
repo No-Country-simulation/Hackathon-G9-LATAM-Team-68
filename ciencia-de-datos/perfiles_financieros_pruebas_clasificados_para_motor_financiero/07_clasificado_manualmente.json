@@ -1,0 +1,103 @@
+{
+  "usuario": {
+    "nombre": "Sofía Aguilar"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Salario",
+      "monto": 48000
+    },
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Dividendos",
+      "monto": 2100
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "Intereses de pagaré bancario",
+      "monto": 900
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Crédito hipotecario",
+      "monto": 12000,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-04",
+      "descripcion": "Despensa City Market",
+      "monto": 3200,
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 42
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "Gasolina BP",
+      "monto": 1700,
+      "forma_pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "Seguro de vida",
+      "monto": 1250,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "ETF S&P 500",
+      "monto": 5000,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Fondo indexado GBM",
+      "monto": 4500,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "Pagaré bancario Banorte",
+      "monto": 4000,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Aportación voluntaria AFORE",
+      "monto": 3000,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "Acciones BMV",
+      "monto": 3500,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-23",
+      "descripcion": "CFE servicio de luz",
+      "monto": 890,
+      "forma_pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-25",
+      "descripcion": "Internet Telmex",
+      "monto": 599,
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 42
+    },
+    {
+      "fecha": "2026-07-28",
+      "descripcion": "Restaurante Suntory",
+      "monto": 1600,
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 42
+    }
+  ]
+}
