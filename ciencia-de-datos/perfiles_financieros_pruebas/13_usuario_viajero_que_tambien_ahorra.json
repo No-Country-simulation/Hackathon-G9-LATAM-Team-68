@@ -8,14 +8,17 @@
   },
   "ingresos": [
     {
+      "fecha": "2026-07-01",
       "descripcion": "Salario",
       "monto": 62000
     },
     {
+      "fecha": "2026-07-02",
       "descripcion": "Bono de productividad",
       "monto": 10000
     },
     {
+      "fecha": "2026-07-03",
       "descripcion": "Rendimientos de inversión",
       "monto": 1800
     }
