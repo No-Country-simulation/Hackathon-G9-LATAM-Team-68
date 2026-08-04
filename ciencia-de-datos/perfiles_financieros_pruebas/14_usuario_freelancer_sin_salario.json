@@ -8,18 +8,22 @@
   },
   "ingresos": [
     {
+      "fecha": "2026-07-01",
       "descripcion": "Diseño de sitio web",
       "monto": 14000
     },
     {
+      "fecha": "2026-07-02",
       "descripcion": "Proyecto de identidad visual",
       "monto": 9500
     },
     {
+      "fecha": "2026-07-03",
       "descripcion": "Consultoría de marketing",
       "monto": 7000
     },
     {
+      "fecha": "2026-07-04",
       "descripcion": "Venta de plantillas digitales",
       "monto": 3200
     }
