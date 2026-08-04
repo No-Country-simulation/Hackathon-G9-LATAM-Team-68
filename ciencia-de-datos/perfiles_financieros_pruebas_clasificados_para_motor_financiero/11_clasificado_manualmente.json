@@ -1,0 +1,90 @@
+{
+  "usuario": {
+    "nombre": "Patricia Luna"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Salario",
+      "monto": 20500
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Renta casa",
+      "monto": 7000,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "Despensa Bodega Aurrera",
+      "monto": 3500,
+      "forma_pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "CFE servicio de luz",
+      "monto": 780,
+      "forma_pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-07",
+      "descripcion": "Agua potable",
+      "monto": 390,
+      "forma_pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-09",
+      "descripcion": "Gas LP",
+      "monto": 720,
+      "forma_pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-11",
+      "descripcion": "Internet Telmex",
+      "monto": 599,
+      "forma_pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-13",
+      "descripcion": "Transporte público",
+      "monto": 1200,
+      "forma_pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-16",
+      "descripcion": "Colegiatura primaria",
+      "monto": 2800,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-19",
+      "descripcion": "Medicamentos",
+      "monto": 950,
+      "forma_pago": "efectivo"
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "Consulta pediátrica",
+      "monto": 900,
+      "forma_pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-24",
+      "descripcion": "Seguro de vivienda",
+      "monto": 600,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-28",
+      "descripcion": "Pago de predial",
+      "monto": 900,
+      "forma_pago": "transferencia bancaria"
+    }
+  ]
+}
