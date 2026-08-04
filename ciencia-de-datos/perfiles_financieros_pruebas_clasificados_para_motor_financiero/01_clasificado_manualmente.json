@@ -1,0 +1,99 @@
+{
+  "usuario": {
+    "nombre": "Andrea Morales"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Salario",
+      "monto": 42000
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "Rendimientos de fondo de inversión",
+      "monto": 1350
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Renta departamento",
+      "monto": 9500,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "CFE servicio de luz",
+      "monto": 780,
+      "forma_pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-04",
+      "descripcion": "Despensa Costco",
+      "monto": 2800,
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "Gasolina BP",
+      "monto": 1600,
+      "forma_pago": "tarjeta de débito"
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "Seguro de gastos médicos",
+      "monto": 1850,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "Internet Totalplay",
+      "monto": 699,
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Fondo indexado GBM",
+      "monto": 8500,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "Cuenta de ahorro Nu",
+      "monto": 5000,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Restaurante La Vaka",
+      "monto": 950,
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48
+    },
+    {
+      "fecha": "2026-07-22",
+      "descripcion": "Aportación voluntaria AFORE",
+      "monto": 3500,
+      "forma_pago": "transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-26",
+      "descripcion": "Netflix Estándar",
+      "monto": 249,
+      "forma_pago": "tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48
+    },
+    {
+      "fecha": "2026-07-29",
+      "descripcion": "Consulta médica general",
+      "monto": 800,
+      "forma_pago": "tarjeta de débito"
+    }
+  ]
+}
