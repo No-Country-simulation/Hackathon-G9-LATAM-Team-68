@@ -8,14 +8,17 @@
   },
   "ingresos": [
     {
+      "fecha": "2026-07-01",
       "descripcion": "Salario",
       "monto": 48000
     },
     {
+      "fecha": "2026-07-02",
       "descripcion": "Dividendos",
       "monto": 2100
     },
     {
+      "fecha": "2026-07-03",
       "descripcion": "Intereses de pagaré bancario",
       "monto": 900
     }
