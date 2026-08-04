@@ -186,7 +186,6 @@ public class CalculoFinancieroService {
                 .balanceFinanciero(dimBalance)
                 .capacidadAhorro(dimAhorro)
                 .endeudamiento(dimDeuda)
-                .endeudamiento(dimDeuda)
                 .comportamientoConsumo(dimConsumo)
                 .build();
 
