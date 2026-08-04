@@ -17,7 +17,10 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # Puerto donde corre Spring Boot
+ENV PORT=8080
 EXPOSE 8080
+
+CMD ["sh", "-c", "java -jar app.jar --server.port=${PORT}"]
 
 # Comando para iniciar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
