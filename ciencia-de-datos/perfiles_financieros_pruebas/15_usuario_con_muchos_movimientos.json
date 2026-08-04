@@ -8,10 +8,12 @@
   },
   "ingresos": [
     {
+      "fecha": "2026-07-01",
       "descripcion": "Salario",
       "monto": 38000
     },
     {
+      "fecha": "2026-07-02",
       "descripcion": "Comisiones de ventas",
       "monto": 8500
     }
