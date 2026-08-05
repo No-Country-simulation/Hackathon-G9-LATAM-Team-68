@@ -18,67 +18,141 @@
       "fecha": "2026-07-02",
       "descripcion": "Renta habitación",
       "monto": 3200,
-      "forma_pago": "efectivo"
+      "forma_pago": "efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-04",
       "descripcion": "Despensa Bodega Aurrera",
       "monto": 1900,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-06",
       "descripcion": "Recarga transporte público",
       "monto": 520,
-      "forma_pago": "efectivo"
+      "forma_pago": "efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-08",
       "descripcion": "CFE servicio de luz",
       "monto": 430,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-10",
       "descripcion": "Gas LP",
       "monto": 480,
-      "forma_pago": "efectivo"
+      "forma_pago": "efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-12",
       "descripcion": "Internet compartido",
       "monto": 350,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
     },
     {
       "fecha": "2026-07-16",
       "descripcion": "Farmacia del Ahorro",
       "monto": 620,
-      "forma_pago": "efectivo"
+      "forma_pago": "efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-19",
       "descripcion": "Útiles escolares",
       "monto": 750,
-      "forma_pago": "efectivo"
+      "forma_pago": "efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Educación",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-22",
       "descripcion": "Pago préstamo familiar",
       "monto": 800,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Pago de deuda"
+            ]
     },
     {
       "fecha": "2026-07-26",
       "descripcion": "Despensa Tiendas 3B",
       "monto": 980,
-      "forma_pago": "efectivo"
+      "forma_pago": "efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-29",
       "descripcion": "Consulta médica",
       "monto": 500,
-      "forma_pago": "efectivo"
+      "forma_pago": "efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     }
   ]
 }
