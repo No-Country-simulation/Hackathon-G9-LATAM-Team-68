@@ -18,70 +18,150 @@
       "fecha": "2026-07-02",
       "descripcion": "Renta departamento",
       "monto": 6500,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-03",
       "descripcion": "Consulta con cardiólogo",
       "monto": 1800,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-05",
       "descripcion": "Estudios de laboratorio Chopo",
       "monto": 2600,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 51
+      "tasa_de_interes_de_la_tarjeta": 51,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-07",
       "descripcion": "Medicamentos Farmacias San Pablo",
       "monto": 3200,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 51
+      "tasa_de_interes_de_la_tarjeta": 51,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-10",
       "descripcion": "Seguro de gastos médicos",
       "monto": 2800,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-12",
       "descripcion": "Terapia física",
       "monto": 2000,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-18",
       "descripcion": "Despensa Walmart",
       "monto": 2100,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-20",
       "descripcion": "CFE servicio de luz",
       "monto": 650,
-      "forma_pago": "efectivo"
+      "forma_pago": "efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-22",
       "descripcion": "Gasolina Pemex",
       "monto": 1200,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-25",
       "descripcion": "Internet Totalplay",
       "monto": 699,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 51
+      "tasa_de_interes_de_la_tarjeta": 51,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
     },
     {
       "fecha": "2026-07-28",
       "descripcion": "Consulta de seguimiento",
       "monto": 1200,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     }
   ]
 }
