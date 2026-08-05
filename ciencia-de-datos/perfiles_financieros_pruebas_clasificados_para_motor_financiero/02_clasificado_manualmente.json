@@ -46,8 +46,8 @@
                 "Pago de deuda"
             ],
 
-            "categoria": "Alimentación",
-            "grupo": "Esencial"
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-08",
@@ -61,8 +61,8 @@
                 "Pago de deuda"
             ],
 
-            "categoria": "Vivienda",
-            "grupo": "Esencial"
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-10",
@@ -76,8 +76,8 @@
                 "Pago de deuda"
             ],
 
-            "categoria": "Transporte",
-            "grupo": "Esencial"
+      "categoria": "Transporte",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-12",
@@ -91,8 +91,8 @@
                 "Pago de deuda"
             ],
 
-            "categoria": "Entretenimiento y ocio",
-            "grupo": "Discrecional"
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
     },
     {
       "fecha": "2026-07-15",
@@ -116,8 +116,8 @@
                 "Pago de deuda"
             ],
 
-            "categoria": "Compras personales",
-            "grupo": "Discrecional"
+      "categoria": "Compras personales",
+      "grupo": "Discrecional"
     },
     {
       "fecha": "2026-07-21",
@@ -131,8 +131,8 @@
                 "Pago de deuda"
             ],
 
-            "categoria": "Transporte",
-            "grupo": "Esencial"
+      "categoria": "Transporte",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-28",
@@ -146,8 +146,8 @@
                 "Pago de deuda"
             ],
 
-            "categoria": "Compras personales",
-            "grupo": "Discrecional"
+      "categoria": "Compras personales",
+      "grupo": "Discrecional"
     }
   ]
 }
