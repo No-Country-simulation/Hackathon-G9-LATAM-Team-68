@@ -18,63 +18,31 @@
       "fecha": "2026-07-03",
       "descripcion": "Renta departamento",
       "monto": 6000,
-      "forma_pago": "transferencia bancaria",
-
-      "clasificacion": [
-                "Consumo"
-            ],
-
-      "categoria": "Vivienda",
-      "grupo": "Esencial"
+      "forma_pago": "transferencia bancaria"
     },
     {
       "fecha": "2026-07-08",
       "descripcion": "Despensa Walmart",
       "monto": 2600,
-      "forma_pago": "tarjeta de débito",
-
-      "clasificacion": [
-                "Consumo"
-            ],
-
-      "categoria": "Alimentación",
-      "grupo": "Esencial"
+      "forma_pago": "tarjeta de débito"
     },
     {
       "fecha": "2026-07-15",
       "descripcion": "CFE y agua",
       "monto": 950,
-      "forma_pago": "efectivo",
-
-      "clasificacion": [
-                "Consumo"
-            ],
-
-      "categoria": "Vivienda",
-      "grupo": "Esencial"
+      "forma_pago": "efectivo"
     },
     {
       "fecha": "2026-07-21",
       "descripcion": "Farmacias San Pablo",
       "monto": 780,
-      "forma_pago": "tarjeta de débito",
-
-      "clasificacion": [
-                "Consumo"
-            ],
-
-      "categoria": "Salud",
-      "grupo": "Esencial"
+      "forma_pago": "tarjeta de débito"
     },
     {
       "fecha": "2026-07-28",
       "descripcion": "Cuenta de ahorro bancaria",
       "monto": 2000,
-      "forma_pago": "transferencia bancaria",
-
-      "clasificacion": [
-                "Ahorro e inversión"
-            ]
+      "forma_pago": "transferencia bancaria"
     }
   ]
 }
