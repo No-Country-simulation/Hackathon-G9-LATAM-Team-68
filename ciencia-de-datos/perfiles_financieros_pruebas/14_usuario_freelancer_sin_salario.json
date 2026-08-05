@@ -33,84 +33,171 @@
       "fecha": "2026-07-02",
       "descripcion": "Renta departamento",
       "monto": 7500,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-04",
       "descripcion": "Internet Totalplay",
       "monto": 699,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 58
+      "tasa_de_interes_de_la_tarjeta": 58,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Otros",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-05",
       "descripcion": "Adobe Creative Cloud",
       "monto": 899,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 58
+      "tasa_de_interes_de_la_tarjeta": 58,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Otros",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-06",
       "descripcion": "Google Workspace",
       "monto": 136,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 58
+      "tasa_de_interes_de_la_tarjeta": 58,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Otros",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-08",
       "descripcion": "Despensa Walmart",
       "monto": 2400,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-10",
       "descripcion": "Gasolina Mobil",
       "monto": 1300,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-12",
       "descripcion": "Pago provisional de impuestos SAT",
       "monto": 3200,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Pago de deuda"
+            ]
     },
     {
       "fecha": "2026-07-15",
       "descripcion": "Seguro de vida",
       "monto": 850,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-18",
       "descripcion": "Fondo de inversión de deuda",
       "monto": 3500,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
     },
     {
       "fecha": "2026-07-21",
       "descripcion": "Cuenta de ahorro para impuestos",
       "monto": 2500,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
     },
     {
       "fecha": "2026-07-24",
       "descripcion": "Restaurante",
       "monto": 780,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 58
+      "tasa_de_interes_de_la_tarjeta": 58,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
     },
     {
       "fecha": "2026-07-27",
       "descripcion": "Monitor para diseño",
       "monto": 4200,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 58
+      "tasa_de_interes_de_la_tarjeta": 58,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Otros",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-30",
       "descripcion": "Consulta médica",
       "monto": 750,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     }
   ]
 }
