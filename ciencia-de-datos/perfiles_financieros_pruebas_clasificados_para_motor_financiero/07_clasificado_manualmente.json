@@ -28,76 +28,145 @@
       "fecha": "2026-07-02",
       "descripcion": "Crédito hipotecario",
       "monto": 12000,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Pago de deuda"
+            ]
     },
     {
       "fecha": "2026-07-04",
       "descripcion": "Despensa City Market",
       "monto": 3200,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 42
+      "tasa_de_interes_de_la_tarjeta": 42,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-06",
       "descripcion": "Gasolina BP",
       "monto": 1700,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-08",
       "descripcion": "Seguro de vida",
       "monto": 1250,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-10",
       "descripcion": "ETF S&P 500",
       "monto": 5000,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
     },
     {
       "fecha": "2026-07-12",
       "descripcion": "Fondo indexado GBM",
       "monto": 4500,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
     },
     {
       "fecha": "2026-07-15",
       "descripcion": "Pagaré bancario Banorte",
       "monto": 4000,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
     },
     {
       "fecha": "2026-07-18",
       "descripcion": "Aportación voluntaria AFORE",
       "monto": 3000,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
     },
     {
       "fecha": "2026-07-21",
       "descripcion": "Acciones BMV",
       "monto": 3500,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
     },
     {
       "fecha": "2026-07-23",
       "descripcion": "CFE servicio de luz",
       "monto": 890,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
     },
     {
       "fecha": "2026-07-25",
       "descripcion": "Internet Telmex",
       "monto": 599,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 42
+      "tasa_de_interes_de_la_tarjeta": 42,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
     },
     {
       "fecha": "2026-07-28",
       "descripcion": "Restaurante Suntory",
       "monto": 1600,
       "forma_pago": "tarjeta de crédito",
-      "tasa_de_interes_de_la_tarjeta": 42
+      "tasa_de_interes_de_la_tarjeta": 42,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
     }
   ]
 }
