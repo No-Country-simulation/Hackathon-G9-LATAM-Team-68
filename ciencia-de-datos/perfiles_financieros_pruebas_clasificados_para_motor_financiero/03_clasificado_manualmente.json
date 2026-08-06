@@ -33,7 +33,7 @@
       "fecha": "2026-07-02",
       "descripcion": "Renta departamento",
       "monto": 8500,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Consumo"
@@ -46,7 +46,7 @@
       "fecha": "2026-07-03",
       "descripcion": "Agua SACMEX",
       "monto": 420,
-      "forma_pago": "tarjeta de débito",
+      "forma_pago": "Tarjeta de débito",
 
       "clasificacion": [
                 "Consumo"
@@ -59,7 +59,7 @@
       "fecha": "2026-07-04",
       "descripcion": "Despensa Soriana",
       "monto": 2100,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 55,
 
       "clasificacion": [
@@ -74,7 +74,7 @@
       "fecha": "2026-07-06",
       "descripcion": "Metro y Metrobús",
       "monto": 650,
-      "forma_pago": "tarjeta de débito",
+      "forma_pago": "Tarjeta de débito",
 
       "clasificacion": [
                 "Consumo"
@@ -87,7 +87,7 @@
       "fecha": "2026-07-08",
       "descripcion": "Internet Telmex",
       "monto": 599,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 55,
 
       "clasificacion": [
@@ -102,7 +102,7 @@
       "fecha": "2026-07-10",
       "descripcion": "Colegiatura diplomado",
       "monto": 3200,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Consumo"
@@ -115,7 +115,7 @@
       "fecha": "2026-07-12",
       "descripcion": "Fondo de inversión BBVA",
       "monto": 4500,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Ahorro e inversión"
@@ -125,7 +125,7 @@
       "fecha": "2026-07-16",
       "descripcion": "CETES Directo",
       "monto": 3000,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Ahorro e inversión"
@@ -135,7 +135,7 @@
       "fecha": "2026-07-19",
       "descripcion": "Spotify Individual",
       "monto": 129,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 55,
 
       "clasificacion": [
@@ -150,7 +150,7 @@
       "fecha": "2026-07-21",
       "descripcion": "Cena en Sonora Grill",
       "monto": 1400,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 55,
 
       "clasificacion": [
@@ -165,7 +165,7 @@
       "fecha": "2026-07-25",
       "descripcion": "Seguro de vida",
       "monto": 980,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Consumo"
@@ -178,7 +178,7 @@
       "fecha": "2026-07-29",
       "descripcion": "Ropa Zara",
       "monto": 1750,
-      "forma_pago": "tarjeta de débito",
+      "forma_pago": "Tarjeta de débito",
 
       "clasificacion": [
                 "Consumo"

@@ -18,7 +18,7 @@
       "fecha": "2026-07-01",
       "descripcion": "Renta departamento",
       "monto": 7500,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Consumo"
@@ -31,7 +31,7 @@
       "fecha": "2026-07-03",
       "descripcion": "Pago tarjeta BBVA",
       "monto": 4500,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Pago de deuda"
@@ -41,7 +41,7 @@
       "fecha": "2026-07-05",
       "descripcion": "Pago préstamo personal",
       "monto": 3800,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Pago de deuda"
@@ -51,7 +51,7 @@
       "fecha": "2026-07-07",
       "descripcion": "Despensa Soriana",
       "monto": 2200,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 92,
 
       "clasificacion": [
@@ -66,7 +66,7 @@
       "fecha": "2026-07-09",
       "descripcion": "CFE servicio de luz",
       "monto": 780,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 92,
 
       "clasificacion": [
@@ -81,7 +81,7 @@
       "fecha": "2026-07-11",
       "descripcion": "Gasolina Pemex",
       "monto": 1600,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 92,
 
       "clasificacion": [
@@ -96,7 +96,7 @@
       "fecha": "2026-07-13",
       "descripcion": "Internet Izzi",
       "monto": 650,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 92,
 
       "clasificacion": [
@@ -111,7 +111,7 @@
       "fecha": "2026-07-16",
       "descripcion": "Bar y restaurante",
       "monto": 1800,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 92,
 
       "clasificacion": [
@@ -126,7 +126,7 @@
       "fecha": "2026-07-19",
       "descripcion": "Celular a meses",
       "monto": 2400,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 92,
 
       "clasificacion": [
@@ -141,7 +141,7 @@
       "fecha": "2026-07-22",
       "descripcion": "Farmacia Benavides",
       "monto": 900,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 92,
 
       "clasificacion": [
@@ -156,7 +156,7 @@
       "fecha": "2026-07-25",
       "descripcion": "Pago crédito automotriz",
       "monto": 4200,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Pago de deuda"
@@ -166,7 +166,7 @@
       "fecha": "2026-07-28",
       "descripcion": "Amazon compras personales",
       "monto": 1700,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 92,
 
       "clasificacion": [

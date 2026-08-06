@@ -18,7 +18,7 @@
       "fecha": "2026-07-01",
       "descripcion": "Netflix Premium",
       "monto": 329,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -33,7 +33,7 @@
       "fecha": "2026-07-02",
       "descripcion": "Disney+ Premium",
       "monto": 299,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -48,7 +48,7 @@
       "fecha": "2026-07-03",
       "descripcion": "HBO Max Estándar",
       "monto": 199,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -63,7 +63,7 @@
       "fecha": "2026-07-04",
       "descripcion": "Amazon Prime",
       "monto": 99,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -78,7 +78,7 @@
       "fecha": "2026-07-05",
       "descripcion": "Spotify Premium",
       "monto": 129,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -93,7 +93,7 @@
       "fecha": "2026-07-06",
       "descripcion": "YouTube Premium",
       "monto": 159,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -108,7 +108,7 @@
       "fecha": "2026-07-07",
       "descripcion": "Apple iCloud 200 GB",
       "monto": 49,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -123,7 +123,7 @@
       "fecha": "2026-07-08",
       "descripcion": "Microsoft 365 Personal",
       "monto": 1699,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -138,7 +138,7 @@
       "fecha": "2026-07-09",
       "descripcion": "PlayStation Plus Extra",
       "monto": 1989,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -153,7 +153,7 @@
       "fecha": "2026-07-10",
       "descripcion": "Renta departamento",
       "monto": 8200,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Consumo"
@@ -166,7 +166,7 @@
       "fecha": "2026-07-12",
       "descripcion": "Despensa Chedraui",
       "monto": 2200,
-      "forma_pago": "tarjeta de débito",
+      "forma_pago": "Tarjeta de débito",
 
       "clasificacion": [
                 "Consumo"
@@ -179,7 +179,7 @@
       "fecha": "2026-07-15",
       "descripcion": "Internet Totalplay",
       "monto": 699,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 64,
 
       "clasificacion": [
@@ -194,7 +194,7 @@
       "fecha": "2026-07-20",
       "descripcion": "Gasolina Mobil",
       "monto": 1500,
-      "forma_pago": "tarjeta de débito",
+      "forma_pago": "Tarjeta de débito",
 
       "clasificacion": [
                 "Consumo"
@@ -207,7 +207,7 @@
       "fecha": "2026-07-25",
       "descripcion": "Consulta dental",
       "monto": 1200,
-      "forma_pago": "tarjeta de débito",
+      "forma_pago": "Tarjeta de débito",
 
       "clasificacion": [
                 "Consumo"

@@ -18,7 +18,7 @@
       "fecha": "2026-07-03",
       "descripcion": "Renta departamento",
       "monto": 6000,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Consumo"
@@ -31,7 +31,7 @@
       "fecha": "2026-07-08",
       "descripcion": "Despensa Walmart",
       "monto": 2600,
-      "forma_pago": "tarjeta de débito",
+      "forma_pago": "Tarjeta de débito",
 
       "clasificacion": [
                 "Consumo"
@@ -44,7 +44,7 @@
       "fecha": "2026-07-15",
       "descripcion": "CFE y agua",
       "monto": 950,
-      "forma_pago": "efectivo",
+      "forma_pago": "Efectivo",
 
       "clasificacion": [
                 "Consumo"
@@ -57,7 +57,7 @@
       "fecha": "2026-07-21",
       "descripcion": "Farmacias San Pablo",
       "monto": 780,
-      "forma_pago": "tarjeta de débito",
+      "forma_pago": "Tarjeta de débito",
 
       "clasificacion": [
                 "Consumo"
@@ -70,7 +70,7 @@
       "fecha": "2026-07-28",
       "descripcion": "Cuenta de ahorro bancaria",
       "monto": 2000,
-      "forma_pago": "transferencia bancaria",
+      "forma_pago": "Transferencia bancaria",
 
       "clasificacion": [
                 "Ahorro e inversión"
