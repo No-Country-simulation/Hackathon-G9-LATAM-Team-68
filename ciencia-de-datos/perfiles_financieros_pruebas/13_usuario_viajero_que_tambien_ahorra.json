@@ -28,84 +28,84 @@
       "fecha": "2026-07-01",
       "descripcion": "Crédito hipotecario",
       "monto": 13000,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "Transferencia bancaria"
     },
     {
       "fecha": "2026-07-03",
       "descripcion": "Despensa Costco",
       "monto": 3500,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 44
     },
     {
       "fecha": "2026-07-05",
       "descripcion": "CFE e internet",
       "monto": 1500,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "Tarjeta de débito"
     },
     {
       "fecha": "2026-07-07",
       "descripcion": "Gasolina Shell",
       "monto": 1800,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "Tarjeta de débito"
     },
     {
       "fecha": "2026-07-09",
       "descripcion": "Seguro de gastos médicos",
       "monto": 2100,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "Transferencia bancaria"
     },
     {
       "fecha": "2026-07-11",
       "descripcion": "Vuelo Aeroméxico Cancún",
       "monto": 7800,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 44
     },
     {
       "fecha": "2026-07-13",
       "descripcion": "Hotel en Cancún",
       "monto": 9500,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 44
     },
     {
       "fecha": "2026-07-16",
       "descripcion": "Restaurantes durante viaje",
       "monto": 3800,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 44
     },
     {
       "fecha": "2026-07-18",
       "descripcion": "Tours y actividades",
       "monto": 2600,
-      "forma_pago": "tarjeta de crédito",
+      "forma_pago": "Tarjeta de crédito",
       "tasa_de_interes_de_la_tarjeta": 44
     },
     {
       "fecha": "2026-07-21",
       "descripcion": "Fondo indexado internacional",
       "monto": 6500,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "Transferencia bancaria"
     },
     {
       "fecha": "2026-07-23",
       "descripcion": "Cuenta de ahorro de emergencia",
       "monto": 5000,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "Transferencia bancaria"
     },
     {
       "fecha": "2026-07-26",
       "descripcion": "Aportación voluntaria AFORE",
       "monto": 3000,
-      "forma_pago": "transferencia bancaria"
+      "forma_pago": "Transferencia bancaria"
     },
     {
       "fecha": "2026-07-29",
       "descripcion": "Consulta médica",
       "monto": 900,
-      "forma_pago": "tarjeta de débito"
+      "forma_pago": "Tarjeta de débito"
     }
   ]
 }
