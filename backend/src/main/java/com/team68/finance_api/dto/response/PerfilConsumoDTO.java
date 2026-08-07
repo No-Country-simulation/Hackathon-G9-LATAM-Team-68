@@ -9,13 +9,13 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class PerfilConsumoDTO {
-    @JsonProperty("predominio_gasto")
+    @JsonProperty("predominio_del_gasto")
     private String predominioGasto;
 
-    @JsonProperty("tipo_consumo")
+    @JsonProperty("tipo_de_consumo")
     private String tipoConsumo;
 
-    @JsonProperty("diversificacion_consumo")
+    @JsonProperty("diversificacion_del_consumo")
     private String diversificacionConsumo;
 
     @JsonProperty("categoria_predominante")

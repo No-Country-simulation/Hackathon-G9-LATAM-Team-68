@@ -17,7 +17,7 @@ public class DimensionDetalleDTO {
     private String estado;
     private Map<String, Object> indicadores;
 
-    @JsonProperty("perfil_consumo")
+    @JsonProperty("perfil_de_consumo")
     private PerfilConsumoDTO perfilConsumo;
 
     private List<String> recomendaciones;

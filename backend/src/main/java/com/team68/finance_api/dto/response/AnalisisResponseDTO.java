@@ -20,7 +20,7 @@ public class AnalisisResponseDTO {
 
     private DimensionesWrapperDTO dimensiones;
 
-    @JsonProperty("recomendaciones_generales")
+    @JsonProperty("recomendacion_general")
     private List<String> recomendacionesGenerales;
 
     @Getter
@@ -32,12 +32,12 @@ public class AnalisisResponseDTO {
         @JsonProperty("balance_financiero")
         private DimensionDetalleDTO balanceFinanciero;
 
-        @JsonProperty("capacidad_ahorro")
+        @JsonProperty("capacidad_de_ahorro")
         private DimensionDetalleDTO capacidadAhorro;
 
         private DimensionDetalleDTO endeudamiento;
 
-        @JsonProperty("comportamiento_consumo")
+        @JsonProperty("comportamiento_de_consumo")
         private DimensionDetalleDTO comportamientoConsumo;
     }
 }

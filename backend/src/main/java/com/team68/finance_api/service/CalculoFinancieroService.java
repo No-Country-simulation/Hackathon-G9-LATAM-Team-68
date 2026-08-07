@@ -71,7 +71,7 @@ public class CalculoFinancieroService {
         int scoreBalance = 87;
         Map<String, Object> indBalance = new LinkedHashMap<>();
         indBalance.put("balance_mensual", balanceMensual);
-        indBalance.put("tasa_gasto", tasaGasto);
+        indBalance.put("tasa_de_gasto", tasaGasto);
         indBalance.put("margen_financiero", margenFinanciero);
 
         DimensionDetalleDTO dimBalance = DimensionDetalleDTO.builder()
@@ -93,8 +93,8 @@ public class CalculoFinancieroService {
 
         Map<String, Object> indAhorro = new LinkedHashMap<>();
         indAhorro.put("tasa_ahorro", tasaAhorro);
-        indAhorro.put("ahorro_inversion_periodo", ahorroTotal);
-        indAhorro.put("aprovechamiento_margen", aprovechamientoMargen);
+        indAhorro.put("ahorro_e_inversion_del_periodo", ahorroTotal);
+        indAhorro.put("aprovechamiento_del_margen_financiero", aprovechamientoMargen);
 
         DimensionDetalleDTO dimAhorro = DimensionDetalleDTO.builder()
                 .puntuacion(scoreAhorro)
@@ -112,9 +112,9 @@ public class CalculoFinancieroService {
         int scoreDeuda = 91;
 
         Map<String, Object> indDeuda = new LinkedHashMap<>();
-        indDeuda.put("ratio_endeudamiento", ratioEndeudamiento);
-        indDeuda.put("pago_deudas", pagoDeudas);
-        indDeuda.put("presion_deuda", "Baja");
+        indDeuda.put("ratio_de_endeudamiento", ratioEndeudamiento);
+        indDeuda.put("monto_destinado_al_pago_de_deudass", pagoDeudas);
+        indDeuda.put("presion_de_la_deuda", "Baja");
 
         DimensionDetalleDTO dimDeuda = DimensionDetalleDTO.builder()
                 .puntuacion(scoreDeuda)
@@ -145,8 +145,8 @@ public class CalculoFinancieroService {
 
         int scoreConsumo = 58;
         Map<String, Object> indConsumo = new LinkedHashMap<>();
-        indConsumo.put("distribucion_gasto_categoria", distribucionCat);
-        indConsumo.put("indice_concentracion", 0.58);
+        indConsumo.put("distribucion_del_gasto_por_categoria", distribucionCat);
+        indConsumo.put("indice_de_concentracion_del_gasto", 0.58);
 
         PerfilConsumoDTO perfilConsumo = PerfilConsumoDTO.builder()
                 .predominioGasto("Balance entre gastos esenciales y discrecionales")
