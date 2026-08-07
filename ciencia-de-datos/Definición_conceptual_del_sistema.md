@@ -404,6 +404,11 @@ Posibles resultados:
 - Consumo diversificado.
 - Consumo poco diversificado.
 
+|Categorías utilizadas|	Resultado|
+| -- | -- |
+|≥ 5|	Consumo diversificado|
+|< 5|	Consumo poco diversificado|
+
 Indicador de consumo 4: _Categoría predominante_
 
 Identifica la categoría que representa el mayor porcentaje del consumo.
