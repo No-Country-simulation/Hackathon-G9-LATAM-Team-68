@@ -372,6 +372,13 @@ Posibles resultados:
 - Balance entre gastos esenciales y discrecionales.
 - Predominio en gastos discrecionales.
 
+
+|Condición|	Resultado|
+| -- | -- |
+|Esencial ≥ 60 %	|Predominio en gastos esenciales|
+|Discrecional ≥ 60 %	|Predominio en gastos discrecionales|
+|Ninguno supera 60 %	|Balance entre gastos esenciales y discrecionales|
+
 Indicador de consumo 2: _Tipo de consumo_
 
 Describe la forma en que se distribuye el gasto.
