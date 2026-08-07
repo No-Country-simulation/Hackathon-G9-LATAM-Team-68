@@ -309,7 +309,58 @@ Es el análisis de la forma en que el usuario distribuye sus gastos entre las di
 ### Indicadores generados
 
 - Distribución del gasto por categorías: Determinar cómo se distribuye el consumo del usuario entre las distintas categorías de gasto. Permite conocer el peso relativo de cada categoría. Facilita comparar hábitos de consumo entre distintos usuarios. Constituye la base para identificar patrones de consumo.
-- Índice de concentración del gasto: Evaluar qué tan equilibrada o concentrada se encuentra la distribución del consumo. Identifica si el presupuesto está distribuido entre diversas categorías. Detecta cuando una o pocas categorías concentran la mayor parte del consumo. Complementa la distribución porcentual del gasto. (Nota: La fórmula específica del índice se definirá posteriormente)
+- Índice de concentración del gasto: Evaluar qué tan equilibrada o concentrada se encuentra la distribución del consumo. Identifica si el presupuesto está distribuido entre diversas categorías. Detecta cuando una o pocas categorías concentran la mayor parte del consumo. Complementa la distribución porcentual del gasto.
+
+  Para calcular este indicador se utilizará el Índice de Herfindahl-Hirschman (HHI) normalizado, ampliamente utilizado en economía para   medir el grado de concentración de una distribución.
+
+  El cálculo se realizará en dos etapas:
+
+    - Cálculo del Índice de Herfindahl-Hirschman (HHI)
+
+    Se calcula sumando el cuadrado de la participación porcentual de cada categoría de consumo expresada como proporción.
+
+    ``` text
+    HHI = Σ(pi²)
+    ```
+  
+    donde:
+
+    `pi` representa la proporción del gasto correspondiente a la categoría `i`.
+  
+    `n` corresponde al número total de categorías de consumo.
+
+    En este proyecto:
+
+    (n = 10) categorías.
+
+    - Normalización del índice
+ 
+    Con el objetivo de obtener una escala más intuitiva entre **0** y **1**, el índice se normaliza mediante la siguiente expresión:
+
+    ```text
+                     HHI - (1/n)
+    HHI_normalizado = -------------
+                      1 - (1/n)
+    ```
+
+    donde:
+
+    - `HHI` es el índice calculado previamente.
+    - `n` es el número de categorías de consumo.
+
+  Interpretación
+
+  El índice normalizado toma valores comprendidos entre **0** y **1**.
+
+  | Valor del índice | Interpretación |
+  |-----------------:|----------------|
+  | **0.00** | Consumo completamente distribuido entre las categorías. |
+  | **0.00 – 0.33** | Baja concentración del gasto. |
+  | **0.34 – 0.66** | Concentración moderada del gasto. |
+  | **0.67 – 1.00** | Alta concentración del gasto. |
+  | **1.00** | Todo el gasto se concentra en una única categoría. |
+
+
 - Perfil de consumo: A partir de los indicadores financieros anteriores, el sistema generará un conjunto de indicadores interpretativos que describen el comportamiento de consumo del usuario. Estos indicadores serán utilizados tanto para la evaluación de la dimensión como para la generación de recomendaciones personalizadas.
 
 Indicador de consumo 1: _Predominio del gasto_
