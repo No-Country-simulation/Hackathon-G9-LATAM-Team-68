@@ -389,6 +389,12 @@ Posibles resultados:
 - Consumo moderadamente concentrado.
 - Consumo altamente concentrado.
 
+|HHI|	Resultado|
+| -- | -- |
+|0.00–0.33|	Consumo equilibrado|
+|0.34–0.66|	Consumo moderadamente concentrado|
+|0.67–1.00|	Consumo altamente concentrado|
+
 Indicador de consumo 3: _Diversificación del consumo_
 
 Describe si el usuario distribuye su presupuesto entre distintas categorías o concentra sus recursos en pocas de ellas.
