@@ -16,10 +16,11 @@ public class DataInitializer implements CommandLineRunner {
         this.medallaRepository = medallaRepository;
     }
 
+    @SuppressWarnings("null")
     @Override
     public void run(String... args) {
         if (medallaRepository.count() == 0) {
-            medallaRepository.saveAll(List.of(
+            List<Medalla> medallas = List.of(
                 // Permanentes
                 Medalla.builder().codigo("PEQUENO_OSEZNO").nombre("Pequeño osezno").descripcion("Has iniciado sesión y creado una cuenta.").puntos(50).iconoUrl("/assets/osezno.png").build(),
                 Medalla.builder().codigo("PRIMERA_PRIMAVERA").nombre("Primera Primavera").descripcion("Llevas racha de uso de la aplicación por un mes.").puntos(100).iconoUrl("/assets/primavera.png").build(),
@@ -32,7 +33,8 @@ public class DataInitializer implements CommandLineRunner {
                 Medalla.builder().codigo("HIBERNACION_MONETARIA").nombre("Hibernación monetaria").descripcion("Tus gastos no han subido durante el balance del último mes.").puntos(150).iconoUrl("/assets/hibernacion.png").build(),
                 Medalla.builder().codigo("TREPANDO_CASCADA").nombre("Trepando la cascada").descripcion("Has mejorado tu puntuación financiera en un 25% a tu inicio de mes.").puntos(200).iconoUrl("/assets/cascada.png").build(),
                 Medalla.builder().codigo("SALMON_DORADO").nombre("Salmón dorado").descripcion("Has conseguido números positivos durante los primeros 20 días del mes.").puntos(200).iconoUrl("/assets/salmon.png").build()
-            ));
+            );
+            medallaRepository.saveAll(medallas);
         }
     }
 }

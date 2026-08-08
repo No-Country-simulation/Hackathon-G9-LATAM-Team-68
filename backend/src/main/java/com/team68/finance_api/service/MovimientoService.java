@@ -7,6 +7,8 @@ import com.team68.finance_api.model.Transaccion;
 import com.team68.finance_api.model.Usuario;
 import com.team68.finance_api.repository.TransaccionRepository;
 import com.team68.finance_api.repository.UsuarioRepository;
+
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -22,7 +24,8 @@ public class MovimientoService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Transaccion guardarTransaccion(UUID usuarioId, TransaccionRequestDTO dto) {
+    @SuppressWarnings("null")
+    public Transaccion guardarTransaccion(@NonNull UUID usuarioId, TransaccionRequestDTO dto) {
         // Validacion Cruzada de Negocio
         validarReglaTipoYCategoria(dto.getTipoFinanciero(), dto.getCategoria());
 

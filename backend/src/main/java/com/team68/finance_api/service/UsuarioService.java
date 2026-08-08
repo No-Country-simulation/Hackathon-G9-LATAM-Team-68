@@ -24,6 +24,7 @@ public class UsuarioService {
         this.medallaRepository = medallaRepository;
     }
 
+    @SuppressWarnings("null")
     @Transactional
     public AuthResponseDTO login(AuthRequestDTO request) {
         // Buscar usuario con sus medallas inicializadas o crearlo
