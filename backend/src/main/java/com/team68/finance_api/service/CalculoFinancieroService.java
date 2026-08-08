@@ -113,7 +113,7 @@ public class CalculoFinancieroService {
 
         Map<String, Object> indDeuda = new LinkedHashMap<>();
         indDeuda.put("ratio_de_endeudamiento", ratioEndeudamiento);
-        indDeuda.put("monto_destinado_al_pago_de_deudass", pagoDeudas);
+        indDeuda.put("monto_destinado_al_pago_de_deudas", pagoDeudas);
         indDeuda.put("presion_de_la_deuda", "Baja");
 
         DimensionDetalleDTO dimDeuda = DimensionDetalleDTO.builder()
