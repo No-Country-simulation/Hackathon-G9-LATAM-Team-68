@@ -194,11 +194,7 @@ public class CalculoFinancieroService {
                 .usuario(request.getUsuario())
                 .perfilFinanciero(perfilFinanciero)
                 .dimensiones(wrapper)
-                .recomendacionesGenerales(Arrays.asList(
-                        "Incrementar la capacidad de ahorro para fortalecer la estabilidad financiera.",
-                        "Mantener el bajo nivel de endeudamiento actual.",
-                        "Revisar periódicamente los gastos discrecionales para mejorar el margen financiero."
-                ))
+                .recomendacionGeneral("Incrementar la capacidad de ahorro para fortalecer la estabilidad financiera, Mantener el bajo nivel de endeudamiento actual,Revisar periódicamente los gastos discrecionales para mejorar el margen financiero")
                 .build();
     }
 

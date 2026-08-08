@@ -21,7 +21,7 @@ public class AnalisisResponseDTO {
     private DimensionesWrapperDTO dimensiones;
 
     @JsonProperty("recomendacion_general")
-    private List<String> recomendacionesGenerales;
+    private String recomendacionGeneral;
 
     @Getter
     @Setter
