@@ -115,6 +115,7 @@ public class CalculoFinancieroService {
         indDeuda.put("ratio_de_endeudamiento", ratioEndeudamiento);
         indDeuda.put("monto_destinado_al_pago_de_deudas", pagoDeudas);
         indDeuda.put("presion_de_la_deuda", 0.0);
+        indDeuda.put("costo_promedio_del_endeudamiento", 0.0);
 
         DimensionDetalleDTO dimDeuda = DimensionDetalleDTO.builder()
                 .puntuacion(scoreDeuda)
