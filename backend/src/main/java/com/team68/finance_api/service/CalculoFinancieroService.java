@@ -155,11 +155,12 @@ public class CalculoFinancieroService {
                 .categoriaPredominante(catPredominante)
                 .build();
 
+        indConsumo.put("perfil_de_consumo", perfilConsumo);
+
         DimensionDetalleDTO dimConsumo = DimensionDetalleDTO.builder()
                 .puntuacion(scoreConsumo)
                 .estado("En observación")
                 .indicadores(indConsumo)
-                .perfilConsumo(perfilConsumo)
                 .recomendaciones(Arrays.asList(
                         "Reducir gradualmente el gasto en entretenimiento y ocio.",
                         "Revisar las suscripciones digitales activas y cancelar aquellas con poco uso.",
