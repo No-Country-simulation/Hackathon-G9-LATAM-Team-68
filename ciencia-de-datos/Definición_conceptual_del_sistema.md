@@ -372,6 +372,9 @@ Posibles resultados:
 - Balance entre gastos esenciales y discrecionales.
 - Predominio en gastos discrecionales.
 
+Porcentaje esencial = Gasto esencial / Consumo total por categoría
+
+Porcentaje discrecional = Gasto discrecional / Consumo total por categoría
 
 |Condición|	Resultado|
 | -- | -- |
