@@ -5,6 +5,7 @@ import com.team68.finance_api.model.Transaccion;
 import com.team68.finance_api.model.Usuario;
 import com.team68.finance_api.repository.TransaccionRepository;
 import com.team68.finance_api.repository.UsuarioRepository;
+import com.team68.finance_api.service.GamificacionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +22,19 @@ public class MovimientoController {
 
     private final TransaccionRepository transaccionRepository;
     private final UsuarioRepository usuarioRepository;
+    private final GamificacionService gamificacionService;
 
-    public MovimientoController(TransaccionRepository transaccionRepository, UsuarioRepository usuarioRepository) {
+    public MovimientoController(TransaccionRepository transaccionRepository,
+                                UsuarioRepository usuarioRepository,
+                                GamificacionService gamificacionService) {
         this.transaccionRepository = transaccionRepository;
         this.usuarioRepository = usuarioRepository;
+        this.gamificacionService = gamificacionService;
     }
 
     @PostMapping("/usuario/{usuarioId}")
     public ResponseEntity<Transaccion> crearTransaccion(@PathVariable @NonNull UUID usuarioId,
-    @Valid @RequestBody TransaccionRequestDTO dto) {
+                                                        @Valid @RequestBody TransaccionRequestDTO dto) {
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
@@ -46,6 +51,10 @@ public class MovimientoController {
 
         @SuppressWarnings("null")
         Transaccion savedTransaccion = transaccionRepository.save(transaccion);
+
+        // Evaluar medallas automáticamente tras registrar el nuevo movimiento
+        gamificacionService.evaluarYAsignarMedallas(usuarioId);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTransaccion);
     }
 
@@ -53,5 +62,4 @@ public class MovimientoController {
     public ResponseEntity<List<Transaccion>> obtenerMovimientosUsuario(@PathVariable UUID usuarioId){
         return ResponseEntity.ok(transaccionRepository.findByUsuarioId(usuarioId));
     }
-
 }

@@ -18,10 +18,14 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final MedallaRepository medallaRepository;
+    private final GamificacionService gamificacionService;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, MedallaRepository medallaRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository,
+                            MedallaRepository medallaRepository,
+                            GamificacionService gamificacionService) {
         this.usuarioRepository = usuarioRepository;
         this.medallaRepository = medallaRepository;
+        this.gamificacionService = gamificacionService;
     }
 
     @SuppressWarnings("null")
@@ -59,8 +63,11 @@ public class UsuarioService {
                 .build();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<MedallaResponseDTO> obtenerMedallasUsuario(UUID usuarioId) {
+        // Ejecutar la evaluación de medallas al consultar el estado actual
+        gamificacionService.evaluarYAsignarMedallas(usuarioId);
+
         Usuario usuario = usuarioRepository.findByIdWithMedallas(usuarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
