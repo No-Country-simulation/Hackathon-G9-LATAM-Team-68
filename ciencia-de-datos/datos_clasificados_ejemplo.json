@@ -1,0 +1,183 @@
+{
+  "usuario": {
+    "nombre": "Valentina Hernández"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "fecha": "2026-07-30",
+      "descripcion": "me cayó la nómina",
+      "monto": 3168.03
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "compré verduras",
+      "monto": 45.53,
+      "forma_pago": "Tarjeta de débito",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "agua",
+      "monto": 422.33,
+      "forma_pago": "Tarjeta de débito",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "salí a cenar",
+      "monto": 84.41,
+      "forma_pago": "Transferencia bancaria",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "un gusto que me di",
+      "monto": 210.53,
+      "forma_pago": "Tarjeta de débito",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Compras personales",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-07",
+      "descripcion": "fruta para la casa",
+      "monto": 263.04,
+      "forma_pago": "Efectivo",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "arreglo de una muela",
+      "monto": 141.49,
+      "forma_pago": "Tarjeta de débito",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-13",
+      "descripcion": "abono de la compra a crédito",
+      "monto": 126.0,
+      "forma_pago": "Transferencia bancaria",
+      "clasificacion": [
+        "Pago de deuda"
+      ]
+    },
+    {
+      "fecha": "2026-07-14",
+      "descripcion": "pan y tortillas",
+      "monto": 395.93,
+      "forma_pago": "Transferencia bancaria",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "salario",
+      "monto": 3131.99,
+      "forma_pago": "Transferencia bancaria",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Otros",
+      "grupo": null
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "cooperación",
+      "monto": 73.38,
+      "forma_pago": "Transferencia bancaria",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Otros",
+      "grupo": null
+    },
+    {
+      "fecha": "2026-07-25",
+      "descripcion": "mensualidad de la universidad",
+      "monto": 119.32,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 41.8,
+      "clasificacion": [
+        "Consumo",
+        "Pago de deuda"
+      ],
+      "categoria": "Educación",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-26",
+      "descripcion": "frutas y verduras",
+      "monto": 643.86,
+      "forma_pago": "Tarjeta de débito",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-26",
+      "descripcion": "arreglo del carro",
+      "monto": 168.3,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 41.8,
+      "clasificacion": [
+        "Consumo",
+        "Pago de deuda"
+      ],
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-30",
+      "descripcion": "le puse gasolina al carro",
+      "monto": 527.12,
+      "forma_pago": "Tarjeta de débito",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-31",
+      "descripcion": "guardé parte de mi sueldo",
+      "monto": 1260.0,
+      "forma_pago": "Transferencia bancaria",
+      "clasificacion": [
+        "Ahorro e inversión"
+      ]
+    }
+  ]
+}
