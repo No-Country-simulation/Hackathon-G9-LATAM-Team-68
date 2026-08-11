@@ -1,6 +1,7 @@
 ```
 {
   "usuario": {
+    "id": "8f7c2b91-3d64-4a12-9e58-71c6d8f204ab"
     "nombre": "Brayan Lira"
   },
   "periodo": {
