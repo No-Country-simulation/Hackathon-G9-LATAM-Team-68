@@ -35,7 +35,4 @@ public class Ingreso {
 
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal monto;
-
-    @Column(name = "forma_pago", nullable = false)
-    private String formaPago;
 }
