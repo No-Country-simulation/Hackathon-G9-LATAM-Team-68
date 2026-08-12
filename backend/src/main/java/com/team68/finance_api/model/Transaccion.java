@@ -49,7 +49,4 @@ public class Transaccion {
 
     @Enumerated(EnumType.STRING)
     private CategoriaConsumo categoria;
-
-    @Column(nullable = false)
-    private Boolean esIngreso;
 }
