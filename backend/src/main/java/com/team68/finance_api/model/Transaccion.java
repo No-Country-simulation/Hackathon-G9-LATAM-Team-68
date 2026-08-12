@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Transaccion {
 
     @Id
