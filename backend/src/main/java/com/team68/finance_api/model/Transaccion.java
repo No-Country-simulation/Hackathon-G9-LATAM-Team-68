@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Transaccion {
 
     @Id
@@ -36,7 +37,7 @@ public class Transaccion {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal monto;
 
-    @Column(name = "forma_pago")
+    @Column(name = "forma_pago", nullable = false)
     private String formaPago;
 
     @Column(name = "tasa_interes")
@@ -48,4 +49,7 @@ public class Transaccion {
 
     @Enumerated(EnumType.STRING)
     private CategoriaConsumo categoria;
+
+    @Column(nullable = false)
+    private Boolean esIngreso;
 }

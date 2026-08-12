@@ -34,12 +34,12 @@ public class IngresoController {
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
-        Ingreso ingreso = Ingreso.builder()
-                .usuario(usuario)
-                .fecha(dto.getFecha())
-                .descripcion(dto.getDescripcion())
-                .monto(dto.getMonto())
-                .build();
+        Ingreso ingreso = new Ingreso();
+        ingreso.setUsuario(usuario);
+        ingreso.setFecha(dto.getFecha());
+        ingreso.setDescripcion(dto.getDescripcion());
+        ingreso.setMonto(dto.getMonto());
+        ingreso.setEsIngreso(true);
 
         Ingreso savedIngreso = ingresoRepository.save(ingreso);
 
