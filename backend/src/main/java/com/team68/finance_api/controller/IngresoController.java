@@ -44,7 +44,6 @@ public class IngresoController {
         ingreso.setFecha(dto.getFecha());
         ingreso.setDescripcion(dto.getDescripcion());
         ingreso.setMonto(dto.getMonto());
-        ingreso.setEsIngreso(true);
 
         Ingreso savedIngreso = ingresoRepository.save(ingreso);
 
