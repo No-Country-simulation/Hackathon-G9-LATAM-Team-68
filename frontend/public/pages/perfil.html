@@ -9,7 +9,7 @@
   <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
   <link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
   <link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
-  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
+  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
   <style>
     .health-chart-shell {
       max-width: 220px;
@@ -52,7 +52,6 @@
           <select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
             <option value="default">Default (Bootstrap)</option>
             <option value="wireframe">Wireframe</option>
-            <option value="modern">Modern</option>
             <option value="y2k">Y2K</option>
             <option value="hollow">Hollow</option>
 							<option value="rendi">Rendi</option>
@@ -160,6 +159,7 @@
   <script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
   <script src="../assets/js/theme-switcher.js"></script>
   <script src="../assets/js/page-help.js"></script>
+  <script src="../assets/js/api-client.js"></script>
   <script src="../assets/js/movements-local.js"></script>
   <script src="../vendor/chartjs/chart.umd.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -183,48 +183,6 @@
     }
     function roundPercent(value) {
       return Math.round(clamp(value, 0, 100));
-    }
-    function getTotalsFromMovements() {
-      var totals = {
-        income: 0,
-        expense: 0
-      };
-      if (!window.team68Movements || typeof window.team68Movements.getAll !== "function") {
-        return totals;
-      }
-      var rows = window.team68Movements.getAll();
-      rows.forEach(function (item) {
-        var amount = Math.abs(Number(item.monto || 0));
-        if (item.tipo === "Ingreso") {
-          totals.income += amount;
-        }
-        if (item.tipo === "Gasto") {
-          totals.expense += amount;
-        }
-      });
-      return totals;
-    }
-    function getFinancialMetrics() {
-      var totals = getTotalsFromMovements();
-      var income = totals.income;
-      var expense = totals.expense;
-      if (income <= 0) {
-        return {
-          health: 0,
-          debt: 0,
-          savings: 0
-        };
-      }
-      var savingsAmount = Math.max(income - expense, 0);
-      var debtPct = roundPercent((expense / income) * 100);
-      var savingsPct = roundPercent((savingsAmount / income) * 100);
-      var healthFormula = 100 - debtPct * 0.6 + savingsPct * 0.4;
-      var healthPct = roundPercent(healthFormula);
-      return {
-        health: healthPct,
-        debt: debtPct,
-        savings: savingsPct
-      };
     }
     function normalizeFinancialPayload(payload) {
       var data = asObject(payload);
@@ -280,9 +238,6 @@
       };
     }
     function getFinancialPayloadSource() {
-      if (window.team68FinancialPayload && typeof window.team68FinancialPayload === "object") {
-        return window.team68FinancialPayload;
-      }
       try {
         var fromStorage = localStorage.getItem("team68-financial-profile");
         if (!fromStorage) {
@@ -365,113 +320,46 @@
         return "<li>" + text + "</li>";
       }).join("");
     }
-    function getHealthSuggestions(value) {
-      if (value >= 75) {
-        return [
-          "Mantener tu presupuesto actual y revisar resultados cada semana.",
-          "Automatizar transferencias a ahorro para conservar el buen ritmo.",
-          "Definir una meta de inversion de mediano plazo."
-        ];
-      }
-      if (value >= 50) {
-        return [
-          "Reducir uno o dos gastos variables este mes.",
-          "Separar primero un monto fijo para ahorro.",
-          "Revisar suscripciones y pagos recurrentes."
-        ];
-      }
-      return [
-        "Crear un presupuesto base con topes por categoria.",
-        "Evitar compras no esenciales durante las proximas semanas.",
-        "Buscar una fuente adicional de ingreso temporal."
-      ];
-    }
-    function getDebtSuggestions(value) {
-      if (value <= 35) {
-        return [
-          "Mantener el endeudamiento en niveles controlados.",
-          "Pagar siempre el total de tarjetas para evitar intereses.",
-          "Construir fondo de emergencia para no recurrir a deuda."
-        ];
-      }
-      if (value <= 60) {
-        return [
-          "Priorizar el pago de deudas con mayor interes.",
-          "Evitar nuevas compras financiadas en el corto plazo.",
-          "Negociar mejores tasas o consolidar saldos si aplica."
-        ];
-      }
-      return [
-        "Detener deuda nueva y enfocarte en reducir saldo actual.",
-        "Aplicar metodo bola de nieve o avalancha de pagos.",
-        "Revisar plan de pagos mensual con objetivos realistas."
-      ];
-    }
-    function getSavingsSuggestions(value) {
-      if (value >= 25) {
-        return [
-          "Mantener la disciplina de ahorro mensual.",
-          "Evaluar dividir ahorro entre emergencia e inversion.",
-          "Subir gradualmente tu meta de ahorro."
-        ];
-      }
-      if (value >= 10) {
-        return [
-          "Incrementar ahorro con recortes pequenos y constantes.",
-          "Programar una transferencia automatica al inicio del mes.",
-          "Definir un objetivo puntual para motivar el ahorro."
-        ];
-      }
-      return [
-        "Comenzar con una meta minima del 5% del ingreso.",
-        "Eliminar gastos hormiga y redirigir ese monto a ahorro.",
-        "Separar el ahorro apenas recibas ingresos."
-      ];
-    }
-    function getHealthStatusLabel(value) {
-      if (value >= 75) {
-        return "saludable";
-      }
-      if (value >= 50) {
-        return "en observación";
-      }
-      return "en riego";
-    }
     function renderFinancialHealthPage() {
       var rawPayload = getFinancialPayloadSource();
       var profilePayload = rawPayload ? normalizeFinancialPayload(rawPayload) : null;
-      var metrics = getFinancialMetrics();
-      var healthValue = profilePayload ? profilePayload.financialProfile.score : metrics.health;
-      var debtValue = profilePayload ? profilePayload.dimensions.debt.score : metrics.debt;
-      var savingsValue = profilePayload ? profilePayload.dimensions.savingsCapacity.score : metrics.savings;
+      var healthValue = profilePayload ? profilePayload.financialProfile.score : 0;
+      var debtValue = profilePayload ? profilePayload.dimensions.debt.score : 0;
+      var savingsValue = profilePayload ? profilePayload.dimensions.savingsCapacity.score : 0;
       var statusNode = document.getElementById("saludEstado");
       drawDonut("saludChart", healthValue, "#198754");
       drawDonut("deudaChart", debtValue, "#dc3545");
       drawDonut("ahorroChart", savingsValue, "#0d6efd");
       if (statusNode) {
-        var label = profilePayload ? String(profilePayload.financialProfile.status).toLowerCase() : getHealthStatusLabel(healthValue);
+        var label = profilePayload ? String(profilePayload.financialProfile.status).toLowerCase() : "sin datos del api";
         statusNode.textContent = "Estado actual de la salud financiera: " + label + ".";
       }
       renderSuggestions(
         "saludSuggestions",
         profilePayload
           ? profilePayload.dimensions.financialBalance.recommendations
-          : getHealthSuggestions(healthValue)
+          : ["Esperando criterios del servicio de analisis financiero (API)."]
       );
       renderSuggestions(
         "deudaSuggestions",
         profilePayload
           ? profilePayload.dimensions.debt.recommendations
-          : getDebtSuggestions(debtValue)
+          : ["Esperando criterios del servicio de analisis financiero (API)."]
       );
       renderSuggestions(
         "ahorroSuggestions",
         profilePayload
           ? profilePayload.dimensions.savingsCapacity.recommendations
-          : getSavingsSuggestions(savingsValue)
+          : ["Esperando criterios del servicio de analisis financiero (API)."]
       );
     }
     renderFinancialHealthPage();
+    document.addEventListener("team68:movements-updated", function () {
+      renderFinancialHealthPage();
+    });
+    document.addEventListener("team68:profile-updated", function () {
+      renderFinancialHealthPage();
+    });
   </script>
 </body>
 </html>

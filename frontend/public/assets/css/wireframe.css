@@ -139,6 +139,16 @@ small,
 	color: var(--wf-line);
 }
 
+.wf-api-on {
+	border-color: #1e7f3f !important;
+	box-shadow: 0 0 0 2px rgba(30, 127, 63, 0.18) !important;
+}
+
+.wf-api-off {
+	border-color: #a12121 !important;
+	box-shadow: 0 0 0 2px rgba(161, 33, 33, 0.18) !important;
+}
+
 .form-control::placeholder {
 	color: #8a8a8a;
 }

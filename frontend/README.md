@@ -6,7 +6,7 @@ La propuesta funcional combina visualización clara, clasificación de movimient
 
 ## Versiones
 
-Versión actual: 0.6
+Versión actual: 0.8
 
 Versión 0.1: Prototipo inicial
 Versión 0.2: Gráfica de gastos
@@ -15,6 +15,7 @@ Versión 0.4: Ajustes de la simulación
 Versión 0.5: Método de pago en gastos
 Versión 0.6: Fixes y optimizaciones
 Versión 0.7: Diseno de interfaz Rendi
+Versión 0.8: Integracion con API remota
 
 ## Descripción del proyecto
 
@@ -108,13 +109,11 @@ Este repositorio implementa la capa frontend del MVP como maqueta funcional en H
     - logout.html: salida y redirección.
   - assets/css/
     - wireframe.css: estilo tipo boceto.
-    - modern.css: estilo visual moderno.
     - y2k.css: variante visual retro.
     - hollow.css: variante visual alternativa.
     - rendi.css: estilo y diseño de rendi.
   - assets/js/
     - theme-switcher.js: cambio de tema y persistencia.
-    - forms-local.js: comportamiento local de formularios.
     - movements-local.js: datos y movimientos de ejemplo.
     - page-help.js: ayuda contextual.
   - vendor/

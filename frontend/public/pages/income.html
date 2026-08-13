@@ -9,7 +9,7 @@
 	<link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
 	<link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
 	<link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
-	<link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
+	<link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
 </head>
 <body>
 
@@ -39,7 +39,6 @@
 					<select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
 						<option value="default">Default (Bootstrap)</option>
 						<option value="wireframe">Wireframe</option>
-						<option value="modern">Modern</option>
 						<option value="y2k">Y2K</option>
 						<option value="hollow">Hollow</option>
 							<option value="rendi">Rendi</option>
@@ -54,19 +53,19 @@
 		<section class="rounded-3 border p-4 mb-4" id="incomeForm">
 			<h1 class="h3 mb-3">Registrar ingreso</h1>
 			<form class="row g-3" id="incomeEntryForm">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<label for="fechaIngreso" class="form-label">Fecha</label>
 					<input id="fechaIngreso" type="date" class="form-control fecha-hoy" required>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<label for="montoIngreso" class="form-label">Monto</label>
 					<input id="montoIngreso" type="number" class="form-control" placeholder="0.00" required>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<label for="conceptoIngreso" class="form-label">Concepto</label>
 					<input id="conceptoIngreso" type="text" class="form-control" placeholder="Ej. Salario" required>
 				</div>
-				<div class="col-md-4 d-none">
+				<div class="col-md-3">
 					<label for="categoriaIngreso" class="form-label">Categoria</label>
 					<select id="categoriaIngreso" class="form-select">
 						<option value="Sueldo">Sueldo</option>
@@ -95,6 +94,7 @@
 	<script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
 	<script src="../assets/js/theme-switcher.js"></script>
 	<script src="../assets/js/page-help.js"></script>
+	<script src="../assets/js/api-client.js"></script>
 	<script src="../assets/js/movements-local.js"></script>
 	<script src="../assets/js/forms-local.js"></script>
 	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

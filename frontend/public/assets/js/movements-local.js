@@ -1,144 +1,215 @@
 (function () {
-  var STORAGE_KEY = "team68-movimientos";
+  var PROFILE_KEY = "team68-financial-profile";
+  var CATEGORY_TO_API = {
+    Vivienda: "VIVIENDA",
+    Alimentacion: "ALIMENTACION",
+    Transporte: "TRANSPORTE",
+    Salud: "SALUD",
+    Educacion: "EDUCACION",
+    Entretenimiento: "ENTRETENIMIENTO",
+    Subscripciones: "SUSCRIPCIONES",
+    Personal: "COMPRAS_PERSONALES",
+    Viajes: "VIAJES",
+    Otros: "OTROS",
+    Sueldo: "OTROS",
+    Bono: "OTROS",
+    Freelance: "OTROS"
+  };
+  var CATEGORY_FROM_API = {
+    VIVIENDA: "Vivienda",
+    ALIMENTACION: "Alimentacion",
+    TRANSPORTE: "Transporte",
+    SALUD: "Salud",
+    EDUCACION: "Educacion",
+    ENTRETENIMIENTO: "Entretenimiento",
+    SUSCRIPCIONES: "Subscripciones",
+    COMPRAS_PERSONALES: "Personal",
+    VIAJES: "Viajes",
+    OTROS: "Otros"
+  };
+  var syncPopupTimer = null;
 
-  var seedMovements = [
-    { id: 1, fecha: "2026-07-01", concepto: "Salario mensual", categoria: "Sueldo", tipo: "Ingreso", monto: 2400 },
-    { id: 2, fecha: "2026-07-02", concepto: "Arriendo", categoria: "Vivienda", metodoPago: "Transferencia", tipo: "Gasto", monto: -650 },
-    { id: 3, fecha: "2026-07-03", concepto: "Pago cliente landing page", categoria: "Freelance", tipo: "Ingreso", monto: 620 },
-    { id: 4, fecha: "2026-07-04", concepto: "Gasolina", categoria: "Transporte", metodoPago: "Debito", tipo: "Gasto", monto: -58 },
-    { id: 5, fecha: "2026-07-05", concepto: "Mercado quincenal", categoria: "Alimentacion", metodoPago: "Debito", tipo: "Gasto", monto: -145 },
-    { id: 6, fecha: "2026-07-06", concepto: "Venta de accesorios", categoria: "Otros", tipo: "Ingreso", monto: 120 },
-    { id: 7, fecha: "2026-07-07", concepto: "Consulta medica", categoria: "Salud", metodoPago: "Efectivo", tipo: "Gasto", monto: -95 },
-    { id: 8, fecha: "2026-07-08", concepto: "Consultoria UX", categoria: "Freelance", tipo: "Ingreso", monto: 450 },
-    { id: 9, fecha: "2026-07-09", concepto: "Curso online", categoria: "Educacion", metodoPago: "Crédito", tipo: "Gasto", monto: -42 },
-    { id: 10, fecha: "2026-07-10", concepto: "Interés bancario", categoria: "Otros", tipo: "Ingreso", monto: 36 },
-    { id: 11, fecha: "2026-07-11", concepto: "Bus intermunicipal", categoria: "Transporte", metodoPago: "Efectivo", tipo: "Gasto", monto: -21 },
-    { id: 12, fecha: "2026-07-12", concepto: "Plataforma de musica", categoria: "Subscripciones", metodoPago: "Crédito", tipo: "Gasto", monto: -11 },
-    { id: 13, fecha: "2026-07-13", concepto: "Clases particulares", categoria: "Otros", tipo: "Ingreso", monto: 90 },
-    { id: 14, fecha: "2026-07-14", concepto: "Cena con amigos", categoria: "Entretenimiento", metodoPago: "Debito", tipo: "Gasto", monto: -72 },
-    { id: 15, fecha: "2026-07-15", concepto: "Reembolso empresa", categoria: "Sueldo", tipo: "Ingreso", monto: 210 },
-    { id: 16, fecha: "2026-07-16", concepto: "Corte de cabello", categoria: "Personal", metodoPago: "Efectivo", tipo: "Gasto", monto: -38 },
-    { id: 17, fecha: "2026-07-17", concepto: "Diseño de logo", categoria: "Freelance", tipo: "Ingreso", monto: 300 },
-    { id: 18, fecha: "2026-07-18", concepto: "Reserva de hotel", categoria: "Viajes", metodoPago: "Transferencia", tipo: "Gasto", monto: -180 },
-    { id: 19, fecha: "2026-07-19", concepto: "Bono productividad", categoria: "Bono", tipo: "Ingreso", monto: 180 },
-    { id: 20, fecha: "2026-07-20", concepto: "Compra de escritorio", categoria: "Otros", metodoPago: "Debito", tipo: "Gasto", monto: -85 }
-  ];
+  function showMessage(icon, title, text) {
+    if (window.Swal) {
+      window.Swal.fire({
+        icon: icon,
+        title: title,
+        text: text
+      });
+      return;
+    }
 
-  function parseStorage() {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) {
-        return null;
-      }
+    alert(title + ": " + text);
+  }
 
-      var parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : null;
-    } catch (error) {
-      return null;
+  function showSyncPopup(state, message) {
+    var text = message || "Movimientos actualizados.";
+    var icon = "info";
+
+    if (state === "success") {
+      icon = "success";
+    } else if (state === "error") {
+      icon = "error";
+    }
+
+    if (window.Swal) {
+      window.Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: icon,
+        title: text,
+        showConfirmButton: false,
+        timer: state === "loading" ? 1200 : 1800,
+        timerProgressBar: true
+      });
+      return;
+    }
+
+    var popup = document.getElementById("team68-sync-toast");
+    if (!popup) {
+      popup = document.createElement("div");
+      popup.id = "team68-sync-toast";
+      popup.setAttribute("role", "status");
+      popup.style.position = "fixed";
+      popup.style.top = "16px";
+      popup.style.right = "16px";
+      popup.style.zIndex = "1080";
+      popup.style.padding = "10px 12px";
+      popup.style.borderRadius = "8px";
+      popup.style.color = "#fff";
+      popup.style.fontSize = "0.875rem";
+      popup.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.2)";
+      popup.style.display = "none";
+      document.body.appendChild(popup);
+    }
+
+    popup.style.background = state === "error" ? "#dc3545" : (state === "success" ? "#198754" : "#0d6efd");
+
+    popup.textContent = text;
+    popup.style.display = "block";
+
+    if (syncPopupTimer) {
+      window.clearTimeout(syncPopupTimer);
+    }
+
+    syncPopupTimer = window.setTimeout(function () {
+      popup.style.display = "none";
+    }, state === "loading" ? 1200 : 1800);
+  }
+
+  function setSyncStatus(state, message) {
+    if (state === "idle") {
+      return;
+    }
+
+    if (state === "loading") {
+      showSyncPopup("loading", message || "Sincronizando movimientos con la API...");
+      return;
+    }
+
+    if (state === "success") {
+      showSyncPopup("success", message || "Movimientos actualizados desde la API.");
+      return;
+    }
+
+    if (state === "error") {
+      showSyncPopup("error", message || "No se pudo sincronizar con la API.");
     }
   }
 
-  function saveStorage(movements) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(movements));
-  }
-
-  function ensureSeedData() {
-    var existing = parseStorage();
-    if (existing && existing.length) {
-      return existing;
+  function normalizePayment(value) {
+    var text = String(value || "").toLowerCase();
+    if (text.indexOf("credit") >= 0) {
+      return "Credito";
+    }
+    if (text.indexOf("debit") >= 0) {
+      return "Debito";
+    }
+    if (text.indexOf("transfer") >= 0) {
+      return "Transferencia";
+    }
+    if (text.indexOf("efect") >= 0 || !text) {
+      return "Efectivo";
     }
 
-    saveStorage(seedMovements);
-    return seedMovements.slice();
+    return String(value || "Efectivo");
   }
 
-  function getMovements() {
-    return ensureSeedData().slice().sort(function (a, b) {
+  function mapCategoryToApi(value) {
+    var key = String(value || "Otros").trim();
+    return CATEGORY_TO_API[key] || "OTROS";
+  }
+
+  function mapCategoryFromApi(value) {
+    var key = String(value || "OTROS").trim().toUpperCase();
+    return CATEGORY_FROM_API[key] || "Otros";
+  }
+
+  function sortRows(rows) {
+    return rows.slice().sort(function (a, b) {
       if (a.fecha === b.fecha) {
-        return b.id - a.id;
+        return String(b.id).localeCompare(String(a.id));
       }
 
       return a.fecha < b.fecha ? 1 : -1;
     });
   }
 
-  function saveMovements(movements) {
-    saveStorage(movements);
-  }
-
-  function resetToSeedData() {
-    var freshSeed = seedMovements.slice();
-    saveMovements(freshSeed);
-    return freshSeed;
-  }
-
-  function getNextId(movements) {
-    if (!movements.length) {
-      return 1;
-    }
-
-    return Math.max(...movements.map(function (entry) {
-      return Number(entry.id || 0);
-    })) + 1;
-  }
-
-  function addMovement(payload) {
-    var concept = String(payload.concepto || "").trim();
-    var amountValue = Number(payload.monto);
-    var dateValue = String(payload.fecha || "").trim();
-    var typeValue = payload.tipo === "Gasto" ? "Gasto" : "Ingreso";
-
-    if (!concept) {
-      throw new Error("El concepto es obligatorio.");
-    }
-
-    if (concept.length > 60) {
-      throw new Error("El concepto no puede superar los 60 caracteres.");
-    }
-
-    if (!dateValue) {
-      throw new Error("La fecha es obligatoria.");
-    }
-
-    if (!Number.isFinite(amountValue) || amountValue <= 0) {
-      throw new Error("El monto debe ser mayor a 0.");
-    }
-
-    var rows = getMovements();
-    var nextId = getNextId(rows);
-    var normalizedAmount = typeValue === "Gasto" ? -Math.abs(amountValue) : Math.abs(amountValue);
-    var paymentMethod = typeValue === "Gasto"
-      ? (String(payload.metodoPago || "Efectivo").trim() || "Efectivo")
-      : "";
-    var interestRate = payload.tasaInteres;
-
-    if (typeValue === "Gasto" && paymentMethod === "Crédito") {
-      if (!Number.isFinite(Number(interestRate)) || Number(interestRate) <= 0) {
-        throw new Error("La tasa de interés es obligatoria cuando el método de pago es Crédito.");
-      }
-    }
-
-    var entry = {
-      id: nextId,
-      fecha: dateValue,
-      concepto: concept,
-      categoria: String(payload.categoria || "Otros").trim() || "Otros",
-      metodoPago: paymentMethod,
-      tipo: typeValue,
-      monto: normalizedAmount
+  function buildIngresoRow(item) {
+    return {
+      id: item.id || "ing-" + item.fecha + "-" + item.descripcion,
+      fecha: item.fecha,
+      concepto: item.descripcion || "Ingreso",
+      categoria: "Sueldo",
+      metodoPago: "",
+      tipo: "Ingreso",
+      monto: Math.abs(Number(item.monto || 0))
     };
+  }
 
-    if (typeValue === "Gasto" && paymentMethod === "Crédito") {
-      entry.tasaInteres = Number(interestRate);
-    }
+  function buildExpenseRow(item) {
+    return {
+      id: item.id || "gas-" + item.fecha + "-" + item.descripcion,
+      fecha: item.fecha,
+      concepto: item.descripcion || "Gasto",
+      categoria: mapCategoryFromApi(item.categoria),
+      metodoPago: normalizePayment(item.formaPago || item.forma_pago),
+      tipo: "Gasto",
+      monto: -Math.abs(Number(item.monto || 0)),
+      tasaInteres: Number(item.tasaDeInteresDeLaTarjeta || item.tasa_de_interes_de_la_tarjeta || 0)
+    };
+  }
 
-    rows.push(entry);
-    saveMovements(rows);
-    return entry;
+  function getUniqueRows(rows) {
+    var byId = {};
+    rows.forEach(function (row) {
+      byId[String(row.id)] = row;
+    });
+    return Object.keys(byId).map(function (id) {
+      return byId[id];
+    });
+  }
+
+  var movementCache = [];
+
+  function getMovements() {
+    return sortRows(movementCache);
+  }
+
+  function setMovements(rows) {
+    movementCache = sortRows(getUniqueRows(rows));
+  }
+
+  function upsertMovement(row) {
+    var next = movementCache.filter(function (item) {
+      return String(item.id) !== String(row.id);
+    });
+    next.push(row);
+    setMovements(next);
   }
 
   function formatDate(isoDate) {
-    var parts = (isoDate || "").split("-");
+    var parts = String(isoDate || "").split("-");
     if (parts.length !== 3) {
       return isoDate || "-";
     }
@@ -310,8 +381,7 @@
       return;
     }
 
-    var rows = all.slice(0, 6);
-    renderTable(summaryBody, rows, rowForSummary, 5);
+    renderTable(summaryBody, all.slice(0, 6), rowForSummary, 5);
   }
 
   function loadHistoryTable() {
@@ -334,10 +404,241 @@
     renderTable(historyBody, rows, rowForHistory, 6);
   }
 
+  function getAnalysisPayload(rows) {
+    var session = window.team68Api ? window.team68Api.getSession() : null;
+    if (!session || !session.id) {
+      return null;
+    }
+
+    var validDates = rows.map(function (item) {
+      return item.fecha;
+    }).filter(function (date) {
+      return /^\d{4}-\d{2}-\d{2}$/.test(String(date || ""));
+    }).sort();
+
+    var today = new Date().toISOString().slice(0, 10);
+    var periodStart = validDates.length ? validDates[0] : today;
+    var periodEnd = validDates.length ? validDates[validDates.length - 1] : today;
+
+    return {
+      usuario: {
+        id: session.id,
+        nombre: session.nombre || session.username || "Usuario"
+      },
+      periodo: {
+        inicio: periodStart,
+        fin: periodEnd
+      },
+      ingresos: rows.filter(function (item) {
+        return item.tipo === "Ingreso";
+      }).map(function (item) {
+        return {
+          fecha: item.fecha,
+          descripcion: item.concepto,
+          monto: Math.abs(Number(item.monto || 0))
+        };
+      }),
+      transacciones: rows.filter(function (item) {
+        return item.tipo === "Gasto";
+      }).map(function (item) {
+        var payload = {
+          fecha: item.fecha,
+          descripcion: item.concepto,
+          monto: Math.abs(Number(item.monto || 0)),
+          tipoFinanciero: "CONSUMO",
+          categoria: mapCategoryToApi(item.categoria),
+          forma_pago: normalizePayment(item.metodoPago)
+        };
+
+        if (normalizePayment(item.metodoPago) === "Credito") {
+          var interest = Number(item.tasaInteres || 0);
+          if (Number.isFinite(interest) && interest > 0) {
+            payload.tasa_de_interes_de_la_tarjeta = interest;
+          }
+        }
+
+        return payload;
+      })
+    };
+  }
+
+  async function refreshFinancialProfile(rows) {
+    if (!window.team68Api || !window.team68Api.isAuthenticated()) {
+      return;
+    }
+
+    var payload = getAnalysisPayload(rows);
+    if (!payload) {
+      return;
+    }
+
+    try {
+      var profile = await window.team68Api.realizarAnalisis(payload);
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+      document.dispatchEvent(new CustomEvent("team68:profile-updated", {
+        detail: {
+          profile: profile
+        }
+      }));
+    } catch (error) {
+      localStorage.removeItem(PROFILE_KEY);
+      document.dispatchEvent(new CustomEvent("team68:profile-updated", {
+        detail: {
+          profile: null
+        }
+      }));
+      setSyncStatus("error", "No se pudo actualizar el analisis de perfil.");
+    }
+  }
+
+  async function syncFromApi(options) {
+    var config = options || {};
+
+    if (!window.team68Api || !window.team68Api.isAuthenticated()) {
+      return getMovements();
+    }
+
+    var usuarioId = window.team68Api.getUsuarioId();
+    setSyncStatus("loading");
+
+    try {
+      var responses = await Promise.all([
+        window.team68Api.getIngresosUsuario(usuarioId),
+        window.team68Api.getMovimientosUsuario(usuarioId)
+      ]);
+      var ingresos = Array.isArray(responses[0]) ? responses[0] : [];
+      var gastos = Array.isArray(responses[1]) ? responses[1] : [];
+      var mergedRows = ingresos.map(buildIngresoRow).concat(gastos.map(buildExpenseRow));
+
+      setMovements(mergedRows);
+      loadSummaryTable();
+      loadHistoryTable();
+      await refreshFinancialProfile(getMovements());
+
+      document.dispatchEvent(new CustomEvent("team68:movements-updated", {
+        detail: {
+          rows: getMovements()
+        }
+      }));
+
+      setSyncStatus("success");
+
+      return getMovements();
+    } catch (error) {
+      setSyncStatus("error", "No se pudo sincronizar con la API: " + error.message);
+      setMovements([]);
+      loadSummaryTable();
+      loadHistoryTable();
+      localStorage.removeItem(PROFILE_KEY);
+      document.dispatchEvent(new CustomEvent("team68:profile-updated", {
+        detail: {
+          profile: null
+        }
+      }));
+      if (!config.silent) {
+        showMessage("error", "No se pudieron cargar los movimientos", error.message);
+      }
+
+      throw error;
+    }
+  }
+
+  function validatePayload(payload) {
+    var concept = String(payload.concepto || "").trim();
+    var amountValue = Number(payload.monto);
+    var dateValue = String(payload.fecha || "").trim();
+
+    if (!concept) {
+      throw new Error("El concepto es obligatorio.");
+    }
+
+    if (concept.length > 60) {
+      throw new Error("El concepto no puede superar los 60 caracteres.");
+    }
+
+    if (!dateValue) {
+      throw new Error("La fecha es obligatoria.");
+    }
+
+    if (!Number.isFinite(amountValue) || amountValue <= 0) {
+      throw new Error("El monto debe ser mayor a 0.");
+    }
+
+    return {
+      concepto: concept,
+      monto: amountValue,
+      fecha: dateValue,
+      categoria: String(payload.categoria || "Otros").trim() || "Otros",
+      metodoPago: normalizePayment(payload.metodoPago),
+      tipo: payload.tipo === "Gasto" ? "Gasto" : "Ingreso",
+      tasaInteres: Number(payload.tasaInteres || 0)
+    };
+  }
+
+  async function addMovement(payload) {
+    if (!window.team68Api || !window.team68Api.isAuthenticated()) {
+      throw new Error("Debes iniciar sesion para registrar movimientos.");
+    }
+
+    var normalized = validatePayload(payload);
+    var usuarioId = window.team68Api.getUsuarioId();
+    setSyncStatus("loading", "Guardando movimiento en la API...");
+
+    try {
+      if (normalized.tipo === "Ingreso") {
+        var incomePayload = {
+          fecha: normalized.fecha,
+          descripcion: normalized.concepto,
+          monto: Math.abs(normalized.monto)
+        };
+        var incomeResponse = await window.team68Api.crearIngreso(usuarioId, incomePayload);
+        var incomeRow = buildIngresoRow(incomeResponse || incomePayload);
+        upsertMovement(incomeRow);
+        loadSummaryTable();
+        loadHistoryTable();
+        refreshFinancialProfile(getMovements());
+        setSyncStatus("success", "Movimiento guardado y sincronizado.");
+        return incomeRow;
+      }
+
+      if (normalized.metodoPago === "Credito") {
+        if (!Number.isFinite(normalized.tasaInteres) || normalized.tasaInteres <= 0) {
+          throw new Error("La tasa de interes es obligatoria cuando el metodo de pago es Credito.");
+        }
+      }
+
+      var expensePayload = {
+        fecha: normalized.fecha,
+        descripcion: normalized.concepto,
+        monto: Math.abs(normalized.monto),
+        tipoFinanciero: "CONSUMO",
+        forma_pago: normalized.metodoPago
+      };
+
+      if (normalized.metodoPago === "Credito") {
+        expensePayload.tasa_de_interes_de_la_tarjeta = normalized.tasaInteres;
+      }
+
+      var expenseResponse = await window.team68Api.crearTransaccion(usuarioId, expensePayload);
+      var expenseRow = buildExpenseRow(expenseResponse || expensePayload);
+      if (!expenseRow.id) {
+        expenseRow.id = "gas-" + Date.now();
+      }
+      upsertMovement(expenseRow);
+      loadSummaryTable();
+      loadHistoryTable();
+      refreshFinancialProfile(getMovements());
+      setSyncStatus("success", "Movimiento guardado y sincronizado.");
+      return expenseRow;
+    } catch (error) {
+      setSyncStatus("error", "No se pudo guardar en la API: " + error.message);
+      throw error;
+    }
+  }
+
   function attachEvents() {
     var applyFiltersBtn = document.getElementById("applyFiltersBtn");
     var clearFiltersBtn = document.getElementById("clearFiltersBtn");
-    var resetFiltersBtn = document.getElementById("resetFiltersBtn");
 
     if (applyFiltersBtn) {
       applyFiltersBtn.addEventListener("click", loadHistoryTable);
@@ -348,48 +649,42 @@
         var resetFields = {"desde": "", "hasta": "", "tipo": "Todos", "categoria": "Todas"};
         Object.keys(resetFields).forEach(function (id) {
           var el = document.getElementById(id);
-          if (el) el.value = resetFields[id];
+          if (el) {
+            el.value = resetFields[id];
+          }
         });
-        loadHistoryTable();
-      });
-    }
-
-    if (resetFiltersBtn) {
-      resetFiltersBtn.addEventListener("click", function () {
-        var confirmed = window.confirm("Esto restablecera los datos de ejemplo. Deseas continuar?");
-        if (!confirmed) {
-          return;
-        }
-
-        resetToSeedData();
-        var resetFields = {"desde": "", "hasta": "", "tipo": "Todos", "categoria": "Todas"};
-        Object.keys(resetFields).forEach(function (id) {
-          var el = document.getElementById(id);
-          if (el) el.value = resetFields[id];
-        });
-        loadSummaryTable();
         loadHistoryTable();
       });
     }
 
   }
 
+
   window.team68Movements = {
-    ensureSeedData: ensureSeedData,
-    resetToSeedData: resetToSeedData,
     getAll: getMovements,
     add: addMovement,
     filter: filterMovements,
     formatDate: formatDate,
     formatAmount: formatAmount,
+    sync: syncFromApi,
     reloadViews: function () {
       loadSummaryTable();
       loadHistoryTable();
     }
   };
 
-  ensureSeedData();
+  if (!window.team68Api || !window.team68Api.requireAuth()) {
+    return;
+  }
+
   loadSummaryTable();
   loadHistoryTable();
   attachEvents();
+  setSyncStatus("loading");
+
+  syncFromApi({
+    silent: true
+  }).catch(function () {
+    // API-only mode: if sync fails there is no local fallback for records.
+  });
 })();

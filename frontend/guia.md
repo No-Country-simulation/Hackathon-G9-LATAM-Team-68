@@ -1,233 +1,81 @@
-# Guía de formularios y gráficas
+# Guia de integracion API
 
-## 1. Objetivo
-Este documento explica cómo fluye la información en el proyecto:
-- Desde los formularios de ingreso/gasto.
-- Hasta el almacenamiento local.
-- Y finalmente a las tablas y gráficas.
+## 1. Alcance actual
+Esta version usa el backend para todo el flujo de datos de negocio:
+- Registros (ingresos y gastos): API.
+- Analisis financiero: API.
+- Perfil financiero: API.
 
-## 2. Archivos clave
+El login se mantiene local para habilitar la sesion de UI sin llamar al endpoint de autenticacion.
 
-### Formularios y datos
-- `public/assets/js/forms-local.js`
-  - Conecta botones de guardado de formularios.
-  - Arma el objeto del movimiento y llama al módulo de datos.
-  - Muestra mensajes de éxito/error (SweetAlert o `alert`).
+## 2. Endpoints usados
+Base URL:
+- `https://hackathon-g9-latam-team-68.onrender.com`
+
+Operaciones:
+- `GET /api/ingresos/usuario/{usuarioId}`
+- `POST /api/ingresos/usuario/{usuarioId}`
+- `GET /api/movimientos/usuario/{usuarioId}`
+- `POST /api/movimientos/usuario/{usuarioId}`
+- `POST /api/analisis`
+
+## 3. Flujo de sesion
+- `public/assets/js/login-local.js` usa `team68Api.login(...)`.
+- `public/assets/js/api-client.js` implementa login local:
+  - valida usuario/contrasena no vacios,
+  - crea o reutiliza un `usuarioId` local UUID,
+  - guarda sesion en `localStorage` (`team68-session`).
+- `requireAuth()` protege vistas internas y redirige a login si no hay sesion.
+
+## 4. Flujo de registros
+Archivo principal:
 - `public/assets/js/movements-local.js`
-  - Es la capa de datos local.
-  - Lee/escribe en `localStorage` con la clave `team68-movimientos`.
-  - Filtra movimientos para historial y actualiza tablas/totales.
 
-### Graficas
-- `public/pages/history.html`
-  - Construye 2 gráficas de barras (gastos por categoría e ingresos por categoría).
-  - Reacciona a cambios de filtros y tema.
-- `public/pages/perfil.html`
-  - Calcula métricas (salud, deuda, ahorro).
-  - Dibuja 3 gráficas tipo doughnut con Chart.js.
+Comportamiento:
+1. Al cargar vistas protegidas, ejecuta sincronizacion API (`syncFromApi`).
+2. Obtiene ingresos y movimientos del usuario por `usuarioId`.
+3. Renderiza tablas/totales con esos datos.
+4. Al crear registro (`addMovement`), envia POST al backend y actualiza vista con respuesta API.
 
-## 3. Flujo de formularios
+Nota:
+- No hay datos semilla.
+- No hay fallback local de registros cuando falla API.
 
-```mermaid
-flowchart TD
-  A[Usuario llena formulario] --> B[Click en Guardar]
-  B --> C[forms-local.js lee campos]
-  C --> D[team68Movements.add(payload)]
-  D --> E[Validación + normalización]
-  E --> F[Guardar en localStorage]
-  F --> G[Reset de formulario]
-  G --> H[Mensaje de éxito]
-  F --> I[Recarga de vistas/listas]
-```
+## 5. Flujo de analisis y perfil
+Analisis:
+- Se arma payload desde registros actuales en memoria (origen API).
+- Se envia a `POST /api/analisis`.
 
-### 3.1 Captura de datos
-En `forms-local.js` hay dos funciones principales:
-- `setupIncomeForm()` para ingresos.
-- `setupExpenseForm()` para gastos.
+Perfil:
+- `perfil.html` lee el resultado desde `localStorage` (`team68-financial-profile`) que se llena solo con respuesta API.
+- Si el analisis no esta disponible, muestra estado "sin datos del api".
+- Se refresca al recibir eventos:
+  - `team68:movements-updated`
+  - `team68:profile-updated`
 
-Ambas:
-1. Buscan el formulario y botón (`saveIncomeBtn` o `saveExpenseBtn`).
-2. En click, leen concepto, monto, fecha, categoría y cuenta/método.
-3. Llaman a `window.team68Movements.add({...})`.
+## 6. Formularios
+Archivo:
+- `public/assets/js/forms-local.js`
 
-### 3.2 Validaciones
-Las validaciones fuertes están en `movements-local.js`, dentro de `addMovement(payload)`:
-- Concepto obligatorio.
-- Fecha obligatoria.
-- Monto numérico y mayor a 0.
+Reglas actuales:
+- Ingreso: envia fecha, descripcion y monto.
+- Gasto: envia fecha, descripcion, monto, forma de pago y tasa si aplica.
+- Categoria de gasto no se envia desde formulario; el backend la determina.
 
-Si algo falla, lanza `Error` y `forms-local.js` muestra mensaje de error.
+## 7. Mensajeria y estados
+- Toasts de sincronizacion en `movements-local.js`:
+  - cargando,
+  - exito,
+  - error.
+- Cuando la API falla en sincronizacion:
+  - se vacian registros en vista,
+  - se limpia perfil API en almacenamiento,
+  - se informa el error.
 
-### 3.3 Normalización del monto
-`addMovement` ajusta signo segun tipo:
-- `Ingreso` => monto positivo.
-- `Gasto` => monto negativo.
-
-Esto facilita cálculos de totales y gráficas.
-
-### 3.4 Persistencia
-Se guarda en `localStorage` bajo:
-- `team68-movimientos`
-
-Al iniciar, `ensureSeedData()` carga datos semilla si no hay registros.
-
-## 4. Cómo se actualiza la vista tras guardar
-
-Después de guardar, hay dos comportamientos:
-- `forms-local.js` actualiza listas recientes (últimos ingresos/gastos).
-- `movements-local.js` mantiene las vistas de resumen/historial con:
-  - `loadSummaryTable()`
-  - `loadHistoryTable()`
-
-`loadHistoryTable()` además emite un evento:
-- `team68:history-data-change`
-
-Ese evento permite que las gráficas de historial se redibujen con los datos filtrados actuales.
-
-## 5. Graficas en historial (`history.html`)
-
-## 5.1 Origen de datos
-1. Se obtiene `currentHistoryRows` desde filtros activos.
-2. `getChartSeries(rows)` agrupa gastos por categoría.
-3. `getIncomeChartSeries(rows)` agrupa ingresos por categoría.
-
-Si no hay datos, se usa:
-- Etiqueta: `Sin datos`
-- Valor: `0`
-
-## 5.2 Render de Chart.js
-Se crean dos instancias tipo `bar`:
-- `expenseCategoryChart`
-
-Detalles importantes:
-- Antes de crear una nueva grafica se hace `destroy()` de la anterior.
-- `responsive: true` y `maintainAspectRatio: false`.
-- Tooltip y eje Y formateados con prefijo `$`.
-
-## 5.3 Re-render automático
-Se redibujan cuando:
-- Cambian datos del historial (`team68:history-data-change`).
-- Cambia el tema (`team68:theme-change`).
-
-## 6. Graficas de perfil financiero (`perfil.html`)
-
-## 6.1 Cálculo de métricas
-Con todos los movimientos:
-- `income`: suma de ingresos.
-- `expense`: suma de gastos absolutos.
-
-Fórmulas:
-- `debtPct = round((expense / income) * 100)`
-- `savingsAmount = max(income - expense, 0)`
-- `savingsPct = round((savingsAmount / income) * 100)`
-- `healthPct = round(100 - debtPct * 0.6 + savingsPct * 0.4)`
-
-Todo se limita a rango `[0, 100]`.
-
-## 6.2 Dibujo de donuts
-`drawDonut(canvasId, valueId, value, color)` crea cada grafica:
-- Tipo `doughnut`.
-- Dataset de 2 partes: `valor` y `resto`.
-- Sin leyenda, con tooltip en porcentaje.
-
-Se usa para:
-- `saludChart`
-- `deudaChart`
-- `ahorroChart`
-
-## 6.3 Estado y sugerencias
-Según el porcentaje:
-- Salud financiera: `saludable`, `en observación` o `en riesgo` (texto actual en código).
-- Se llenan listas de sugerencias para salud, deuda y ahorro.
-
-## 7. Resumen técnico rapido
-- Los formularios no escriben directo en la UI final: delegan en `team68Movements`.
-- `movements-local.js` centraliza reglas de negocio y persistencia.
-- Las gráficas se alimentan de datos ya filtrados/normalizados.
-- El evento `team68:history-data-change` desacopla tabla y gráficas en historial.
-
-## 8. Recomendaciones de mantenimiento
-- Mantener validaciones en un solo lugar (`addMovement`) para evitar inconsistencias.
-- Si agregas nuevos tipos de movimiento, actualizar:
-  - Normalización de monto.
-  - Filtros de historial.
-  - Serie de datos para charts.
-- Para nuevos dashboards, reutilizar `getAll()` + funciones de agregación por categoría/periodo.
-
-## 9. Contrato JSON para perfil financiero
-
-La vista de perfil (`public/pages/perfil.html`) ahora acepta dos formatos:
-- Formato nuevo (recomendado): claves simples en `camelCase`.
-- Formato anterior: claves en `snake_case` (compatibilidad activa).
-
-### 9.1 Formato recomendado
-
-```json
-{
-  "user": {
-    "id": 1,
-    "name": "Brayan Lira"
-  },
-  "financialProfile": {
-    "score": 76,
-    "status": "En observacion"
-  },
-  "dimensions": {
-    "financialBalance": {
-      "score": 87,
-      "status": "Saludable",
-      "indicators": {
-        "monthlyBalance": 5500,
-        "expenseRate": 0.78,
-        "financialMargin": 0.22
-      },
-      "recommendations": []
-    },
-    "savingsCapacity": {
-      "score": 64,
-      "status": "En observacion",
-      "indicators": {
-        "savingsRate": 0.08,
-        "periodSavingsAndInvestment": 2000,
-        "marginUsageRate": 0.36
-      },
-      "recommendations": []
-    },
-    "debt": {
-      "score": 91,
-      "status": "Saludable",
-      "indicators": {
-        "debtRatio": 0.12,
-        "debtPaymentAmount": 3000,
-        "debtPressure": 0.19,
-        "averageDebtCost": 50.1
-      },
-      "recommendations": []
-    },
-    "consumptionBehavior": {
-      "score": 58,
-      "status": "En observacion",
-      "indicators": {
-        "expenseDistributionByCategory": {},
-        "expenseConcentrationIndex": 0.58,
-        "consumptionProfile": {
-          "spendingPredominance": "Balance entre gastos esenciales y discrecionales",
-          "consumptionType": "Moderadamente concentrado",
-          "consumptionDiversification": "Diversificado",
-          "mainCategory": "Vivienda"
-        }
-      },
-      "recommendations": []
-    }
-  },
-  "generalRecommendation": "Texto de recomendación general"
-}
-```
-
-### 9.2 Entrada del payload en frontend
-
-Se puede enviar de 2 formas:
-- `window.team68FinancialPayload = {...}` antes de cargar la lógica de la página.
-- `localStorage.setItem("team68-financial-profile", JSON.stringify(payload))`.
-
-Si no existe payload, la página sigue calculando métricas locales con movimientos de `localStorage`.
+## 8. Archivos clave
+- `public/assets/js/api-client.js`: cliente API + sesion local.
+- `public/assets/js/login-local.js`: login UI.
+- `public/assets/js/logout-local.js`: cierre de sesion.
+- `public/assets/js/movements-local.js`: sincronizacion registros + analisis.
+- `public/assets/js/forms-local.js`: captura y envio de formularios.
+- `public/pages/perfil.html`: visualizacion del perfil proveniente de API.

@@ -116,18 +116,21 @@
       return;
     }
 
-    saveBtn.addEventListener("click", function () {
+    saveBtn.addEventListener("click", async function () {
       var concepto = document.getElementById(conceptoId).value.trim().slice(0, 60);
       var monto = document.getElementById(montoId).value;
       var fecha = document.getElementById(fechaId).value;
-      var categoria = document.getElementById(categoriaId).value;
+      var categoriaNode = categoriaId ? document.getElementById(categoriaId) : null;
       var payload = {
         concepto: concepto,
         monto: Number(monto),
         fecha: normalizeDate(fecha),
-        categoria: categoria,
         tipo: tipo
       };
+
+      if (categoriaNode && categoriaNode.value) {
+        payload.categoria = categoriaNode.value;
+      }
 
       if (metodoPagoId) {
         payload.metodoPago = document.getElementById(metodoPagoId).value;
@@ -144,7 +147,8 @@
       }
 
       try {
-        var row = window.team68Movements.add(payload);
+        saveBtn.disabled = true;
+        var row = await window.team68Movements.add(payload);
         form.reset();
         setTodayOnInput(fechaId);
         if (tipo === "Gasto") {
@@ -157,13 +161,20 @@
         renderRecentLists();
       } catch (error) {
         showMessage("error", "No se pudo guardar", error.message);
+      } finally {
+        saveBtn.disabled = false;
       }
     });
   }
 
   setupMovementForm("incomeEntryForm", "saveIncomeBtn", "conceptoIngreso", "montoIngreso", "fechaIngreso", "categoriaIngreso", null, "Ingreso");
-  setupMovementForm("expenseEntryForm", "saveExpenseBtn", "conceptoGasto", "montoGasto", "fechaGasto", "categoriaGasto", "metodoPagoGasto", "Gasto");
+  setupMovementForm("expenseEntryForm", "saveExpenseBtn", "conceptoGasto", "montoGasto", "fechaGasto", null, "metodoPagoGasto", "Gasto");
   setupCreditInterestField();
   setTodayOnDateFields();
   renderRecentLists();
+
+  // Re-render when initial API synchronization finishes.
+  document.addEventListener("team68:movements-updated", function () {
+    renderRecentLists();
+  });
 })();

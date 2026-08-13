@@ -9,7 +9,7 @@
   <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
   <link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
   <link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
-  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
+  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
   <style>
     .chart-shell {
       min-height: 320px;
@@ -47,7 +47,6 @@
           <select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
             <option value="default">Default (Bootstrap)</option>
             <option value="wireframe">Wireframe</option>
-            <option value="modern">Modern</option>
             <option value="y2k">Y2K</option>
             <option value="hollow">Hollow</option>
 							<option value="rendi">Rendi</option>
@@ -97,7 +96,6 @@
         <div class="col-12 d-flex gap-2">
           <button type="button" class="btn btn-primary" id="applyFiltersBtn"><i class="fa-solid fa-filter" aria-hidden="true"></i> Aplicar filtros</button>
           <button type="button" class="btn btn-outline-secondary" id="clearFiltersBtn"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Limpiar</button>
-           <button type="button" class="btn btn-outline-secondary" id="resetFiltersBtn"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Restablecer</button>
         </div>
       </form>
     </section>
@@ -165,6 +163,7 @@
   <script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
   <script src="../assets/js/theme-switcher.js"></script>
   <script src="../assets/js/page-help.js"></script>
+  <script src="../assets/js/api-client.js"></script>
   <script src="../assets/js/movements-local.js"></script>
   <script src="../vendor/chartjs/chart.umd.min.js"></script>
   <script>
