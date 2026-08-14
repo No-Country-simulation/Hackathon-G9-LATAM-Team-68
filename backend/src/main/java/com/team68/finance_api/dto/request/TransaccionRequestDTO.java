@@ -37,8 +37,4 @@ public class TransaccionRequestDTO {
     @JsonProperty("tasa_de_interes_de_la_tarjeta")
     @JsonAlias("tasaDeInteresDeLaTarjeta")
     private Double tasaDeInteresDeLaTarjeta;
-
-    private TipoFinanciero tipoFinanciero;
-
-    private CategoriaConsumo categoria;
 }

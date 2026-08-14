@@ -89,8 +89,6 @@ public class CalculoFinancieroService {
                     .monto(t.getMonto())
                     .formaPago(t.getFormaPago())
                     .tasaDeInteresDeLaTarjeta(t.getTasaDeInteresDeLaTarjeta())
-                    .tipoFinanciero(t.getTipoFinanciero())
-                    .categoria(t.getCategoria())
                     .build())
             .collect(Collectors.toList());
 
