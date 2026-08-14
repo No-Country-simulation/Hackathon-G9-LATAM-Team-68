@@ -74,25 +74,25 @@ public class CalculoFinancieroService {
 
         // 4. Mapear Ingresos (pasa i.getFecha() directamente como LocalDate)
         List<IngresoRequestDTO> ingresosDTO = ingresosEntities.stream()
-                .map(i -> IngresoRequestDTO.builder()
-                        .fecha(i.getFecha())
-                        .descripcion(i.getDescripcion())
-                        .monto(i.getMonto())
-                        .build())
-                .collect(Collectors.toList());
+            .map(i -> IngresoRequestDTO.builder()
+                    .fecha(i.getFecha() != null ? LocalDate.parse(formatearFecha(i.getFecha())) : null)
+                    .descripcion(i.getDescripcion())
+                    .monto(i.getMonto())
+                    .build())
+            .collect(Collectors.toList());
 
         // 5. Mapear Transacciones (pasa t.getFecha() directamente como LocalDate)
         List<TransaccionRequestDTO> transaccionesDTO = transaccionesEntities.stream()
-                .map(t -> TransaccionRequestDTO.builder()
-                        .fecha(t.getFecha())
-                        .descripcion(t.getDescripcion())
-                        .monto(t.getMonto())
-                        .formaPago(t.getFormaPago())
-                        .tasaDeInteresDeLaTarjeta(t.getTasaDeInteresDeLaTarjeta())
-                        .tipoFinanciero(t.getTipoFinanciero())
-                        .categoria(t.getCategoria())
-                        .build())
-                .collect(Collectors.toList());
+            .map(t -> TransaccionRequestDTO.builder()
+                    .fecha(t.getFecha() != null ? LocalDate.parse(formatearFecha(t.getFecha())) : null)
+                    .descripcion(t.getDescripcion())
+                    .monto(t.getMonto())
+                    .formaPago(t.getFormaPago())
+                    .tasaDeInteresDeLaTarjeta(t.getTasaDeInteresDeLaTarjeta())
+                    .tipoFinanciero(t.getTipoFinanciero())
+                    .categoria(t.getCategoria())
+                    .build())
+            .collect(Collectors.toList());
 
         // 6. Armar el payload completo para el servicio externo
         AnalisisRequestDTO payload = AnalisisRequestDTO.builder()
@@ -117,5 +117,17 @@ public class CalculoFinancieroService {
         );
 
         return response.getBody();
+    }
+
+    // Método auxiliar para garantizar formato YYYY-MM-DD
+    private String formatearFecha(Object fecha) {
+        if (fecha == null) return null;
+        String fechaStr = fecha.toString().trim();
+
+        // Si la fecha solo contiene el año (4 dígitos, p. ej. "2026")
+        if (fechaStr.matches("^\\d{4}$")) {
+            return fechaStr + "-01-01";
+        }
+        return fechaStr;
     }
 }
