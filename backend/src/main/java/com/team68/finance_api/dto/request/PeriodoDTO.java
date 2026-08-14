@@ -1,8 +1,8 @@
 package com.team68.finance_api.dto.request;
 
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -10,9 +10,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class PeriodoDTO {
-    @NotNull(message = "La fecha de inicio es obligatoria")
-    private LocalDate inicio;
+    @NotBlank(message = "La fecha de inicio es obligatoria")
+    @JsonProperty("inicio")
+    private String inicio;
 
-    @NotNull(message = "La fecha de fin es obligatoria")
-    private LocalDate fin;
+    @NotBlank(message = "La fecha de fin es obligatoria")
+    @JsonProperty("fin")
+    private String fin;
 }
