@@ -4,7 +4,6 @@ import com.team68.finance_api.dto.request.UsuarioRequestDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,8 +19,8 @@ public class AnalisisResponseDTO {
 
     private DimensionesWrapperDTO dimensiones;
 
-    @JsonProperty("recomendaciones_generales")
-    private List<String> recomendacionesGenerales;
+    @JsonProperty("recomendacion_general")
+    private String recomendacionGeneral;
 
     @Getter
     @Setter
@@ -32,12 +31,12 @@ public class AnalisisResponseDTO {
         @JsonProperty("balance_financiero")
         private DimensionDetalleDTO balanceFinanciero;
 
-        @JsonProperty("capacidad_ahorro")
+        @JsonProperty("capacidad_de_ahorro")
         private DimensionDetalleDTO capacidadAhorro;
 
         private DimensionDetalleDTO endeudamiento;
 
-        @JsonProperty("comportamiento_consumo")
+        @JsonProperty("comportamiento_de_consumo")
         private DimensionDetalleDTO comportamientoConsumo;
     }
 }

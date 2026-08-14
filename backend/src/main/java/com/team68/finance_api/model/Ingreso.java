@@ -10,13 +10,13 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "transacciones")
+@Table(name = "ingresos")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Transaccion {
+public class Ingreso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,17 +35,4 @@ public class Transaccion {
 
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal monto;
-
-    @Column(name = "forma_pago", nullable = false)
-    private String formaPago;
-
-    @Column(name = "tasa_interes")
-    private Double tasaDeInteresDeLaTarjeta;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_financiero")
-    private TipoFinanciero tipoFinanciero;
-
-    @Enumerated(EnumType.STRING)
-    private CategoriaConsumo categoria;
 }

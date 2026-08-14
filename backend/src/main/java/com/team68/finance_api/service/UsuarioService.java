@@ -8,6 +8,7 @@ import com.team68.finance_api.model.Usuario;
 import com.team68.finance_api.repository.MedallaRepository;
 import com.team68.finance_api.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,15 +18,21 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final MedallaRepository medallaRepository;
+    private final GamificacionService gamificacionService;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, MedallaRepository medallaRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository,
+                            MedallaRepository medallaRepository,
+                            GamificacionService gamificacionService) {
         this.usuarioRepository = usuarioRepository;
         this.medallaRepository = medallaRepository;
+        this.gamificacionService = gamificacionService;
     }
 
+    @SuppressWarnings("null")
+    @Transactional
     public AuthResponseDTO login(AuthRequestDTO request) {
-        // Buscar o crear usuario (sin la variable esNuevoUsuario innecesaria)
-        Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(request.getUsername());
+        // Buscar usuario con sus medallas inicializadas o crearlo
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByUsernameWithMedallas(request.getUsername());
         Usuario usuario;
 
         if (usuarioOpt.isPresent()) {
@@ -35,7 +42,7 @@ public class UsuarioService {
                     .username(request.getUsername())
                     .password(request.getPassword())
                     .nombre(request.getUsername())
-                    .medallas(new HashSet<>()) // Asegurar inicialización de la colección
+                    .medallas(new HashSet<>())
                     .build();
         }
 
@@ -56,13 +63,16 @@ public class UsuarioService {
                 .build();
     }
 
+    @Transactional
     public List<MedallaResponseDTO> obtenerMedallasUsuario(UUID usuarioId) {
-        Usuario usuario = usuarioRepository.findById(usuarioId)
+        // Ejecutar la evaluación de medallas al consultar el estado actual
+        gamificacionService.evaluarYAsignarMedallas(usuarioId);
+
+        Usuario usuario = usuarioRepository.findByIdWithMedallas(usuarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
         List<Medalla> todasLasMedallas = medallaRepository.findAll();
 
-        // Cambiado a Set<Long> y lambda explícita m -> m.getId() para evitar warnings de null safety
         Set<Long> medallasObtenidasIds = usuario.getMedallas().stream()
                 .filter(Objects::nonNull)
                 .map(m -> m.getId())
