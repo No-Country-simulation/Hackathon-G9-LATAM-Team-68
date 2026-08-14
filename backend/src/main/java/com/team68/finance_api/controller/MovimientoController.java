@@ -45,8 +45,6 @@ public class MovimientoController {
                 .monto(dto.getMonto())
                 .formaPago(dto.getFormaPago())
                 .tasaDeInteresDeLaTarjeta(dto.getTasaDeInteresDeLaTarjeta())
-                .tipoFinanciero(dto.getTipoFinanciero())
-                .categoria(dto.getCategoria())
                 .build();
 
         @SuppressWarnings("null")
