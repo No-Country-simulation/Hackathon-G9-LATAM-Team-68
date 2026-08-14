@@ -83,13 +83,20 @@ public class CalculoFinancieroService {
 
         // 5. Mapear Transacciones
         List<TransaccionRequestDTO> transaccionesDTO = transaccionesEntities.stream()
-            .map(t -> TransaccionRequestDTO.builder()
-                    .fecha(t.getFecha()) // Pasa directamente el LocalDate/Date
-                    .descripcion(t.getDescripcion())
-                    .monto(t.getMonto())
-                    .formaPago(t.getFormaPago())
-                    .tasaDeInteresDeLaTarjeta(t.getTasaDeInteresDeLaTarjeta())
-                    .build())
+            .map(t -> {
+                // Verificar si es tarjeta de crédito (ignorando mayúsculas/minúsculas o acentos si aplica)
+                boolean esTarjetaCredito = t.getFormaPago() != null &&
+                        t.getFormaPago().equalsIgnoreCase("Tarjeta de crédito");
+
+                return TransaccionRequestDTO.builder()
+                        .fecha(t.getFecha())
+                        .descripcion(t.getDescripcion())
+                        .monto(t.getMonto())
+                        .formaPago(t.getFormaPago())
+                        // Si no es tarjeta de crédito, se envía null
+                        .tasaDeInteresDeLaTarjeta(esTarjetaCredito ? t.getTasaDeInteresDeLaTarjeta() : null)
+                        .build();
+            })
             .collect(Collectors.toList());
 
         // 6. Armar el payload completo para el servicio externo

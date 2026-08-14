@@ -1,9 +1,8 @@
 package com.team68.finance_api.dto.request;
 
-import com.team68.finance_api.model.CategoriaConsumo;
-import com.team68.finance_api.model.TipoFinanciero;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
@@ -18,6 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransaccionRequestDTO {
     @NotNull(message = "La fecha es obligatoria")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
