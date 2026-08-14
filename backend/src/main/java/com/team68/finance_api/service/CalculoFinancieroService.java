@@ -72,19 +72,19 @@ public class CalculoFinancieroService {
                 .nombre(usuario.getNombre())
                 .build();
 
-        // 4. Mapear Ingresos (pasa i.getFecha() directamente como LocalDate)
+        // 4. Mapear Ingresos
         List<IngresoRequestDTO> ingresosDTO = ingresosEntities.stream()
             .map(i -> IngresoRequestDTO.builder()
-                    .fecha(i.getFecha() != null ? LocalDate.parse(formatearFecha(i.getFecha())) : null)
+                    .fecha(i.getFecha()) // Pasa directamente el LocalDate/Date
                     .descripcion(i.getDescripcion())
                     .monto(i.getMonto())
                     .build())
             .collect(Collectors.toList());
 
-        // 5. Mapear Transacciones (pasa t.getFecha() directamente como LocalDate)
+        // 5. Mapear Transacciones
         List<TransaccionRequestDTO> transaccionesDTO = transaccionesEntities.stream()
             .map(t -> TransaccionRequestDTO.builder()
-                    .fecha(t.getFecha() != null ? LocalDate.parse(formatearFecha(t.getFecha())) : null)
+                    .fecha(t.getFecha()) // Pasa directamente el LocalDate/Date
                     .descripcion(t.getDescripcion())
                     .monto(t.getMonto())
                     .formaPago(t.getFormaPago())
@@ -117,17 +117,5 @@ public class CalculoFinancieroService {
         );
 
         return response.getBody();
-    }
-
-    // Método auxiliar para garantizar formato YYYY-MM-DD
-    private String formatearFecha(Object fecha) {
-        if (fecha == null) return null;
-        String fechaStr = fecha.toString().trim();
-
-        // Si la fecha solo contiene el año (4 dígitos, p. ej. "2026")
-        if (fechaStr.matches("^\\d{4}$")) {
-            return fechaStr + "-01-01";
-        }
-        return fechaStr;
     }
 }
