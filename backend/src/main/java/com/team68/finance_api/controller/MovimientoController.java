@@ -60,4 +60,32 @@ public class MovimientoController {
     public ResponseEntity<List<Transaccion>> obtenerMovimientosUsuario(@PathVariable UUID usuarioId){
         return ResponseEntity.ok(transaccionRepository.findByUsuarioId(usuarioId));
     }
+
+    @PutMapping("/{transaccionId}")
+    public ResponseEntity<Transaccion> actualizarTransaccion(@PathVariable UUID transaccionId,
+                                                             @Valid @RequestBody TransaccionRequestDTO dto){
+        Transaccion transaccion = transaccionRepository.findById(transaccionId)
+                .orElseThrow(() -> new IllegalArgumentException("Transaccion no encontrada"));
+
+        transaccion.setFecha(dto.getFecha());
+        transaccion.setDescripcion(dto.getDescripcion());
+        transaccion.setMonto(dto.getMonto());
+        transaccion.setFormaPago(dto.getFormaPago());
+        transaccion.setTasaDeInteresDeLaTarjeta(dto.getTasaDeInteresDeLaTarjeta());
+
+        Transaccion transaccionActualizada = transaccionRepository.save(transaccion);
+
+        return ResponseEntity.ok(transaccionActualizada);
+    }
+
+    @DeleteMapping("/{transaccionId}")
+    public  ResponseEntity<Void> eliminarTransaccion(@PathVariable UUID transaccionId){
+        Transaccion transaccion = transaccionRepository.findById(transaccionId)
+                .orElseThrow(() -> new IllegalArgumentException("Transaccion no encontrada"));
+
+        transaccionRepository.delete(transaccion);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
