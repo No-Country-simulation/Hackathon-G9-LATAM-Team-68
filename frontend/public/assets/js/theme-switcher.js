@@ -1,4 +1,6 @@
 (function () {
+  var hasOwn = Object.prototype.hasOwnProperty.call.bind(Object.prototype.hasOwnProperty);
+
   var themeLink = document.getElementById("themeStylesheet");
   if (!themeLink) {
     return;
@@ -20,7 +22,6 @@
   };
   var themes = {
     default: null,
-    wireframe: themeLink.dataset.wireframe || themeLink.getAttribute("href"),
     y2k: themeLink.dataset.y2k,
     hollow: themeLink.dataset.hollow,
     rendi: themeLink.dataset.rendi
@@ -35,7 +36,7 @@
     fields.forEach(function (field) {
       field.classList.remove("wf-api-on", "wf-api-off");
 
-      if (themeName !== "wireframe") {
+      if (themeName !== "default") {
         return;
       }
 
@@ -48,7 +49,7 @@
   }
 
   function applyTheme(themeName, persist) {
-    if (!Object.hasOwn(themes, themeName)) {
+    if (!hasOwn(themes, themeName)) {
       return;
     }
 
@@ -70,7 +71,7 @@
   }
 
   var storedTheme = localStorage.getItem("team68-theme");
-  var initialTheme = Object.hasOwn(themes, storedTheme) ? storedTheme : "rendi";
+  var initialTheme = hasOwn(themes, storedTheme) ? storedTheme : "rendi";
 
   applyTheme(initialTheme, false);
 

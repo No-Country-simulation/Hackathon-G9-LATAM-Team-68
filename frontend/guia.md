@@ -2,11 +2,10 @@
 
 ## 1. Alcance actual
 Esta version usa el backend para todo el flujo de datos de negocio:
+- Login y sesion: API.
 - Registros (ingresos y gastos): API.
 - Analisis financiero: API.
 - Perfil financiero: API.
-
-El login se mantiene local para habilitar la sesion de UI sin llamar al endpoint de autenticacion.
 
 ## 2. Endpoints usados
 Base URL:
@@ -20,16 +19,16 @@ Operaciones:
 - `POST /api/analisis`
 
 ## 3. Flujo de sesion
-- `public/assets/js/login-local.js` usa `team68Api.login(...)`.
-- `public/assets/js/api-client.js` implementa login local:
+- `public/assets/js/login.js` usa `team68Api.login(...)`.
+- `public/assets/js/api-client.js` autentica contra `POST /api/auth/login`:
   - valida usuario/contrasena no vacios,
-  - crea o reutiliza un `usuarioId` local UUID,
+  - obtiene `id` (UUID), `username`, `nombre` y `token` desde backend,
   - guarda sesion en `localStorage` (`team68-session`).
 - `requireAuth()` protege vistas internas y redirige a login si no hay sesion.
 
 ## 4. Flujo de registros
 Archivo principal:
-- `public/assets/js/movements-local.js`
+- `public/assets/js/movements.js`
 
 Comportamiento:
 1. Al cargar vistas protegidas, ejecuta sincronizacion API (`syncFromApi`).
@@ -55,7 +54,7 @@ Perfil:
 
 ## 6. Formularios
 Archivo:
-- `public/assets/js/forms-local.js`
+- `public/assets/js/forms.js`
 
 Reglas actuales:
 - Ingreso: envia fecha, descripcion y monto.
@@ -63,7 +62,7 @@ Reglas actuales:
 - Categoria de gasto no se envia desde formulario; el backend la determina.
 
 ## 7. Mensajeria y estados
-- Toasts de sincronizacion en `movements-local.js`:
+- Toasts de sincronizacion en `movements.js`:
   - cargando,
   - exito,
   - error.
@@ -74,8 +73,8 @@ Reglas actuales:
 
 ## 8. Archivos clave
 - `public/assets/js/api-client.js`: cliente API + sesion local.
-- `public/assets/js/login-local.js`: login UI.
-- `public/assets/js/logout-local.js`: cierre de sesion.
-- `public/assets/js/movements-local.js`: sincronizacion registros + analisis.
-- `public/assets/js/forms-local.js`: captura y envio de formularios.
+- `public/assets/js/login.js`: login UI.
+- `public/assets/js/logout.js`: cierre de sesion.
+- `public/assets/js/movements.js`: sincronizacion registros + analisis.
+- `public/assets/js/forms.js`: captura y envio de formularios.
 - `public/pages/perfil.html`: visualizacion del perfil proveniente de API.

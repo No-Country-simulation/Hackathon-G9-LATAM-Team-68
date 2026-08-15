@@ -1,7 +1,6 @@
 (function () {
   var API_BASE_URL = "https://hackathon-g9-latam-team-68.onrender.com";
   var SESSION_KEY = "team68-session";
-  var LOCAL_SESSION_ID_KEY = "team68-local-user-id";
 
   function safeParseJSON(raw) {
     try {
@@ -9,6 +8,10 @@
     } catch (error) {
       return null;
     }
+  }
+
+  function isValidUuid(value) {
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || ""));
   }
 
   function normalizeErrorMessage(response, payload) {
@@ -50,6 +53,10 @@
       return null;
     }
 
+    if (!isValidUuid(parsed.id)) {
+      return null;
+    }
+
     return parsed;
   }
 
@@ -59,7 +66,6 @@
 
   function clearSession() {
     localStorage.removeItem(SESSION_KEY);
-    localStorage.removeItem("team68-movimientos-cache");
     localStorage.removeItem("team68-financial-profile");
   }
 
@@ -68,27 +74,13 @@
     return !!(session && session.id);
   }
 
-  function getOrCreateLocalUserId() {
-    var existing = localStorage.getItem(LOCAL_SESSION_ID_KEY);
-    if (existing) {
-      return existing;
-    }
-
-    var nextId;
-    if (window.crypto && typeof window.crypto.randomUUID === "function") {
-      nextId = window.crypto.randomUUID();
-    } else {
-      nextId = "00000000-0000-0000-0000-000000000001";
-    }
-
-    localStorage.setItem(LOCAL_SESSION_ID_KEY, nextId);
-    return nextId;
-  }
-
   async function request(path, options) {
     var config = options || {};
     var headers = Object.assign({}, config.headers || {});
     var session = getSession();
+    var method = config.method || "GET";
+    var endpoint = path;
+    var operation = config.operation || "api";
 
     if (config.body && !headers["Content-Type"]) {
       headers["Content-Type"] = "application/json";
@@ -98,20 +90,25 @@
       headers.Authorization = "Bearer " + session.token;
     }
 
-    var response = await fetch(API_BASE_URL + path, {
-      method: config.method || "GET",
-      headers: headers,
-      body: config.body
-    });
+    try {
+      var response = await fetch(API_BASE_URL + path, {
+        method: method,
+        headers: headers,
+        body: config.body
+      });
 
-    var text = await response.text();
-    var payload = text ? safeParseJSON(text) || text : null;
+      var text = await response.text();
+      var payload = text ? safeParseJSON(text) || text : null;
 
-    if (!response.ok) {
-      throw new Error(normalizeErrorMessage(response, payload));
+      if (!response.ok) {
+        var httpErrorMessage = normalizeErrorMessage(response, payload);
+        throw new Error(httpErrorMessage);
+      }
+
+      return payload;
+    } catch (error) {
+      throw error;
     }
-
-    return payload;
   }
 
   async function login(username, password) {
@@ -121,11 +118,25 @@
       throw new Error("Debes ingresar usuario y contrasena.");
     }
 
+    var authResponse = await request("/api/auth/login", {
+      method: "POST",
+      auth: false,
+      body: JSON.stringify({
+        username: cleanUser,
+        password: cleanPassword
+      }),
+      operation: "iniciar sesion"
+    });
+
+    if (!authResponse || !authResponse.id) {
+      throw new Error("La API no devolvio un identificador de usuario valido.");
+    }
+
     var session = {
-      id: getOrCreateLocalUserId(),
-      username: cleanUser,
-      nombre: cleanUser,
-      token: ""
+      id: String(authResponse.id),
+      username: String(authResponse.username || cleanUser),
+      nombre: String(authResponse.nombre || authResponse.username || cleanUser),
+      token: String(authResponse.token || "")
     };
 
     saveSession(session);
@@ -156,31 +167,38 @@
   }
 
   function getIngresosUsuario(usuarioId) {
-    return request("/api/ingresos/usuario/" + encodeURIComponent(usuarioId));
+    return request("/api/ingresos/usuario/" + encodeURIComponent(usuarioId), {
+      operation: "listar ingresos"
+    });
   }
 
   function crearIngreso(usuarioId, payload) {
     return request("/api/ingresos/usuario/" + encodeURIComponent(usuarioId), {
       method: "POST",
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      operation: "registrar ingreso"
     });
   }
 
   function getMovimientosUsuario(usuarioId) {
-    return request("/api/movimientos/usuario/" + encodeURIComponent(usuarioId));
+    return request("/api/movimientos/usuario/" + encodeURIComponent(usuarioId), {
+      operation: "listar movimientos"
+    });
   }
 
   function crearTransaccion(usuarioId, payload) {
     return request("/api/movimientos/usuario/" + encodeURIComponent(usuarioId), {
       method: "POST",
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      operation: "registrar movimiento"
     });
   }
 
   function realizarAnalisis(payload) {
-    return request("/api/analisis", {
+    return request("/api/analisis/analizar", {
       method: "POST",
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      operation: "analisis financiero"
     });
   }
 

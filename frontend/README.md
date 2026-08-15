@@ -114,7 +114,7 @@ Este repositorio implementa la capa frontend del MVP como maqueta funcional en H
     - rendi.css: estilo y diseño de rendi.
   - assets/js/
     - theme-switcher.js: cambio de tema y persistencia.
-    - movements-local.js: datos y movimientos de ejemplo.
+    - movements.js: datos y movimientos de ejemplo.
     - page-help.js: ayuda contextual.
   - vendor/
     - bootstrap: estilos y componentes.

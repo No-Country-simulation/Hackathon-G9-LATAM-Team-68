@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <link rel="icon" type="image/png" href="../assets/images/rendi-10.png">
   <title>Team68 Salud Financiera | Salud financiera</title>
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
   <link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
   <link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
-  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
+  <link id="themeStylesheet" rel="stylesheet" href="" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
   <style>
     .health-chart-shell {
       max-width: 220px;
@@ -29,7 +29,7 @@
   <nav class="navbar navbar-expand-lg border-bottom">
     <div class="container">
       <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
-        <img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
+        <img src="../assets/images/logo.png" alt="Team68" width="140" height="36">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
         <span class="navbar-toggler-icon"></span>
@@ -48,14 +48,6 @@
             <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
             <span></span>
           </button>
-          <label for="themeSelector" class="small mb-0">Estilo</label>
-          <select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
-            <option value="default">Default (Bootstrap)</option>
-            <option value="wireframe">Wireframe</option>
-            <option value="y2k">Y2K</option>
-            <option value="hollow">Hollow</option>
-							<option value="rendi">Rendi</option>
-          </select>
         </div>
       </div>
     </div>
@@ -66,7 +58,7 @@
     <section class="rounded-3 border p-4 mb-4" id="financialHealthHeader">
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
         <div>
-          <h1 class="h3 mb-1">Perfil financiero</h1>
+          <h1 class="h3 mb-1" id="usuarioNombreHeader">Perfil financiero de Usuario</h1>
           <small>Indicadores clave de tu situación actual</small>
         </div>
         <a href="history.html" class="btn btn-outline-secondary"><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Ver historial</a>
@@ -126,7 +118,7 @@
         <div class="col-md-4">
           <article class="h-100 text-center">
             <div class="card-body">
-              <img src="../assets/images/medalla-finanzas-saludables.webp" class="img-fluid mb-3" alt="Medalla finanzas saludables">
+              <img src="../assets/images/rendi-01.png" width="75%" class="img-fluid mb-3" alt="Medalla finanzas saludables">
               <h3 class="h6 mb-2">Finanzas saludables</h3>
               <p class="small mb-0">Reconoce constancia en ahorro y balance financiero estable.</p>
             </div>
@@ -135,7 +127,7 @@
         <div class="col-md-4">
           <article class="h-100 text-center">
             <div class="card-body">
-              <img src="../assets/images/medalla-deuda-bajo control.webp" class="img-fluid mb-3" alt="Medalla deuda bajo control">
+              <img src="../assets/images/rendi-08.png" width="75%" class="img-fluid mb-3" alt="Medalla deuda bajo control">
               <h3 class="h6 mb-2">Deuda bajo control</h3>
               <p class="small mb-0">Premio por mantener el endeudamiento dentro de un nivel sano.</p>
             </div>
@@ -144,7 +136,7 @@
         <div class="col-md-4">
           <article class="h-100 text-center">
             <div class="card-body">
-              <img src="../assets/images/medalla-gasto-hormiga-reina.webp" class="img-fluid mb-3" alt="Medalla gasto hormiga reina">
+              <img src="../assets/images/rendi-05.png" width="75%" class="img-fluid mb-3" alt="Medalla gasto hormiga reina">
               <h3 class="h6 mb-2">Gasto hormiga reina</h3>
               <p class="small mb-0">La hormiga reina exige un gasto a la altura de sus caprichos.</p>
             </div>
@@ -160,10 +152,25 @@
   <script src="../assets/js/theme-switcher.js"></script>
   <script src="../assets/js/page-help.js"></script>
   <script src="../assets/js/api-client.js"></script>
-  <script src="../assets/js/movements-local.js"></script>
+  <script src="../assets/js/movements.js"></script>
   <script src="../vendor/chartjs/chart.umd.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
+    var chartInstances = {};
+
+    function renderUsuarioHeader() {
+      var name = "Usuario";
+      if (window.team68Api && typeof window.team68Api.getUsuarioNombre === "function") {
+        name = window.team68Api.getUsuarioNombre();
+      }
+      var el = document.getElementById("usuarioNombreHeader");
+      if (el) {
+        el.textContent = "Perfil financiero de " + name;
+      }
+    }
+
+    renderUsuarioHeader();
+
     function pickFirstDefined(values) {
       for (var i = 0; i < values.length; i += 1) {
         if (values[i] !== undefined && values[i] !== null) {
@@ -255,6 +262,11 @@
       if (!canvas) {
         return;
       }
+
+      if (chartInstances[canvasId]) {
+        chartInstances[canvasId].destroy();
+      }
+
       var centerLabelPlugin = {
         id: "team68-center-label-" + canvasId,
         afterDraw: function (chart) {
@@ -280,7 +292,7 @@
           ctx.restore();
         }
       };
-      new Chart(canvas, {
+      chartInstances[canvasId] = new Chart(canvas, {
         type: "doughnut",
         plugins: [centerLabelPlugin],
         data: {
