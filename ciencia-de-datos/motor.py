@@ -3066,3 +3066,12 @@ def funcion_integradora_final (datos):
 	)
 	resultado_financiero = ejecutar_motor_financiero(datos_clasificados)
 	return resultado_financiero
+
+def clasificar_datos(datos):
+    datos_clasificados = ejecutar_clasificacion(
+        datos_entrada=datos,
+        pipeline_movimiento=pipeline_movimiento,
+        pipeline_categoria=pipeline_categoria
+    )
+
+    return datos_clasificados

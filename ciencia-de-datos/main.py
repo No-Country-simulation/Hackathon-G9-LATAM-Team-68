@@ -16,3 +16,8 @@ def analizar(datos: dict):
             status_code=400,
             detail=str(e)
         )
+    
+@app.post("/clasificar")
+def clasificar(datos: dict):
+    resultado = motor.clasificar_datos(datos)
+    return resultado
