@@ -25,11 +25,24 @@ public class ClasificacionResponseDTO {
         private String descripcion;
 
         @JsonProperty("tipo_financiero")
-        @JsonAlias({"tipoFinanciero", "tipo", "tipo_financiero_clasificado"})
-        private TipoFinanciero tipoFinanciero;
+        @JsonAlias({"clasificacion", "tipoFinanciero", "tipo"})
+        private Object tipoFinancieroRaw;
 
         @JsonProperty("categoria")
-        @JsonAlias({"categoria_consumo", "categoriaConsumo", "categoria_clasificada"})
+        @JsonAlias({"categoria_consumo", "categoriaConsumo"})
         private CategoriaConsumo categoria;
+
+        public TipoFinanciero getTipoFinanciero() {
+            if (tipoFinancieroRaw == null) {
+                return TipoFinanciero.CONSUMO;
+            }
+
+            // Si la IA regresa un array: ["Pago de deuda"]
+            if (tipoFinancieroRaw instanceof List<?> list && !list.isEmpty()) {
+                return TipoFinanciero.fromString(list.get(0).toString());
+            }
+
+            return TipoFinanciero.fromString(tipoFinancieroRaw.toString());
+        }
     }
 }
