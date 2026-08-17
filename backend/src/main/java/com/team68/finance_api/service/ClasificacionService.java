@@ -15,8 +15,10 @@ import com.team68.finance_api.repository.IngresoRepository;
 import com.team68.finance_api.repository.TransaccionRepository;
 import com.team68.finance_api.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -24,7 +26,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -103,26 +104,24 @@ public class ClasificacionService {
                 .transacciones(transaccionesDTO)
                 .build();
 
-        // 6. Petición POST a /clasificar
+        // 6. Petición POST a /clasificar usando ParameterizedTypeReference
         String url = analisisApiUrl.replaceAll("/+$", "") + "/clasificar";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<AnalisisRequestDTO> entity = new HttpEntity<>(payload, headers);
 
-        // Se recibe directamente un Array/List JSON en la respuesta
-        ResponseEntity<TransaccionClasificadaDTO[]> response = restTemplate.postForEntity(
+        ResponseEntity<List<TransaccionClasificadaDTO>> response = restTemplate.exchange(
                 url,
+                HttpMethod.POST,
                 entity,
-                TransaccionClasificadaDTO[].class
+                new ParameterizedTypeReference<List<TransaccionClasificadaDTO>>() {}
         );
 
-        TransaccionClasificadaDTO[] clasificadasArray = response.getBody();
+        List<TransaccionClasificadaDTO> clasificadas = response.getBody();
 
         // 7. Actualizar las transacciones en DB
-        if (clasificadasArray != null && clasificadasArray.length > 0) {
-            List<TransaccionClasificadaDTO> clasificadas = Arrays.asList(clasificadasArray);
-
+        if (clasificadas != null && !clasificadas.isEmpty()) {
             for (int i = 0; i < transacciones.size() && i < clasificadas.size(); i++) {
                 Transaccion t = transacciones.get(i);
                 TransaccionClasificadaDTO c = clasificadas.get(i);
@@ -145,11 +144,11 @@ public class ClasificacionService {
     }
 
     private PeriodoDTO calcularPeriodo(List<Transaccion> transacciones, List<Ingreso> ingresos) {
-        var fechaMinTransaccion = transacciones.stream().map(Transaccion::getFecha).min(Comparator.naturalOrder());
-        var fechaMaxTransaccion = transacciones.stream().map(Transaccion::getFecha).max(Comparator.naturalOrder());
+        var fechaMinTransaccion = transacciones.stream().map(t -> t.getFecha()).min(Comparator.naturalOrder());
+        var fechaMaxTransaccion = transacciones.stream().map(t -> t.getFecha()).max(Comparator.naturalOrder());
 
-        var fechaMinIngreso = ingresos.stream().map(Ingreso::getFecha).min(Comparator.naturalOrder());
-        var fechaMaxIngreso = ingresos.stream().map(Ingreso::getFecha).max(Comparator.naturalOrder());
+        var fechaMinIngreso = ingresos.stream().map(t -> t.getFecha()).min(Comparator.naturalOrder());
+        var fechaMaxIngreso = ingresos.stream().map(t -> t.getFecha()).max(Comparator.naturalOrder());
 
         var fechaInicio = fechaMinTransaccion.orElseGet(() -> fechaMinIngreso.orElse(null));
         var fechaFin = fechaMaxTransaccion.orElseGet(() -> fechaMaxIngreso.orElse(null));
