@@ -5,6 +5,7 @@ import com.team68.finance_api.dto.request.IngresoRequestDTO;
 import com.team68.finance_api.dto.request.PeriodoDTO;
 import com.team68.finance_api.dto.request.TransaccionRequestDTO;
 import com.team68.finance_api.dto.request.UsuarioRequestDTO;
+import com.team68.finance_api.dto.response.ClasificacionResponseDTO;
 import com.team68.finance_api.dto.response.ClasificacionResponseDTO.TransaccionClasificadaDTO;
 import com.team68.finance_api.model.CategoriaConsumo;
 import com.team68.finance_api.model.Ingreso;
@@ -104,21 +105,23 @@ public class ClasificacionService {
                 .transacciones(transaccionesDTO)
                 .build();
 
-        // 6. Petición POST a /clasificar usando ParameterizedTypeReference
+        // 6. Petición POST a /clasificar usando el DTO contenedor
         String url = analisisApiUrl.replaceAll("/+$", "") + "/clasificar";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<AnalisisRequestDTO> entity = new HttpEntity<>(payload, headers);
 
-        ResponseEntity<List<TransaccionClasificadaDTO>> response = restTemplate.exchange(
+        ResponseEntity<ClasificacionResponseDTO> response = restTemplate.postForEntity(
                 url,
-                HttpMethod.POST,
                 entity,
-                new ParameterizedTypeReference<List<TransaccionClasificadaDTO>>() {}
+                ClasificacionResponseDTO.class
         );
 
-        List<TransaccionClasificadaDTO> clasificadas = response.getBody();
+        ClasificacionResponseDTO responseBody = response.getBody();
+        List<TransaccionClasificadaDTO> clasificadas = (responseBody != null) 
+                ? responseBody.getTransacciones() 
+                : null;
 
         // 7. Actualizar las transacciones en DB
         if (clasificadas != null && !clasificadas.isEmpty()) {
@@ -128,9 +131,7 @@ public class ClasificacionService {
 
                 t.setTipoFinanciero(c.getTipoFinanciero());
 
-                if (c.getTipoFinanciero() != TipoFinanciero.CONSUMO ||
-                        c.getTipoFinanciero() == TipoFinanciero.PAGO_DEUDA ||
-                        c.getTipoFinanciero() == TipoFinanciero.AHORRO_INVERSION) {
+                if (c.getTipoFinanciero() != TipoFinanciero.CONSUMO) {
                     t.setCategoria(CategoriaConsumo.OTROS);
                 } else {
                     t.setCategoria(c.getCategoria());
