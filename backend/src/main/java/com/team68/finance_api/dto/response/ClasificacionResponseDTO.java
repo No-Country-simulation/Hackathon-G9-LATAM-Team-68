@@ -2,6 +2,7 @@ package com.team68.finance_api.dto.response;
 
 import com.team68.finance_api.model.CategoriaConsumo;
 import com.team68.finance_api.model.TipoFinanciero;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -24,8 +25,11 @@ public class ClasificacionResponseDTO {
         private String descripcion;
 
         @JsonProperty("tipo_financiero")
+        @JsonAlias({"tipoFinanciero", "tipo"})
         private TipoFinanciero tipoFinanciero;
 
+        @JsonProperty("categoria")
+        @JsonAlias({"categoria_consumo", "categoriaConsumo"})
         private CategoriaConsumo categoria;
     }
 }

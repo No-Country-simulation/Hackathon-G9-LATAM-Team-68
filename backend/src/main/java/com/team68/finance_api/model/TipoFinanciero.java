@@ -10,10 +10,16 @@ public enum TipoFinanciero {
 
     @JsonCreator
     public static TipoFinanciero fromString(String value) {
-        if (value == null) return OTROS;
+        if (value == null || value.isBlank()) return OTROS;
+
+        String cleanValue = value.trim().toUpperCase()
+                .replace("/", "_")
+                .replace("-", "_")
+                .replace(" ", "_");
+
         for (TipoFinanciero type : TipoFinanciero.values()) {
-            if (type.name().equalsIgnoreCase(value.trim()) || 
-                type.name().replace("_", "").equalsIgnoreCase(value.replace(" ", "").trim())) {
+            if (type.name().equalsIgnoreCase(cleanValue) ||
+                type.name().replace("_", "").equalsIgnoreCase(cleanValue.replace("_", ""))) {
                 return type;
             }
         }
