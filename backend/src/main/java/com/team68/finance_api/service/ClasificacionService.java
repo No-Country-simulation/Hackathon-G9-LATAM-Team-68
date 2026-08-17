@@ -5,7 +5,7 @@ import com.team68.finance_api.dto.request.IngresoRequestDTO;
 import com.team68.finance_api.dto.request.PeriodoDTO;
 import com.team68.finance_api.dto.request.TransaccionRequestDTO;
 import com.team68.finance_api.dto.request.UsuarioRequestDTO;
-import com.team68.finance_api.dto.response.ClasificacionResponseDTO;
+import com.team68.finance_api.dto.response.ClasificacionResponseDTO.TransaccionClasificadaDTO;
 import com.team68.finance_api.model.CategoriaConsumo;
 import com.team68.finance_api.model.Ingreso;
 import com.team68.finance_api.model.TipoFinanciero;
@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -91,10 +92,10 @@ public class ClasificacionService {
                 })
                 .collect(Collectors.toList());
 
-        // 4. Calcular el Periodo dinámicamente según el rango de fechas existente
+        // 4. Calcular Periodo
         PeriodoDTO periodoDTO = calcularPeriodo(transacciones, ingresos);
 
-        // 5. Construir el payload idéntico a /analizar
+        // 5. Construir Payload
         AnalisisRequestDTO payload = AnalisisRequestDTO.builder()
                 .usuario(usuarioDTO)
                 .periodo(periodoDTO)
@@ -108,21 +109,23 @@ public class ClasificacionService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<AnalisisRequestDTO> entity = new HttpEntity<>(payload, headers);
-        ResponseEntity<ClasificacionResponseDTO> response = restTemplate.postForEntity(
+
+        // Se recibe directamente un Array/List JSON en la respuesta
+        ResponseEntity<TransaccionClasificadaDTO[]> response = restTemplate.postForEntity(
                 url,
                 entity,
-                ClasificacionResponseDTO.class
+                TransaccionClasificadaDTO[].class
         );
 
-        ClasificacionResponseDTO responseBody = response.getBody();
+        TransaccionClasificadaDTO[] clasificadasArray = response.getBody();
 
-        // 7. Actualizar las transacciones en DB con los resultados devueltos
-        if (responseBody != null && responseBody.getTransacciones() != null) {
-            List<ClasificacionResponseDTO.TransaccionClasificadaDTO> clasificadas = responseBody.getTransacciones();
+        // 7. Actualizar las transacciones en DB
+        if (clasificadasArray != null && clasificadasArray.length > 0) {
+            List<TransaccionClasificadaDTO> clasificadas = Arrays.asList(clasificadasArray);
 
             for (int i = 0; i < transacciones.size() && i < clasificadas.size(); i++) {
                 Transaccion t = transacciones.get(i);
-                ClasificacionResponseDTO.TransaccionClasificadaDTO c = clasificadas.get(i);
+                TransaccionClasificadaDTO c = clasificadas.get(i);
 
                 t.setTipoFinanciero(c.getTipoFinanciero());
 
@@ -142,11 +145,11 @@ public class ClasificacionService {
     }
 
     private PeriodoDTO calcularPeriodo(List<Transaccion> transacciones, List<Ingreso> ingresos) {
-        var fechaMinTransaccion = transacciones.stream().map(t -> t.getFecha()).min(Comparator.naturalOrder());
-        var fechaMaxTransaccion = transacciones.stream().map(t -> t.getFecha()).max(Comparator.naturalOrder());
+        var fechaMinTransaccion = transacciones.stream().map(Transaccion::getFecha).min(Comparator.naturalOrder());
+        var fechaMaxTransaccion = transacciones.stream().map(Transaccion::getFecha).max(Comparator.naturalOrder());
 
-        var fechaMinIngreso = ingresos.stream().map(t -> t.getFecha()).min(Comparator.naturalOrder());
-        var fechaMaxIngreso = ingresos.stream().map(t -> t.getFecha()).max(Comparator.naturalOrder());
+        var fechaMinIngreso = ingresos.stream().map(Ingreso::getFecha).min(Comparator.naturalOrder());
+        var fechaMaxIngreso = ingresos.stream().map(Ingreso::getFecha).max(Comparator.naturalOrder());
 
         var fechaInicio = fechaMinTransaccion.orElseGet(() -> fechaMinIngreso.orElse(null));
         var fechaFin = fechaMaxTransaccion.orElseGet(() -> fechaMaxIngreso.orElse(null));
