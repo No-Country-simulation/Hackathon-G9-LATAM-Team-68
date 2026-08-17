@@ -20,6 +20,7 @@ import java.util.UUID;
 @RequestMapping("/api/movimientos")
 @CrossOrigin(origins = "*")
 public class MovimientoController {
+
     private final TransaccionRepository transaccionRepository;
     private final UsuarioRepository usuarioRepository;
     private final GamificacionService gamificacionService;
@@ -63,6 +64,16 @@ public class MovimientoController {
                 .orElse(transaccion);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(transaccionActualizada);
+    }
+
+    @PostMapping("/clasificar/usuario/{usuarioId}")
+    public ResponseEntity<List<Transaccion>> clasificarTransaccionesExistentes(@PathVariable @NonNull UUID usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + usuarioId));
+
+        List<Transaccion> transaccionesClasificadas = clasificacionService.clasificarYGuardarTodasLasTransacciones(usuario.getId());
+
+        return ResponseEntity.ok(transaccionesClasificadas);
     }
 
     @GetMapping("/usuario/{usuarioId}")
