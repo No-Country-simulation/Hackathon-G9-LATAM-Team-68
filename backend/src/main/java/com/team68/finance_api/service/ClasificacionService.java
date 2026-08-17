@@ -129,12 +129,18 @@ public class ClasificacionService {
                 Transaccion t = transacciones.get(i);
                 TransaccionClasificadaDTO c = clasificadas.get(i);
 
-                t.setTipoFinanciero(c.getTipoFinanciero());
+                // Si la IA no determina el tipo, se asigna OTROS en lugar de null
+                TipoFinanciero tipo = (c.getTipoFinanciero() != null)
+                        ? c.getTipoFinanciero()
+                        : TipoFinanciero.OTROS;
 
-                if (c.getTipoFinanciero() != TipoFinanciero.CONSUMO) {
-                    t.setCategoria(CategoriaConsumo.OTROS);
-                } else {
+                t.setTipoFinanciero(tipo);
+
+                // Asignar categoría solo si el tipo es CONSUMO y la categoría no es nula
+                if (tipo == TipoFinanciero.CONSUMO && c.getCategoria() != null) {
                     t.setCategoria(c.getCategoria());
+                } else {
+                    t.setCategoria(CategoriaConsumo.OTROS);
                 }
             }
 

@@ -25,11 +25,11 @@ public class ClasificacionResponseDTO {
         private String descripcion;
 
         @JsonProperty("tipo_financiero")
-        @JsonAlias({"tipoFinanciero", "tipo"})
+        @JsonAlias({"tipoFinanciero", "tipo", "tipo_financiero_clasificado"})
         private TipoFinanciero tipoFinanciero;
 
         @JsonProperty("categoria")
-        @JsonAlias({"categoria_consumo", "categoriaConsumo"})
+        @JsonAlias({"categoria_consumo", "categoriaConsumo", "categoria_clasificada"})
         private CategoriaConsumo categoria;
     }
 }
