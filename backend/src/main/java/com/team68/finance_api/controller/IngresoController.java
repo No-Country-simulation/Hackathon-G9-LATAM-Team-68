@@ -19,6 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/ingresos")
 @CrossOrigin(origins = "*")
+
 public class IngresoController {
 
     private final IngresoRepository ingresoRepository;
@@ -56,6 +57,31 @@ public class IngresoController {
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<Ingreso>> obtenerIngresosUsuario(@PathVariable UUID usuarioId){
         return ResponseEntity.ok(ingresoRepository.findByUsuarioId(usuarioId));
+    }
+
+    @PutMapping("/{ingresoId}")
+    public ResponseEntity<Ingreso> actualizarIngreso(@PathVariable UUID ingresoId,
+                                                     @Valid @RequestBody IngresoRequestDTO dto){
+        Ingreso ingreso= ingresoRepository.findById(ingresoId)
+                .orElseThrow(() -> new IllegalArgumentException("Ingreso no encontrado"));
+        ingreso.setFecha(dto.getFecha());
+        ingreso.setDescripcion(dto.getDescripcion());
+        ingreso.setMonto(dto.getMonto());
+
+        Ingreso ingresoActualizado = ingresoRepository.save(ingreso);
+
+        return ResponseEntity.ok(ingresoActualizado );
+    }
+
+    @DeleteMapping("/{ingresoId}")
+    public ResponseEntity<Void> eliminarIngreso(@PathVariable UUID ingresoId){
+
+        Ingreso ingreso = ingresoRepository.findById(ingresoId)
+                .orElseThrow(() -> new IllegalArgumentException("Ingreso no encontrado"));
+
+        ingresoRepository.delete(ingreso);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

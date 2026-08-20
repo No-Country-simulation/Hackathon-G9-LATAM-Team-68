@@ -1,5 +1,6 @@
 package com.team68.finance_api.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 
 @Getter
@@ -21,5 +22,23 @@ public enum CategoriaConsumo {
     CategoriaConsumo(String nombreFormateado, GrupoCategoria grupo) {
         this.nombreFormateado = nombreFormateado;
         this.grupo = grupo;
+    }
+
+    @JsonCreator
+    public static CategoriaConsumo fromString(String value) {
+        if (value == null || value.isBlank()) return OTROS;
+
+        String cleanValue = value.trim().toUpperCase()
+                .replace("Á", "A").replace("É", "E").replace("Í", "I")
+                .replace("Ó", "O").replace("Ú", "U")
+                .replace(" ", "_");
+
+        for (CategoriaConsumo cat : CategoriaConsumo.values()) {
+            if (cat.name().equalsIgnoreCase(cleanValue) ||
+                cat.nombreFormateado.equalsIgnoreCase(value.trim())) {
+                return cat;
+            }
+        }
+        return OTROS;
     }
 }

@@ -7,6 +7,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,6 +16,7 @@ import java.time.LocalDate;
 @Builder
 public class IngresoRequestDTO {
     @NotNull(message = "La fecha del ingreso es obligatoria")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fecha;
 
     @NotBlank(message = "La descripción del ingreso no puede estar vacía")
