@@ -202,6 +202,42 @@
     });
   }
 
+  function actualizarIngreso(ingresoId, payload) {
+    return request("/api/ingresos/" + encodeURIComponent(ingresoId), {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      operation: "actualizar ingreso"
+    });
+  }
+
+  function eliminarIngreso(ingresoId) {
+    return request("/api/ingresos/" + encodeURIComponent(ingresoId), {
+      method: "DELETE",
+      operation: "eliminar ingreso"
+    });
+  }
+
+  function actualizarTransaccion(transaccionId, payload) {
+    return request("/api/movimientos/" + encodeURIComponent(transaccionId), {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      operation: "actualizar transaccion"
+    });
+  }
+
+  function eliminarTransaccion(transaccionId) {
+    return request("/api/movimientos/" + encodeURIComponent(transaccionId), {
+      method: "DELETE",
+      operation: "eliminar transaccion"
+    });
+  }
+
+  function getMedallasUsuario(usuarioId) {
+    return request("/api/medallas/usuario/" + encodeURIComponent(usuarioId), {
+      operation: "obtener medallas"
+    });
+  }
+
   window.team68Api = {
     login: login,
     logout: logout,
@@ -212,8 +248,13 @@
     getUsuarioNombre: getUsuarioNombre,
     getIngresosUsuario: getIngresosUsuario,
     crearIngreso: crearIngreso,
+    actualizarIngreso: actualizarIngreso,
+    eliminarIngreso: eliminarIngreso,
     getMovimientosUsuario: getMovimientosUsuario,
     crearTransaccion: crearTransaccion,
-    realizarAnalisis: realizarAnalisis
+    actualizarTransaccion: actualizarTransaccion,
+    eliminarTransaccion: eliminarTransaccion,
+    realizarAnalisis: realizarAnalisis,
+    getMedallasUsuario: getMedallasUsuario
   };
 })();

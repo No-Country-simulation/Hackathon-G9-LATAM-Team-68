@@ -161,11 +161,18 @@
   }
 
   function buildIngresoRow(item) {
+    // La API puede devolver OTROS como categoria aunque el usuario haya elegido una más
+    // específica. Si viene OTROS o vacío, usamos la categoria que ya trae el item local.
+    var apiCategoria = mapCategoryFromApi(item.categoria);
+    var categoria = (apiCategoria && apiCategoria !== "Otros")
+      ? apiCategoria
+      : (item.categoriaLocal || item.categoria_local || apiCategoria || "Sueldo");
+
     return {
       id: item.id || "ing-" + item.fecha + "-" + (item.descripcion || item.concepto || "Ingreso"),
       fecha: item.fecha,
       concepto: item.descripcion || item.concepto || "Ingreso",
-      categoria: mapCategoryFromApi(item.categoria) || "Sueldo",
+      categoria: categoria,
       metodoPago: "",
       tipo: "Ingreso",
       monto: Math.abs(Number(item.monto || 0))
@@ -316,14 +323,25 @@
 
   function rowForHistory(item) {
     var metodoPago = item.tipo === "Gasto" ? (item.metodoPago || "") : "";
+    var rowId = String(item.id).replace(/"/g, "");
 
-    return "<tr>" +
+    return "<tr data-id=\"" + rowId + "\" data-tipo=\"" + item.tipo + "\">" +
       "<td>" + formatDate(item.fecha) + "</td>" +
       "<td>" + item.concepto + "</td>" +
       "<td>" + item.categoria + "</td>" +
       "<td>" + metodoPago + "</td>" +
       "<td>" + item.tipo + "</td>" +
       '<td class="text-end">' + formatAmount(item.monto) + "</td>" +
+      '<td class="text-end text-nowrap">' +
+        '<button type="button" class="btn btn-sm btn-outline-secondary me-1 btn-edit-movement" ' +
+          'data-id="' + rowId + '" aria-label="Editar movimiento">' +
+          '<i class="fa-solid fa-pencil" aria-hidden="true"></i>' +
+        '</button>' +
+        '<button type="button" class="btn btn-sm btn-outline-danger btn-delete-movement" ' +
+          'data-id="' + rowId + '" aria-label="Eliminar movimiento">' +
+          '<i class="fa-solid fa-trash" aria-hidden="true"></i>' +
+        '</button>' +
+      "</td>" +
       "</tr>";
   }
 
@@ -406,7 +424,7 @@
       return;
     }
 
-    renderTable(historyBody, rows, rowForHistory, 6);
+    renderTable(historyBody, rows, rowForHistory, 7);
   }
 
   function getAnalysisPayload(rows) {
@@ -481,7 +499,20 @@
       ]);
       var ingresos = Array.isArray(responses[0]) ? responses[0] : [];
       var gastos = Array.isArray(responses[1]) ? responses[1] : [];
-      var mergedRows = ingresos.map(buildIngresoRow).concat(gastos.map(buildExpenseRow));
+
+      // Preservar categoriaLocal que el usuario haya establecido para ingresos.
+      var prevCache = movementCache.slice();
+      function prevCategoriaLocal(id) {
+        var prev = prevCache.find(function (r) { return String(r.id) === String(id); });
+        return prev ? prev.categoriaLocal : undefined;
+      }
+
+      var mergedRows = ingresos.map(function (item) {
+        var row = buildIngresoRow(item);
+        var local = prevCategoriaLocal(row.id);
+        if (local) { row.categoriaLocal = local; row.categoria = local; }
+        return row;
+      }).concat(gastos.map(buildExpenseRow));
 
       setMovements(mergedRows);
       loadSummaryTable();
@@ -587,6 +618,127 @@
     };
   }
 
+  async function editMovement(id, payload) {
+    if (!window.team68Api || !window.team68Api.isAuthenticated()) {
+      throw new Error("Debes iniciar sesion para editar movimientos.");
+    }
+
+    // El tipo siempre se toma del registro existente en cache; el payload del modal
+    // puede tener el tipo correcto, pero el cache es la fuente de verdad.
+    var existing = movementCache.find(function (item) {
+      return String(item.id) === String(id);
+    });
+
+    if (!existing) {
+      throw new Error("Movimiento no encontrado en el historial actual.");
+    }
+
+    // Forzamos el tipo del payload al del registro existente para que validatePayload
+    // no lo cambie y buildCompatible* reciba el tipo correcto.
+    var payloadWithType = Object.assign({}, payload, { tipo: existing.tipo });
+    var normalized = validatePayload(payloadWithType);
+    setSyncStatus("loading", "Actualizando movimiento en la API...");
+
+    try {
+      if (existing.tipo === "Ingreso") {
+        var incomePayload = buildCompatibleIncomePayload(normalized);
+        var incomeResponse = await window.team68Api.actualizarIngreso(id, incomePayload);
+        // Construimos el row directamente con los valores locales confirmados.
+        // No pasamos por buildIngresoRow porque mapCategoryFromApi convierte
+        // categorías humanas (Sueldo, Bono…) a "Otros", perdiendo la selección.
+        var incomeRow = {
+          id: id,
+          fecha: normalized.fecha,
+          concepto: normalized.concepto,
+          categoria: normalized.categoria,
+          categoriaLocal: normalized.categoria,
+          metodoPago: "",
+          tipo: "Ingreso",
+          monto: Math.abs(normalized.monto)
+        };
+        // Si la API devolvió datos válidos los mezclamos pero nunca pisamos
+        // id, tipo, ni la categoría local elegida por el usuario.
+        if (incomeResponse && typeof incomeResponse === "object") {
+          if (incomeResponse.fecha)      { incomeRow.fecha    = incomeResponse.fecha; }
+          if (incomeResponse.monto)      { incomeRow.monto    = Math.abs(Number(incomeResponse.monto)); }
+          if (incomeResponse.descripcion){ incomeRow.concepto = incomeResponse.descripcion; }
+        }
+        upsertMovement(incomeRow);
+        loadSummaryTable();
+        loadHistoryTable();
+        refreshFinancialProfile(getMovements());
+        document.dispatchEvent(new CustomEvent("team68:movements-updated", {
+          detail: { rows: getMovements() }
+        }));
+        setSyncStatus("success", "Movimiento actualizado.");
+        return incomeRow;
+      }
+
+      if (normalized.metodoPago === "Credito") {
+        if (!Number.isFinite(normalized.tasaInteres) || normalized.tasaInteres <= 0) {
+          throw new Error("La tasa de interes es obligatoria cuando el metodo de pago es Credito.");
+        }
+      }
+
+      var expensePayload = buildCompatibleExpensePayload(normalized);
+      var expenseResponse = await window.team68Api.actualizarTransaccion(id, expensePayload);
+      var expenseSource = Object.assign({}, expensePayload, expenseResponse && typeof expenseResponse === "object" ? expenseResponse : {}, { id: id });
+      var expenseRow = buildExpenseRow(expenseSource);
+      upsertMovement(expenseRow);
+      loadSummaryTable();
+      loadHistoryTable();
+      refreshFinancialProfile(getMovements());
+      document.dispatchEvent(new CustomEvent("team68:movements-updated", {
+        detail: { rows: getMovements() }
+      }));
+      setSyncStatus("success", "Movimiento actualizado.");
+      return expenseRow;
+    } catch (error) {
+      setSyncStatus("error", "No se pudo actualizar: " + error.message);
+      throw error;
+    }
+  }
+
+  async function deleteMovement(id) {
+    if (!window.team68Api || !window.team68Api.isAuthenticated()) {
+      throw new Error("Debes iniciar sesion para eliminar movimientos.");
+    }
+
+    var existing = movementCache.find(function (item) {
+      return String(item.id) === String(id);
+    });
+
+    if (!existing) {
+      throw new Error("Movimiento no encontrado.");
+    }
+
+    setSyncStatus("loading", "Eliminando movimiento de la API...");
+
+    try {
+      if (existing.tipo === "Ingreso") {
+        await window.team68Api.eliminarIngreso(id);
+      } else {
+        await window.team68Api.eliminarTransaccion(id);
+      }
+
+      movementCache = movementCache.filter(function (item) {
+        return String(item.id) !== String(id);
+      });
+
+      loadSummaryTable();
+      loadHistoryTable();
+      refreshFinancialProfile(getMovements());
+      setSyncStatus("success", "Movimiento eliminado.");
+
+      document.dispatchEvent(new CustomEvent("team68:movements-updated", {
+        detail: { rows: getMovements() }
+      }));
+    } catch (error) {
+      setSyncStatus("error", "No se pudo eliminar: " + error.message);
+      throw error;
+    }
+  }
+
   async function addMovement(payload) {
     if (!window.team68Api || !window.team68Api.isAuthenticated()) {
       throw new Error("Debes iniciar sesion para registrar movimientos.");
@@ -661,6 +813,8 @@
   window.team68Movements = {
     getAll: getMovements,
     add: addMovement,
+    edit: editMovement,
+    remove: deleteMovement,
     filter: filterMovements,
     formatDate: formatDate,
     formatAmount: formatAmount,

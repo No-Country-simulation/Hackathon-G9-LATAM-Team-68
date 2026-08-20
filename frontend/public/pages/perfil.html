@@ -110,37 +110,13 @@
     <section class="rounded-3 border p-4 mb-4" id="medallasObtenidas">
       <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
         <div>
-          <h2 class="h4 mb-1">Medallas obtenidas el mes pasado</h2>
-          <p class="small mb-0">Reconocimientos de ejemplo ganados por buenos hábitos financieros.</p>
+          <h2 class="h4 mb-1">Medallas obtenidas</h2>
+          <p class="small mb-0" id="medallasSubtitulo">Reconocimientos ganados por buenos hábitos financieros.</p>
         </div>
       </div>
-      <div class="row g-3">
-        <div class="col-md-4">
-          <article class="h-100 text-center">
-            <div class="card-body">
-              <img src="../assets/images/rendi-01.png" width="75%" class="img-fluid mb-3" alt="Medalla finanzas saludables">
-              <h3 class="h6 mb-2">Finanzas saludables</h3>
-              <p class="small mb-0">Reconoce constancia en ahorro y balance financiero estable.</p>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="h-100 text-center">
-            <div class="card-body">
-              <img src="../assets/images/rendi-08.png" width="75%" class="img-fluid mb-3" alt="Medalla deuda bajo control">
-              <h3 class="h6 mb-2">Deuda bajo control</h3>
-              <p class="small mb-0">Premio por mantener el endeudamiento dentro de un nivel sano.</p>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="h-100 text-center">
-            <div class="card-body">
-              <img src="../assets/images/rendi-05.png" width="75%" class="img-fluid mb-3" alt="Medalla gasto hormiga reina">
-              <h3 class="h6 mb-2">Gasto hormiga reina</h3>
-              <p class="small mb-0">La hormiga reina exige un gasto a la altura de sus caprichos.</p>
-            </div>
-          </article>
+      <div class="row g-3" id="medallasList">
+        <div class="col-12 text-center text-secondary small py-3" id="medallasLoading">
+          <i class="fa-solid fa-spinner fa-spin me-1" aria-hidden="true"></i> Cargando medallas…
         </div>
       </div>
     </section>
@@ -149,12 +125,12 @@
 
   <script src="../vendor/introjs/intro.min.js"></script>
   <script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../vendor/chartjs/chart.umd.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/theme-switcher.js"></script>
   <script src="../assets/js/page-help.js"></script>
   <script src="../assets/js/api-client.js"></script>
   <script src="../assets/js/movements.js"></script>
-  <script src="../vendor/chartjs/chart.umd.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
     var chartInstances = {};
 
@@ -255,6 +231,103 @@
         return null;
       }
     }
+
+    // --- Calculo local de metricas a partir de los movimientos en memoria ---
+    function getTotalsFromMovements() {
+      var totals = { income: 0, expense: 0 };
+      if (!window.team68Movements || typeof window.team68Movements.getAll !== "function") {
+        return totals;
+      }
+      window.team68Movements.getAll().forEach(function (item) {
+        var amount = Math.abs(Number(item.monto || 0));
+        if (item.tipo === "Ingreso") { totals.income += amount; }
+        if (item.tipo === "Gasto")   { totals.expense += amount; }
+      });
+      return totals;
+    }
+    function getLocalFinancialMetrics() {
+      var totals = getTotalsFromMovements();
+      var income  = totals.income;
+      var expense = totals.expense;
+      if (income <= 0) {
+        return { health: 0, debt: 0, savings: 0 };
+      }
+      var savingsAmount = Math.max(income - expense, 0);
+      var debtPct    = roundPercent((expense / income) * 100);
+      var savingsPct = roundPercent((savingsAmount / income) * 100);
+      var healthPct  = roundPercent(100 - debtPct * 0.6 + savingsPct * 0.4);
+      return { health: healthPct, debt: debtPct, savings: savingsPct };
+    }
+
+    // --- Sugerencias contextuales locales ---
+    function getHealthSuggestions(value) {
+      if (value >= 75) {
+        return [
+          "Mantener tu presupuesto actual y revisar resultados cada semana.",
+          "Automatizar transferencias a ahorro para conservar el buen ritmo.",
+          "Definir una meta de inversion de mediano plazo."
+        ];
+      }
+      if (value >= 50) {
+        return [
+          "Reducir uno o dos gastos variables este mes.",
+          "Separar primero un monto fijo para ahorro.",
+          "Revisar suscripciones y pagos recurrentes."
+        ];
+      }
+      return [
+        "Crear un presupuesto base con topes por categoria.",
+        "Evitar compras no esenciales durante las proximas semanas.",
+        "Buscar una fuente adicional de ingreso temporal."
+      ];
+    }
+    function getDebtSuggestions(value) {
+      if (value <= 35) {
+        return [
+          "Mantener el endeudamiento en niveles controlados.",
+          "Pagar siempre el total de tarjetas para evitar intereses.",
+          "Construir fondo de emergencia para no recurrir a deuda."
+        ];
+      }
+      if (value <= 60) {
+        return [
+          "Priorizar el pago de deudas con mayor interes.",
+          "Evitar nuevas compras financiadas en el corto plazo.",
+          "Negociar mejores tasas o consolidar saldos si aplica."
+        ];
+      }
+      return [
+        "Detener deuda nueva y enfocarte en reducir saldo actual.",
+        "Aplicar metodo bola de nieve o avalancha de pagos.",
+        "Revisar plan de pagos mensual con objetivos realistas."
+      ];
+    }
+    function getSavingsSuggestions(value) {
+      if (value >= 25) {
+        return [
+          "Mantener la disciplina de ahorro mensual.",
+          "Evaluar dividir ahorro entre emergencia e inversion.",
+          "Subir gradualmente tu meta de ahorro."
+        ];
+      }
+      if (value >= 10) {
+        return [
+          "Incrementar ahorro con recortes pequenos y constantes.",
+          "Programar una transferencia automatica al inicio del mes.",
+          "Definir un objetivo puntual para motivar el ahorro."
+        ];
+      }
+      return [
+        "Comenzar con una meta minima del 5% del ingreso.",
+        "Eliminar gastos hormiga y redirigir ese monto a ahorro.",
+        "Separar el ahorro apenas recibas ingresos."
+      ];
+    }
+    function getHealthStatusLabel(value) {
+      if (value >= 75) { return "saludable"; }
+      if (value >= 50) { return "en observación"; }
+      return "en riesgo";
+    }
     function drawDonut(canvasId, value, color) {
       var canvas = document.getElementById(canvasId);
       var safeValue = roundPercent(value);
@@ -335,42 +408,132 @@
     function renderFinancialHealthPage() {
       var rawPayload = getFinancialPayloadSource();
       var profilePayload = rawPayload ? normalizeFinancialPayload(rawPayload) : null;
-      var healthValue = profilePayload ? profilePayload.financialProfile.score : 0;
-      var debtValue = profilePayload ? profilePayload.dimensions.debt.score : 0;
-      var savingsValue = profilePayload ? profilePayload.dimensions.savingsCapacity.score : 0;
+      var metrics = getLocalFinancialMetrics();
+      var healthValue  = profilePayload ? profilePayload.financialProfile.score              : metrics.health;
+      var debtValue    = profilePayload ? profilePayload.dimensions.debt.score               : metrics.debt;
+      var savingsValue = profilePayload ? profilePayload.dimensions.savingsCapacity.score    : metrics.savings;
       var statusNode = document.getElementById("saludEstado");
-      drawDonut("saludChart", healthValue, "#198754");
-      drawDonut("deudaChart", debtValue, "#dc3545");
+      drawDonut("saludChart",  healthValue,  "#198754");
+      drawDonut("deudaChart",  debtValue,    "#dc3545");
       drawDonut("ahorroChart", savingsValue, "#0d6efd");
       if (statusNode) {
-        var label = profilePayload ? String(profilePayload.financialProfile.status).toLowerCase() : "sin datos del api";
+        var label = profilePayload
+          ? String(profilePayload.financialProfile.status).toLowerCase()
+          : getHealthStatusLabel(healthValue);
         statusNode.textContent = "Estado actual de la salud financiera: " + label + ".";
       }
       renderSuggestions(
         "saludSuggestions",
         profilePayload
           ? profilePayload.dimensions.financialBalance.recommendations
-          : ["Esperando criterios del servicio de analisis financiero (API)."]
+          : getHealthSuggestions(healthValue)
       );
       renderSuggestions(
         "deudaSuggestions",
         profilePayload
           ? profilePayload.dimensions.debt.recommendations
-          : ["Esperando criterios del servicio de analisis financiero (API)."]
+          : getDebtSuggestions(debtValue)
       );
       renderSuggestions(
         "ahorroSuggestions",
         profilePayload
           ? profilePayload.dimensions.savingsCapacity.recommendations
-          : ["Esperando criterios del servicio de analisis financiero (API)."]
+          : getSavingsSuggestions(savingsValue)
       );
     }
+    // Render inicial: si ya hay datos en localStorage se muestran de inmediato;
+    // si no, movements.js los cargará vía API y disparará team68:profile-updated.
     renderFinancialHealthPage();
+
     document.addEventListener("team68:movements-updated", function () {
       renderFinancialHealthPage();
     });
     document.addEventListener("team68:profile-updated", function () {
       renderFinancialHealthPage();
+    });
+
+    /* ── Medallas ─────────────────────────────────────────────────── */
+    var MEDALLA_IMAGES = [
+      "../assets/images/rendi-01.png",
+      "../assets/images/rendi-02.png",
+      "../assets/images/rendi-03.png",
+      "../assets/images/rendi-04.png",
+      "../assets/images/rendi-05.png",
+      "../assets/images/rendi-06.png",
+      "../assets/images/rendi-07.png",
+      "../assets/images/rendi-08.png",
+      "../assets/images/rendi-09.png",
+      "../assets/images/rendi-10.png"
+    ];
+
+    function medallaImageUrl(medalla, index) {
+      if (medalla.iconoUrl && medalla.iconoUrl.startsWith("http")) {
+        return medalla.iconoUrl;
+      }
+      return MEDALLA_IMAGES[index % MEDALLA_IMAGES.length];
+    }
+
+    function renderMedallas(medallas) {
+      var list    = document.getElementById("medallasList");
+      var loading = document.getElementById("medallasLoading");
+      var subtitulo = document.getElementById("medallasSubtitulo");
+      if (!list) { return; }
+      if (loading) { loading.remove(); }
+
+      var obtenidas = medallas.filter(function (m) { return m.obtenida; });
+
+      if (!medallas.length) {
+        list.innerHTML = '<div class="col-12 text-center text-secondary small py-3">No hay medallas disponibles.</div>';
+        return;
+      }
+
+      subtitulo.textContent = obtenidas.length
+        ? "Tienes " + obtenidas.length + " medalla" + (obtenidas.length !== 1 ? "s" : "") + " ganada" + (obtenidas.length !== 1 ? "s" : "") + "."
+        : "Aún no has ganado medallas. ¡Sigue mejorando tus hábitos!";
+
+      list.innerHTML = medallas.map(function (m, i) {
+        var opacity   = m.obtenida ? "1" : "0.35";
+        var badgeHtml = m.obtenida
+          ? '<span class="badge bg-success mb-2"><i class="fa-solid fa-check me-1" aria-hidden="true"></i>Obtenida</span>'
+          : '<span class="badge bg-secondary mb-2">Pendiente</span>';
+        var puntosHtml = (m.puntos > 0)
+          ? '<p class="small text-secondary mb-0">' + m.puntos + ' pts</p>'
+          : '';
+        return '<div class="col-md-4">' +
+          '<article class="h-100 text-center" aria-label="Medalla: ' + m.nombre + '">' +
+            '<div class="card-body">' +
+              '<img src="' + medallaImageUrl(m, i) + '" width="75%" class="img-fluid mb-2" ' +
+                'alt="' + m.nombre + '" style="opacity:' + opacity + ';transition:opacity .3s">' +
+              badgeHtml +
+              '<h3 class="h6 mb-1">' + m.nombre + '</h3>' +
+              '<p class="small mb-0">' + (m.descripcion || "") + '</p>' +
+              puntosHtml +
+            '</div>' +
+          '</article>' +
+        '</div>';
+      }).join("");
+    }
+
+    async function loadMedallas() {
+      if (!window.team68Api || !window.team68Api.isAuthenticated()) { return; }
+      var usuarioId = window.team68Api.getUsuarioId();
+      try {
+        var medallas = await window.team68Api.getMedallasUsuario(usuarioId);
+        if (Array.isArray(medallas)) {
+          renderMedallas(medallas);
+        }
+      } catch (e) {
+        var list = document.getElementById("medallasList");
+        if (list) {
+          list.innerHTML = '<div class="col-12 text-center text-secondary small py-3">No se pudieron cargar las medallas.</div>';
+        }
+      }
+    }
+
+    loadMedallas();
+    // Recargar medallas cuando se actualiza el perfil (nuevo análisis tras sync)
+    document.addEventListener("team68:profile-updated", function () {
+      loadMedallas();
     });
   </script>
 </body>

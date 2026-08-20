@@ -141,6 +141,7 @@
                 <th>Método de pago</th>
                 <th>Tipo</th>
                 <th class="text-end">Monto</th>
+                <th class="text-end">Acciones</th>
               </tr>
             </thead>
             <tbody id="historyMovementsBody"></tbody>
@@ -151,104 +152,300 @@
 
   </main>
 
+  <!-- Modal de edición de movimiento -->
+  <div class="modal fade" id="editMovementModal" tabindex="-1" aria-labelledby="editMovementModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editMovementModalLabel">Editar movimiento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editMovementForm" class="row g-3">
+            <input type="hidden" id="editMovementId">
+            <input type="hidden" id="editMovementTipo">
+            <div class="col-md-6">
+              <label for="editFecha" class="form-label">Fecha</label>
+              <input id="editFecha" type="date" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label for="editMonto" class="form-label">Monto</label>
+              <input id="editMonto" type="number" class="form-control" min="0.01" step="0.01" required>
+            </div>
+            <div class="col-md-6">
+              <label for="editConcepto" class="form-label">Concepto</label>
+              <input id="editConcepto" type="text" class="form-control" maxlength="60" required>
+            </div>
+            <div class="col-md-6" id="editCategoriaWrapper">
+              <label for="editCategoria" class="form-label">Categoria</label>
+              <select id="editCategoria" class="form-select">
+                <!-- opciones pobladas dinámicamente según el tipo -->
+              </select>
+            </div>
+            <div class="col-md-6" id="editMetodoPagoWrapper">
+              <label for="editMetodoPago" class="form-label">Método de pago</label>
+              <select id="editMetodoPago" class="form-select">
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Debito">Debito</option>
+                <option value="Credito">Credito</option>
+              </select>
+            </div>
+            <div class="col-md-6 d-none" id="editTasaInteresWrapper">
+              <label for="editTasaInteres" class="form-label">Tasa de interés (%)</label>
+              <input id="editTasaInteres" type="number" class="form-control" min="0.01" step="0.01">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="saveEditMovementBtn">
+            <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Guardar cambios
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="../vendor/introjs/intro.min.js"></script>
   <script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../vendor/chartjs/chart.umd.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/theme-switcher.js"></script>
   <script src="../assets/js/page-help.js"></script>
   <script src="../assets/js/api-client.js"></script>
   <script src="../assets/js/movements.js"></script>
-  <script src="../vendor/chartjs/chart.umd.min.js"></script>
   <script>
+    /* ── Grafica de categorias ─────────────────────────────────────── */
     let currentHistoryRows = [];
     let expenseChart = null;
+
     function getChartSeries(rows) {
       const categoryTotals = {};
       rows.forEach(function (item) {
-        if (item.tipo !== "Gasto") {
-          return;
-        }
+        if (item.tipo !== "Gasto") { return; }
         const category = item.categoria || "Otros";
         const amount = Math.abs(Number(item.monto || 0));
         categoryTotals[category] = (categoryTotals[category] || 0) + amount;
       });
       const labels = Object.keys(categoryTotals);
-      const values = labels.map(function (label) {
-        return categoryTotals[label];
-      });
-      if (!labels.length) {
-        return {
-          labels: ["Sin datos"],
-          values: [0]
-        };
-      }
-      return {
-        labels: labels,
-        values: values
-      };
+      const values = labels.map(function (label) { return categoryTotals[label]; });
+      if (!labels.length) { return { labels: ["Sin datos"], values: [0] }; }
+      return { labels: labels, values: values };
     }
+
     function renderExpenseChart() {
       const chartCanvas = document.getElementById("expenseCategoryChart");
-      if (!chartCanvas) {
-        return;
-      }
+      if (!chartCanvas) { return; }
       const chartSeries = getChartSeries(currentHistoryRows);
-      if (expenseChart) {
-        expenseChart.destroy();
-      }
-      const dataset = {
-        label: "Gasto (USD)",
-        data: chartSeries.values
-      };
-      const chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return "$" + context.raw;
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function(value) {
-                return "$" + value;
-              }
-            }
-          },
-          x: {
-            grid: {
-              display: false
-            }
-          }
-        }
-      };
+      if (expenseChart) { expenseChart.destroy(); }
       expenseChart = new Chart(chartCanvas, {
         type: "bar",
         data: {
           labels: chartSeries.labels,
-          datasets: [dataset]
+          datasets: [{ label: "Gasto", data: chartSeries.values }]
         },
-        options: chartOptions
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: function (ctx) { return "$" + ctx.raw; } } }
+          },
+          scales: {
+            y: { beginAtZero: true, ticks: { callback: function (v) { return "$" + v; } } },
+            x: { grid: { display: false } }
+          }
+        }
       });
     }
+
     currentHistoryRows = window.team68Movements ? window.team68Movements.getAll() : [];
     renderExpenseChart();
+
     document.addEventListener("team68:history-data-change", function (event) {
       currentHistoryRows = event.detail && Array.isArray(event.detail.rows) ? event.detail.rows : [];
       renderExpenseChart();
     });
-    document.addEventListener("team68:theme-change", function () {
-      renderExpenseChart();
+    document.addEventListener("team68:theme-change", function () { renderExpenseChart(); });
+    // Actualizar grafica y totales también cuando se edita o elimina un movimiento.
+    document.addEventListener("team68:movements-updated", function () {
+      if (window.team68Movements) {
+        window.team68Movements.reloadViews();
+      }
+    });
+
+    /* ── Edición y eliminación ─────────────────────────────────────── */
+    var editModalEl = document.getElementById("editMovementModal");
+    var editModal = null;  // se inicializa tras bootstrap.bundle
+
+    // Re-renderizar tabla y gráfica después de que el modal termine de cerrarse.
+    editModalEl.addEventListener("hidden.bs.modal", function () {
+      if (window.team68Movements) {
+        window.team68Movements.reloadViews();
+      }
+    });
+
+    var CATEGORIAS_INGRESO = [
+      { value: "Sueldo",    label: "Sueldo" },
+      { value: "Bono",      label: "Bono" },
+      { value: "Freelance", label: "Freelance" },
+      { value: "Otros",     label: "Otros" }
+    ];
+    var CATEGORIAS_GASTO = [
+      { value: "Vivienda",       label: "Vivienda" },
+      { value: "Alimentacion",   label: "Alimentacion" },
+      { value: "Transporte",     label: "Transporte" },
+      { value: "Salud",          label: "Salud" },
+      { value: "Educacion",      label: "Educacion" },
+      { value: "Entretenimiento",label: "Entretenimiento" },
+      { value: "Subscripciones", label: "Subscripciones" },
+      { value: "Personal",       label: "Personal" },
+      { value: "Viajes",         label: "Viajes" },
+      { value: "Otros",          label: "Otros" }
+    ];
+
+    function setCategoriaOptions(tipo, selectedValue) {
+      var select = document.getElementById("editCategoria");
+      var opciones = tipo === "Ingreso" ? CATEGORIAS_INGRESO : CATEGORIAS_GASTO;
+      select.innerHTML = opciones.map(function (op) {
+        var sel = op.value === selectedValue ? " selected" : "";
+        return "<option value=\"" + op.value + "\"" + sel + ">" + op.label + "</option>";
+      }).join("");
+    }
+
+    function showToast(icon, title, text) {
+      if (window.Swal) {
+        window.Swal.fire({
+          toast: true, position: "bottom-end",
+          icon: icon, title: title, text: text,
+          timer: icon === "error" ? 3200 : 1800,
+          showConfirmButton: false, timerProgressBar: true
+        });
+      }
+    }
+
+    function openEditModal(id) {
+      var row = window.team68Movements.getAll().find(function (r) {
+        return String(r.id) === String(id);
+      });
+      if (!row) { return; }
+
+      document.getElementById("editMovementId").value    = row.id;
+      document.getElementById("editMovementTipo").value  = row.tipo;
+      document.getElementById("editFecha").value         = row.fecha;
+      document.getElementById("editMonto").value         = Math.abs(row.monto);
+      document.getElementById("editConcepto").value      = row.concepto;
+
+      var metWrapper  = document.getElementById("editMetodoPagoWrapper");
+      var tasaWrapper = document.getElementById("editTasaInteresWrapper");
+      var metSelect   = document.getElementById("editMetodoPago");
+      var tasaInput   = document.getElementById("editTasaInteres");
+      var catWrapper  = document.getElementById("editCategoriaWrapper");
+
+      if (row.tipo === "Ingreso") {
+        // Ingresos: mostrar categoría (Sueldo/Bono/Freelance/Otros), ocultar pago y tasa
+        var categoriaActual = row.categoriaLocal || row.categoria || "Sueldo";
+        setCategoriaOptions("Ingreso", categoriaActual);
+        catWrapper.classList.remove("d-none");
+        metWrapper.classList.add("d-none");
+        tasaWrapper.classList.add("d-none");
+      } else {
+        // Gastos: ocultar categoría (la asigna la API), mostrar método de pago
+        catWrapper.classList.add("d-none");
+        metWrapper.classList.remove("d-none");
+        metSelect.value = row.metodoPago || "Efectivo";
+        var isCredit = metSelect.value === "Credito";
+        tasaWrapper.classList.toggle("d-none", !isCredit);
+        tasaInput.value = isCredit ? (row.tasaInteres || "") : "";
+      }
+
+      if (!editModal) { editModal = new bootstrap.Modal(editModalEl); }
+      editModal.show();
+    }
+
+    // Toggle tasa de interes dentro del modal
+    document.getElementById("editMetodoPago").addEventListener("change", function () {
+      var isCredit = this.value === "Credito";
+      var tasaWrapper = document.getElementById("editTasaInteresWrapper");
+      var tasaInput   = document.getElementById("editTasaInteres");
+      tasaWrapper.classList.toggle("d-none", !isCredit);
+      if (!isCredit) { tasaInput.value = ""; }
+    });
+
+    // Guardar cambios del modal
+    document.getElementById("saveEditMovementBtn").addEventListener("click", async function () {
+      var btn  = this;
+      var id   = document.getElementById("editMovementId").value;
+      var tipo = document.getElementById("editMovementTipo").value;
+
+      var payload = {
+        concepto:   document.getElementById("editConcepto").value.trim(),
+        monto:      Number(document.getElementById("editMonto").value),
+        fecha:      document.getElementById("editFecha").value,
+        tipo:       tipo,
+        categoria:  tipo === "Ingreso" ? document.getElementById("editCategoria").value : undefined,
+        metodoPago: tipo === "Ingreso" ? "" : document.getElementById("editMetodoPago").value
+      };
+
+      if (tipo === "Gasto" && payload.metodoPago === "Credito") {
+        payload.tasaInteres = Number(document.getElementById("editTasaInteres").value);
+      }
+
+      try {
+        btn.disabled = true;
+        await window.team68Movements.edit(id, payload);
+        if (editModal) { editModal.hide(); }
+        showToast("success", "Movimiento actualizado", payload.concepto);
+      } catch (error) {
+        showToast("error", "No se pudo actualizar", error.message);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // Delegación de eventos en el tbody para editar/eliminar
+    document.getElementById("historyMovementsBody").addEventListener("click", async function (event) {
+      var editBtn   = event.target.closest(".btn-edit-movement");
+      var deleteBtn = event.target.closest(".btn-delete-movement");
+
+      if (editBtn) {
+        openEditModal(editBtn.dataset.id);
+        return;
+      }
+
+      if (deleteBtn) {
+        var id = deleteBtn.dataset.id;
+        var row = window.team68Movements.getAll().find(function (r) {
+          return String(r.id) === String(id);
+        });
+        var concepto = row ? row.concepto : "este movimiento";
+
+        if (window.Swal) {
+          var result = await window.Swal.fire({
+            title: "¿Eliminar movimiento?",
+            text: concepto,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#dc3545"
+          });
+          if (!result.isConfirmed) { return; }
+        } else {
+          if (!confirm("¿Eliminar " + concepto + "?")) { return; }
+        }
+
+        try {
+          deleteBtn.disabled = true;
+          await window.team68Movements.remove(id);
+          showToast("success", "Movimiento eliminado", concepto);
+        } catch (error) {
+          showToast("error", "No se pudo eliminar", error.message);
+          deleteBtn.disabled = false;
+        }
+      }
     });
   </script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
