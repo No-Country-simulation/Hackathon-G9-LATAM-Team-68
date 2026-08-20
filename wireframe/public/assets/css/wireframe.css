@@ -1,0 +1,156 @@
+@font-face {
+	font-family: "IBM Plex Mono Local";
+	src: url("../fonts/ibm-plex-mono-400.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "IBM Plex Mono Local";
+	src: url("../fonts/ibm-plex-mono-700.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--wf-bg: #f2f2f2;
+	--wf-surface: #ffffff;
+	--wf-line: #1f1f1f;
+	--wf-muted: #666666;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: repeating-linear-gradient(
+		45deg,
+		#f7f7f7,
+		#f7f7f7 12px,
+		#f2f2f2 12px,
+		#f2f2f2 24px
+	);
+	color: var(--wf-line);
+	font-family: "IBM Plex Mono Local", "Liberation Mono", "Courier New", monospace;
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: "IBM Plex Mono Local", "Liberation Mono", "Courier New", monospace;
+}
+
+.navbar,
+.card,
+.form-control,
+.btn,
+.rounded-3,
+.border,
+.input-group-text {
+	background-color: var(--wf-surface) !important;
+	border: 2px solid var(--wf-line) !important;
+	border-radius: 2px !important;
+	box-shadow: none !important;
+}
+
+.navbar .nav-link,
+.navbar-brand,
+.card-title,
+.form-label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--wf-line) !important;
+}
+
+.lead,
+.card-text,
+small,
+.text-body-secondary {
+	color: var(--wf-muted) !important;
+}
+
+.btn {
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.btn-primary,
+.btn-dark {
+	color: #ffffff !important;
+	background: repeating-linear-gradient(
+		-45deg,
+		#444444,
+		#444444 8px,
+		#2d2d2d 8px,
+		#2d2d2d 16px
+	) !important;
+}
+
+.btn-outline-secondary,
+.btn-outline-primary {
+	color: var(--wf-line) !important;
+	border-color: var(--wf-line) !important;
+}
+
+.nav-help-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.nav-help-btn ion-icon {
+	font-size: 1rem;
+}
+
+.btn:hover,
+.btn:focus {
+	filter: brightness(0.94);
+}
+
+.form-control {
+	color: var(--wf-line);
+}
+
+.form-control::placeholder {
+	color: #8a8a8a;
+}
+
+.container section,
+.card-body {
+	position: relative;
+}
+
+.container section::after,
+.card-body::after {
+	content: "";
+	position: absolute;
+	inset: 8px;
+	border: 1px dashed #b0b0b0;
+	pointer-events: none;
+}
+
+.chart-shell {
+	min-height: 320px;
+	background-color: #ffffff;
+	border: 2px dashed #7f7f7f;
+	padding: 10px;
+}
+
+.chart-shell canvas {
+	background: repeating-linear-gradient(
+		-45deg,
+		#f8f8f8,
+		#f8f8f8 9px,
+		#efefef 9px,
+		#efefef 18px
+	);
+}

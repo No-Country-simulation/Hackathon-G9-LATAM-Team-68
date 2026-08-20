@@ -1,0 +1,437 @@
+{
+  "usuario": {
+    "id": "8f7c2b91-3d64-4a12-9e58-71c6d8f204ab",
+    "nombre": "Alejandra Soto"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Salario",
+      "monto": 38000
+    },
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Comisiones de ventas",
+      "monto": 8500
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Renta departamento",
+      "monto": 9000,
+      "forma_pago": "Transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Café Starbucks",
+      "monto": 95,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-03",
+      "descripcion": "Metro y Metrobús",
+      "monto": 45,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-04",
+      "descripcion": "Despensa Walmart",
+      "monto": 1450,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+            "categoria": "Alimentación",
+            "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "Netflix Estándar",
+      "monto": 249,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+            "categoria": "Suscripciones digitales",
+            "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "Gasolina Pemex",
+      "monto": 900,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-07",
+      "descripcion": "Comida en fonda",
+      "monto": 180,
+      "forma_pago": "Efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "CFE servicio de luz",
+      "monto": 680,
+      "forma_pago": "Transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-09",
+      "descripcion": "Farmacia del Ahorro",
+      "monto": 340,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "Uber",
+      "monto": 160,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-11",
+      "descripcion": "Spotify Premium",
+      "monto": 129,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Suscripciones digitales",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Cine Cinépolis",
+      "monto": 420,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-13",
+      "descripcion": "Despensa Soriana",
+      "monto": 980,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-14",
+      "descripcion": "Internet Telmex",
+      "monto": 599,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "Pago tarjeta de crédito",
+      "monto": 2500,
+      "forma_pago": "Transferencia bancaria",
+
+      "clasificacion": [
+                "Pago de deuda"
+            ]
+    },
+    {
+      "fecha": "2026-07-16",
+      "descripcion": "Restaurante Vips",
+      "monto": 390,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-17",
+      "descripcion": "Uber",
+      "monto": 135,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Ropa H&M",
+      "monto": 1250,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Compras personales",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-19",
+      "descripcion": "Consulta médica",
+      "monto": 700,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Salud",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-20",
+      "descripcion": "Agua potable",
+      "monto": 320,
+      "forma_pago": "Efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Vivienda",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "CETES Directo",
+      "monto": 2000,
+      "forma_pago": "Transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
+    },
+    {
+      "fecha": "2026-07-22",
+      "descripcion": "Cuenta de ahorro Nu",
+      "monto": 1800,
+      "forma_pago": "Transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
+    },
+    {
+      "fecha": "2026-07-23",
+      "descripcion": "Gasolina Pemex",
+      "monto": 850,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-24",
+      "descripcion": "Amazon accesorios",
+      "monto": 680,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Compras personales",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-25",
+      "descripcion": "Comida rápida",
+      "monto": 210,
+      "forma_pago": "Efectivo",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-26",
+      "descripcion": "Seguro automotriz",
+      "monto": 1450,
+      "forma_pago": "Transferencia bancaria",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-27",
+      "descripcion": "Uber",
+      "monto": 145,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-28",
+      "descripcion": "Despensa Chedraui",
+      "monto": 1150,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+      "categoria": "Alimentación",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-29",
+      "descripcion": "Bar con amigos",
+      "monto": 950,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 47,
+
+      "clasificacion": [
+                "Consumo",
+                "Pago de deuda"
+            ],
+
+      "categoria": "Entretenimiento y ocio",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-30",
+      "descripcion": "Curso en línea",
+      "monto": 900,
+      "forma_pago": "Tarjeta de débito",
+
+      "clasificacion": [
+                "Consumo"
+            ],
+
+            "categoria": "Educación",
+            "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-31",
+      "descripcion": "Aportación voluntaria AFORE",
+      "monto": 1500,
+      "forma_pago": "Transferencia bancaria",
+
+      "clasificacion": [
+                "Ahorro e inversión"
+            ]
+    }
+  ]
+}

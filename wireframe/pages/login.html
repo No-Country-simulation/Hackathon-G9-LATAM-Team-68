@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Team68 Wireframe | Login</title>
+	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link id="themeStylesheet" rel="stylesheet" href="../assets/css/wireframe.css" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg border-bottom">
+		<div class="container">
+			<a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
+				<img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link" href="summary.html">Resumen</a></li>
+					<li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
+					<li class="nav-item"><a class="nav-link" href="expense.html">Gastos</a></li>
+					<li class="nav-item"><a class="nav-link" href="history.html">Historial</a></li>
+					<li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+				</ul>
+				<div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+					<label for="themeSelector" class="small mb-0">Estilo</label>
+					<select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
+						<option value="wireframe">Wireframe</option>
+						<option value="modern">Modern</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<main class="container py-5">
+		<section class="row justify-content-center">
+			<div class="col-md-8 col-lg-5">
+				<div class="card">
+					<div class="card-body p-4">
+						<h1 class="h3 mb-3">Iniciar sesion</h1>
+						<p class="text-body-secondary mb-4">Accede para gestionar tus ingresos y gastos.</p>
+						<form class="row g-3">
+							<div class="col-12">
+								<label for="email" class="form-label">Correo</label>
+								<input id="email" type="email" class="form-control" placeholder="usuario@correo.com">
+							</div>
+							<div class="col-12">
+								<label for="password" class="form-label">Contrasena</label>
+								<input id="password" type="password" class="form-control" placeholder="********">
+							</div>
+							<div class="col-12 d-grid">
+								<a class="btn btn-primary" href="summary.html"><ion-icon name="log-in-outline"></ion-icon> Ingresar</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script src="../assets/js/theme-switcher.js"></script>
+	<script src="../vendor/ionicons/ionicons.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

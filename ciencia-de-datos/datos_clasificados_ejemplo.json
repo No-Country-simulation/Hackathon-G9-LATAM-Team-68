@@ -1,0 +1,103 @@
+{
+  "usuario": {
+    "id": "8f7c2b91-3d64-4a12-9e58-71c6d8f204ab",
+    "nombre": "Brayan Lira"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Salario",
+      "monto": 25000.0
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "Proyecto freelance",
+      "monto": 4500.0
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-02",
+      "descripcion": "Walmart León",
+      "monto": 1350.0,
+      "forma_pago": "Tarjeta de débito",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Compras personales",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "Hospital Ángeles",
+      "monto": 5800.0,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48.5,
+      "clasificacion": [
+        "Consumo",
+        "Pago de deuda"
+      ],
+      "categoria": "Salud",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "Pago préstamo personal",
+      "monto": 3200.0,
+      "forma_pago": "Transferencia bancaria",
+      "clasificacion": [
+        "Pago de deuda"
+      ]
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Netflix",
+      "monto": 249.0,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 48.5,
+      "clasificacion": [
+        "Consumo",
+        "Pago de deuda"
+      ],
+      "categoria": "Suscripciones digitales",
+      "grupo": "Discrecional"
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Gasolina Pemex",
+      "monto": 900.0,
+      "forma_pago": "Efectivo",
+      "clasificacion": [
+        "Consumo"
+      ],
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    },
+    {
+      "fecha": "2026-07-22",
+      "descripcion": "Aportación fondo de inversión",
+      "monto": 2500.0,
+      "forma_pago": "Transferencia bancaria",
+      "clasificacion": [
+        "Ahorro e inversión"
+      ]
+    },
+    {
+      "fecha": "2026-07-26",
+      "descripcion": "Liverpool",
+      "monto": 4200.0,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 52.3,
+      "clasificacion": [
+        "Consumo",
+        "Pago de deuda"
+      ],
+      "categoria": "Transporte",
+      "grupo": "Esencial"
+    }
+  ]
+}

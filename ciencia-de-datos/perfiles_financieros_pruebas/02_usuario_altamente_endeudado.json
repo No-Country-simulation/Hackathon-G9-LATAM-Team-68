@@ -1,0 +1,86 @@
+{
+  "usuario": {
+    "id": "8f7c2b91-3d64-4a12-9e58-71c6d8f204ab",
+    "nombre": "Roberto Cárdenas"
+  },
+  "periodo": {
+    "inicio": "2026-07-01",
+    "fin": "2026-07-31"
+  },
+  "ingresos": [
+    {
+      "fecha": "2026-07-31",
+      "descripcion": "Salario",
+      "monto": 23000
+    }
+  ],
+  "transacciones": [
+    {
+      "fecha": "2026-07-01",
+      "descripcion": "Pago crédito hipotecario",
+      "monto": 14500,
+      "forma_pago": "Transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-05",
+      "descripcion": "Pago tarjeta Santander",
+      "monto": 6200,
+      "forma_pago": "Transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-06",
+      "descripcion": "Despensa Walmart",
+      "monto": 2300,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 89
+    },
+    {
+      "fecha": "2026-07-08",
+      "descripcion": "CFE servicio de luz",
+      "monto": 950,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 89
+    },
+    {
+      "fecha": "2026-07-10",
+      "descripcion": "Gasolina Pemex",
+      "monto": 1800,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 89
+    },
+    {
+      "fecha": "2026-07-12",
+      "descripcion": "Internet Izzi",
+      "monto": 650,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 89
+    },
+    {
+      "fecha": "2026-07-15",
+      "descripcion": "Pago préstamo personal",
+      "monto": 5000,
+      "forma_pago": "Transferencia bancaria"
+    },
+    {
+      "fecha": "2026-07-18",
+      "descripcion": "Farmacias Guadalajara",
+      "monto": 1250,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 89
+    },
+    {
+      "fecha": "2026-07-21",
+      "descripcion": "Seguro automotriz",
+      "monto": 2100,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 89
+    },
+    {
+      "fecha": "2026-07-28",
+      "descripcion": "Amazon electrónica",
+      "monto": 2900,
+      "forma_pago": "Tarjeta de crédito",
+      "tasa_de_interes_de_la_tarjeta": 89
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="icon" type="image/png" href="../assets/images/rendi-10.png">
+	<title>Team68 Salud Financiera | Gastos</title>
+	<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
+	<link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
+	<link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+	<link id="themeStylesheet" rel="stylesheet" href="" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg border-bottom">
+		<div class="container">
+			<a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
+				<img src="../assets/images/logo.png" alt="Team68" width="140" height="36">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link" href="summary.html">Resumen</a></li>
+					<li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
+					<li class="nav-item"><a class="nav-link active" href="expense.html">Gastos</a></li>
+					<li class="nav-item"><a class="nav-link" href="history.html">Historial</a></li>
+					<li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
+					<li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+				</ul>
+				<div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+					<button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la página">
+						<i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+						<span></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<main class="container py-4 py-md-5">
+
+		<section class="rounded-3 border p-4 mb-4" id="expenseForm">
+			<h1 class="h3 mb-3">Registrar gasto</h1>
+			<form class="row g-3" id="expenseEntryForm">
+				<div class="col-md-4">
+					<label for="fechaGasto" class="form-label">Fecha</label>
+					<input id="fechaGasto" type="date" class="form-control fecha-hoy" required>
+				</div>
+				<div class="col-md-4">
+					<label for="montoGasto" class="form-label">Monto</label>
+					<input id="montoGasto" type="number" class="form-control" placeholder="0.00" required>
+				</div>
+				<div class="col-md-4">
+					<label for="metodoPagoGasto" class="form-label">Método de pago</label>
+					<select id="metodoPagoGasto" class="form-select" required>
+						<option value="Efectivo">Efectivo</option>
+						<option value="Transferencia">Transferencia</option>
+						<option value="Debito">Debito</option>
+						<option value="Credito">Credito</option>
+					</select>
+				</div>
+				<div class="col-md-12" id="conceptoGastoWrapper">
+					<label for="conceptoGasto" class="form-label">Concepto</label>
+					<input id="conceptoGasto" type="text" class="form-control" placeholder="Ej. Supermercado" maxlength="60" required>
+				</div>
+				<div class="col-md-4 d-none" id="tasaInteresGastoWrapper">
+					<label for="tasaInteresGasto" class="form-label">Tasa de interés (%)</label>
+					<input id="tasaInteresGasto" type="number" class="form-control" placeholder="Ej. 2.5" min="0.01" step="0.01" inputmode="decimal">
+				</div>
+				<div class="col-12 d-flex gap-2">
+					<button type="button" class="btn btn-primary" id="saveExpenseBtn"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Guardar gasto</button>
+					<a class="btn btn-outline-secondary" href="summary.html"><i class="fa-regular fa-circle-xmark" aria-hidden="true"></i> Cancelar</a>
+				</div>
+			</form>
+		</section>
+
+		<section class="card" id="expenseRecent">
+			<div class="card-body">
+				<h2 class="h5 mb-3">Gastos recientes</h2>
+				<ul class="mb-0" id="expenseRecentList"></ul>
+			</div>
+		</section>
+		
+	</main>
+
+	<script src="../vendor/introjs/intro.min.js"></script>
+	<script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
+	<script src="../assets/js/theme-switcher.js"></script>
+	<script src="../assets/js/page-help.js"></script>
+	<script src="../assets/js/api-client.js"></script>
+	<script src="../assets/js/movements.js"></script>
+	<script src="../assets/js/forms.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

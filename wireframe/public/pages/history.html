@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team68 Wireframe | Historial</title>
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
+  <link id="themeStylesheet" rel="stylesheet" href="" data-wireframe="../assets/css/wireframe.css" data-modern="../assets/css/modern.css" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
+        <img src="../assets/images/logo.svg" alt="Team68" width="140" height="36">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="summary.html">Resumen</a></li>
+          <li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
+          <li class="nav-item"><a class="nav-link" href="expense.html">Gastos</a></li>
+          <li class="nav-item"><a class="nav-link active" href="history.html">Historial</a></li>
+          <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+          <button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la pagina">
+            <ion-icon name="help-circle-outline"></ion-icon>
+            <span></span>
+          </button>
+          <label for="themeSelector" class="small mb-0">Estilo</label>
+          <select id="themeSelector" class="form-select form-select-sm" style="min-width: 132px;" aria-label="Selector de estilo">
+            <option value="default">Default (Bootstrap)</option>
+            <option value="wireframe">Wireframe</option>
+            <option value="modern">Modern</option>
+            <option value="y2k">Y2K</option>
+            <option value="hollow">Hollow</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4 py-md-5">
+    <section class="rounded-3 border p-4 mb-4" id="historyFilters">
+      <h1 class="h3 mb-3">Historial de movimientos</h1>
+      <form class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <label for="desde" class="form-label">Desde</label>
+          <input id="desde" type="date" class="form-control">
+        </div>
+        <div class="col-md-3">
+          <label for="hasta" class="form-label">Hasta</label>
+          <input id="hasta" type="date" class="form-control">
+        </div>
+        <div class="col-md-3">
+          <label for="tipo" class="form-label">Tipo</label>
+          <select id="tipo" class="form-control">
+            <option>Todos</option>
+            <option>Ingreso</option>
+            <option>Gasto</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="categoria" class="form-label">Categoria</label>
+          <select id="categoria" class="form-control">
+            <option>Todas</option>
+            <option>Trabajo</option>
+            <option>Alimentacion</option>
+            <option>Transporte</option>
+            <option>Servicios</option>
+          </select>
+        </div>
+        <div class="col-12 d-flex gap-2">
+          <button type="button" class="btn btn-primary"><ion-icon name="funnel-outline"></ion-icon> Aplicar filtros</button>
+          <button type="button" class="btn btn-outline-secondary"><ion-icon name="refresh-outline"></ion-icon> Limpiar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card mb-4" id="historyResults">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Resultados</h2>
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Categoria</th>
+                <th>Tipo</th>
+                <th>Cuenta</th>
+                <th class="text-end">Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>16/07/2026</td>
+                <td>Salario</td>
+                <td>Trabajo</td>
+                <td>Ingreso</td>
+                <td>Banco principal</td>
+                <td class="text-end">+$2,400</td>
+              </tr>
+              <tr>
+                <td>15/07/2026</td>
+                <td>Supermercado</td>
+                <td>Alimentacion</td>
+                <td>Gasto</td>
+                <td>Tarjeta</td>
+                <td class="text-end">-$180</td>
+              </tr>
+              <tr>
+                <td>14/07/2026</td>
+                <td>Freelance</td>
+                <td>Servicios</td>
+                <td>Ingreso</td>
+                <td>Banco principal</td>
+                <td class="text-end">+$800</td>
+              </tr>
+              <tr>
+                <td>13/07/2026</td>
+                <td>Gasolina</td>
+                <td>Transporte</td>
+                <td>Gasto</td>
+                <td>Efectivo</td>
+                <td class="text-end">-$60</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card mb-4" id="historyChartCard">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Gastos por categoria</h2>
+        <div class="chart-shell">
+          <canvas id="expenseCategoryChart" aria-label="Grafica de gastos por categoria" role="img"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="row g-3">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="h6">Total ingresos filtrados</h3>
+            <p class="display-6 mb-0">$3,200</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="h6">Total gastos filtrados</h3>
+            <p class="display-6 mb-0">$1,920</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="h6">Balance filtrado</h3>
+            <p class="display-6 mb-0">$1,280</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../vendor/introjs/intro.min.js"></script>
+  <script type="module" src="../vendor/ionicons/ionicons.esm.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script src="../assets/js/page-help.js"></script>
+  <script src="../vendor/chartjs/chart.umd.min.js"></script>
+  <script>
+    const expenseLabels = ["Alimentacion", "Transporte", "Servicios", "Salud", "Otros"];
+    const expenseValues = [180, 60, 95, 45, 25];
+    let expenseChart = null;
+
+    function chartThemeTokens(themeName) {
+      if (themeName === "default") {
+        return null;
+      }
+
+      if (themeName === "modern") {
+        return {
+          borderColor: "#1565c0",
+          backgroundColor: ["#1e88e5", "#42a5f5", "#5c6bc0", "#26a69a", "#8d6e63"],
+          gridColor: "#dbe5f0",
+          tickColor: "#2b3a4a",
+          tooltipBg: "rgba(15, 33, 53, 0.92)",
+          tooltipText: "#ffffff"
+        };
+      }
+
+      if (themeName === "y2k") {
+        return {
+          borderColor: "#ffffff",
+          backgroundColor: [
+            "rgba(0, 166, 255, 0.92)",
+            "rgba(123, 97, 255, 0.9)",
+            "rgba(255, 79, 216, 0.9)",
+            "rgba(106, 255, 200, 0.9)",
+            "rgba(255, 196, 90, 0.92)"
+          ],
+          gridColor: "rgba(123, 97, 255, 0.16)",
+          tickColor: "#31456f",
+          tooltipBg: "rgba(255, 255, 255, 0.94)",
+          tooltipText: "#11233f"
+        };
+      }
+
+      if (themeName === "hollow") {
+        return {
+          borderColor: "#f4efdf",
+          backgroundColor: [
+            "#f4efdf",
+            "#d7c07c",
+            "#7fc6cf",
+            "#9a8f6a",
+            "#5f667f"
+          ],
+          gridColor: "rgba(244, 239, 223, 0.12)",
+          tickColor: "#f4efdf",
+          tooltipBg: "rgba(18, 20, 31, 0.98)",
+          tooltipText: "#f4efdf"
+        };
+      }
+
+      return {
+        borderColor: "#1f1f1f",
+        backgroundColor: ["#555555", "#6a6a6a", "#808080", "#969696", "#acacac"],
+        gridColor: "#c8c8c8",
+        tickColor: "#1f1f1f",
+        tooltipBg: "rgba(38, 38, 38, 0.92)",
+        tooltipText: "#ffffff"
+      };
+    }
+
+    function renderExpenseChart(themeName) {
+      const chartCanvas = document.getElementById("expenseCategoryChart");
+      if (!chartCanvas) {
+        return;
+      }
+
+      const palette = chartThemeTokens(themeName);
+      const useChartDefaults = themeName === "default";
+
+      if (expenseChart) {
+        expenseChart.destroy();
+      }
+
+      const dataset = {
+        label: "Gasto (USD)",
+        data: expenseValues,
+        borderWidth: 2,
+        borderRadius: themeName === "y2k" ? 12 : 6,
+        maxBarThickness: 56
+      };
+
+      if (!useChartDefaults && palette) {
+        dataset.borderColor = palette.borderColor;
+        dataset.backgroundColor = palette.backgroundColor;
+      }
+
+      const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return "$" + context.raw;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return "$" + value;
+              }
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
+      };
+
+      if (!useChartDefaults && palette) {
+        chartOptions.plugins.tooltip.backgroundColor = palette.tooltipBg;
+        chartOptions.plugins.tooltip.titleColor = palette.tooltipText;
+        chartOptions.plugins.tooltip.bodyColor = palette.tooltipText;
+        chartOptions.scales.y.grid = {
+          color: palette.gridColor
+        };
+        chartOptions.scales.y.ticks.color = palette.tickColor;
+        chartOptions.scales.x.ticks = {
+          color: palette.tickColor
+        };
+      }
+
+      expenseChart = new Chart(chartCanvas, {
+        type: "bar",
+        data: {
+          labels: expenseLabels,
+          datasets: [dataset]
+        },
+        options: chartOptions
+      });
+    }
+
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "wireframe";
+    renderExpenseChart(currentTheme);
+
+    document.addEventListener("fintrack:theme-change", function (event) {
+      renderExpenseChart(event.detail.theme);
+    });
+  </script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

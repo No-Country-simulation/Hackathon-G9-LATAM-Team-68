@@ -1,0 +1,11 @@
+google-genai
+python-dotenv
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+imbalanced-learn
+joblib
+fastapi
+uvicorn

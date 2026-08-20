@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="../assets/images/rendi-10.png">
+  <title>Team68 Salud Financiera | Salud financiera</title>
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/fontawesome/css/all.min.css" rel="stylesheet">
+  <link href="../vendor/introjs/introjs.min.css" rel="stylesheet">
+  <link href="../vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+  <link id="themeStylesheet" rel="stylesheet" href="" data-y2k="../assets/css/y2k.css" data-hollow="../assets/css/hollow.css" data-rendi="../assets/css/rendi.css">
+  <style>
+    .health-chart-shell {
+      max-width: 220px;
+      margin: 0 auto;
+    }
+    .health-suggestions {
+      text-align: left;
+    }
+    .medal-card img {
+      max-height: 150px;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="welcome.html">
+        <img src="../assets/images/logo.png" alt="Team68" width="140" height="36">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="summary.html">Resumen</a></li>
+          <li class="nav-item"><a class="nav-link" href="income.html">Ingresos</a></li>
+          <li class="nav-item"><a class="nav-link" href="expense.html">Gastos</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">Historial</a></li>
+          <li class="nav-item"><a class="nav-link active" href="perfil.html">Perfil</a></li>
+          <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+          <button class="btn btn-outline-secondary btn-sm nav-help-btn" type="button" id="pageHelpTrigger" aria-label="Mostrar ayuda de la página">
+            <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4 py-md-5">
+    
+    <section class="rounded-3 border p-4 mb-4" id="financialHealthHeader">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div>
+          <h1 class="h3 mb-1" id="usuarioNombreHeader">Perfil financiero de Usuario</h1>
+          <small>Indicadores clave de tu situación actual</small>
+        </div>
+        <a href="history.html" class="btn btn-outline-secondary"><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Ver historial</a>
+      </div>
+    </section>
+
+    <section class="row g-3 mb-4" id="financialHealthMetrics">
+      <div class="col-md-4">
+        <article class="card h-100">
+          <div class="card-body text-center">
+            <h2 class="h5 mb-1">Salud financiera</h2>
+            <p class="small mb-3" id="saludEstado">Estado actual de la salud financiera: en observación.</p>
+            <div class="health-chart-shell mb-3">
+              <canvas id="saludChart" aria-label="Grafica de salud financiera" role="img"></canvas>
+            </div>
+            <h3 class="h6 mb-2">Sugerencias</h3>
+            <ul class="small mb-0 health-suggestions" id="saludSuggestions"></ul>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="card h-100">
+          <div class="card-body text-center">
+            <h2 class="h5 mb-1">Endeudamiento</h2>
+            <p class="small mb-3">Porcentaje de tus ingresos comprometidos en gastos.</p>
+            <div class="health-chart-shell mb-3">
+              <canvas id="deudaChart" aria-label="Grafica de endeudamiento" role="img"></canvas>
+            </div>
+            <h3 class="h6 mb-2">Sugerencias</h3>
+            <ul class="small mb-0 health-suggestions" id="deudaSuggestions"></ul>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="card h-100">
+          <div class="card-body text-center">
+            <h2 class="h5 mb-1">Ahorro</h2>
+            <p class="small mb-3">Proporcion de ingresos que logras conservar.</p>
+            <div class="health-chart-shell mb-3">
+              <canvas id="ahorroChart" aria-label="Grafica de ahorro" role="img"></canvas>
+            </div>
+            <h3 class="h6 mb-2">Sugerencias</h3>
+            <ul class="small mb-0 health-suggestions" id="ahorroSuggestions"></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="rounded-3 border p-4 mb-4" id="medallasObtenidas">
+      <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+        <div>
+          <h2 class="h4 mb-1">Medallas obtenidas el mes pasado</h2>
+          <p class="small mb-0">Reconocimientos de ejemplo ganados por buenos hábitos financieros.</p>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <article class="h-100 text-center">
+            <div class="card-body">
+              <img src="../assets/images/rendi-01.png" width="75%" class="img-fluid mb-3" alt="Medalla finanzas saludables">
+              <h3 class="h6 mb-2">Finanzas saludables</h3>
+              <p class="small mb-0">Reconoce constancia en ahorro y balance financiero estable.</p>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="h-100 text-center">
+            <div class="card-body">
+              <img src="../assets/images/rendi-08.png" width="75%" class="img-fluid mb-3" alt="Medalla deuda bajo control">
+              <h3 class="h6 mb-2">Deuda bajo control</h3>
+              <p class="small mb-0">Premio por mantener el endeudamiento dentro de un nivel sano.</p>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="h-100 text-center">
+            <div class="card-body">
+              <img src="../assets/images/rendi-05.png" width="75%" class="img-fluid mb-3" alt="Medalla gasto hormiga reina">
+              <h3 class="h6 mb-2">Gasto hormiga reina</h3>
+              <p class="small mb-0">La hormiga reina exige un gasto a la altura de sus caprichos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../vendor/introjs/intro.min.js"></script>
+  <script src="../vendor/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../assets/js/theme-switcher.js"></script>
+  <script src="../assets/js/page-help.js"></script>
+  <script src="../assets/js/api-client.js"></script>
+  <script src="../assets/js/movements.js"></script>
+  <script src="../vendor/chartjs/chart.umd.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var chartInstances = {};
+
+    function renderUsuarioHeader() {
+      var name = "Usuario";
+      if (window.team68Api && typeof window.team68Api.getUsuarioNombre === "function") {
+        name = window.team68Api.getUsuarioNombre();
+      }
+      var el = document.getElementById("usuarioNombreHeader");
+      if (el) {
+        el.textContent = "Perfil financiero de " + name;
+      }
+    }
+
+    renderUsuarioHeader();
+
+    function pickFirstDefined(values) {
+      for (var i = 0; i < values.length; i += 1) {
+        if (values[i] !== undefined && values[i] !== null) {
+          return values[i];
+        }
+      }
+      return undefined;
+    }
+    function asArray(value) {
+      return Array.isArray(value) ? value : [];
+    }
+    function asObject(value) {
+      return value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    }
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+    function roundPercent(value) {
+      return Math.round(clamp(value, 0, 100));
+    }
+    function normalizeFinancialPayload(payload) {
+      var data = asObject(payload);
+      var userData = asObject(pickFirstDefined([data.user, data.usuario]));
+      var profileData = asObject(pickFirstDefined([data.financialProfile, data.perfil_financiero]));
+      var dimensionsData = asObject(pickFirstDefined([data.dimensions, data.dimensiones]));
+
+      var financialBalance = asObject(pickFirstDefined([dimensionsData.financialBalance, dimensionsData.balance_financiero]));
+      var savingsCapacity = asObject(pickFirstDefined([dimensionsData.savingsCapacity, dimensionsData.capacidad_de_ahorro]));
+      var debt = asObject(pickFirstDefined([dimensionsData.debt, dimensionsData.endeudamiento]));
+      var consumptionBehavior = asObject(pickFirstDefined([dimensionsData.consumptionBehavior, dimensionsData.comportamiento_de_consumo]));
+
+      return {
+        user: {
+          id: pickFirstDefined([userData.id]),
+          name: pickFirstDefined([userData.name, userData.nombre, "Usuario"])
+        },
+        financialProfile: {
+          score: Number(pickFirstDefined([profileData.score, profileData.puntuacion, 0])) || 0,
+          status: pickFirstDefined([profileData.status, profileData.estado, "Sin datos"])
+        },
+        dimensions: {
+          financialBalance: {
+            score: Number(pickFirstDefined([financialBalance.score, financialBalance.puntuacion, 0])) || 0,
+            status: pickFirstDefined([financialBalance.status, financialBalance.estado, "Sin datos"]),
+            indicators: asObject(pickFirstDefined([financialBalance.indicators, financialBalance.indicadores])),
+            recommendations: asArray(pickFirstDefined([financialBalance.recommendations, financialBalance.recomendaciones]))
+          },
+          savingsCapacity: {
+            score: Number(pickFirstDefined([savingsCapacity.score, savingsCapacity.puntuacion, 0])) || 0,
+            status: pickFirstDefined([savingsCapacity.status, savingsCapacity.estado, "Sin datos"]),
+            indicators: asObject(pickFirstDefined([savingsCapacity.indicators, savingsCapacity.indicadores])),
+            recommendations: asArray(pickFirstDefined([savingsCapacity.recommendations, savingsCapacity.recomendaciones]))
+          },
+          debt: {
+            score: Number(pickFirstDefined([debt.score, debt.puntuacion, 0])) || 0,
+            status: pickFirstDefined([debt.status, debt.estado, "Sin datos"]),
+            indicators: asObject(pickFirstDefined([debt.indicators, debt.indicadores])),
+            recommendations: asArray(pickFirstDefined([debt.recommendations, debt.recomendaciones]))
+          },
+          consumptionBehavior: {
+            score: Number(pickFirstDefined([consumptionBehavior.score, consumptionBehavior.puntuacion, 0])) || 0,
+            status: pickFirstDefined([consumptionBehavior.status, consumptionBehavior.estado, "Sin datos"]),
+            indicators: asObject(pickFirstDefined([consumptionBehavior.indicators, consumptionBehavior.indicadores])),
+            recommendations: asArray(pickFirstDefined([consumptionBehavior.recommendations, consumptionBehavior.recomendaciones]))
+          }
+        },
+        generalRecommendation: pickFirstDefined([
+          data.generalRecommendation,
+          data.recomendacion_general,
+          ""
+        ])
+      };
+    }
+    function getFinancialPayloadSource() {
+      try {
+        var fromStorage = localStorage.getItem("team68-financial-profile");
+        if (!fromStorage) {
+          return null;
+        }
+        return JSON.parse(fromStorage);
+      } catch (error) {
+        return null;
+      }
+    }
+    function drawDonut(canvasId, value, color) {
+      var canvas = document.getElementById(canvasId);
+      var safeValue = roundPercent(value);
+
+      if (!canvas) {
+        return;
+      }
+
+      if (chartInstances[canvasId]) {
+        chartInstances[canvasId].destroy();
+      }
+
+      var centerLabelPlugin = {
+        id: "team68-center-label-" + canvasId,
+        afterDraw: function (chart) {
+          var meta = chart.getDatasetMeta(0);
+          if (!meta || !meta.data || !meta.data.length) {
+            return;
+          }
+
+          var point = meta.data[0];
+          var x = point.x;
+          var y = point.y;
+          var ctx = chart.ctx;
+          var centerColor = getComputedStyle(document.documentElement)
+            .getPropertyValue("--team68-donut-center-color")
+            .trim() || "#212529";
+
+          ctx.save();
+          ctx.fillStyle = centerColor;
+          ctx.font = "700 28px system-ui";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(safeValue + "%", x, y);
+          ctx.restore();
+        }
+      };
+      chartInstances[canvasId] = new Chart(canvas, {
+        type: "doughnut",
+        plugins: [centerLabelPlugin],
+        data: {
+          labels: ["Valor", "Resto"],
+          datasets: [{
+            data: [safeValue, 100 - safeValue],
+            backgroundColor: [color, "#e9ecef"],
+            borderWidth: 0,
+            hoverOffset: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          cutout: "72%",
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function (ctx) {
+                  return ctx.raw + "%";
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+    function renderSuggestions(listId, suggestions) {
+      var listNode = document.getElementById(listId);
+      if (!listNode) {
+        return;
+      }
+      listNode.innerHTML = suggestions.map(function (text) {
+        return "<li>" + text + "</li>";
+      }).join("");
+    }
+    function renderFinancialHealthPage() {
+      var rawPayload = getFinancialPayloadSource();
+      var profilePayload = rawPayload ? normalizeFinancialPayload(rawPayload) : null;
+      var healthValue = profilePayload ? profilePayload.financialProfile.score : 0;
+      var debtValue = profilePayload ? profilePayload.dimensions.debt.score : 0;
+      var savingsValue = profilePayload ? profilePayload.dimensions.savingsCapacity.score : 0;
+      var statusNode = document.getElementById("saludEstado");
+      drawDonut("saludChart", healthValue, "#198754");
+      drawDonut("deudaChart", debtValue, "#dc3545");
+      drawDonut("ahorroChart", savingsValue, "#0d6efd");
+      if (statusNode) {
+        var label = profilePayload ? String(profilePayload.financialProfile.status).toLowerCase() : "sin datos del api";
+        statusNode.textContent = "Estado actual de la salud financiera: " + label + ".";
+      }
+      renderSuggestions(
+        "saludSuggestions",
+        profilePayload
+          ? profilePayload.dimensions.financialBalance.recommendations
+          : ["Esperando criterios del servicio de analisis financiero (API)."]
+      );
+      renderSuggestions(
+        "deudaSuggestions",
+        profilePayload
+          ? profilePayload.dimensions.debt.recommendations
+          : ["Esperando criterios del servicio de analisis financiero (API)."]
+      );
+      renderSuggestions(
+        "ahorroSuggestions",
+        profilePayload
+          ? profilePayload.dimensions.savingsCapacity.recommendations
+          : ["Esperando criterios del servicio de analisis financiero (API)."]
+      );
+    }
+    renderFinancialHealthPage();
+    document.addEventListener("team68:movements-updated", function () {
+      renderFinancialHealthPage();
+    });
+    document.addEventListener("team68:profile-updated", function () {
+      renderFinancialHealthPage();
+    });
+  </script>
+</body>
+</html>
