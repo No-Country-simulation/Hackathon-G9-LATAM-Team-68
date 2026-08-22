@@ -260,74 +260,82 @@
     }
 
     // --- Sugerencias contextuales locales ---
-    function getHealthSuggestions(value) {
-      if (value >= 75) {
-        return [
-          "Mantener tu presupuesto actual y revisar resultados cada semana.",
-          "Automatizar transferencias a ahorro para conservar el buen ritmo.",
-          "Definir una meta de inversion de mediano plazo."
-        ];
-      }
-      if (value >= 50) {
-        return [
-          "Reducir uno o dos gastos variables este mes.",
-          "Separar primero un monto fijo para ahorro.",
-          "Revisar suscripciones y pagos recurrentes."
-        ];
-      }
-      return [
-        "Crear un presupuesto base con topes por categoria.",
-        "Evitar compras no esenciales durante las proximas semanas.",
-        "Buscar una fuente adicional de ingreso temporal."
-      ];
-    }
-    function getDebtSuggestions(value) {
-      if (value <= 35) {
-        return [
-          "Mantener el endeudamiento en niveles controlados.",
-          "Pagar siempre el total de tarjetas para evitar intereses.",
-          "Construir fondo de emergencia para no recurrir a deuda."
-        ];
-      }
-      if (value <= 60) {
-        return [
-          "Priorizar el pago de deudas con mayor interes.",
-          "Evitar nuevas compras financiadas en el corto plazo.",
-          "Negociar mejores tasas o consolidar saldos si aplica."
-        ];
-      }
-      return [
-        "Detener deuda nueva y enfocarte en reducir saldo actual.",
-        "Aplicar metodo bola de nieve o avalancha de pagos.",
-        "Revisar plan de pagos mensual con objetivos realistas."
-      ];
-    }
-    function getSavingsSuggestions(value) {
-      if (value >= 25) {
-        return [
-          "Mantener la disciplina de ahorro mensual.",
-          "Evaluar dividir ahorro entre emergencia e inversion.",
-          "Subir gradualmente tu meta de ahorro."
-        ];
-      }
-      if (value >= 10) {
-        return [
-          "Incrementar ahorro con recortes pequenos y constantes.",
-          "Programar una transferencia automatica al inicio del mes.",
-          "Definir un objetivo puntual para motivar el ahorro."
-        ];
-      }
-      return [
-        "Comenzar con una meta minima del 5% del ingreso.",
-        "Eliminar gastos hormiga y redirigir ese monto a ahorro.",
-        "Separar el ahorro apenas recibas ingresos."
-      ];
-    }
-    function getHealthStatusLabel(value) {
-      if (value >= 75) { return "saludable"; }
-      if (value >= 50) { return "en observación"; }
-      return "en riesgo";
-    }
+function getHealthSuggestions(value) {
+  if (value >= 80) {
+    return [
+      "Mantener un balance mensual positivo para fortalecer la estabilidad financiera.",
+      "Mantener el nivel actual de gasto respecto a los ingresos.",
+      "Destinar parte del excedente al ahorro o inversión."
+    ];
+  }
+
+  if (value >= 50) {
+    return [
+      "Continuar monitoreando el gasto para evitar que aumente.",
+      "Buscar incrementar gradualmente el margen financiero mediante una mejor planificación del presupuesto.",
+      "Incrementar el margen financiero reduciendo gastos no esenciales o aumentando los ingresos."
+    ];
+  }
+
+  return [
+    "Recuperar un balance mensual positivo reduciendo gastos o incrementando los ingresos.",
+    "Priorizar la reducción de gastos para recuperar el equilibrio financiero.",
+    "Recuperar un margen financiero positivo antes de asumir nuevos compromisos financieros."
+  ];
+}
+function getDebtSuggestions(value) {
+  if (value >= 80) {
+    return [
+      "Mantener una administración responsable del endeudamiento para conservar esta fortaleza financiera.",
+      "Mantener el bajo nivel de endeudamiento actual.",
+      "Evitar adquirir deudas con costos financieros elevados."
+    ];
+  }
+  if (value >= 50) {
+    return [
+      "Vigilar el crecimiento del endeudamiento para mantener una carga financiera saludable.",
+      "Reducir gradualmente el porcentaje del ingreso destinado al pago de deudas.",
+      "Buscar oportunidades para reducir el costo del financiamiento."
+    ];
+  }
+  return [
+    "Priorizar la reducción del endeudamiento antes de adquirir nuevas obligaciones financieras.",
+    "Priorizar el pago de las deudas con mayor tasa de interés.",
+    "Implementar un plan de reducción de deudas para recuperar flexibilidad financiera."
+  ];
+}
+function getSavingsSuggestions(value) {
+  if (value >= 80) {
+    return [
+      "Mantener el excelente hábito de destinar una parte importante de los ingresos al ahorro e inversión.",
+      "Mantener el ritmo de ahorro actual y buscar incrementarlo gradualmente.",
+      "Mantener el excelente aprovechamiento del margen financiero destinándolo al ahorro o inversión."
+    ];
+  }
+  if (value >= 50) {
+    return [
+      "Incrementar gradualmente el porcentaje destinado al ahorro.",
+      "Aprovechar una mayor parte del margen financiero para fortalecer el ahorro.",
+      "Continuar fortaleciendo el ahorro para consolidar una mayor estabilidad financiera."
+    ];
+  }
+  return [
+    "Establecer como prioridad aumentar el ahorro mensual para fortalecer la estabilidad financiera.",
+    "Priorizar el incremento del ahorro mensual reduciendo gastos no esenciales.",
+    "Priorizar el aprovechamiento del margen financiero para construir un fondo de ahorro o inversión."
+  ];
+}
+function getHealthStatusLabel(value) {
+  if (value >= 80) {
+    return "saludable";
+  }
+
+  if (value >= 50) {
+    return "en observación";
+  }
+
+  return "en riesgo";
+}
     function drawDonut(canvasId, value, color) {
       var canvas = document.getElementById(canvasId);
       var safeValue = roundPercent(value);
