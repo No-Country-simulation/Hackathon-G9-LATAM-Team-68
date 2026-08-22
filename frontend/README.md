@@ -6,7 +6,7 @@ La propuesta funcional combina visualización clara, clasificación de movimient
 
 ## Versiones
 
-Versión actual: 0.8
+Versión actual: 1.0
 
 Versión 0.1: Prototipo inicial
 Versión 0.2: Gráfica de gastos
@@ -16,6 +16,9 @@ Versión 0.5: Método de pago en gastos
 Versión 0.6: Fixes y optimizaciones
 Versión 0.7: Diseno de interfaz Rendi
 Versión 0.8: Integracion con API remota
+Versión 0.9: Fallback local en metricas
+Versión 1.0: Edición y eliminación de movimientos
+Versión 1.1: Fixes en fallback de perfil
 
 ## Descripción del proyecto
 
