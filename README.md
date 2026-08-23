@@ -1,112 +1,112 @@
-# Team 68 - App de Educación Financiera
+# Team 68 - FinanceAI: App de Educación Financiera
 
 ## Descripción del Proyecto
 Team 68 es una aplicación de educación financiera enfocada en ayudar a los usuarios a entender y mejorar sus hábitos de consumo mediante el análisis inteligente de sus datos transaccionales y su perfil financiero.
 
-La plataforma permite registrar ingresos y gastos por categorías, analizar el comportamiento financiero con Inteligencia Artificial y generar sugerencias prácticas de presupuesto, prioridades de gasto y estrategias de ahorro.
+La plataforma permite registrar ingresos y gastos, analizar el comportamiento financiero con Inteligencia Artificial y generar recomendaciones prácticas de presupuesto, prioridades de gasto y estrategias de ahorro — todo esto acompañado de un sistema de gamificación que premia los buenos hábitos financieros.
 
 ## Objetivo
 Ofrecer una herramienta simple, intuitiva y confiable para:
 - Organizar ingresos y gastos personales.
 - Detectar patrones de consumo y comportamientos de riesgo.
 - Recibir recomendaciones personalizadas basadas en datos reales para una mejor salud financiera.
+- Motivar la mejora de hábitos financieros mediante un sistema de logros.
 
 ## Características Principales
-- **Registro de Ingresos y Gastos:** Control detallado de movimientos con categorización flexible.
-- **Clasificación Automática de Transacciones:** Agrupación inteligente de movimientos en categorías clave (vivienda, transporte, alimentación, ocio, ahorro, salud y educación).
-- **Análisis del Comportamiento y Clasificación del Perfil Financiero:** Evaluación automatizada que clasifica al usuario en un perfil determinado (*Saludable*, *En observación*, *En riesgo* o *Con una probabilidad*) acompañado de su correspondiente nivel o probabilidad de certeza.
+- **Registro de Ingresos y Gastos:** Control detallado de movimientos financieros.
+- **Clasificación Automática de Transacciones:** Un servicio de inteligencia artificial clasifica cada transacción según su tipo (Consumo, Pago de deuda, Ahorro e inversión) y categoría (Vivienda, Alimentación, Transporte, Salud, Educación, Entretenimiento, Suscripciones, Compras personales, Viajes, Otros).
+- **Análisis del Perfil Financiero:** Evaluación en 4 dimensiones (Balance financiero, Capacidad de ahorro, Endeudamiento, Comportamiento de consumo), cada una con su propio puntaje de 0 a 100, más un puntaje y estado general (*Saludable*, *En observación*, *En riesgo*).
+- **Recomendaciones Personalizadas:** Sugerencias generadas por IA para cada dimensión, más una recomendación general.
+- **Gamificación:** Sistema de medallas y logros que premian rachas de uso, mejoras en el balance financiero y buenos hábitos de ahorro.
 - **Visualización Dinámica:** Paneles interactivos con gráficas financieras para el análisis visual de tendencias.
-- **Recomendaciones de Presupuesto Mensual:** Sugerencias automatizadas y accionables ajustadas a la realidad de cada usuario.
 
 ## Cómo Funciona
-1. El usuario registra sus ingresos, gastos y actualiza los datos de su perfil financiero.
-2. El backend en Spring Boot valida la integridad de los datos y los almacena de forma segura.
-3. El motor de IA (embebido en el backend vía ONNX Runtime) procesa los datos históricos y las variables del perfil.
-4. El sistema genera respuestas en formato JSON con sugerencias de presupuesto y alertas de riesgo.
-5. El frontend renderiza visualmente los resultados y las gráficas mediante librerías de JavaScript.
+1. El usuario se registra e inicia sesión, y registra sus ingresos y transacciones.
+2. El backend en Spring Boot valida la integridad de los datos y los almacena en una base de datos PostgreSQL.
+3. Cuando el usuario solicita su análisis, el backend envía sus datos financieros a un **microservicio externo de Inteligencia Artificial** (desarrollado en Python), que se encarga de clasificar las transacciones y calcular el perfil financiero.
+4. El backend recibe la respuesta del microservicio, la almacena, y la expone a través de su propia API REST.
+5. El frontend consume esa API y renderiza visualmente los resultados, las gráficas y las medallas obtenidas.
 
 ## Requisitos Mínimos del MVP (Checklist de Cumplimiento)
-- [ ] **Modelo entrenado y cargado correctamente:** Motor predictivo operacional cargado de forma nativa.
-- [ ] **Validación de entrada:** Robustez ante datos erróneos, montos negativos o campos vacíos.
-- [ ] **Clasificación funcional de las transacciones:** Clasificación correcta dentro de las categorías del negocio.
-- [ ] **Análisis del perfil financiero:** Determinación del estado del cliente (Saludable / En observación / En riesgo).
-- [ ] **Generación de recomendaciones:** Mensajes accionables y lógicos según las métricas obtenidas.
-- [ ] **API documentada:** Endpoints completamente expuestos mediante Swagger / OpenAPI.
-- [ ] **Integración con OCI:** Infraestructura en la nube utilizando servicios mínimos obligatorios.
-- [ ] **Mínimo de tres ejemplos reales de uso:** Casos prácticos integrados para la evaluación inmediata del jurado.
+- [x] **Motor de clasificación y análisis financiero:** Implementado como microservicio independiente en Python.
+- [x] **Validación de entrada:** Validaciones con `@Valid` en los DTOs de entrada, rechazando montos inconsistentes o campos vacíos.
+- [x] **Clasificación funcional de las transacciones:** Clasificación automática dentro de las categorías del negocio.
+- [x] **Análisis del perfil financiero:** Determinación del estado del cliente en 4 dimensiones (Saludable / En observación / En riesgo).
+- [x] **Generación de recomendaciones:** Mensajes accionables por dimensión, más una recomendación general.
+- [x] **API documentada:** Endpoints expuestos mediante Swagger / OpenAPI (`springdoc-openapi`).
+- [x] **Infraestructura en la nube:** Implementado con **Render**, con **PostgreSQL** como base de datos de producción.
+- [x] **Mínimo de tres ejemplos reales de uso:** Perfiles de prueba precargados (ahorrador saludable, promedio en observación, endeudado en riesgo).
 
 ## Arquitectura Tecnológica
 
-### Backend (Monolito Robusto)
-- **Tecnología:** Java 17+ + Spring Boot 3.x.
+### Backend
+- **Tecnología:** Java 17+ + Spring Boot.
 - **Responsabilidades:**
-  - API REST completamente documentada mediante **Swagger / OpenAPI** para la gestión integral de usuarios y movimientos.
-  - Implementación obligatoria de los siguientes endpoints exigidos por el brief:
-    - `POST /analisis-financiero`: Endpoint centralizado que procesa las variables de perfil financiero e históricos para determinar la salud financiera y generar las recomendaciones.
-    - `POST /clasificacion-transacciones`: Endpoint dedicado a la catalogación inteligente e inmediata de transacciones.
-  - **Manejo de Errores y Validación:** Filtros estrictos en los esquemas de entrada de datos (`@Valid`) acoplados a un controlador central de excepciones (`@RestControllerAdvice`) para interceptar solicitudes con montos inconsistentes o datos vacíos, respondiendo siempre con códigos de estado HTTP semánticos (ej. `400 Bad Request`).
-  - Ejecución nativa del modelo predictivo mediante la librería **ONNX Runtime**, eliminando la necesidad de microservicios externos en Python y optimizando el consumo de infraestructura.
+  - API REST documentada con **Swagger / OpenAPI**, para la gestión de usuarios, ingresos, transacciones, análisis financiero y medallas.
+  - Endpoints principales:
+    - `POST /api/auth/login`: Inicio de sesión y creación automática de usuario.
+    - `POST /api/movimientos/usuario/{usuarioId}` y `GET/PUT/DELETE`: gestión de transacciones (CRUD completo).
+    - `POST /api/ingresos/usuario/{usuarioId}` y `GET/PUT/DELETE`: gestión de ingresos (CRUD completo).
+    - `POST /api/analisis/analizar`: análisis financiero completo, delegando la clasificación y el cálculo al microservicio de IA.
+    - Endpoints de `/api/medallas` para consultar los logros del usuario.
+  - **Manejo de Errores y Validación:** Validaciones estrictas en los DTOs de entrada (`@Valid`), junto con un manejador global de excepciones (`@RestControllerAdvice`) que responde con códigos HTTP semánticos (ej. `400 Bad Request`) y mensajes estructurados.
+  - Persistencia en **PostgreSQL** en producción (con H2 como base de datos de respaldo/desarrollo local).
 
 ### Módulo de IA y Ciencia de Datos
-- **Tecnología:** Python (Fase de Desarrollo y Entrenamiento) -> Exportado a formato **ONNX**.
+- **Tecnología:** Python, desplegado como **microservicio independiente**, consumido por el backend vía peticiones HTTP.
 - **Responsabilidades:**
-  - Creación y simulación del dataset financiero base utilizando técnicas de generación de datos sintéticos.
-  - Análisis descriptivo y predictivo de datos históricos transaccionales.
-  - Clasificación de perfiles de riesgo financiero a partir de variables estrictas del modelo.
+  - Clasificación automática de transacciones (tipo y categoría) a partir de su descripción.
+  - Cálculo del perfil financiero en 4 dimensiones, con puntuación 0-100.
+  - Generación de recomendaciones personalizadas por dimensión y general.
 
 ### Frontend
-- **Tecnología:** HTML5, CSS3, JavaScript Moderno + Bootstrap 5.
-- **Librerías de Visualización:** Chart.js (gráficos interactivos de pastel y tendencias lineales).
+- **Tecnología:** HTML5, CSS3, JavaScript + Bootstrap.
+- **Librerías de Visualización:** Chart.js para gráficas interactivas.
 - **Responsabilidades:**
-  - Interfaz responsiva y accesible para la carga sin fricciones de transacciones.
-  - Dashboard centralizado con métricas clave y distribución de gastos por categorías.
-  - Renderizado claro de las sugerencias generadas por la IA utilizando un lenguaje amigable y directo.
+  - Interfaz para el registro de ingresos y transacciones.
+  - Dashboard con métricas clave, distribución de gastos por categoría y medallas obtenidas.
+  - Renderizado de las recomendaciones generadas por la IA.
 
-### Infraestructura (Oracle Cloud Infrastructure - OCI)
-Optimizada para la capa *Always Free* de Oracle:
-- **OCI Compute:** Instancia de máquina virtual asignada para el despliegue del contenedor del backend y frontend.
-- **OCI Autonomous Database:** Base de datos relacional administrada (Oracle Autonomous Transaction Processing) para la persistencia segura de usuarios, transacciones y bitácoras de recomendaciones.
-- **OCI Object Storage:** Almacenamiento de objetos para resguardar los archivos `.onnx` del modelo entrenado y los backups del sistema.
+### Infraestructura y Despliegue
+- **Backend y microservicio de IA:** Desplegados en **Render**.
+- **Base de datos:** **PostgreSQL**, desplegada también como servicio administrado en **Render**.
 
 ## Valor para el Cliente
 - **Autonomía Financiera:** Herramienta directa que empodera al usuario en la toma de decisiones diarias.
-- **Inteligencia al Instante:** Recomendaciones predictivas sin latencia gracias a la integración embebida del modelo ONNX.
-- **Estructura Escalable:** Arquitectura limpia en la nube que permite añadir nuevos modelos predictivos y reglas de negocio complejas sin reestructurar el núcleo del sistema.
+- **Análisis en Profundidad:** El usuario no recibe solo un resultado genérico — entiende su situación desde 4 ángulos distintos, incluyendo el costo real de su deuda, no solo el monto.
+- **Motivación:** El sistema de medallas convierte el cuidado de las finanzas personales en un hábito gratificante, no en una obligación.
 
-## Estructura de Datos (Esquema para la IA)
+## Estructura de Datos
 
-### Entidad Usuario / Perfil Financiero
-- `id_usuario` (UUID)
-- `nombre` (String)
-- `email` (String)
-- `ingreso_mensual` (Numeric) *[Campo Obligatorio]*
-- `frecuencia_ahorro` (String: mensual, quincenal, ocasional) *[Campo Obligatorio]*
-- `nivel_de_endeudamiento` (Numeric / Porcentaje) *[Campo Obligatorio]*
-- `fecha_registro` (Timestamp)
+### Entidad Usuario
+- `id` (UUID)
+- `username` / `password` (autenticación)
+- `nombre`, `email`
+- `ingresoMensual` (Numeric, opcional)
+- Relación con sus medallas obtenidas
 
-### Entidad Movimiento / Transacción
-- `id_movimiento` (UUID)
-- `id_usuario` (UUID - FK)
-- `tipo` (Enum: INGRESO | GASTO)
-- `categoria` (String: vivienda, transporte, alimentación, ocio, ahorro, salud, educación) *[Campos del Brief]*
-- `monto` (Numeric - Validado positivo)
-- `fecha` (Date)
-- `descripcion` (String)
+### Entidad Transaccion
+- `id` (UUID)
+- `usuario` (FK)
+- `fecha`, `descripcion`, `monto`
+- `formaPago` (Efectivo, Transferencia bancaria, Tarjeta de débito, Tarjeta de crédito)
+- `tasaDeInteresDeLaTarjeta` (solo si es tarjeta de crédito)
+- `tipoFinanciero` (Consumo / Pago de deuda / Ahorro e inversión)
+- `categoria` (solo si el tipo es Consumo)
 
-### Entidad Recomendación
-- `id_recomendacion` (UUID)
-- `id_usuario` (UUID - FK)
-- `periodo` (String: MM-AAAA)
-- `perfil_calculado` (Enum: SALUDABLE | EN_OBSERVACION | EN_RIESGO) *[Campo Obligatorio]*
-- `tipo_recomendacion` (Enum: PRESUPUESTO | PRIORIDAD_GASTO | ALERTA_RIESGO)
-- `mensaje` (Text)
-- `nivel_confianza` (Numeric / Float que representa la probabilidad del perfil) *[Campo Obligatorio]*
+### Entidad Ingreso
+- `id` (UUID)
+- `usuario` (FK)
+- `fecha`, `descripcion`, `monto`
+
+### Entidad Medalla
+- `id`, `codigo`, `nombre`, `descripcion`, `puntos`, `iconoUrl`
 
 ## Criterios de Éxito y Calidad Técnico-Funcional
-- **Cero Fricción:** El usuario registra y visualiza sus finanzas en menos de 3 clics desde la interfaz principal.
 - **Validación Robusta:** El sistema rechaza datos inconsistentes devolviendo respuestas JSON estructuradas y descriptivas ante fallos.
-- **Precisión Predictiva:** Respuestas del modelo JSON coherentes con el perfil financiero cargado, evaluadas bajo los 3 escenarios de prueba mínimos del proyecto.
-- **Eficiencia en la Nube:** Despliegue completo y funcional operando de forma estable bajo los recursos controlados de la capa gratuita de OCI.
+- **Precisión del Análisis:** Respuestas coherentes con el perfil financiero cargado, evaluadas bajo los 3 escenarios de prueba mínimos del proyecto.
+- **Documentación Accesible:** Toda la API es explorable y probable directamente desde Swagger UI.
 
 ## Mensaje Resumen
-Team 68 propone una App de Educación Financiera que unifica la gestión transaccional diaria, la analítica predictiva mediante IA embebida y una visualización de datos moderna en la nube de Oracle, transformando la contabilidad tradicional en decisiones financieras inteligentes y accionables.
+Team 68 propone FinanceAI, una app de educación financiera que combina clasificación automática de transacciones mediante IA, un análisis financiero en 4 dimensiones con recomendaciones personalizadas, y un sistema de gamificación que motiva al usuario a mejorar sus hábitos — transformando datos financieros dispersos en decisiones claras y accionables.
+
